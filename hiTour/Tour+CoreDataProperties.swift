@@ -14,10 +14,10 @@ import CoreData
 
 extension Tour {
 
-    @NSManaged var tourId: String?
     @NSManaged var name: String?
+    @NSManaged var tourId: NSNumber?
+    @NSManaged var audience: Audience?
     @NSManaged var pointTours: NSSet?
-    @NSManaged var audience: NSSet?
     @NSManaged var sessions: NSSet?
 
 }

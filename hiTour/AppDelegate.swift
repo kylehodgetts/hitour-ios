@@ -18,6 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        ApiConnector(apikey: "A7DE6825FD96CCC79E63C89B55F88", stack: coreDataStack).updateAll()
+        
+
+        
         return true
     }
 

@@ -14,9 +14,9 @@ import CoreData
 
 extension Point {
 
-    @NSManaged var pointId: String?
     @NSManaged var name: String?
-    @NSManaged var pointTours: NSSet?
+    @NSManaged var pointId: NSNumber?
     @NSManaged var pointData: NSSet?
+    @NSManaged var pointTours: NSSet?
 
 }

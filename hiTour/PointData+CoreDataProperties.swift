@@ -15,7 +15,7 @@ import CoreData
 extension PointData {
 
     @NSManaged var rank: String?
-    @NSManaged var point: NSManagedObject?
-    @NSManaged var data: NSManagedObject?
+    @NSManaged var data: Data?
+    @NSManaged var point: Point?
 
 }

@@ -42,13 +42,31 @@ class CoreDataStack{
         return managedObjectContext
     }()
     
-    func insert<T: NSManagedObject>(name: String, @noescape callback: (NSEntityDescription, NSManagedObjectContext) -> T ) -> Void {
-        guard let description = NSEntityDescription.entityForName(name, inManagedObjectContext: managedObjectContext) else {
+    
+    /**
+     * Method name: insert
+     * Description: Inserts a given entity into coreData, THE ENTITY IS NOT PERSISTENTLY SAVED!
+     * Parameters: 
+     *  - entityName:   The name of the entity to be inserted
+     *  - callback:     The callback on created entityDescription, passes ManagedObjectContext as well
+     *                  this is unsave as such should be treated carefully
+     */
+    func insert<T: NSManagedObject>(entityName: String, callback: (NSEntityDescription, NSManagedObjectContext) -> T ) -> T {
+        guard let description = NSEntityDescription.entityForName(entityName, inManagedObjectContext: managedObjectContext) else {
             fatalError("Creating an entity that does not exist")
         }
-        callback(description, managedObjectContext)
+        return callback(description, managedObjectContext)
     }
     
+    /**
+     * Method name: fetch
+     * Description: Fetches resources from the core data
+     * Parameters: 
+     *  - entityName:       The name of the entity to be fetched
+     *  - predicate:        The predicate to be used with this query
+     *  - sortDescriptors:  The sort of the fetch query
+     *  - errorHandler:     Handles a possible error thhat was emited while fetching the objects
+     */
     func fetch<T: NSManagedObject>(
         name entityName: String
         , predicate: NSPredicate? = nil
@@ -67,12 +85,22 @@ class CoreDataStack{
 
     }
     
-    func saveMainContext(errorHandler: (ErrorType) -> Void = {err in fatalError("Error occured while saving\(err)")}) -> Void {
+    /**
+     * Method name: saveMainContext
+     * Description: Saves the changes to the context to make them persistent
+     * Parameters: 
+     *  - errorHandler: Handles a possible error that was emited while saving the context
+     */
+    func saveMainContext(errorHandler: (ErrorType) -> Void = {fatalError("Error occured while saving\($0)")}) -> Void {
         do {
             try managedObjectContext.save()
         } catch {
             errorHandler(error)
         }
+    }
+    
+    func deleteAll() -> Void {
+        managedObjectContext.reset()
     }
     
 }

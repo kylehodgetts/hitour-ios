@@ -15,7 +15,8 @@ import CoreData
 extension Audience {
 
     @NSManaged var name: String?
-    @NSManaged var tour: NSSet?
+    @NSManaged var audienceId: NSNumber?
     @NSManaged var data: NSSet?
+    @NSManaged var tour: NSSet?
 
 }

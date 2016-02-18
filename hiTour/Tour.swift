@@ -13,7 +13,28 @@ import CoreData
 class Tour: NSManagedObject {
     
     static let entityName = "Tour"
+    static let jsonReader = TourReader()
 
 // Insert code here to add functionality to your managed object subclass
 
+}
+
+class TourReader: JsonReader{
+    typealias T = Tour
+    
+    func read(dict: [String: AnyObject]) -> ((NSEntityDescription, NSManagedObjectContext) -> Tour)? {
+        guard let id = dict["id"] as? Int, name = dict["name"] as? String, audienceId = dict["audience_id"] as? Int else {
+            return nil
+        }
+        
+        return
+            {(entity: NSEntityDescription, context: NSManagedObjectContext) -> Tour in
+                let tour = Tour(entity: entity, insertIntoManagedObjectContext: context)
+                tour.tourId = id
+                tour.name = name
+                //TODO: AudienceID, need to deal with it somehow
+                
+                return tour
+        }
+    }
 }

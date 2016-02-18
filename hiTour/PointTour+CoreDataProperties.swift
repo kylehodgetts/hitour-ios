@@ -15,7 +15,7 @@ import CoreData
 extension PointTour {
 
     @NSManaged var rank: String?
-    @NSManaged var tour: NSManagedObject?
     @NSManaged var point: Point?
+    @NSManaged var tour: Tour?
 
 }

@@ -13,8 +13,29 @@ import CoreData
 class Audience: NSManagedObject {
     
     static let entityName = "Audience"
+    static let jsonReader = AudienceReader()
+
 
 
 // Insert code here to add functionality to your managed object subclass
 
+}
+
+
+class AudienceReader: JsonReader{
+    typealias T = Audience
+    
+    func read(dict: [String: AnyObject]) -> ((NSEntityDescription, NSManagedObjectContext) -> Audience)? {
+        guard let id = dict["id"] as? Int, name = dict["name"] as? String else {
+            return nil
+        }
+        
+        return
+            {(entity: NSEntityDescription, context: NSManagedObjectContext) -> Audience in
+                let audience = Audience(entity: entity, insertIntoManagedObjectContext: context)
+                audience.audienceId = id
+                audience.name = name                
+                return audience
+        }
+    }
 }

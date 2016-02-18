@@ -14,10 +14,10 @@ import CoreData
 
 extension Session {
 
-    @NSManaged var sessionId: String?
-    @NSManaged var startData: NSDate?
     @NSManaged var endData: NSDate?
     @NSManaged var sessionCode: String?
-    @NSManaged var tour: NSManagedObject?
+    @NSManaged var sessionId: NSNumber?
+    @NSManaged var startData: NSDate?
+    @NSManaged var tour: Tour?
 
 }

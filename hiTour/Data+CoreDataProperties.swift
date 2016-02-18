@@ -14,11 +14,11 @@ import CoreData
 
 extension Data {
 
-    @NSManaged var title: String?
+    @NSManaged var dataId: NSNumber?
     @NSManaged var descriptionD: String?
+    @NSManaged var title: String?
     @NSManaged var url: String?
-    @NSManaged var dataId: String?
-    @NSManaged var audience: NSManagedObject?
+    @NSManaged var audience: NSSet?
     @NSManaged var pointData: NSSet?
 
 }

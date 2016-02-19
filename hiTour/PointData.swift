@@ -24,15 +24,14 @@ class PointDataReader: JsonReader{
     typealias T = PointData
     
     func read(dict: [String: AnyObject]) -> ((NSEntityDescription, NSManagedObjectContext) -> PointData)? {
-        guard let id = dict["id"] as? Int, name = dict["name"] as? String else {
+        guard let rank = dict["rank"] as? Int else {
             return nil
         }
         
         return
             {(entity: NSEntityDescription, context: NSManagedObjectContext) -> PointData in
                 let point = PointData(entity: entity, insertIntoManagedObjectContext: context)
-                //point.pointId = id
-                //point.name = name
+                point.rank = rank
                 
                 return point
         }

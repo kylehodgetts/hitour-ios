@@ -11,13 +11,11 @@ import CoreData
 
 class ApiConnector{
     
-    let baseUrl = "https://hitour.herokuapp.com/api/"
-    
-    let key: String
+    let client: HTTPClient
     let coreDataStack: CoreDataStack
     
-    init(apikey key: String, stack coreDataStack: CoreDataStack){
-        self.key = key
+    init(HTTPClient client: HTTPClient, stack coreDataStack: CoreDataStack){
+        self.client = client
         self.coreDataStack = coreDataStack
     }
     
@@ -26,7 +24,6 @@ class ApiConnector{
         coreDataStack.saveMainContext()
         
         fetchPoints { (points) -> Void in
-            print("Aloha")
             self.fetchAudience({ (audiences) -> Void in
                 self.fetchData({ (data) -> Void in
                     self.fetchTours(audiences, chain: { (tours) -> Void in
@@ -44,7 +41,7 @@ class ApiConnector{
     }
     
     func fetchTours(audiences: [Audience], chain: (([Tour]) -> Void)? ) -> Void {
-        request("tours") { (dicts) -> Void in
+        client.request("tours") { (dicts) -> Void in
             let tours = dicts.flatMap({ dict -> Tour? in
                 Tour.jsonReader.read(dict).map({self.coreDataStack.insert(Tour.entityName, callback: $0)})
                 .map({ (t) -> Tour in
@@ -61,7 +58,7 @@ class ApiConnector{
     }
     
     func fetchPoints(chain: (([Point]) -> Void)? ) -> Void {
-        request("points") { (dicts) -> Void in
+        client.request("points") { (dicts) -> Void in
             let points = dicts.flatMap({ dict -> Point? in
                 Point.jsonReader.read(dict).map({self.coreDataStack.insert(Point.entityName, callback: $0)})
             })
@@ -72,7 +69,7 @@ class ApiConnector{
     }
     
     func fetchData(chain: (([Data]) -> Void)? ) -> Void {
-        request("data") { (dicts) -> Void in
+        client.request("data") { (dicts) -> Void in
             let data = dicts.flatMap({ dict -> Data? in
                 Data.jsonReader.read(dict).map({self.coreDataStack.insert(Data.entityName, callback: $0)})
             })
@@ -84,7 +81,7 @@ class ApiConnector{
     
     
     func fetchAudience(chain: (([Audience]) -> Void)? ) -> Void {
-        request("audiences") { (dicts) -> Void in
+        client.request("audiences") { (dicts) -> Void in
             let audiences = dicts.flatMap({ dict -> Audience? in
                 Audience.jsonReader.read(dict).map({self.coreDataStack.insert(Audience.entityName, callback: $0)})
             })
@@ -95,7 +92,7 @@ class ApiConnector{
     }
     
     func fetchPointTour(tours: [Tour], points: [Point], chain: (([PointTour]) -> Void)? = nil ) -> Void {
-        request("tour_points") { (dicts) -> Void in
+        client.request("tour_points") { (dicts) -> Void in
             let pointTours = dicts.flatMap({ dict -> PointTour? in
                 let tourPoint = PointTour.jsonReader.read(dict).map({self.coreDataStack.insert(PointTour.entityName, callback: $0)})
                 .map({ (pt) -> PointTour in
@@ -119,7 +116,7 @@ class ApiConnector{
     }
     
     func fetchPointData(data: [Data], points: [Point], chain: (([PointData]) -> Void)? = nil ) -> Void {
-        request("point_data") { (dicts) -> Void in
+        client.request("point_data") { (dicts) -> Void in
             let pointTours = dicts.flatMap({ dict -> PointData? in
                 let tourPoint = PointData.jsonReader.read(dict).map({self.coreDataStack.insert(PointData.entityName, callback: $0)})
                     .map({ (pd) -> PointData in
@@ -143,7 +140,7 @@ class ApiConnector{
     }
 
     func fetchDataAudiences(data: [Data], audiences: [Audience], chain: (() -> Void)? = nil ) -> Void {
-        request("data_audiences") { (dicts) -> Void in
+        client.request("data_audiences") { (dicts) -> Void in
             dicts.forEach({ dict in
                 if let audienceId = dict["audience_id"] as? Int, adx = audiences.indexOf({$0.audienceId == audienceId}), dataId = dict["datum_id"] as? Int, ddx = data.indexOf({$0.dataId == dataId}){
                     let data = data[ddx]
@@ -159,28 +156,5 @@ class ApiConnector{
     }
     
     
-    private func request(url: String, cb: ([[String: AnyObject]]) -> Void) -> Void {
-        let nsURL = NSURL(string: baseUrl + key + "/\(url)")!
-        print(nsURL.standardizedURL)
-        let request = NSURLRequest(URL: nsURL)
-        let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
-        let task = session.dataTaskWithRequest(
-            request
-            , completionHandler: { (data, response, error) -> Void in
-                //TODO: error handling and such
-                do {
-                    print(error)
-                    let json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as? [[String: AnyObject]]
-                    guard let ret = json else {
-                        return
-                    }
-                    session.invalidateAndCancel()
-                    cb(ret)
-                } catch {
-                    //TODO: ^^ error handling
-                    fatalError("DETH TO all... :D")
-                }
-        })
-        task.resume()
-    }
+
 }

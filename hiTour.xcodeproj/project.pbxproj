@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		453BAFDD1C772A6C00BE7896 /* DiscoveredBarcodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453BAFDC1C772A6C00BE7896 /* DiscoveredBarcodeView.swift */; };
+		45A7B42A1C76001700F4A3AB /* BarcodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7B4291C76001700F4A3AB /* BarcodeScannerViewController.swift */; };
 		984EC7AC1C7209C200A12379 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984EC7AB1C7209C200A12379 /* AppDelegate.swift */; };
 		984EC7AE1C7209C200A12379 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984EC7AD1C7209C200A12379 /* ViewController.swift */; };
 		984EC7B11C7209C200A12379 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 984EC7AF1C7209C200A12379 /* Main.storyboard */; };
@@ -35,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		453BAFDC1C772A6C00BE7896 /* DiscoveredBarcodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveredBarcodeView.swift; sourceTree = "<group>"; };
+		45A7B4291C76001700F4A3AB /* BarcodeScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeScannerViewController.swift; sourceTree = "<group>"; };
 		984EC7A81C7209C200A12379 /* hiTour.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hiTour.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		984EC7AB1C7209C200A12379 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		984EC7AD1C7209C200A12379 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +110,8 @@
 				984EC7B71C7209C200A12379 /* LaunchScreen.storyboard */,
 				984EC7BA1C7209C200A12379 /* Info.plist */,
 				984EC7B21C7209C200A12379 /* hiTour.xcdatamodeld */,
+				45A7B4291C76001700F4A3AB /* BarcodeScannerViewController.swift */,
+				453BAFDC1C772A6C00BE7896 /* DiscoveredBarcodeView.swift */,
 			);
 			path = hiTour;
 			sourceTree = "<group>";
@@ -196,6 +202,7 @@
 				TargetAttributes = {
 					984EC7A71C7209C200A12379 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = R6PXL3EZJD;
 					};
 					984EC7BE1C7209C200A12379 = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -260,7 +267,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				984EC7AE1C7209C200A12379 /* ViewController.swift in Sources */,
+				453BAFDD1C772A6C00BE7896 /* DiscoveredBarcodeView.swift in Sources */,
 				984EC7B41C7209C200A12379 /* hiTour.xcdatamodeld in Sources */,
+				45A7B42A1C76001700F4A3AB /* BarcodeScannerViewController.swift in Sources */,
 				984EC7AC1C7209C200A12379 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -403,10 +412,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = hiTour/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Stranders.hiTour;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -414,10 +426,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = hiTour/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Stranders.hiTour;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -488,6 +503,7 @@
 				984EC7D51C7209C200A12379 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		984EC7D61C7209C200A12379 /* Build configuration list for PBXNativeTarget "hiTourTests" */ = {
 			isa = XCConfigurationList;
@@ -496,6 +512,7 @@
 				984EC7D81C7209C200A12379 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		984EC7D91C7209C200A12379 /* Build configuration list for PBXNativeTarget "hiTourUITests" */ = {
 			isa = XCConfigurationList;
@@ -504,6 +521,7 @@
 				984EC7DB1C7209C200A12379 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

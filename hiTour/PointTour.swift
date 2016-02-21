@@ -37,4 +37,8 @@ class PointTourReader: JsonReader{
                 return pointTour
         }
     }
+    
+    func entityName() -> String {
+        return PointTour.entityName
+    }
 }

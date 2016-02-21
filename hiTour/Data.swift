@@ -39,4 +39,8 @@ class DataReader: JsonReader{
                 return data
         }
     }
+    
+    func entityName() -> String {
+        return Data.entityName
+    }
 }

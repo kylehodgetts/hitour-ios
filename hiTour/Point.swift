@@ -38,4 +38,8 @@ class PointReader: JsonReader{
                 return point
         }
     }
+    
+    func entityName() -> String {
+        return Point.entityName
+    }
 }

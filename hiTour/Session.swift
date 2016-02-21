@@ -32,10 +32,13 @@ class SessionReader: JsonReader{
         return
             {(entity: NSEntityDescription, context: NSManagedObjectContext) -> Session in
                 let point = Session(entity: entity, insertIntoManagedObjectContext: context)
-                //point.pointId = id
-                //point.name = name
+                //TODO: finish the reader, dunno if it will even be user or what is actually going on with sessions etc
                 
                 return point
         }
+    }
+    
+    func entityName() -> String {
+        return Session.entityName
     }
 }

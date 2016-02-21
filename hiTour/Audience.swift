@@ -38,4 +38,8 @@ class AudienceReader: JsonReader{
                 return audience
         }
     }
+    
+    func entityName() -> String {
+        return Audience.entityName
+    }
 }

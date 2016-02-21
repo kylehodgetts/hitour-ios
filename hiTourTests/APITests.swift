@@ -10,6 +10,9 @@ import XCTest
 @testable import hiTour
 
 
+///
+/// A mock up to simulate the incoming data from the network
+///
 class MOCKSession: URLSessionProtocol {
     
     func dataTaskWithURL(url: NSURL, completionHandler: DataTaskResult) -> NSURLSessionDataTask {
@@ -54,6 +57,9 @@ class MOCKSession: URLSessionProtocol {
     
 }
 
+///
+/// Mock up for the data task returned by session
+///
 class MOCKDataTask: NSURLSessionDataTask{
     
     override func resume() {
@@ -83,6 +89,9 @@ class APITests: XCTestCase {
         httpClient?.tearDown()
     }
     
+    ///
+    /// Tests getting of the points via the api
+    ///
     func testGettingPoints() {
         let expectation = expectationWithDescription("Expects to retrieve points 2 points")
         connector?.fetchPoints({ (points) -> Void in
@@ -95,8 +104,11 @@ class APITests: XCTestCase {
         waitForExpectationsWithTimeout(5, handler: nil)
     }
     
+    ///
+    /// Tests getting of the data via the api
+    ///
     func testGettingData() {
-        let expectation = expectationWithDescription("Expects to retrieve points 2 datas")
+        let expectation = expectationWithDescription("Expects to retrieve points 2 data")
         connector?.fetchData({ (data) -> Void in
             if data.count != 2 {
                 XCTFail("Expected to retrieve 2 data, got: \(data.count)")
@@ -107,8 +119,11 @@ class APITests: XCTestCase {
         waitForExpectationsWithTimeout(5, handler: nil)
     }
     
+    ///
+    /// Tests getting of the audience via the api
+    ///
     func testGettingAudience() {
-        let expectation = expectationWithDescription("Expects to retrieve points 2 points")
+        let expectation = expectationWithDescription("Expects to retrieve points 2 audiences")
         connector?.fetchAudience({ (audiences) -> Void in
             if audiences.count != 2 {
                 XCTFail("Expected to retrieve 2 audience, got: \(audiences.count)")
@@ -119,6 +134,9 @@ class APITests: XCTestCase {
         waitForExpectationsWithTimeout(5, handler: nil)
     }
     
+    ///
+    /// Tests getting of the tours via the api
+    ///
     func testGettingTours() {
         let audience = coreDataStack?.insert(Audience.entityName, callback: { (entity, context) -> Audience in
             let aud = Audience(entity: entity, insertIntoManagedObjectContext: context)
@@ -127,7 +145,7 @@ class APITests: XCTestCase {
             return aud
         })
         
-        let expectation = expectationWithDescription("Expects to retrieve points 2 points")
+        let expectation = expectationWithDescription("Expects to retrieve points 1 tour")
         connector?.fetchTours([audience!], chain: { (tours) -> Void in
             if tours.count != 1 {
                 XCTFail("Expected to retrieve 1 tour, got: \(tours.count)")
@@ -141,8 +159,11 @@ class APITests: XCTestCase {
         waitForExpectationsWithTimeout(5, handler: nil)
     }
     
+    ///
+    /// Tests getting of tour-point relation via the api
+    ///
     func testGettingPointTour() {
-        let expectation = expectationWithDescription("Expects to retrieve points 2 points")
+        let expectation = expectationWithDescription("Expects to retrieve the relation of point-tour")
         connector?.fetchPoints({ (points) -> Void in
             self.connector?.fetchAudience({ (audiences) -> Void in
                 self.connector?.fetchTours(audiences, chain: { (tours) -> Void in
@@ -184,8 +205,11 @@ class APITests: XCTestCase {
         waitForExpectationsWithTimeout(5, handler: nil)
     }
     
+    ///
+    /// Tests getting of point-data relation via the api
+    ///
     func testGettingPointData() {
-        let expectation = expectationWithDescription("Expects to retrieve points 2 points")
+        let expectation = expectationWithDescription("Expects to retrieve the relation of point-data")
         connector?.fetchPoints({ (points) -> Void in
             self.connector?.fetchData({ (data) -> Void in
                 self.connector?.fetchPointData(data, points: points, chain: { (pointData) -> Void in
@@ -224,8 +248,11 @@ class APITests: XCTestCase {
         waitForExpectationsWithTimeout(5, handler: nil)
     }
     
+    ///
+    /// Tests getting of data-audience relation via the api
+    ///
     func testGettingDataAudience() {
-        let expectation = expectationWithDescription("Expects to retrieve points 2 points")
+        let expectation = expectationWithDescription("Expects to retrieve the relation of data-audience")
         self.connector?.fetchData({ (data) -> Void in
             self.connector?.fetchAudience({ (audiences) -> Void in
                 self.connector?.fetchDataAudiences(data, audiences: audiences, chain: { () -> Void in
@@ -261,7 +288,4 @@ class APITests: XCTestCase {
     }
 
 }
-
-
-
 

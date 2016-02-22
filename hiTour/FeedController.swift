@@ -11,11 +11,17 @@ import Foundation
 import UIKit
 
 class FeedController: UICollectionViewController {
+        
+    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
     let prototypeData = PrototypeDatum.getAllData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.collectionView?.backgroundColor = UIColor.whiteColor()
+        
+        flowLayout.minimumLineSpacing = 2.0
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {

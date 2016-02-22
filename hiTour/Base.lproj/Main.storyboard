@@ -33,6 +33,7 @@
                         <viewControllerLayoutGuide type="bottom" id="H9q-tK-QxA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="iD2-kp-9IA">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -46,7 +47,6 @@
         <!--Item-->
         <scene sceneID="577-QZ-Eby">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="M76-Ay-lvc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="dBZ-o0-rIm" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="2Sh-z9-VGi"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="aEU-NG-n56">
@@ -57,6 +57,7 @@
                         <segue destination="lOE-q2-xdQ" kind="relationship" relationship="rootViewController" id="U35-pZ-8BI"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="M76-Ay-lvc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-724.5" y="398"/>
         </scene>
@@ -65,12 +66,15 @@
             <objects>
                 <tableViewController id="yij-eK-aXR" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="AUI-iC-JET">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="OC3-1I-O37">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OC3-1I-O37" id="ZEI-Ej-l3L">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -126,6 +130,7 @@
             <objects>
                 <collectionViewController storyboardIdentifier="FeedController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ANH-Qu-MBs" customClass="FeedController" customModule="hiTour" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="stx-5H-ziW">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4KB-bT-Q6H">
                             <size key="itemSize" width="378.5" height="185"/>
@@ -135,7 +140,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FeedControllerCell" id="CsL-Ec-PZk" customClass="FeedControllerCell" customModule="hiTour" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <rect key="frame" x="111" y="64" width="378.5" height="185"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="378.5" height="185"/>
@@ -156,18 +161,18 @@
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="widthClass=compact" fixedFrame="YES">
-                                                        <rect key="frame" x="8" y="6" width="362.5" height="21"/>
+                                                        <rect key="frame" x="8" y="9" width="362.5" height="21"/>
                                                     </variation>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="0.64936127533783783" colorSpace="calibratedRGB"/>
                                             <variation key="default">
                                                 <mask key="subviews">
                                                     <exclude reference="eP2-7d-5bu"/>
                                                 </mask>
                                             </variation>
                                             <variation key="widthClass=compact" fixedFrame="YES">
-                                                <rect key="frame" x="0.0" y="151" width="378.5" height="34"/>
+                                                <rect key="frame" x="0.0" y="145" width="378.5" height="40"/>
                                                 <mask key="subviews">
                                                     <include reference="eP2-7d-5bu"/>
                                                 </mask>
@@ -200,6 +205,9 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="hiTour" id="Lp9-3L-PuK"/>
+                    <connections>
+                        <outlet property="flowLayout" destination="4KB-bT-Q6H" id="VuG-pr-9u1"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="48o-fl-WiL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -214,6 +222,7 @@
                         <viewControllerLayoutGuide type="bottom" id="jW4-oU-bas"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="7Z5-rT-ZJU">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

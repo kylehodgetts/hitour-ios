@@ -138,6 +138,7 @@
                         <outlet property="cameraView" destination="Vaj-IK-rAZ" id="3ge-td-M3V"/>
                         <outlet property="codeInputView" destination="JFe-sr-Mba" id="8St-xM-DtR"/>
                         <outlet property="txtInput" destination="W8G-dP-iaj" id="gP7-FZ-3Gc"/>
+                        <segue destination="vec-O7-hc9" kind="show" identifier="returnToViewController" id="pfg-vr-8oT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gnc-r2-E4T" userLabel="First Responder" sceneMemberID="firstResponder"/>

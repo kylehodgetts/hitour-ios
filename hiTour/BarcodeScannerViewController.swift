@@ -66,6 +66,7 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
             errorAlert.popoverPresentationController?.sourceRect = self.cameraView.frame
             self.presentViewController(errorAlert, animated: true, completion: nil)
         }
+
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -167,6 +168,10 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
         sender.resignFirstResponder()
     }
     
+    @IBAction func returnSwipeToPreviousView(sender: UISwipeGestureRecognizer)
+    {
+        performSegueWithIdentifier("returnToViewController", sender: self)
+    }
     
     
 }

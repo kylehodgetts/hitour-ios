@@ -103,6 +103,7 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="eUz-Zf-Jfm"/>
@@ -115,15 +116,24 @@
                                 <include reference="pg8-VB-kOP"/>
                             </mask>
                         </variation>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="pYw-y5-y9l" appends="YES" id="1nR-Va-JcW"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="btnSubmit" destination="bYl-zR-gyu" id="Bqj-hG-W2G"/>
                         <outlet property="cameraView" destination="eUz-Zf-Jfm" id="u0J-Ke-ebW"/>
                         <outlet property="codeInputView" destination="pg8-VB-kOP" id="QDu-Nq-yVX"/>
                         <outlet property="txtInput" destination="lBg-Tc-5Vs" id="sTf-AT-A7C"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="returnToViewController" id="gQV-mN-4wi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gai-7b-N8R" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="pYw-y5-y9l">
+                    <connections>
+                        <action selector="returnSwipeToPreviousView:" destination="Kfe-5q-Kyz" id="Yjo-ye-rAx"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1111.5" y="-32"/>
         </scene>

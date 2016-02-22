@@ -82,6 +82,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4501BF6B1C7BCA4300BE2627 /* BarcodeScanner */ = {
+			isa = PBXGroup;
+			children = (
+				45A7B4291C76001700F4A3AB /* BarcodeScannerViewController.swift */,
+				453BAFDC1C772A6C00BE7896 /* DiscoveredBarcodeView.swift */,
+			);
+			name = BarcodeScanner;
+			sourceTree = "<group>";
+		};
 		984EC79F1C7209C200A12379 = {
 			isa = PBXGroup;
 			children = (
@@ -108,13 +117,12 @@
 				984EC7AB1C7209C200A12379 /* AppDelegate.swift */,
 				984EC7AD1C7209C200A12379 /* ViewController.swift */,
 				984EC7AF1C7209C200A12379 /* Main.storyboard */,
-				984EC7B51C7209C200A12379 /* Assets.xcassets */,
+				45F22DD81C7931FB003C11ED /* StoryboardiPad.storyboard */,
 				984EC7B71C7209C200A12379 /* LaunchScreen.storyboard */,
+				984EC7B51C7209C200A12379 /* Assets.xcassets */,
 				984EC7BA1C7209C200A12379 /* Info.plist */,
 				984EC7B21C7209C200A12379 /* hiTour.xcdatamodeld */,
-				45A7B4291C76001700F4A3AB /* BarcodeScannerViewController.swift */,
-				453BAFDC1C772A6C00BE7896 /* DiscoveredBarcodeView.swift */,
-				45F22DD81C7931FB003C11ED /* StoryboardiPad.storyboard */,
+				4501BF6B1C7BCA4300BE2627 /* BarcodeScanner */,
 			);
 			path = hiTour;
 			sourceTree = "<group>";

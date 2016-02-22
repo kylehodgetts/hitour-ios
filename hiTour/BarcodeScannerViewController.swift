@@ -15,6 +15,7 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
     var previewLayer : AVCaptureVideoPreviewLayer?
     var identifiedBorder : DiscoveredBardCodeView?
     var timer : NSTimer!
+    var errorAlert : UIAlertController!
     
     @IBOutlet weak var cameraView: UIView!
     @IBOutlet weak var codeInputView: UIView!
@@ -34,16 +35,22 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
         {
             let inputDevice = try AVCaptureDeviceInput(device: captureDevice)
             session.addInput(inputDevice)
+            let output = AVCaptureMetadataOutput()
+            session.addOutput(output)
+            output.metadataObjectTypes = [AVMetadataObjectTypeQRCode]
+            output.setMetadataObjectsDelegate(self, queue: dispatch_get_main_queue())
         }
         catch
         {
             print("Error With Input Device")
+            errorAlert = UIAlertController()
+            errorAlert.title = "Input Device Error"
+            errorAlert.message = "There appears to be a problem with the camera. Please check the app has permission and try again"
+            let errorAlertOkAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default) {
+                action in self.errorAlert.dismissViewControllerAnimated(true, completion: nil)
+            }
+            errorAlert.addAction(errorAlertOkAction)
         }
-        
-        let output = AVCaptureMetadataOutput()
-        session.addOutput(output)
-        output.metadataObjectTypes = [AVMetadataObjectTypeQRCode]
-        output.setMetadataObjectsDelegate(self, queue: dispatch_get_main_queue())
     }
     
     // MARK: Overrides
@@ -53,8 +60,12 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
         self.view.bringSubviewToFront(codeInputView)
         session.startRunning()
         txtInput.delegate = self
-
         
+        if errorAlert != nil {
+            errorAlert.popoverPresentationController?.sourceView = self.cameraView
+            errorAlert.popoverPresentationController?.sourceRect = self.cameraView.frame
+            self.presentViewController(errorAlert, animated: true, completion: nil)
+        }
     }
     
     override func viewWillDisappear(animated: Bool) {

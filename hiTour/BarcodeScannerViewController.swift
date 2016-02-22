@@ -9,21 +9,27 @@
 import AVFoundation
 import UIKit
 
-class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputObjectsDelegate, UITextFieldDelegate {
     
     let session = AVCaptureSession()
     var previewLayer : AVCaptureVideoPreviewLayer?
     var identifiedBorder : DiscoveredBardCodeView?
     var timer : NSTimer!
     
+    @IBOutlet weak var cameraView: UIView!
+    @IBOutlet weak var codeInputView: UIView!
+    @IBOutlet weak var txtInput: UITextField!
+    @IBOutlet weak var btnSubmit: UIButton!
+    
+    
     
     // MARK: Initialiser
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+    
         let captureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
-        
         do
         {
             let inputDevice = try AVCaptureDeviceInput(device: captureDevice)
@@ -36,30 +42,25 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
         
         let output = AVCaptureMetadataOutput()
         session.addOutput(output)
-        output.metadataObjectTypes = output.availableMetadataObjectTypes
-        
-        addPreviewLayer()
-        
-        identifiedBorder = DiscoveredBardCodeView(frame: self.view.bounds)
-        identifiedBorder?.backgroundColor = UIColor.clearColor()
-        identifiedBorder?.hidden = true
-        self.view.addSubview(identifiedBorder!)
-        
+        output.metadataObjectTypes = [AVMetadataObjectTypeQRCode]
         output.setMetadataObjectsDelegate(self, queue: dispatch_get_main_queue())
-        session.startRunning()
-        
     }
     
     // MARK: Overrides
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewDidAppear(animated: Bool) {
+        addPreviewLayer()
+        self.view.bringSubviewToFront(codeInputView)
+        session.startRunning()
+        txtInput.delegate = self
+
         
     }
     
     override func viewWillDisappear(animated: Bool) {
         session.stopRunning()
     }
-
+    
     
     // MARK: Actions
     
@@ -67,9 +68,19 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
     {
         previewLayer = AVCaptureVideoPreviewLayer(session: session)
         previewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
-        previewLayer?.bounds = self.view.bounds
-        previewLayer?.position = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds))
-        self.view.layer.addSublayer(previewLayer!)
+        previewLayer?.bounds = cameraView.bounds
+        previewLayer?.position = CGPointMake(CGRectGetMidX(cameraView.bounds), CGRectGetMidY(cameraView.bounds))
+        previewLayer?.frame = cameraView.bounds
+        cameraView.layer.addSublayer(previewLayer!)
+        previewLayer?.backgroundColor = UIColor.clearColor().CGColor
+        previewLayer?.shadowColor = UIColor.clearColor().CGColor
+        self.view.backgroundColor = UIColor.whiteColor()
+        previewLayer?.opaque = false
+        
+        identifiedBorder = DiscoveredBardCodeView(frame: previewLayer!.bounds)
+        identifiedBorder?.backgroundColor = UIColor.clearColor()
+        identifiedBorder?.hidden = true
+        self.view.addSubview(identifiedBorder!)
     }
     
     
@@ -111,13 +122,16 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
         {
             let metaData = data as! AVMetadataObject
             let transformed = previewLayer?.transformedMetadataObjectForMetadataObject(metaData) as? AVMetadataMachineReadableCodeObject
+            
             if let unwraped = transformed
             {
                 identifiedBorder?.frame = unwraped.bounds
                 identifiedBorder?.hidden = false
                 let identifiedCorners = self.translatePoints(unwraped.corners, fromView: self.view, toView: self.identifiedBorder!)
                 identifiedBorder?.drawBorder(identifiedCorners)
-                self.identifiedBorder?.hidden = false
+                //self.identifiedBorder?.hidden = false
+                
+                txtInput.text = unwraped.stringValue
                 
                 let alertView = UIAlertController()
                 alertView.title = "Result"
@@ -127,6 +141,7 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
                     action in alertView.dismissViewControllerAnimated(true, completion: nil)
                     self.startTimer()
                     self.session.startRunning()
+                    self.txtInput.text = ""
                 }
                 alertView.addAction(okAction)
                 presentViewController(alertView, animated: true, completion: nil)
@@ -136,6 +151,10 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
         }
     }
 
+    @IBAction func textInputDone(sender: UITextField)
+    {
+        sender.resignFirstResponder()
+    }
     
     
     

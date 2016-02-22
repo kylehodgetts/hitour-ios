@@ -11,7 +11,6 @@ import UIKit
 class ViewController: UIViewController {
     
     
-    @IBOutlet weak var scanButton: UIButton!
     
 
     override func viewDidLoad() {
@@ -25,9 +24,5 @@ class ViewController: UIViewController {
     }
     
 
-    @IBAction func scanBarcode(sender: UIButton) {
-        let scanViewController = BarcodeScannerViewController()
-        presentViewController(scanViewController, animated: true, completion: nil)
-    }
 }
 

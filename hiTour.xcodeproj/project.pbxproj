@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		453BAFDD1C772A6C00BE7896 /* DiscoveredBarcodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453BAFDC1C772A6C00BE7896 /* DiscoveredBarcodeView.swift */; };
 		45A7B42A1C76001700F4A3AB /* BarcodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7B4291C76001700F4A3AB /* BarcodeScannerViewController.swift */; };
+		45F22DD91C7931FB003C11ED /* StoryboardiPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45F22DD81C7931FB003C11ED /* StoryboardiPad.storyboard */; };
 		984EC7AC1C7209C200A12379 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984EC7AB1C7209C200A12379 /* AppDelegate.swift */; };
 		984EC7AE1C7209C200A12379 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984EC7AD1C7209C200A12379 /* ViewController.swift */; };
 		984EC7B11C7209C200A12379 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 984EC7AF1C7209C200A12379 /* Main.storyboard */; };
@@ -39,6 +40,7 @@
 /* Begin PBXFileReference section */
 		453BAFDC1C772A6C00BE7896 /* DiscoveredBarcodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveredBarcodeView.swift; sourceTree = "<group>"; };
 		45A7B4291C76001700F4A3AB /* BarcodeScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeScannerViewController.swift; sourceTree = "<group>"; };
+		45F22DD81C7931FB003C11ED /* StoryboardiPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = StoryboardiPad.storyboard; sourceTree = "<group>"; };
 		984EC7A81C7209C200A12379 /* hiTour.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hiTour.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		984EC7AB1C7209C200A12379 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		984EC7AD1C7209C200A12379 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				984EC7B21C7209C200A12379 /* hiTour.xcdatamodeld */,
 				45A7B4291C76001700F4A3AB /* BarcodeScannerViewController.swift */,
 				453BAFDC1C772A6C00BE7896 /* DiscoveredBarcodeView.swift */,
+				45F22DD81C7931FB003C11ED /* StoryboardiPad.storyboard */,
 			);
 			path = hiTour;
 			sourceTree = "<group>";
@@ -242,6 +245,7 @@
 				984EC7B91C7209C200A12379 /* LaunchScreen.storyboard in Resources */,
 				984EC7B61C7209C200A12379 /* Assets.xcassets in Resources */,
 				984EC7B11C7209C200A12379 /* Main.storyboard in Resources */,
+				45F22DD91C7931FB003C11ED /* StoryboardiPad.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

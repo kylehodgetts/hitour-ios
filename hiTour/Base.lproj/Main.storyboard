@@ -60,7 +60,7 @@
             </objects>
             <point key="canvasLocation" x="-724.5" y="398"/>
         </scene>
-        <!--hiTour-->
+        <!--Tours-->
         <scene sceneID="Qpv-7C-Nhk">
             <objects>
                 <tableViewController id="yij-eK-aXR" sceneMemberID="viewController">
@@ -81,7 +81,7 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Tours" image="tours" id="PFw-RG-OVO"/>
-                    <navigationItem key="navigationItem" title="hiTour" id="A9i-mr-yeB"/>
+                    <navigationItem key="navigationItem" id="A9i-mr-yeB"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7hp-Td-YzZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -124,24 +124,74 @@
         <!--hiTour-->
         <scene sceneID="dzb-tC-LIE">
             <objects>
-                <collectionViewController id="ANH-Qu-MBs" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="FeedController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ANH-Qu-MBs" customClass="FeedController" customModule="hiTour" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="stx-5H-ziW">
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4KB-bT-Q6H">
-                            <size key="itemSize" width="50" height="50"/>
+                            <size key="itemSize" width="378.5" height="185"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="CsL-Ec-PZk">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FeedControllerCell" id="CsL-Ec-PZk" customClass="FeedControllerCell" customModule="hiTour" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="378.5" height="185"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZrT-cI-v9T">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                            <variation key="widthClass=compact" fixedFrame="YES">
+                                                <rect key="frame" x="0.0" y="0.0" width="378.5" height="185"/>
+                                            </variation>
+                                        </imageView>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gV5-wo-TVM">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eP2-7d-5bu">
+                                                    <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <variation key="widthClass=compact" fixedFrame="YES">
+                                                        <rect key="frame" x="8" y="6" width="362.5" height="21"/>
+                                                    </variation>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
+                                            <variation key="default">
+                                                <mask key="subviews">
+                                                    <exclude reference="eP2-7d-5bu"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="widthClass=compact" fixedFrame="YES">
+                                                <rect key="frame" x="0.0" y="151" width="378.5" height="34"/>
+                                                <mask key="subviews">
+                                                    <include reference="eP2-7d-5bu"/>
+                                                </mask>
+                                            </variation>
+                                        </view>
+                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="ZrT-cI-v9T"/>
+                                        <exclude reference="gV5-wo-TVM"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="subviews">
+                                        <include reference="ZrT-cI-v9T"/>
+                                        <include reference="gV5-wo-TVM"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <outlet property="imageViewFeed" destination="ZrT-cI-v9T" id="MZ4-KF-ph0"/>
+                                    <outlet property="labelTitle" destination="eP2-7d-5bu" id="91g-lY-KNy"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>

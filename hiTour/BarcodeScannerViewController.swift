@@ -9,23 +9,47 @@
 import AVFoundation
 import UIKit
 
+/**
+ Class that implements a QR Barcode Scanner within a UIView by using the device main camera.
+ Then inputs the results into the text field on the view.
+*/
 class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputObjectsDelegate, UITextFieldDelegate {
     
+    /** Capture session for receiving input from the camera */
     let session = AVCaptureSession()
+    
+    /** Video Preview layer to provide a live video camera feed to the view */
     var previewLayer : AVCaptureVideoPreviewLayer?
+    
+    /** View that provides a red rectangle when a QR code has been discovered */
     var identifiedBorder : DiscoveredBardCodeView?
+    
+    /** Timer to remove the red rectangle after a small moment */
     var timer : NSTimer!
+    
+    /** Error Alert to be displayed */
     var errorAlert : UIAlertController!
     
+    /** Reference to the Storyboards camera view */
     @IBOutlet weak var cameraView: UIView!
+    
+    /** Reference to the View containing the text field and button */
     @IBOutlet weak var codeInputView: UIView!
+    
+    /** Reference to the input text field */
     @IBOutlet weak var txtInput: UITextField!
+    
+    /** Reference to the submit button */
     @IBOutlet weak var btnSubmit: UIButton!
     
     
     
     // MARK: Initialiser
     
+    /**
+     Starts a new capture device session which only accepts QR codes as the output produced by the session
+     Handles error if the camera can't be accessed.
+    */
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -55,6 +79,10 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
     
     // MARK: Overrides
     
+    /** 
+     When the view appears on the device, the preview layer is added and the input view brought forward.
+     The capture session is started to start the live camera feed.
+    */
     override func viewDidAppear(animated: Bool) {
         addPreviewLayer()
         self.view.bringSubviewToFront(codeInputView)
@@ -69,6 +97,9 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
 
     }
     
+    /** 
+      Stops the capture session when the view is no longer visible
+     */
     override func viewWillDisappear(animated: Bool) {
         session.stopRunning()
     }
@@ -76,6 +107,10 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
     
     // MARK: Actions
     
+    /** 
+     Sets up the video preview layer to handle the live camera feed and prepares the view to be displayed when a
+     QR code has been discovered.
+    */
     func addPreviewLayer()
     {
         previewLayer = AVCaptureVideoPreviewLayer(session: session)
@@ -95,7 +130,11 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
         self.view.addSubview(identifiedBorder!)
     }
     
-    
+    /** 
+      Translates the points for each received from the capture session by the camera.
+     
+      @return Array of CGPoint's
+     */
     func translatePoints(points: [AnyObject], fromView: UIView, toView: UIView) -> [CGPoint]
     {
         var translatedPoints : [CGPoint] = []
@@ -111,6 +150,9 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
         return translatedPoints
     }
     
+    /** 
+      Starts the timer to remove the discovered red rectangle view around a found QR code when the session is to be started again.
+     */
     func startTimer()
     {
         if timer?.valid != true
@@ -123,11 +165,17 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
         }
     }
     
+    /** 
+      Hides the discovered red rectangle from the view
+     */
     func removeBorder()
     {
         self.identifiedBorder?.hidden = true
     }
     
+    /** 
+      When a QR code has been discovered puts the result into the textfield and stops the capture session.
+     */
     func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!)
     {
         for data in metadataObjects
@@ -163,15 +211,20 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
         }
     }
 
+    /** 
+      Closes the keyboard view when the user presses the done button on the keyboard
+     */
     @IBAction func textInputDone(sender: UITextField)
     {
         sender.resignFirstResponder()
     }
     
+    /** 
+      Loads the main feed activity view when the user swipes back to the right
+     */
     @IBAction func returnSwipeToPreviousView(sender: UISwipeGestureRecognizer)
     {
         performSegueWithIdentifier("returnToViewController", sender: self)
     }
-    
     
 }

@@ -9,10 +9,16 @@
         <scene sceneID="Y6i-Wf-T5t">
             <objects>
                 <tabBarController id="PeC-GC-Ewf" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="WBH-8Z-oYC">
+                    <tabBar key="tabBar" contentMode="scaleToFill" barStyle="black" id="WBH-8Z-oYC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
                         <segue destination="OXW-Bp-Viq" kind="relationship" relationship="viewControllers" id="TBB-TS-aOt"/>
@@ -49,9 +55,10 @@
             <objects>
                 <navigationController id="dBZ-o0-rIm" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="2Sh-z9-VGi"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="aEU-NG-n56">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="aEU-NG-n56">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="lOE-q2-xdQ" kind="relationship" relationship="rootViewController" id="U35-pZ-8BI"/>
@@ -61,7 +68,7 @@
             </objects>
             <point key="canvasLocation" x="-724.5" y="398"/>
         </scene>
-        <!--Tours-->
+        <!--hiTour-->
         <scene sceneID="Qpv-7C-Nhk">
             <objects>
                 <tableViewController id="yij-eK-aXR" sceneMemberID="viewController">
@@ -85,7 +92,7 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Tours" image="tours" id="PFw-RG-OVO"/>
-                    <navigationItem key="navigationItem" id="A9i-mr-yeB"/>
+                    <navigationItem key="navigationItem" title="hiTour" id="A9i-mr-yeB"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7hp-Td-YzZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -96,9 +103,10 @@
             <objects>
                 <navigationController id="cdo-Be-tem" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="1Tt-21-v6o"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="XyQ-eM-RHW">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="XyQ-eM-RHW">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="yij-eK-aXR" kind="relationship" relationship="rootViewController" id="2bF-PZ-dkh"/>
@@ -113,9 +121,10 @@
             <objects>
                 <navigationController id="OXW-Bp-Viq" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Feed" image="feed" id="Ao6-iI-nOy"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Z4V-uK-iD5">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="Z4V-uK-iD5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="ANH-Qu-MBs" kind="relationship" relationship="rootViewController" id="6JJ-Ed-DuW"/>

@@ -12,6 +12,13 @@
 		6D245D491C7B91E50017A0BD /* FeedControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D245D481C7B91E50017A0BD /* FeedControllerCell.swift */; };
 		6D245D4B1C7B92880017A0BD /* PrototypeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D245D4A1C7B92880017A0BD /* PrototypeData.swift */; };
 		6D2BFBC41C7D3941008BE3F4 /* ToursControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2BFBC31C7D3941008BE3F4 /* ToursControllerCell.swift */; };
+		6D90EE3C1C7DFEBC00433E1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D90EE361C7DFEBC00433E1F /* Assets.xcassets */; };
+		6D90EE3D1C7DFEBC00433E1F /* BarcodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D90EE371C7DFEBC00433E1F /* BarcodeScannerViewController.swift */; };
+		6D90EE3F1C7DFEBC00433E1F /* DiscoveredBarcodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D90EE391C7DFEBC00433E1F /* DiscoveredBarcodeView.swift */; };
+		6D90EE401C7DFEBC00433E1F /* hiTour.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6D90EE3A1C7DFEBC00433E1F /* hiTour.xcdatamodeld */; };
+		6D90EE451C7DFF0600433E1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D90EE411C7DFF0600433E1F /* Assets.xcassets */; };
+		6D90EE461C7DFF0600433E1F /* Base.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 6D90EE421C7DFF0600433E1F /* Base.lproj */; };
+		6D90EE471C7DFF0600433E1F /* hiTour.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6D90EE431C7DFF0600433E1F /* hiTour.xcdatamodeld */; };
 		6DFEF6C01C7CDA670089429B /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFEF6BF1C7CDA670089429B /* DetailViewController.swift */; };
 		984EC7AC1C7209C200A12379 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984EC7AB1C7209C200A12379 /* AppDelegate.swift */; };
 		984EC7B11C7209C200A12379 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 984EC7AF1C7209C200A12379 /* Main.storyboard */; };
@@ -45,6 +52,13 @@
 		6D245D481C7B91E50017A0BD /* FeedControllerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedControllerCell.swift; sourceTree = "<group>"; };
 		6D245D4A1C7B92880017A0BD /* PrototypeData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrototypeData.swift; sourceTree = "<group>"; };
 		6D2BFBC31C7D3941008BE3F4 /* ToursControllerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToursControllerCell.swift; sourceTree = "<group>"; };
+		6D90EE361C7DFEBC00433E1F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6D90EE371C7DFEBC00433E1F /* BarcodeScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeScannerViewController.swift; sourceTree = "<group>"; };
+		6D90EE391C7DFEBC00433E1F /* DiscoveredBarcodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveredBarcodeView.swift; sourceTree = "<group>"; };
+		6D90EE3B1C7DFEBC00433E1F /* hiTour.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = hiTour.xcdatamodel; sourceTree = "<group>"; };
+		6D90EE411C7DFF0600433E1F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6D90EE421C7DFF0600433E1F /* Base.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Base.lproj; sourceTree = "<group>"; };
+		6D90EE441C7DFF0600433E1F /* hiTour.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = hiTour.xcdatamodel; sourceTree = "<group>"; };
 		6DFEF6BF1C7CDA670089429B /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		984EC7A81C7209C200A12379 /* hiTour.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hiTour.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		984EC7AB1C7209C200A12379 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -108,8 +122,15 @@
 		984EC7AA1C7209C200A12379 /* hiTour */ = {
 			isa = PBXGroup;
 			children = (
+				6D90EE361C7DFEBC00433E1F /* Assets.xcassets */,
+				6D90EE371C7DFEBC00433E1F /* BarcodeScannerViewController.swift */,
+				6D90EE391C7DFEBC00433E1F /* DiscoveredBarcodeView.swift */,
+				6D90EE3A1C7DFEBC00433E1F /* hiTour.xcdatamodeld */,
 				984EC7AB1C7209C200A12379 /* AppDelegate.swift */,
 				984EC7AF1C7209C200A12379 /* Main.storyboard */,
+				6D90EE411C7DFF0600433E1F /* Assets.xcassets */,
+				6D90EE421C7DFF0600433E1F /* Base.lproj */,
+				6D90EE431C7DFF0600433E1F /* hiTour.xcdatamodeld */,
 				984EC7B51C7209C200A12379 /* Assets.xcassets */,
 				984EC7B71C7209C200A12379 /* LaunchScreen.storyboard */,
 				984EC7BA1C7209C200A12379 /* Info.plist */,
@@ -250,7 +271,10 @@
 			files = (
 				984EC7B91C7209C200A12379 /* LaunchScreen.storyboard in Resources */,
 				984EC7B61C7209C200A12379 /* Assets.xcassets in Resources */,
+				6D90EE3C1C7DFEBC00433E1F /* Assets.xcassets in Resources */,
 				984EC7B11C7209C200A12379 /* Main.storyboard in Resources */,
+				6D90EE461C7DFF0600433E1F /* Base.lproj in Resources */,
+				6D90EE451C7DFF0600433E1F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,13 +300,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D245D4B1C7B92880017A0BD /* PrototypeData.swift in Sources */,
+				6D90EE3F1C7DFEBC00433E1F /* DiscoveredBarcodeView.swift in Sources */,
 				984EC7B41C7209C200A12379 /* hiTour.xcdatamodeld in Sources */,
 				6D245D471C7B90600017A0BD /* ToursController.swift in Sources */,
 				6D245D451C7B904F0017A0BD /* FeedController.swift in Sources */,
+				6D90EE401C7DFEBC00433E1F /* hiTour.xcdatamodeld in Sources */,
 				6D245D491C7B91E50017A0BD /* FeedControllerCell.swift in Sources */,
 				6D2BFBC41C7D3941008BE3F4 /* ToursControllerCell.swift in Sources */,
 				984EC7AC1C7209C200A12379 /* AppDelegate.swift in Sources */,
 				6DFEF6C01C7CDA670089429B /* DetailViewController.swift in Sources */,
+				6D90EE471C7DFF0600433E1F /* hiTour.xcdatamodeld in Sources */,
+				6D90EE3D1C7DFEBC00433E1F /* BarcodeScannerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -538,6 +566,26 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
+		6D90EE3A1C7DFEBC00433E1F /* hiTour.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6D90EE3B1C7DFEBC00433E1F /* hiTour.xcdatamodel */,
+			);
+			currentVersion = 6D90EE3B1C7DFEBC00433E1F /* hiTour.xcdatamodel */;
+			path = hiTour.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		6D90EE431C7DFF0600433E1F /* hiTour.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6D90EE441C7DFF0600433E1F /* hiTour.xcdatamodel */,
+			);
+			currentVersion = 6D90EE441C7DFF0600433E1F /* hiTour.xcdatamodel */;
+			path = hiTour.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
 		984EC7B21C7209C200A12379 /* hiTour.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (

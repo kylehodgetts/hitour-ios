@@ -32,26 +32,6 @@
             </objects>
             <point key="canvasLocation" x="-1690.5" y="603"/>
         </scene>
-        <!--hiTour-->
-        <scene sceneID="qcJ-2I-09h">
-            <objects>
-                <viewController id="lOE-q2-xdQ" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="bqx-cw-psj"/>
-                        <viewControllerLayoutGuide type="bottom" id="H9q-tK-QxA"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="iD2-kp-9IA">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Scanner" image="qrcode" id="pkg-24-QEa"/>
-                    <navigationItem key="navigationItem" title="hiTour" id="coe-jr-jPO"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NU6-Rx-M5W" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="157.5" y="398"/>
-        </scene>
         <!--Scanner-->
         <scene sceneID="577-QZ-Eby">
             <objects>
@@ -63,7 +43,7 @@
                         <color key="barTintColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="lOE-q2-xdQ" kind="relationship" relationship="rootViewController" id="U35-pZ-8BI"/>
+                        <segue destination="rDu-uS-NhD" kind="relationship" relationship="rootViewController" id="5Be-wD-NiP"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M76-Ay-lvc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -298,7 +278,7 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Vo-gi-STz">
                                                         <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Fc9-G0-Oab">
@@ -338,7 +318,7 @@
                                                 <exclude reference="xhj-aI-Dl3"/>
                                             </mask>
                                         </variation>
-                                        <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                        <variation key="widthClass=compact" ambiguous="YES">
                                             <rect key="frame" x="0.0" y="0.0" width="400" height="487"/>
                                             <mask key="subviews">
                                                 <include reference="MZ1-qN-qXB"/>
@@ -435,6 +415,98 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xUG-8g-1BQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="847.5" y="-314"/>
+        </scene>
+        <!--hiTour-->
+        <scene sceneID="EiM-DD-fot">
+            <objects>
+                <viewController id="rDu-uS-NhD" customClass="BarcodeScannerViewController" customModule="hiTour" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3zW-bj-tWR"/>
+                        <viewControllerLayoutGuide type="bottom" id="17c-1x-RMR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7t4-NW-ffI">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DKA-nn-XcZ">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Code or PIN" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fxb-cA-wp5">
+                                        <rect key="frame" x="-25" y="-30" width="97" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
+                                        <variation key="widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="24" y="78" width="281" height="30"/>
+                                        </variation>
+                                        <connections>
+                                            <action selector="textInputDone:" destination="rDu-uS-NhD" eventType="primaryActionTriggered" id="0eq-q4-x2J"/>
+                                        </connections>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m57-vH-UoN">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <state key="normal" title="Submit"/>
+                                        <variation key="widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="308" y="78" width="68" height="30"/>
+                                        </variation>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="Fxb-cA-wp5"/>
+                                        <exclude reference="m57-vH-UoN"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="337" width="400" height="214"/>
+                                    <mask key="subviews">
+                                        <include reference="Fxb-cA-wp5"/>
+                                        <include reference="m57-vH-UoN"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IuD-OK-Oxg">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="64" width="400" height="329"/>
+                                </variation>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="DKA-nn-XcZ"/>
+                                <exclude reference="IuD-OK-Oxg"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="DKA-nn-XcZ"/>
+                                <include reference="IuD-OK-Oxg"/>
+                            </mask>
+                        </variation>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="HvQ-hz-7lb" appends="YES" id="dVN-Hb-qKr"/>
+                        </connections>
+                    </view>
+                    <navigationItem key="navigationItem" title="hiTour" id="oGJ-cO-g8e"/>
+                    <connections>
+                        <outlet property="btnSubmit" destination="m57-vH-UoN" id="HFY-2B-ZDd"/>
+                        <outlet property="cameraView" destination="IuD-OK-Oxg" id="cE8-Xw-aU9"/>
+                        <outlet property="codeInputView" destination="DKA-nn-XcZ" id="ZHK-I7-GSx"/>
+                        <outlet property="txtInput" destination="Fxb-cA-wp5" id="Xb4-tH-sNG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eUI-5f-z3k" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="HvQ-hz-7lb">
+                    <connections>
+                        <action selector="returnSwipeToPreviousView:" destination="rDu-uS-NhD" id="3ng-4v-pCb"/>
+                    </connections>
+                </swipeGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="66" y="398"/>
         </scene>
     </scenes>
     <resources>

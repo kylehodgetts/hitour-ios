@@ -219,12 +219,4 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
         sender.resignFirstResponder()
     }
     
-    /** 
-      Loads the main feed activity view when the user swipes back to the right
-     */
-    @IBAction func returnSwipeToPreviousView(sender: UISwipeGestureRecognizer)
-    {
-        performSegueWithIdentifier("returnToViewController", sender: self)
-    }
-    
 }

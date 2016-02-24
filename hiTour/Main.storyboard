@@ -487,9 +487,6 @@
                                 <include reference="IuD-OK-Oxg"/>
                             </mask>
                         </variation>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="HvQ-hz-7lb" appends="YES" id="dVN-Hb-qKr"/>
-                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="hiTour" id="oGJ-cO-g8e"/>
                     <connections>
@@ -500,11 +497,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eUI-5f-z3k" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="right" id="HvQ-hz-7lb">
-                    <connections>
-                        <action selector="returnSwipeToPreviousView:" destination="rDu-uS-NhD" id="3ng-4v-pCb"/>
-                    </connections>
-                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="66" y="398"/>
         </scene>

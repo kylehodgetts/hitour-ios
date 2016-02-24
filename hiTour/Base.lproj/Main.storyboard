@@ -440,6 +440,6 @@
     <resources>
         <image name="feed" width="30" height="30"/>
         <image name="qrcode" width="30" height="30"/>
-        <image name="tours" width="40" height="40"/>
+        <image name="tours" width="30" height="30"/>
     </resources>
 </document>

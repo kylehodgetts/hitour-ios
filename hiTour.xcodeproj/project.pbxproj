@@ -11,6 +11,7 @@
 		6D245D471C7B90600017A0BD /* ToursController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D245D461C7B90600017A0BD /* ToursController.swift */; };
 		6D245D491C7B91E50017A0BD /* FeedControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D245D481C7B91E50017A0BD /* FeedControllerCell.swift */; };
 		6D245D4B1C7B92880017A0BD /* PrototypeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D245D4A1C7B92880017A0BD /* PrototypeData.swift */; };
+		6D2BFBC41C7D3941008BE3F4 /* ToursControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2BFBC31C7D3941008BE3F4 /* ToursControllerCell.swift */; };
 		6DFEF6C01C7CDA670089429B /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFEF6BF1C7CDA670089429B /* DetailViewController.swift */; };
 		984EC7AC1C7209C200A12379 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984EC7AB1C7209C200A12379 /* AppDelegate.swift */; };
 		984EC7B11C7209C200A12379 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 984EC7AF1C7209C200A12379 /* Main.storyboard */; };
@@ -43,6 +44,7 @@
 		6D245D461C7B90600017A0BD /* ToursController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToursController.swift; sourceTree = "<group>"; };
 		6D245D481C7B91E50017A0BD /* FeedControllerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedControllerCell.swift; sourceTree = "<group>"; };
 		6D245D4A1C7B92880017A0BD /* PrototypeData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrototypeData.swift; sourceTree = "<group>"; };
+		6D2BFBC31C7D3941008BE3F4 /* ToursControllerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToursControllerCell.swift; sourceTree = "<group>"; };
 		6DFEF6BF1C7CDA670089429B /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		984EC7A81C7209C200A12379 /* hiTour.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hiTour.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		984EC7AB1C7209C200A12379 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				6D245D481C7B91E50017A0BD /* FeedControllerCell.swift */,
 				6D245D4A1C7B92880017A0BD /* PrototypeData.swift */,
 				6DFEF6BF1C7CDA670089429B /* DetailViewController.swift */,
+				6D2BFBC31C7D3941008BE3F4 /* ToursControllerCell.swift */,
 				984EC7C21C7209C200A12379 /* hiTourTests */,
 			);
 			path = hiTour;
@@ -277,6 +280,7 @@
 				6D245D471C7B90600017A0BD /* ToursController.swift in Sources */,
 				6D245D451C7B904F0017A0BD /* FeedController.swift in Sources */,
 				6D245D491C7B91E50017A0BD /* FeedControllerCell.swift in Sources */,
+				6D2BFBC41C7D3941008BE3F4 /* ToursControllerCell.swift in Sources */,
 				984EC7AC1C7209C200A12379 /* AppDelegate.swift in Sources */,
 				6DFEF6C01C7CDA670089429B /* DetailViewController.swift in Sources */,
 			);

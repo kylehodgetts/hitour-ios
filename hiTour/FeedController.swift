@@ -41,9 +41,11 @@ class FeedController: UICollectionViewController {
         return self.prototypeData.count
     }
     
-//    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-//        // TODO: launch the detail view
-//    }
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("DetailViewController") as! DetailViewController
+        detailController.prototypeData = self.prototypeData[indexPath.row]
+        self.navigationController!.pushViewController(detailController, animated: true)
+    }
     
     
 }

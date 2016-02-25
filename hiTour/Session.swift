@@ -14,11 +14,6 @@ class Session: NSManagedObject {
     
     static let entityName = "Session"
     static let jsonReader = SessionReader()
-
-
-
-// Insert code here to add functionality to your managed object subclass
-
 }
 
 class SessionReader: JsonReader{

@@ -15,9 +15,6 @@ class PointData: NSManagedObject {
     static let entityName = "PointData"
     static let jsonReader = PointDataReader()
 
-
-// Insert code here to add functionality to your managed object subclass
-
 }
 
 class PointDataReader: JsonReader{

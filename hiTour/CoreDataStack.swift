@@ -13,7 +13,7 @@ class CoreDataStack{
     
     static let moduleName = "hiTour"
     
-    lazy var applicationDocumentsDirectory: NSURL = {
+    private lazy var applicationDocumentsDirectory: NSURL = {
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
         return urls.last!
     }()

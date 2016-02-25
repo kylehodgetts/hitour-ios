@@ -15,10 +15,6 @@ class Audience: NSManagedObject {
     static let entityName = "Audience"
     static let jsonReader = AudienceReader()
 
-
-
-// Insert code here to add functionality to your managed object subclass
-
 }
 
 

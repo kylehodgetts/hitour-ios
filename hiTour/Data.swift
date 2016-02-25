@@ -15,9 +15,6 @@ class Data: NSManagedObject {
     static let entityName = "Data"
     static let jsonReader = DataReader()
 
-
-// Insert code here to add functionality to your managed object subclass
-
 }
 
 class DataReader: JsonReader{

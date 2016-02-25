@@ -15,10 +15,6 @@ class PointTour: NSManagedObject {
     static let entityName = "PointTour"
     static let jsonReader = PointTourReader()
 
-
-
-// Insert code here to add functionality to your managed object subclass
-
 }
 
 class PointTourReader: JsonReader{

@@ -9,6 +9,9 @@
 import Foundation
 import CoreData
 
+///
+/// App that servers a s connection to the server and handles all calls to the api
+///
 class ApiConnector{
     
     let client: HTTPClient
@@ -19,25 +22,53 @@ class ApiConnector{
         self.coreDataStack = coreDataStack
     }
     
-    func updateAll() -> Void {
+    
+    ///
+    /// Drops all data from the coreData and updates them with new values from the server
+    ///
+    func updateAll(cb: () -> Void) -> Void {
         coreDataStack.deleteAll()
         coreDataStack.saveMainContext()
+        var ptFinished = false
+        var pdFinished = false
+        var daFinished = false
+        
+        func doneConcurent() -> Void {
+            guard ptFinished && pdFinished && daFinished else {
+                return
+            }
+            cb()
+        }
         
         fetchPoints { (points) -> Void in
             self.fetchAudience({ (audiences) -> Void in
                 self.fetchData({ (data) -> Void in
                     self.fetchTours(audiences, chain: { (tours) -> Void in
-                        self.fetchPointTour(tours, points: points)
-                        self.fetchPointData(data, points: points)
-                        self.fetchDataAudiences(data, audiences: audiences)
-                        let a:[Point]? = self.coreDataStack.fetch(name: Point.entityName)
-                        a?.forEach({print($0.name)})
+                        self.fetchPointTour(tours, points: points, chain: { _ in
+                            ptFinished = true; doneConcurent()
+                        })
+                        self.fetchPointData(data, points: points, chain: { _ in
+                            pdFinished = true; doneConcurent()
+                        })
+                        self.fetchDataAudiences(data, audiences: audiences, chain: { _ in
+                            daFinished = true; doneConcurent()
+                        })
                     })
                 })
             })
         }
     }
     
+    ///
+    /// A generic fetch method to fetch data from a given url, and then parse them
+    ///
+    /// Parameters:
+    ///  - url: The end url to be fetched rom the api
+    ///  - jsonReader: The reader for the objects returned from the api
+    ///  - chain: An option of function taht is called once the request is finnished
+    ///  - afterParse: A curried function that takes takes the json object and then the already parsed object and does actions
+    ///     that need to be done in order to keep the validity of the object
+    ///
     internal func fetch<R: JsonReader where R.T: NSManagedObject>(
         url: String
         , jsonReader: R
@@ -56,6 +87,9 @@ class ApiConnector{
         }
     }
     
+    ///
+    /// Fetches tours from the server
+    ///
     func fetchTours(audiences: [Audience], chain: (([Tour]) -> Void)? ) -> Void {
         fetch("tours", jsonReader: Tour.jsonReader, chain: chain, afterParse: {dict in
             return { (t) -> Tour in
@@ -67,19 +101,32 @@ class ApiConnector{
         })
     }
     
+    ///
+    /// Fetches the points from the server
+    ///
     func fetchPoints(chain: (([Point]) -> Void)? ) -> Void {
         fetch("points", jsonReader: Point.jsonReader, chain: chain)
     }
     
+    
+    ///
+    /// Fetches the data from the server
+    ///
     func fetchData(chain: (([Data]) -> Void)? ) -> Void {
         fetch("data", jsonReader: Data.jsonReader, chain: chain)
     }
     
     
+    ///
+    /// Fetches the audiences from the server
+    ///
     func fetchAudience(chain: (([Audience]) -> Void)? ) -> Void {
         fetch("audiences", jsonReader: Audience.jsonReader, chain: chain)
     }
     
+    ///
+    /// Fetches the point - tour relationsships from the srever
+    ///
     func fetchPointTour(tours: [Tour], points: [Point], chain: (([PointTour]) -> Void)? = nil ) -> Void {
         fetch("tour_points", jsonReader: PointTour.jsonReader, chain: chain, afterParse: {dict in
             return { (pt) -> PointTour in
@@ -96,6 +143,9 @@ class ApiConnector{
         })
     }
     
+    ///
+    /// Fetches teh point - data relationships from the server
+    ///
     func fetchPointData(data: [Data], points: [Point], chain: (([PointData]) -> Void)? = nil ) -> Void {
         fetch("point_data", jsonReader: PointData.jsonReader, chain: chain, afterParse: {dict in
             return { (pd) -> PointData in
@@ -112,6 +162,10 @@ class ApiConnector{
         })
     }
 
+    
+    ///
+    /// Fetches teh data - audience relationships from the server
+    ///
     func fetchDataAudiences(data: [Data], audiences: [Audience], chain: (() -> Void)? = nil ) -> Void {
         client.request("data_audiences") { (dicts) -> Void in
             dicts.forEach({ dict in

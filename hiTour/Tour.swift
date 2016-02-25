@@ -15,8 +15,6 @@ class Tour: NSManagedObject {
     static let entityName = "Tour"
     static let jsonReader = TourReader()
 
-// Insert code here to add functionality to your managed object subclass
-
 }
 
 class TourReader: JsonReader{

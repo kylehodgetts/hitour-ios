@@ -15,6 +15,7 @@ class FeedController: UICollectionViewController {
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
     let prototypeData = PrototypeDatum.getAllData
+    var selectedItem = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,10 +43,18 @@ class FeedController: UICollectionViewController {
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("DetailViewController") as! DetailViewController
-        detailController.prototypeData = self.prototypeData[indexPath.row]
-        self.navigationController!.pushViewController(detailController, animated: true)
+        let pageView = self.storyboard!.instantiateViewControllerWithIdentifier("FeedPageViewController") as! FeedPageViewController
+        pageView.startIndex = indexPath.row
+        self.navigationController!.pushViewController(pageView, animated: true)
+        // selectedItem = indexPath.row
+        //performSegueWithIdentifier("FeedPageViewSegue", sender: self)
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if (segue.identifier == "FeedPageViewSegue") {
+            let viewController = segue.destinationViewController as! FeedPageViewController
+            viewController.startIndex = self.selectedItem
+        }
+    }
     
 }

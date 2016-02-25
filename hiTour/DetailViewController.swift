@@ -26,16 +26,6 @@ class DetailViewController : UIViewController {
 
         self.titleDetail.text = prototypeData.title
         self.textDetail.text = prototypeData.description
-        
-        self.tabBarController?.tabBar.hidden = true
-        
-        self.view.setNeedsUpdateConstraints()
-        self.view.layoutIfNeeded()
-        
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.tabBarController?.tabBar.hidden = false
-    }
 }

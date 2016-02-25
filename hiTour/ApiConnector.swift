@@ -26,7 +26,7 @@ class ApiConnector{
     ///
     /// Drops all data from the coreData and updates them with new values from the server
     ///
-    func updateAll(cb: () -> Void) -> Void {
+    func updateAll(chain: (() -> Void)? = nil) -> Void {
         coreDataStack.deleteAll()
         coreDataStack.saveMainContext()
         var ptFinished = false
@@ -37,7 +37,9 @@ class ApiConnector{
             guard ptFinished && pdFinished && daFinished else {
                 return
             }
-            cb()
+            if let cb = chain {
+              cb()
+            }
         }
         
         fetchPoints { (points) -> Void in

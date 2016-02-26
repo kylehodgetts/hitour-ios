@@ -14,7 +14,7 @@ class FeedController: UICollectionViewController {
         
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
-    let prototypeData = PrototypeDatum.getAllData
+    var prototypeData:[PrototypeDatum] = []
     var selectedItem = 0
     
     override func viewDidLoad() {
@@ -23,6 +23,12 @@ class FeedController: UICollectionViewController {
         self.collectionView?.backgroundColor = UIColor.whiteColor()
         
         flowLayout.minimumLineSpacing = 2.0
+        
+        let savedTour = NSUserDefaults.standardUserDefaults().integerForKey("Tour")
+        if savedTour > 0 {
+           setTour(savedTour)
+        }
+        
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -55,6 +61,13 @@ class FeedController: UICollectionViewController {
             let viewController = segue.destinationViewController as! FeedPageViewController
             viewController.startIndex = self.selectedItem
         }
+    }
+    
+    func setTour(tour: Int) -> Void {
+        //TODO: Proper loading from the core data
+        prototypeData = Array(PrototypeDatum.getAllData.dropLast(min(tour, PrototypeDatum.getAllData.count - 1)))
+        NSUserDefaults.standardUserDefaults().setInteger(tour, forKey: "Tour")
+        collectionView?.reloadData()
     }
     
 }

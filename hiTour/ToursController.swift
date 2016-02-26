@@ -50,14 +50,10 @@ class ToursController : UICollectionViewController {
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let popup = UIAlertController()
-        popup.title = "Major 🔑 No " + String(indexPath.row)
-        popup.message = "\nIt's just a prototype 💁"
-        let popupAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default) {
-            action in popup.dismissViewControllerAnimated(true, completion: nil)
-        }
-        popup.addAction(popupAction)
-        self.presentViewController(popup, animated: true, completion: nil)
+        //TODO: once data is dinamically loaded pass the correct id of the
+        self.tabBarController?.selectedIndex = 0
+        let feedControlelr = self.tabBarController?.selectedViewController?.childViewControllers.first! as! FeedController
+        feedControlelr.setTour(indexPath.item)
     }
     
 }

@@ -20,13 +20,11 @@ class DetailViewController : UIViewController {
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var scrollView: UIScrollView!
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidLoad() {
         
         textDetail = UITextView()
         textDetail.editable = false
-        textDetail.scrollEnabled = false
-        textDetail.setNeedsLayout()
+        
         
         stackView.addArrangedSubview(textDetail)
         
@@ -35,27 +33,40 @@ class DetailViewController : UIViewController {
 
         self.titleDetail.text = prototypeData.title
         self.textDetail.text = prototypeData.description
+        textDetail.sizeToFit()
+        textDetail.heightAnchor.constraintEqualToConstant(textDetail.contentSize.height + 100).active = true
+        textDetail.widthAnchor.constraintEqualToConstant(textDetail.contentSize.width).active = true
         
-        var contentItem :ContentView!
-        let path = NSBundle.mainBundle().pathForResource("ctscan", ofType: "mp4")
+        loadDynamicContent()
         
-        contentItem = ContentView(frame: CGRect (x: 0, y: 0, width: self.view.bounds.width, height: 350))
-        contentItem.populateView(path!, titleText: prototypeData.title, descriptionText: "An example of an image being dynamically put here")
-        contentItem.heightAnchor.constraintEqualToConstant(300).active = true
-        contentItem.widthAnchor.constraintEqualToConstant(300).active = true
+    }
+    
+    
+    func loadDynamicContent() {
+        let pointData = PrototypeDatum.getPointData(prototypeData.title)
         
-        stackView.addArrangedSubview(contentItem)
+        for item in pointData {
+            let urlString = item[PrototypeDatum.DataURLKey]
+            let urlFileName = (urlString! as NSString).substringToIndex(Int((urlString?.characters.count)!)-4)
+            let urlFileExt = (urlString! as NSString).substringFromIndex(Int((urlString?.characters.count)!)-3)
+            
+            var contentItem :ContentView!
+            let path : String!
+            if urlFileExt != "jpg" {
+                path = NSBundle.mainBundle().pathForResource(urlFileName, ofType: urlFileExt)
+            }
+            else {
+                path = urlFileName
+            }
+            
+            contentItem = ContentView(frame: CGRect (x: 0, y: 0, width: self.view.bounds.width, height: 350))
+            contentItem.populateView(path!, titleText: item[PrototypeDatum.DataTitleKey]!, descriptionText: item[PrototypeDatum.DataDescriptionKey]!)
+            contentItem.heightAnchor.constraintEqualToConstant(300).active = true
+            contentItem.widthAnchor.constraintEqualToConstant(300).active = true
+            
+            stackView.addArrangedSubview(contentItem)
+        }
         
-        var contentItem2 : ContentView!
-        let path2 = NSBundle.mainBundle().pathForResource("prototype", ofType: "txt")
-        contentItem2 = ContentView(frame: CGRect (x: 0, y: 0, width: self.view.bounds.width, height: 350))
-        contentItem2.populateView(path2!, titleText: "Text Title", descriptionText: "An example of text")
-        contentItem2.heightAnchor.constraintEqualToConstant(300).active = true
-        contentItem2.widthAnchor.constraintEqualToConstant(300).active = true
-
-        stackView.addArrangedSubview(contentItem2)
-
-
     }
         
 }

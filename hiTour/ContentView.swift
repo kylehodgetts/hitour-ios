@@ -21,6 +21,8 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
     var videoTap : UIButton!
     var videoPlayer : AVPlayer!
     var playerController : AVPlayerViewController!
+    var txtText : UITextView!
+    var imageView : UIImageView!
     
     
     override init(frame: CGRect) {
@@ -28,6 +30,10 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
         txtTitle = UITextView()
         txtDescription = UITextView()
         stackView = UIStackView()
+        txtText = UITextView()
+        imageView = UIImageView()
+
+        
         
     }
     
@@ -59,16 +65,7 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
 
             stackView.addArrangedSubview(playerController.view)
         }
-        else if url.containsString(".jpg") {
-            let imageView = UIImageView()
-            imageView.contentMode = .ScaleAspectFit
-            imageView.image = UIImage(named: url)
-            imageView.heightAnchor.constraintEqualToConstant(150).active = true
-            imageView.widthAnchor.constraintEqualToConstant(150).active = true
-            stackView.addArrangedSubview(imageView)
-        }
         else if url.containsString(".txt"){
-            let txtText = UITextView()
             do {
                 try txtText.text = String(contentsOfFile: url, encoding: NSUTF8StringEncoding)
             }
@@ -76,12 +73,18 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
                 print("Error reading text file resource")
             }
             txtText.editable = false
-            txtText.scrollEnabled = false
-            txtText.sizeToFit()
-            txtText.heightAnchor.constraintEqualToConstant(txtText.frame.height).active = true
-            txtText.widthAnchor.constraintEqualToConstant(txtText.frame.width).active = true
+            txtText.heightAnchor.constraintEqualToConstant(txtText.contentSize.height + 250).active = true
+            txtText.widthAnchor.constraintEqualToConstant(txtText.contentSize.width).active = true
             stackView.addArrangedSubview(txtText)
         }
+        else {
+            imageView.contentMode = .ScaleAspectFit
+            imageView.image = UIImage(named: url)
+            imageView.heightAnchor.constraintEqualToConstant(150).active = true
+            imageView.widthAnchor.constraintEqualToConstant(150).active = true
+            stackView.addArrangedSubview(imageView)
+        }
+
         
         txtTitle.text = titleText
         txtTitle.editable = false
@@ -98,7 +101,7 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
         
         
         
-        self.sizeToFit()
+        //self.sizeToFit()
         
     }
     

@@ -10,6 +10,7 @@
 		4513421B1C83429F0089F2DC /* ctscan.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 451342181C83429F0089F2DC /* ctscan.mp4 */; };
 		4513421C1C83429F0089F2DC /* mriscan.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 451342191C83429F0089F2DC /* mriscan.mp4 */; };
 		4513421D1C83429F0089F2DC /* ultrasound.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 4513421A1C83429F0089F2DC /* ultrasound.mp4 */; };
+		451342221C8366040089F2DC /* prototype.txt in Resources */ = {isa = PBXBuildFile; fileRef = 451342211C8366040089F2DC /* prototype.txt */; };
 		45583DB31C82671E0087AB18 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45583DB21C82671E0087AB18 /* ContentView.swift */; };
 		6D90EE561C7E00B500433E1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D90EE481C7E00B500433E1F /* AppDelegate.swift */; };
 		6D90EE581C7E00B500433E1F /* BarcodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D90EE4A1C7E00B500433E1F /* BarcodeScannerViewController.swift */; };
@@ -73,6 +74,7 @@
 		451342181C83429F0089F2DC /* ctscan.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = ctscan.mp4; path = "../../Projects/Project Run/ctscan.mp4"; sourceTree = "<group>"; };
 		451342191C83429F0089F2DC /* mriscan.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = mriscan.mp4; path = "../../Projects/Project Run/mriscan.mp4"; sourceTree = "<group>"; };
 		4513421A1C83429F0089F2DC /* ultrasound.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = ultrasound.mp4; path = "../../Projects/Project Run/ultrasound.mp4"; sourceTree = "<group>"; };
+		451342211C8366040089F2DC /* prototype.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = prototype.txt; sourceTree = "<group>"; };
 		45583DB21C82671E0087AB18 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6D90EE481C7E00B500433E1F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6D90EE4A1C7E00B500433E1F /* BarcodeScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeScannerViewController.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				451342181C83429F0089F2DC /* ctscan.mp4 */,
 				451342191C83429F0089F2DC /* mriscan.mp4 */,
 				4513421A1C83429F0089F2DC /* ultrasound.mp4 */,
+				451342211C8366040089F2DC /* prototype.txt */,
 			);
 			name = PrototypeFiles;
 			sourceTree = "<group>";
@@ -379,6 +382,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6DBED3D21C7E021E008BFA30 /* LaunchScreen.storyboard in Resources */,
+				451342221C8366040089F2DC /* prototype.txt in Resources */,
 				4513421B1C83429F0089F2DC /* ctscan.mp4 in Resources */,
 				4513421D1C83429F0089F2DC /* ultrasound.mp4 in Resources */,
 				6DBED3D01C7E021E008BFA30 /* Assets.xcassets in Resources */,

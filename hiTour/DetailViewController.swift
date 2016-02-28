@@ -41,7 +41,21 @@ class DetailViewController : UIViewController {
         
         contentItem = ContentView(frame: CGRect (x: 0, y: 0, width: self.view.bounds.width, height: 350))
         contentItem.populateView(path!, titleText: prototypeData.title, descriptionText: "An example of an image being dynamically put here")
+        contentItem.heightAnchor.constraintEqualToConstant(300).active = true
+        contentItem.widthAnchor.constraintEqualToConstant(300).active = true
+        
         stackView.addArrangedSubview(contentItem)
+        
+        var contentItem2 : ContentView!
+        let path2 = NSBundle.mainBundle().pathForResource("prototype", ofType: "txt")
+        contentItem2 = ContentView(frame: CGRect (x: 0, y: 0, width: self.view.bounds.width, height: 350))
+        contentItem2.populateView(path2!, titleText: "Text Title", descriptionText: "An example of text")
+        contentItem2.heightAnchor.constraintEqualToConstant(300).active = true
+        contentItem2.widthAnchor.constraintEqualToConstant(300).active = true
+
+        stackView.addArrangedSubview(contentItem2)
+
+
     }
         
 }

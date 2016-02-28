@@ -76,7 +76,10 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
                 print("Error reading text file resource")
             }
             txtText.editable = false
+            txtText.scrollEnabled = false
             txtText.sizeToFit()
+            txtText.heightAnchor.constraintEqualToConstant(txtText.frame.height).active = true
+            txtText.widthAnchor.constraintEqualToConstant(txtText.frame.width).active = true
             stackView.addArrangedSubview(txtText)
         }
         
@@ -92,6 +95,8 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
         txtDescription.scrollEnabled = true
         txtDescription.sizeToFit()
         stackView.addArrangedSubview(txtDescription)
+        
+        
         
         self.sizeToFit()
         

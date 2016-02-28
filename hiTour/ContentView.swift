@@ -8,19 +8,23 @@
 
 import Foundation
 import UIKit
+import AVFoundation
+import AVKit
+import MediaPlayer
 
-class ContentView : UIView {
+class ContentView : UIView, UIGestureRecognizerDelegate {
     
     var stackView : UIStackView!
     
-    var imageView : UIImageView!
     var txtTitle : UITextView!
     var txtDescription : UITextView!
+    var videoTap : UIButton!
+    var videoPlayer : AVPlayer!
+    var playerController : AVPlayerViewController!
     
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        imageView = UIImageView()
         txtTitle = UITextView()
         txtDescription = UITextView()
         stackView = UIStackView()
@@ -31,7 +35,7 @@ class ContentView : UIView {
         super.init(coder: aDecoder)
     }
     
-    func populateView(imageKey: String, titleText: String, descriptionText: String) {
+    func populateView(url: String, titleText: String, descriptionText: String) {
         
         stackView.bounds = self.bounds
         stackView.frame = stackView.bounds
@@ -40,11 +44,41 @@ class ContentView : UIView {
         stackView.spacing = 5
         self.addSubview(stackView)
         
-        imageView.contentMode = .ScaleAspectFit
-        imageView.image = UIImage(named: imageKey)
-        imageView.heightAnchor.constraintEqualToConstant(150).active = true
-        imageView.widthAnchor.constraintEqualToConstant(150).active = true
-        stackView.addArrangedSubview(imageView)
+        if url.containsString(".mp4") {
+            let nsUrl = NSURL(fileURLWithPath: url)
+            videoPlayer = AVPlayer(URL: nsUrl)
+            playerController = AVPlayerViewController()
+            playerController.videoGravity = AVLayerVideoGravityResizeAspect
+            playerController.player = videoPlayer
+            playerController.view.heightAnchor.constraintEqualToConstant(150).active = true
+            playerController.view.widthAnchor.constraintEqualToConstant(150).active = true
+            
+            let tap = UITapGestureRecognizer(target: self, action: Selector("showVideoControls"))
+            tap.delegate = self
+            playerController.view.addGestureRecognizer(tap)
+
+            stackView.addArrangedSubview(playerController.view)
+        }
+        else if url.containsString(".jpg") {
+            let imageView = UIImageView()
+            imageView.contentMode = .ScaleAspectFit
+            imageView.image = UIImage(named: url)
+            imageView.heightAnchor.constraintEqualToConstant(150).active = true
+            imageView.widthAnchor.constraintEqualToConstant(150).active = true
+            stackView.addArrangedSubview(imageView)
+        }
+        else if url.containsString(".txt"){
+            let txtText = UITextView()
+            do {
+                try txtText.text = String(contentsOfFile: url, encoding: NSUTF8StringEncoding)
+            }
+            catch {
+                print("Error reading text file resource")
+            }
+            txtText.editable = false
+            txtText.sizeToFit()
+            stackView.addArrangedSubview(txtText)
+        }
         
         txtTitle.text = titleText
         txtTitle.editable = false
@@ -61,6 +95,10 @@ class ContentView : UIView {
         
         self.sizeToFit()
         
+    }
+    
+    func showVideoControls(sender: UITapGestureRecognizer? = nil) {
+        playerController.showsPlaybackControls = true
     }
     
 }

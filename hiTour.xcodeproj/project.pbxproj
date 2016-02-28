@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4513421B1C83429F0089F2DC /* ctscan.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 451342181C83429F0089F2DC /* ctscan.mp4 */; };
+		4513421C1C83429F0089F2DC /* mriscan.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 451342191C83429F0089F2DC /* mriscan.mp4 */; };
+		4513421D1C83429F0089F2DC /* ultrasound.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 4513421A1C83429F0089F2DC /* ultrasound.mp4 */; };
 		45583DB31C82671E0087AB18 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45583DB21C82671E0087AB18 /* ContentView.swift */; };
 		6D90EE561C7E00B500433E1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D90EE481C7E00B500433E1F /* AppDelegate.swift */; };
 		6D90EE581C7E00B500433E1F /* BarcodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D90EE4A1C7E00B500433E1F /* BarcodeScannerViewController.swift */; };
@@ -67,6 +70,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		451342181C83429F0089F2DC /* ctscan.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = ctscan.mp4; path = "../../Projects/Project Run/ctscan.mp4"; sourceTree = "<group>"; };
+		451342191C83429F0089F2DC /* mriscan.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = mriscan.mp4; path = "../../Projects/Project Run/mriscan.mp4"; sourceTree = "<group>"; };
+		4513421A1C83429F0089F2DC /* ultrasound.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = ultrasound.mp4; path = "../../Projects/Project Run/ultrasound.mp4"; sourceTree = "<group>"; };
 		45583DB21C82671E0087AB18 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6D90EE481C7E00B500433E1F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6D90EE4A1C7E00B500433E1F /* BarcodeScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeScannerViewController.swift; sourceTree = "<group>"; };
@@ -136,6 +142,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4513421E1C8342B90089F2DC /* PrototypeFiles */ = {
+			isa = PBXGroup;
+			children = (
+				451342181C83429F0089F2DC /* ctscan.mp4 */,
+				451342191C83429F0089F2DC /* mriscan.mp4 */,
+				4513421A1C83429F0089F2DC /* ultrasound.mp4 */,
+			);
+			name = PrototypeFiles;
+			sourceTree = "<group>";
+		};
 		6D90EE631C7E00D300433E1F /* BarcodeScanner */ = {
 			isa = PBXGroup;
 			children = (
@@ -230,6 +246,7 @@
 				6D90EE631C7E00D300433E1F /* BarcodeScanner */,
 				6D90EE521C7E00B500433E1F /* Info.plist */,
 				6DBED3CB1C7E021E008BFA30 /* Assets.xcassets */,
+				4513421E1C8342B90089F2DC /* PrototypeFiles */,
 				984EC7C21C7209C200A12379 /* hiTourTests */,
 				8FF1C6D21C75FF9E00F16473 /* models */,
 				8FF1C6CF1C75F71A00F16473 /* coreData */,
@@ -362,8 +379,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				6DBED3D21C7E021E008BFA30 /* LaunchScreen.storyboard in Resources */,
+				4513421B1C83429F0089F2DC /* ctscan.mp4 in Resources */,
+				4513421D1C83429F0089F2DC /* ultrasound.mp4 in Resources */,
 				6DBED3D01C7E021E008BFA30 /* Assets.xcassets in Resources */,
 				6D90EE5F1C7E00B500433E1F /* Info.plist in Resources */,
+				4513421C1C83429F0089F2DC /* mriscan.mp4 in Resources */,
 				6DBED3D31C7E021E008BFA30 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

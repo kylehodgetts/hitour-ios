@@ -36,10 +36,12 @@ class DetailViewController : UIViewController {
         self.titleDetail.text = prototypeData.title
         self.textDetail.text = prototypeData.description
         
-        var imageItem :ContentView!
-        imageItem = ContentView(frame: CGRect (x: 0, y: 0, width: self.view.bounds.width, height: 250))
-        imageItem.populateView(prototypeData.imageName, titleText: prototypeData.title, descriptionText: "An example of an image being dynamically put here")
-        stackView.addArrangedSubview(imageItem)
+        var contentItem :ContentView!
+        let path = NSBundle.mainBundle().pathForResource("ctscan", ofType: "mp4")
+        
+        contentItem = ContentView(frame: CGRect (x: 0, y: 0, width: self.view.bounds.width, height: 350))
+        contentItem.populateView(path!, titleText: prototypeData.title, descriptionText: "An example of an image being dynamically put here")
+        stackView.addArrangedSubview(contentItem)
     }
         
 }

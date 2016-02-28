@@ -22,8 +22,9 @@ class DetailViewController : UIViewController {
         super.viewWillAppear(animated)
         
         self.imageDetail!.image = UIImage(named: prototypeData.imageName)
-        self.imageDetail!.contentMode = .ScaleAspectFill
-
+        //self.imageDetail!.contentMode = .ScaleAspectFill
+        self.imageDetail!.autoresizingMask = UIViewAutoresizing.FlexibleWidth
+            
         self.titleDetail.text = prototypeData.title
         self.textDetail.text = prototypeData.description
     }

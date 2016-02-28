@@ -90,7 +90,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kbq-K2-xEQ">
-                                            <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                            <rect key="frame" x="8" y="85" width="160" height="55"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <color key="textColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -129,7 +129,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tyc-cq-9Lw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.5" y="1058"/>
+            <point key="canvasLocation" x="66" y="1060"/>
         </scene>
         <!--Feed-->
         <scene sceneID="FsQ-4o-GcT">
@@ -184,37 +184,66 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="widthClass=compact" fixedFrame="YES">
-                                                        <rect key="frame" x="8" y="9" width="362.5" height="21"/>
-                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="0.64936127533783783" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="eP2-7d-5bu" secondAttribute="trailing" constant="8" id="2ku-fx-UbY"/>
+                                                <constraint firstItem="eP2-7d-5bu" firstAttribute="centerY" secondItem="gV5-wo-TVM" secondAttribute="centerY" id="K09-gj-x6w"/>
+                                                <constraint firstItem="eP2-7d-5bu" firstAttribute="leading" secondItem="gV5-wo-TVM" secondAttribute="leading" constant="8" id="bdI-HE-41n"/>
+                                                <constraint firstAttribute="height" constant="40" id="dzK-Fq-9eD"/>
+                                            </constraints>
                                             <variation key="default">
                                                 <mask key="subviews">
                                                     <exclude reference="eP2-7d-5bu"/>
                                                 </mask>
+                                                <mask key="constraints">
+                                                    <exclude reference="dzK-Fq-9eD"/>
+                                                    <exclude reference="2ku-fx-UbY"/>
+                                                    <exclude reference="K09-gj-x6w"/>
+                                                    <exclude reference="bdI-HE-41n"/>
+                                                </mask>
                                             </variation>
-                                            <variation key="widthClass=compact" fixedFrame="YES">
-                                                <rect key="frame" x="0.0" y="145" width="378.5" height="40"/>
+                                            <variation key="widthClass=compact">
                                                 <mask key="subviews">
                                                     <include reference="eP2-7d-5bu"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <include reference="dzK-Fq-9eD"/>
+                                                    <include reference="2ku-fx-UbY"/>
+                                                    <include reference="K09-gj-x6w"/>
+                                                    <include reference="bdI-HE-41n"/>
                                                 </mask>
                                             </variation>
                                         </view>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <constraints>
+                                    <constraint firstItem="gV5-wo-TVM" firstAttribute="leading" secondItem="CsL-Ec-PZk" secondAttribute="leadingMargin" constant="-8" id="RFO-G5-RCl"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="gV5-wo-TVM" secondAttribute="trailing" constant="-8" id="a4J-ML-0gI"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="gV5-wo-TVM" secondAttribute="bottom" constant="-8" id="knW-8y-8oP"/>
+                                </constraints>
                                 <variation key="default">
                                     <mask key="subviews">
                                         <exclude reference="ZrT-cI-v9T"/>
                                         <exclude reference="gV5-wo-TVM"/>
+                                    </mask>
+                                    <mask key="constraints">
+                                        <exclude reference="RFO-G5-RCl"/>
+                                        <exclude reference="a4J-ML-0gI"/>
+                                        <exclude reference="knW-8y-8oP"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
                                     <mask key="subviews">
                                         <include reference="ZrT-cI-v9T"/>
                                         <include reference="gV5-wo-TVM"/>
+                                    </mask>
+                                    <mask key="constraints">
+                                        <include reference="RFO-G5-RCl"/>
+                                        <include reference="a4J-ML-0gI"/>
+                                        <include reference="knW-8y-8oP"/>
                                     </mask>
                                 </variation>
                                 <connections>
@@ -326,13 +355,14 @@
         <scene sceneID="3RJ-XI-u6X">
             <objects>
                 <pageViewController storyboardIdentifier="FeedPageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="none" id="e5H-su-sJU" customClass="FeedPageViewController" customModule="hiTour" customModuleProvider="target" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <connections>
                         <segue destination="Aij-0E-t2Y" kind="show" id="VUz-KH-lJq"/>
                     </connections>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ft9-Jg-epm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="826.5" y="-1057"/>
+            <point key="canvasLocation" x="808.5" y="-1059"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="vg4-wr-7OI">
@@ -346,14 +376,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g2B-vI-qch">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g2B-vI-qch">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="L7b-qJ-AHX">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                        <variation key="widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="0.0" y="0.0" width="400" height="154"/>
-                                        </variation>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W5a-p2-jy4">
                                         <rect key="frame" x="-42" y="-21" width="42" height="21"/>
@@ -409,36 +436,35 @@
                                         <exclude reference="z6t-JN-G2p"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <exclude reference="0Ip-Fm-KXV"/>
-                                        <exclude reference="zh1-EF-lJF"/>
-                                        <exclude reference="Ou8-wT-MUQ"/>
-                                        <exclude reference="uh4-q4-KTj"/>
                                         <exclude reference="4VC-sv-Ya6"/>
                                         <exclude reference="WfM-PV-FQ7"/>
-                                        <exclude reference="OQt-zQ-Wnc"/>
-                                        <exclude reference="fCH-k1-F09"/>
-                                        <exclude reference="eAy-Tv-4BC"/>
+                                        <exclude reference="uh4-q4-KTj"/>
+                                        <exclude reference="0Ip-Fm-KXV"/>
+                                        <exclude reference="Ou8-wT-MUQ"/>
+                                        <exclude reference="zh1-EF-lJF"/>
                                         <exclude reference="0iF-7f-JK7"/>
+                                        <exclude reference="OQt-zQ-Wnc"/>
+                                        <exclude reference="eAy-Tv-4BC"/>
+                                        <exclude reference="fCH-k1-F09"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="400" height="600"/>
+                                <variation key="widthClass=compact">
                                     <mask key="subviews">
                                         <include reference="L7b-qJ-AHX"/>
                                         <include reference="W5a-p2-jy4"/>
                                         <include reference="z6t-JN-G2p"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <include reference="0Ip-Fm-KXV"/>
-                                        <include reference="zh1-EF-lJF"/>
-                                        <include reference="Ou8-wT-MUQ"/>
-                                        <include reference="uh4-q4-KTj"/>
                                         <include reference="4VC-sv-Ya6"/>
                                         <include reference="WfM-PV-FQ7"/>
-                                        <include reference="OQt-zQ-Wnc"/>
-                                        <include reference="fCH-k1-F09"/>
-                                        <include reference="eAy-Tv-4BC"/>
+                                        <include reference="uh4-q4-KTj"/>
+                                        <include reference="0Ip-Fm-KXV"/>
+                                        <include reference="Ou8-wT-MUQ"/>
+                                        <include reference="zh1-EF-lJF"/>
                                         <include reference="0iF-7f-JK7"/>
+                                        <include reference="OQt-zQ-Wnc"/>
+                                        <include reference="eAy-Tv-4BC"/>
+                                        <include reference="fCH-k1-F09"/>
                                     </mask>
                                 </variation>
                             </scrollView>
@@ -458,10 +484,10 @@
                                 <exclude reference="g2B-vI-qch"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="Uca-6P-QtJ"/>
                                 <exclude reference="7p7-J1-80o"/>
                                 <exclude reference="GcC-i5-b7B"/>
                                 <exclude reference="M4K-xT-Iw6"/>
+                                <exclude reference="Uca-6P-QtJ"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -469,10 +495,10 @@
                                 <include reference="g2B-vI-qch"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="Uca-6P-QtJ"/>
                                 <include reference="7p7-J1-80o"/>
                                 <include reference="GcC-i5-b7B"/>
                                 <include reference="M4K-xT-Iw6"/>
+                                <exclude reference="Uca-6P-QtJ"/>
                             </mask>
                         </variation>
                     </view>
@@ -484,7 +510,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qpe-aJ-SkQ" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="826.5" y="-373"/>
+            <point key="canvasLocation" x="808.5" y="-317"/>
         </scene>
     </scenes>
     <resources>

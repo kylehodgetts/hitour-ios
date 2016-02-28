@@ -18,7 +18,8 @@ class ToursController : UICollectionViewController {
         super.viewDidLoad()
         
         self.collectionView?.backgroundColor = UIColor.whiteColor()
-        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        flowLayout.itemSize = CGSize(width: (screenSize.width - 22) / 2, height: screenSize.height / 3)
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {

@@ -23,6 +23,8 @@ class FeedController: UICollectionViewController {
         self.collectionView?.backgroundColor = UIColor.whiteColor()
         
         flowLayout.minimumLineSpacing = 2.0
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        flowLayout.itemSize = CGSize(width: screenSize.width, height: 185)
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {

@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4513421B1C83429F0089F2DC /* ctscan.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 451342181C83429F0089F2DC /* ctscan.mp4 */; };
+		4513421C1C83429F0089F2DC /* mriscan.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 451342191C83429F0089F2DC /* mriscan.mp4 */; };
+		4513421D1C83429F0089F2DC /* ultrasound.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 4513421A1C83429F0089F2DC /* ultrasound.mp4 */; };
+		451342221C8366040089F2DC /* prototype.txt in Resources */ = {isa = PBXBuildFile; fileRef = 451342211C8366040089F2DC /* prototype.txt */; };
+		45583DB31C82671E0087AB18 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45583DB21C82671E0087AB18 /* ContentView.swift */; };
 		6D90EE561C7E00B500433E1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D90EE481C7E00B500433E1F /* AppDelegate.swift */; };
 		6D90EE581C7E00B500433E1F /* BarcodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D90EE4A1C7E00B500433E1F /* BarcodeScannerViewController.swift */; };
 		6D90EE5A1C7E00B500433E1F /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D90EE4C1C7E00B500433E1F /* DetailViewController.swift */; };
@@ -41,12 +46,9 @@
 		8FF1C6EE1C7603A800F16473 /* Tour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF1C6E01C7603A800F16473 /* Tour.swift */; };
 		8FF1C6F01C760F5D00F16473 /* ApiConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF1C6EF1C760F5D00F16473 /* ApiConnector.swift */; };
 		8FF1C6F21C764EEA00F16473 /* JsonReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF1C6F11C764EEA00F16473 /* JsonReader.swift */; };
-		984EC7AC1C7209C200A12379 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984EC7AB1C7209C200A12379 /* AppDelegate.swift */; };
-		984EC7AE1C7209C200A12379 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984EC7AD1C7209C200A12379 /* ViewController.swift */; };
-		984EC7B11C7209C200A12379 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 984EC7AF1C7209C200A12379 /* Main.storyboard */; };
-		984EC7B41C7209C200A12379 /* hiTour.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 984EC7B21C7209C200A12379 /* hiTour.xcdatamodeld */; };
-		984EC7B61C7209C200A12379 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 984EC7B51C7209C200A12379 /* Assets.xcassets */; };
-		984EC7B91C7209C200A12379 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 984EC7B71C7209C200A12379 /* LaunchScreen.storyboard */; };
+		984EC7AC1C7209C200A12379 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		984EC7AE1C7209C200A12379 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		984EC7B41C7209C200A12379 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		984EC7C41C7209C200A12379 /* hiTourTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984EC7C31C7209C200A12379 /* hiTourTests.swift */; };
 		984EC7CF1C7209C200A12379 /* hiTourUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984EC7CE1C7209C200A12379 /* hiTourUITests.swift */; };
 /* End PBXBuildFile section */
@@ -69,6 +71,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		451342181C83429F0089F2DC /* ctscan.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = ctscan.mp4; path = "../../Projects/Project Run/ctscan.mp4"; sourceTree = "<group>"; };
+		451342191C83429F0089F2DC /* mriscan.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = mriscan.mp4; path = "../../Projects/Project Run/mriscan.mp4"; sourceTree = "<group>"; };
+		4513421A1C83429F0089F2DC /* ultrasound.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = ultrasound.mp4; path = "../../Projects/Project Run/ultrasound.mp4"; sourceTree = "<group>"; };
+		451342211C8366040089F2DC /* prototype.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = prototype.txt; sourceTree = "<group>"; };
+		45583DB21C82671E0087AB18 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6D90EE481C7E00B500433E1F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6D90EE4A1C7E00B500433E1F /* BarcodeScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeScannerViewController.swift; sourceTree = "<group>"; };
 		6D90EE4C1C7E00B500433E1F /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -137,6 +144,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4513421E1C8342B90089F2DC /* PrototypeFiles */ = {
+			isa = PBXGroup;
+			children = (
+				451342181C83429F0089F2DC /* ctscan.mp4 */,
+				451342191C83429F0089F2DC /* mriscan.mp4 */,
+				4513421A1C83429F0089F2DC /* ultrasound.mp4 */,
+				451342211C8366040089F2DC /* prototype.txt */,
+			);
+			name = PrototypeFiles;
+			sourceTree = "<group>";
+		};
 		6D90EE631C7E00D300433E1F /* BarcodeScanner */ = {
 			isa = PBXGroup;
 			children = (
@@ -153,6 +171,7 @@
 				6D90EE4E1C7E00B500433E1F /* FeedController.swift */,
 				6D90EE4F1C7E00B500433E1F /* FeedControllerCell.swift */,
 				6DF7DC4D1C7E72CD00C88B48 /* FeedPageViewController.swift */,
+				45583DB21C82671E0087AB18 /* ContentView.swift */,
 			);
 			name = FeedView;
 			sourceTree = "<group>";
@@ -230,16 +249,10 @@
 				6D90EE631C7E00D300433E1F /* BarcodeScanner */,
 				6D90EE521C7E00B500433E1F /* Info.plist */,
 				6DBED3CB1C7E021E008BFA30 /* Assets.xcassets */,
+				4513421E1C8342B90089F2DC /* PrototypeFiles */,
 				984EC7C21C7209C200A12379 /* hiTourTests */,
 				8FF1C6D21C75FF9E00F16473 /* models */,
 				8FF1C6CF1C75F71A00F16473 /* coreData */,
-				984EC7AB1C7209C200A12379 /* AppDelegate.swift */,
-				984EC7AD1C7209C200A12379 /* ViewController.swift */,
-				984EC7AF1C7209C200A12379 /* Main.storyboard */,
-				984EC7B51C7209C200A12379 /* Assets.xcassets */,
-				984EC7B71C7209C200A12379 /* LaunchScreen.storyboard */,
-				984EC7BA1C7209C200A12379 /* Info.plist */,
-				984EC7B21C7209C200A12379 /* hiTour.xcdatamodeld */,
 			);
 			path = hiTour;
 			sourceTree = "<group>";
@@ -369,8 +382,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				6DBED3D21C7E021E008BFA30 /* LaunchScreen.storyboard in Resources */,
+				451342221C8366040089F2DC /* prototype.txt in Resources */,
+				4513421B1C83429F0089F2DC /* ctscan.mp4 in Resources */,
+				4513421D1C83429F0089F2DC /* ultrasound.mp4 in Resources */,
 				6DBED3D01C7E021E008BFA30 /* Assets.xcassets in Resources */,
 				6D90EE5F1C7E00B500433E1F /* Info.plist in Resources */,
+				4513421C1C83429F0089F2DC /* mriscan.mp4 in Resources */,
 				6DBED3D31C7E021E008BFA30 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -413,16 +430,17 @@
 				8FF1C6D11C75F73A00F16473 /* CoreDataStack.swift in Sources */,
 				8FF1C6EB1C7603A800F16473 /* Audience+CoreDataProperties.swift in Sources */,
 				8FF1C6E31C7603A800F16473 /* Point+CoreDataProperties.swift in Sources */,
-				984EC7AE1C7209C200A12379 /* ViewController.swift in Sources */,
+				984EC7AE1C7209C200A12379 /* (null) in Sources */,
 				8FF1C6ED1C7603A800F16473 /* Tour+CoreDataProperties.swift in Sources */,
 				8FF1C6EC1C7603A800F16473 /* Audience.swift in Sources */,
 				8FF1C6F01C760F5D00F16473 /* ApiConnector.swift in Sources */,
 				8FF1C6E11C7603A800F16473 /* PointData+CoreDataProperties.swift in Sources */,
-				984EC7B41C7209C200A12379 /* hiTour.xcdatamodeld in Sources */,
+				984EC7B41C7209C200A12379 /* (null) in Sources */,
+				45583DB31C82671E0087AB18 /* ContentView.swift in Sources */,
 				8FF1C6E91C7603A800F16473 /* PointTour+CoreDataProperties.swift in Sources */,
 				8FF1C6E21C7603A800F16473 /* PointData.swift in Sources */,
 				8FF1C6E81C7603A800F16473 /* Session.swift in Sources */,
-				984EC7AC1C7209C200A12379 /* AppDelegate.swift in Sources */,
+				984EC7AC1C7209C200A12379 /* (null) in Sources */,
 				8FF1C6F21C764EEA00F16473 /* JsonReader.swift in Sources */,
 				8F1C8FAB1C776E33009C95F4 /* HTTPClient.swift in Sources */,
 				8FF1C6EE1C7603A800F16473 /* Tour.swift in Sources */,

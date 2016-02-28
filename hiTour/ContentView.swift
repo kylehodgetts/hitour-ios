@@ -32,9 +32,6 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
         stackView = UIStackView()
         txtText = UITextView()
         imageView = UIImageView()
-
-        
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -51,41 +48,60 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
         self.addSubview(stackView)
         
         if url.containsString(".mp4") {
-            let nsUrl = NSURL(fileURLWithPath: url)
-            videoPlayer = AVPlayer(URL: nsUrl)
-            playerController = AVPlayerViewController()
-            playerController.videoGravity = AVLayerVideoGravityResizeAspect
-            playerController.player = videoPlayer
-            playerController.view.heightAnchor.constraintEqualToConstant(150).active = true
-            playerController.view.widthAnchor.constraintEqualToConstant(150).active = true
-            
-            let tap = UITapGestureRecognizer(target: self, action: Selector("showVideoControls"))
-            tap.delegate = self
-            playerController.view.addGestureRecognizer(tap)
-
-            stackView.addArrangedSubview(playerController.view)
+            addVideoContent(url)
         }
         else if url.containsString(".txt"){
-            do {
-                try txtText.text = String(contentsOfFile: url, encoding: NSUTF8StringEncoding)
-            }
-            catch {
-                print("Error reading text file resource")
-            }
-            txtText.editable = false
-            txtText.heightAnchor.constraintEqualToConstant(txtText.contentSize.height + 250).active = true
-            txtText.widthAnchor.constraintEqualToConstant(txtText.contentSize.width).active = true
-            stackView.addArrangedSubview(txtText)
+            addTextContent(url)
         }
         else {
-            imageView.contentMode = .ScaleAspectFit
-            imageView.image = UIImage(named: url)
-            imageView.heightAnchor.constraintEqualToConstant(150).active = true
-            imageView.widthAnchor.constraintEqualToConstant(150).active = true
-            stackView.addArrangedSubview(imageView)
+            addImageContent(url)
         }
 
+        addTitleAndDescription(titleText, descriptionText: descriptionText)
+    }
+    
+    func showVideoControls(sender: UITapGestureRecognizer? = nil) {
+        playerController.showsPlaybackControls = true
+    }
+    
+    func addVideoContent(url: String) {
+        let nsUrl = NSURL(fileURLWithPath: url)
+        videoPlayer = AVPlayer(URL: nsUrl)
+        playerController = AVPlayerViewController()
+        playerController.videoGravity = AVLayerVideoGravityResizeAspect
+        playerController.player = videoPlayer
+        playerController.view.heightAnchor.constraintEqualToConstant(150).active = true
+        playerController.view.widthAnchor.constraintEqualToConstant(150).active = true
         
+        let tap = UITapGestureRecognizer(target: self, action: Selector("showVideoControls"))
+        tap.delegate = self
+        playerController.view.addGestureRecognizer(tap)
+        
+        stackView.addArrangedSubview(playerController.view)
+    }
+    
+    func addTextContent(url: String) {
+        do {
+            try txtText.text = String(contentsOfFile: url, encoding: NSUTF8StringEncoding)
+        }
+        catch {
+            print("Error reading text file resource")
+        }
+        txtText.editable = false
+        txtText.heightAnchor.constraintEqualToConstant(txtText.contentSize.height + 250).active = true
+        txtText.widthAnchor.constraintEqualToConstant(txtText.contentSize.width).active = true
+        stackView.addArrangedSubview(txtText)
+    }
+    
+    func addImageContent(url: String) {
+        imageView.contentMode = .ScaleAspectFit
+        imageView.image = UIImage(named: url)
+        imageView.heightAnchor.constraintEqualToConstant(150).active = true
+        imageView.widthAnchor.constraintEqualToConstant(150).active = true
+        stackView.addArrangedSubview(imageView)
+    }
+    
+    func addTitleAndDescription(titleText: String, descriptionText: String) {
         txtTitle.text = titleText
         txtTitle.editable = false
         txtTitle.scrollEnabled = false
@@ -98,15 +114,6 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
         txtDescription.scrollEnabled = true
         txtDescription.sizeToFit()
         stackView.addArrangedSubview(txtDescription)
-        
-        
-        
-        //self.sizeToFit()
-        
-    }
-    
-    func showVideoControls(sender: UITapGestureRecognizer? = nil) {
-        playerController.showsPlaybackControls = true
     }
     
 }

@@ -70,7 +70,7 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
         playerController = AVPlayerViewController()
         playerController.videoGravity = AVLayerVideoGravityResizeAspect
         playerController.player = videoPlayer
-        playerController.view.heightAnchor.constraintEqualToConstant(150).active = true
+        playerController.view.heightAnchor.constraintEqualToConstant(250).active = true
         playerController.view.widthAnchor.constraintEqualToConstant(150).active = true
         
         let tap = UITapGestureRecognizer(target: self, action: Selector("showVideoControls"))

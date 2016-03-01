@@ -17,16 +17,6 @@ class FeedPageViewController : UIPageViewController {
     
     var startIndex : Int!
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        self.tabBarController?.tabBar.hidden = true
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.tabBarController?.tabBar.hidden = false
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,7 +26,6 @@ class FeedPageViewController : UIPageViewController {
         detailController.prototypeData = self.prototypeData[startIndex]
         
         setViewControllers([detailController], direction: .Forward, animated: true, completion: nil)
-        
     }
 }
 

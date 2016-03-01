@@ -355,7 +355,7 @@
         <scene sceneID="3RJ-XI-u6X">
             <objects>
                 <pageViewController storyboardIdentifier="FeedPageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="none" id="e5H-su-sJU" customClass="FeedPageViewController" customModule="hiTour" customModuleProvider="target" sceneMemberID="viewController">
-                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
                         <segue destination="Aij-0E-t2Y" kind="show" id="VUz-KH-lJq"/>
                     </connections>

@@ -60,10 +60,10 @@ class DetailViewController : UIViewController {
                 path = urlFileName
             }
             
-            contentItem = ContentView(frame: CGRect (x: 0, y: 0, width: self.view.bounds.width, height: 350))
+            contentItem = ContentView(frame: CGRect (x: 0, y: 0, width: self.view.bounds.width, height: 400))
             contentItem.populateView(path!, titleText: item[PrototypeDatum.DataTitleKey]!, descriptionText: item[PrototypeDatum.DataDescriptionKey]!)
-            contentItem.heightAnchor.constraintEqualToConstant(300).active = true
-            contentItem.widthAnchor.constraintEqualToConstant(300).active = true
+            contentItem.heightAnchor.constraintEqualToConstant(400).active = true
+            contentItem.widthAnchor.constraintEqualToConstant(400).active = true
             
             stackView.addArrangedSubview(contentItem)
         }

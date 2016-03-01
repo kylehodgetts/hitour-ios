@@ -72,6 +72,8 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
         playerController = AVPlayerViewController()
         playerController.videoGravity = AVLayerVideoGravityResizeAspect
         playerController.player = videoPlayer
+        stackView.addArrangedSubview(playerController.view)
+
         playerController.view.heightAnchor.constraintEqualToConstant(playerController.view.frame.height).active = true
         playerController.view.widthAnchor.constraintEqualToConstant(playerController.view.frame.width).active = true
         
@@ -79,7 +81,6 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
         tap.delegate = self
         playerController.view.addGestureRecognizer(tap)
         
-        stackView.addArrangedSubview(playerController.view)
     }
     
     func addTextContent(url: String) {
@@ -90,6 +91,7 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
             print("Error reading text file resource")
         }
         txtText.editable = false
+        txtTitle.selectable = false
         txtText.widthAnchor.constraintEqualToConstant(txtText.contentSize.width).active = true
         txtText.heightAnchor.constraintEqualToConstant(txtText.contentSize.height + 250).active = true
         stackView.addArrangedSubview(txtText)
@@ -108,6 +110,7 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
     func addTitle(titleText: String) {
         txtTitle.text = titleText
         txtTitle.editable = false
+        txtTitle.selectable = false
         txtTitle.scrollEnabled = false
         txtTitle.font = UIFont.boldSystemFontOfSize(16)
         stackView.addArrangedSubview(txtTitle)
@@ -121,6 +124,7 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
         txtDescription.text = descriptionText
         txtDescription.editable = false
         txtDescription.scrollEnabled = true
+        txtDescription.selectable = false
         
         stackView.addArrangedSubview(txtDescription)
         txtDescription.sizeToFit()

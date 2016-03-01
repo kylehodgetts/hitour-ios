@@ -372,15 +372,15 @@
                         <viewControllerLayoutGuide type="top" id="mxN-xD-W2Q"/>
                         <viewControllerLayoutGuide type="bottom" id="Ifl-t0-U8A"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="gjQ-Gt-HMM">
+                    <view key="view" autoresizesSubviews="NO" contentMode="scaleToFill" id="gjQ-Gt-HMM">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g2B-vI-qch">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g2B-vI-qch">
+                                <rect key="frame" x="300" y="44" width="0.0" height="507"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="L7b-qJ-AHX">
-                                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L7b-qJ-AHX">
+                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="128"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W5a-p2-jy4">
                                         <rect key="frame" x="-42" y="-21" width="42" height="21"/>
@@ -388,10 +388,10 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="z6t-JN-G2p">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="z6t-JN-G2p">
                                         <rect key="frame" x="0.0" y="0.0" width="110" height="200"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="0G2-QG-UUV">
+                                            <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="0G2-QG-UUV">
                                                 <rect key="frame" x="0.0" y="0.0" width="110" height="200"/>
                                                 <variation key="widthClass=compact" ambiguous="YES">
                                                     <rect key="frame" x="0.0" y="0.0" width="384" height="612"/>
@@ -428,7 +428,6 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="subviews">
-                                        <exclude reference="L7b-qJ-AHX"/>
                                         <exclude reference="W5a-p2-jy4"/>
                                         <exclude reference="z6t-JN-G2p"/>
                                     </mask>
@@ -469,17 +468,16 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Ifl-t0-U8A" firstAttribute="top" secondItem="g2B-vI-qch" secondAttribute="bottom" id="5PX-wk-6dm"/>
-                            <constraint firstItem="g2B-vI-qch" firstAttribute="width" secondItem="gjQ-Gt-HMM" secondAttribute="width" id="7p7-J1-80o"/>
+                            <constraint firstItem="g2B-vI-qch" firstAttribute="width" secondItem="gjQ-Gt-HMM" secondAttribute="width" constant="5" id="7p7-J1-80o"/>
                             <constraint firstAttribute="trailingMargin" secondItem="g2B-vI-qch" secondAttribute="trailing" constant="-20" id="GcC-i5-b7B"/>
                             <constraint firstItem="L7b-qJ-AHX" firstAttribute="top" secondItem="mxN-xD-W2Q" secondAttribute="bottom" constant="-20" id="LKQ-7d-uPk"/>
                             <constraint firstItem="g2B-vI-qch" firstAttribute="leading" secondItem="gjQ-Gt-HMM" secondAttribute="leadingMargin" constant="-20" id="M4K-xT-Iw6"/>
                             <constraint firstItem="g2B-vI-qch" firstAttribute="height" secondItem="gjQ-Gt-HMM" secondAttribute="height" id="Uca-6P-QtJ"/>
+                            <constraint firstItem="g2B-vI-qch" firstAttribute="centerX" secondItem="gjQ-Gt-HMM" secondAttribute="centerX" id="ZGz-ra-O5S"/>
+                            <constraint firstItem="g2B-vI-qch" firstAttribute="centerY" secondItem="gjQ-Gt-HMM" secondAttribute="centerY" id="mXM-i6-q0J"/>
                             <constraint firstItem="g2B-vI-qch" firstAttribute="top" secondItem="mxN-xD-W2Q" secondAttribute="bottom" constant="-20" id="sul-y4-eiL"/>
                         </constraints>
                         <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="g2B-vI-qch"/>
-                            </mask>
                             <mask key="constraints">
                                 <exclude reference="7p7-J1-80o"/>
                                 <exclude reference="GcC-i5-b7B"/>

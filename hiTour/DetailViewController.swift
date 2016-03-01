@@ -25,19 +25,22 @@ class DetailViewController : UIViewController {
         textDetail = UITextView()
         textDetail.editable = false
         textDetail.scrollEnabled = false
+        textDetail.selectable = false
         
         
         stackView.addArrangedSubview(textDetail)
         
         self.imageDetail!.image = UIImage(named: prototypeData.imageName)
-        //self.imageDetail!.contentMode = .ScaleAspectFill
+        self.imageDetail!.contentMode = .ScaleAspectFill
         self.imageDetail!.autoresizingMask = UIViewAutoresizing.FlexibleWidth
+        
             
         self.titleDetail.text = prototypeData.title
         self.textDetail.text = prototypeData.description
         textDetail.sizeToFit()
         textDetail.heightAnchor.constraintEqualToConstant(textDetail.contentSize.height + 100).active = true
         textDetail.widthAnchor.constraintEqualToConstant(textDetail.contentSize.width).active = true
+        
         
         loadDynamicContent()
         

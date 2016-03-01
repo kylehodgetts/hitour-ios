@@ -126,7 +126,7 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
         txtDescription.sizeToFit()
         
         txtDescription.widthAnchor.constraintEqualToConstant(txtDescription.bounds.width).active = true
-        txtDescription.heightAnchor.constraintEqualToConstant(txtDescription.bounds.height + 20).active = true
+        txtDescription.heightAnchor.constraintEqualToConstant(txtDescription.contentSize.height + 10).active = true
 
     }
     

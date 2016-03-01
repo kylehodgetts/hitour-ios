@@ -44,8 +44,11 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
         stackView.frame = stackView.bounds
         stackView.axis = UILayoutConstraintAxis.Vertical
         stackView.alignment = UIStackViewAlignment.Fill
-        stackView.spacing = 5
+        stackView.spacing = 0
         self.addSubview(stackView)
+        
+        addTitle(titleText)
+        addDescription(descriptionText)
         
         if url.containsString(".mp4") {
             addVideoContent(url)
@@ -57,7 +60,6 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
             addImageContent(url)
         }
 
-        addTitleAndDescription(titleText, descriptionText: descriptionText)
     }
     
     func showVideoControls(sender: UITapGestureRecognizer? = nil) {
@@ -70,8 +72,8 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
         playerController = AVPlayerViewController()
         playerController.videoGravity = AVLayerVideoGravityResizeAspect
         playerController.player = videoPlayer
-        playerController.view.heightAnchor.constraintEqualToConstant(250).active = true
-        playerController.view.widthAnchor.constraintEqualToConstant(150).active = true
+        playerController.view.heightAnchor.constraintEqualToConstant(playerController.view.frame.height).active = true
+        playerController.view.widthAnchor.constraintEqualToConstant(playerController.view.frame.width).active = true
         
         let tap = UITapGestureRecognizer(target: self, action: Selector("showVideoControls"))
         tap.delegate = self
@@ -88,32 +90,44 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
             print("Error reading text file resource")
         }
         txtText.editable = false
-        txtText.heightAnchor.constraintEqualToConstant(txtText.contentSize.height + 250).active = true
         txtText.widthAnchor.constraintEqualToConstant(txtText.contentSize.width).active = true
+        txtText.heightAnchor.constraintEqualToConstant(txtText.contentSize.height + 250).active = true
         stackView.addArrangedSubview(txtText)
     }
     
     func addImageContent(url: String) {
-        imageView.contentMode = .ScaleAspectFit
+        imageView.contentMode = .ScaleAspectFill
         imageView.image = UIImage(named: url)
-        imageView.heightAnchor.constraintEqualToConstant(150).active = true
-        imageView.widthAnchor.constraintEqualToConstant(150).active = true
+        imageView.layoutIfNeeded()
+        imageView.sizeToFit()
+        imageView.heightAnchor.constraintEqualToConstant(imageView.frame.height).active = true
+        imageView.widthAnchor.constraintEqualToConstant(imageView.frame.width).active = true
         stackView.addArrangedSubview(imageView)
     }
     
-    func addTitleAndDescription(titleText: String, descriptionText: String) {
+    func addTitle(titleText: String) {
         txtTitle.text = titleText
         txtTitle.editable = false
         txtTitle.scrollEnabled = false
         txtTitle.font = UIFont.boldSystemFontOfSize(16)
-        txtTitle.sizeToFit()
         stackView.addArrangedSubview(txtTitle)
         
+        txtTitle.layoutIfNeeded()
+        txtTitle.sizeToFit()
+        txtTitle.heightAnchor.constraintEqualToConstant(txtTitle.contentSize.height).active = true
+    }
+    
+    func addDescription(descriptionText: String) {
         txtDescription.text = descriptionText
         txtDescription.editable = false
         txtDescription.scrollEnabled = true
-        txtDescription.sizeToFit()
+        
         stackView.addArrangedSubview(txtDescription)
+        txtDescription.sizeToFit()
+        
+        txtDescription.widthAnchor.constraintEqualToConstant(txtDescription.bounds.width).active = true
+        txtDescription.heightAnchor.constraintEqualToConstant(txtDescription.bounds.height + 20).active = true
+
     }
     
 }

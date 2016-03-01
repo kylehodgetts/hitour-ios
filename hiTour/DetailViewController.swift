@@ -24,6 +24,7 @@ class DetailViewController : UIViewController {
         
         textDetail = UITextView()
         textDetail.editable = false
+        textDetail.scrollEnabled = false
         
         
         stackView.addArrangedSubview(textDetail)
@@ -60,9 +61,11 @@ class DetailViewController : UIViewController {
                 path = urlFileName
             }
             
-            contentItem = ContentView(frame: CGRect (x: 0, y: 0, width: self.view.bounds.width, height: 400))
+            contentItem = ContentView(frame: CGRect (x: 0, y: 0, width: self.view.bounds.width, height: 350))
             contentItem.populateView(path!, titleText: item[PrototypeDatum.DataTitleKey]!, descriptionText: item[PrototypeDatum.DataDescriptionKey]!)
-            contentItem.heightAnchor.constraintEqualToConstant(400).active = true
+            contentItem.layoutIfNeeded()
+            contentItem.sizeToFit()
+            contentItem.heightAnchor.constraintEqualToConstant(contentItem.frame.height).active = true
             contentItem.widthAnchor.constraintEqualToConstant(400).active = true
             
             stackView.addArrangedSubview(contentItem)

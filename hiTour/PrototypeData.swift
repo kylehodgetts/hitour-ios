@@ -74,7 +74,7 @@ extension PrototypeDatum {
             [
                 PrototypeDatum.DataIDKey : "1",
                 PrototypeDatum.DataTitleKey : "What Happens In a CT Scan?",
-                PrototypeDatum.DataDescriptionKey : "Video that shows the process what happens when a patient has a CT Scan",
+                PrototypeDatum.DataDescriptionKey : "Video that shows the process what happens when a patient has a CT Scan to show what happens when a patient arrives for this scan and what results can be expected",
                 PrototypeDatum.DataURLKey : "ctscan.mp4"
             ],
             [

@@ -10,29 +10,20 @@ import Foundation
 import UIKit
 
 
-class FullScreenImageViewController : UIViewController{
+class FullScreenImageViewController : UIViewController, UIScrollViewDelegate {
     
     var originalImageView : UIImageView!
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var btnClose: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet var tapGesture: UITapGestureRecognizer!
     
-    @IBOutlet var pinchGesture: UIPinchGestureRecognizer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         imageView.image = originalImageView.image
         imageView.contentMode = .ScaleAspectFit
-    }
-    
-    
-    @IBAction func handleTapGesture(sender: UITapGestureRecognizer) {
-        if sender.numberOfTouches() == 2 {
-            let zoomToRect = CGRect(origin: sender.locationInView(imageView), size: CGSize(width: 10, height: 10))
-            scrollView.zoomToRect(zoomToRect, animated: true)
-        }
+        scrollView.delegate = self
     }
     
     
@@ -40,12 +31,8 @@ class FullScreenImageViewController : UIViewController{
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    @IBAction func handlePinchGesture(sender: UIPinchGestureRecognizer) {
-        print("Pinch detected")
-        scrollView.transform = CGAffineTransformScale(scrollView.transform,
-            sender.scale, sender.scale)
-        sender.scale = 1
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        return self.imageView
     }
-    
     
 }

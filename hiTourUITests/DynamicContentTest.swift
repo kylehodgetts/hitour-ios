@@ -8,12 +8,13 @@
 
 import XCTest
 
+//  Test class to check that dynamic content is being generated and populated into the views correctly
+//  This class also tests the functionality of videos and images.
 class DynamicContentTest: XCTestCase {
-        
+    
+    //  Setup function that needs to setup the tests
     override func setUp() {
         super.setUp()
-        
-        // Put setup code here. This method is called before the invocation of each test method in the class.
         
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
@@ -23,11 +24,12 @@ class DynamicContentTest: XCTestCase {
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
     
+    //  Required function to tear everything down after each test
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-        
+    
+    //  Test that checks the CTScan content has been correctly populated and displayed in the correct order
     func testCTScanContent() {
         let app = XCUIApplication()
         app.collectionViews.images["ctscan"].tap()
@@ -70,6 +72,7 @@ class DynamicContentTest: XCTestCase {
         XCTAssert(app.images["mriscanresult1"].exists)
     }
     
+    //  Test that checks the Fluoroscopy content has been dynamically populated correctly
     func testFluroscopyContent() {
         
         let app = XCUIApplication()
@@ -93,6 +96,8 @@ class DynamicContentTest: XCTestCase {
         XCTAssert(textView.exists)
     }
     
+    //  Test that checks the video content is dynamically populated correctly as well as check their controls work
+    //  as expected in both normal mode and full screen mode. So that the user is able to control the videos
     func testVideoContent() {
         
         let app = XCUIApplication()
@@ -121,6 +126,9 @@ class DynamicContentTest: XCTestCase {
         videoElement.tap()
     }
     
+    //  Test that checks image content is dynamically populated correctly and also tests the functionality of the images
+    //  behaves as expected such as testing when tapped it displays in full screen and the user is able to pan and scroll
+    //  the image when it is displayed in full screen mode.
     func testImageContent() {
         
         let app = XCUIApplication()
@@ -139,8 +147,6 @@ class DynamicContentTest: XCTestCase {
         XCTAssert(element.exists)
 
         app.buttons["X"].tap()
-        
     }
 
-    
 }

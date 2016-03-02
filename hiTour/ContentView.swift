@@ -24,6 +24,8 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
     var txtText : UITextView!
     var imageView : UIImageView!
     
+    var presentingViewController : DetailViewController!
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -44,8 +46,11 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
         stackView.frame = stackView.bounds
         stackView.axis = UILayoutConstraintAxis.Vertical
         stackView.alignment = UIStackViewAlignment.Fill
-        stackView.spacing = 5
+        stackView.spacing = 0
         self.addSubview(stackView)
+        
+        addTitle(titleText)
+        addDescription(descriptionText)
         
         if url.containsString(".mp4") {
             addVideoContent(url)
@@ -57,7 +62,6 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
             addImageContent(url)
         }
 
-        addTitleAndDescription(titleText, descriptionText: descriptionText)
     }
     
     func showVideoControls(sender: UITapGestureRecognizer? = nil) {
@@ -70,14 +74,15 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
         playerController = AVPlayerViewController()
         playerController.videoGravity = AVLayerVideoGravityResizeAspect
         playerController.player = videoPlayer
-        playerController.view.heightAnchor.constraintEqualToConstant(250).active = true
-        playerController.view.widthAnchor.constraintEqualToConstant(150).active = true
+        stackView.addArrangedSubview(playerController.view)
+
+        playerController.view.heightAnchor.constraintEqualToConstant(playerController.view.frame.height).active = true
+        playerController.view.widthAnchor.constraintEqualToConstant(playerController.view.frame.width).active = true
         
         let tap = UITapGestureRecognizer(target: self, action: Selector("showVideoControls"))
         tap.delegate = self
         playerController.view.addGestureRecognizer(tap)
         
-        stackView.addArrangedSubview(playerController.view)
     }
     
     func addTextContent(url: String) {
@@ -88,32 +93,58 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
             print("Error reading text file resource")
         }
         txtText.editable = false
-        txtText.heightAnchor.constraintEqualToConstant(txtText.contentSize.height + 250).active = true
+        txtTitle.selectable = false
         txtText.widthAnchor.constraintEqualToConstant(txtText.contentSize.width).active = true
+        txtText.heightAnchor.constraintEqualToConstant(txtText.contentSize.height + 250).active = true
         stackView.addArrangedSubview(txtText)
     }
     
     func addImageContent(url: String) {
-        imageView.contentMode = .ScaleAspectFit
+        imageView.contentMode = .ScaleAspectFill
         imageView.image = UIImage(named: url)
-        imageView.heightAnchor.constraintEqualToConstant(150).active = true
-        imageView.widthAnchor.constraintEqualToConstant(150).active = true
+        imageView.layoutIfNeeded()
+        imageView.sizeToFit()
+        imageView.userInteractionEnabled = true
+        imageView.heightAnchor.constraintEqualToConstant(imageView.frame.height).active = true
+        imageView.widthAnchor.constraintEqualToConstant(imageView.frame.width).active = true
+        
+        let tapFullScreenGesture = UITapGestureRecognizer(target: self, action: Selector("displayImageFullScreen"))
+        tapFullScreenGesture.delegate = self
+        imageView.addGestureRecognizer(tapFullScreenGesture)
+        
         stackView.addArrangedSubview(imageView)
     }
     
-    func addTitleAndDescription(titleText: String, descriptionText: String) {
+    func addTitle(titleText: String) {
         txtTitle.text = titleText
         txtTitle.editable = false
+        txtTitle.selectable = false
         txtTitle.scrollEnabled = false
         txtTitle.font = UIFont.boldSystemFontOfSize(16)
-        txtTitle.sizeToFit()
         stackView.addArrangedSubview(txtTitle)
         
+        txtTitle.layoutIfNeeded()
+        txtTitle.sizeToFit()
+        txtTitle.heightAnchor.constraintEqualToConstant(txtTitle.contentSize.height).active = true
+    }
+    
+    func addDescription(descriptionText: String) {
         txtDescription.text = descriptionText
         txtDescription.editable = false
         txtDescription.scrollEnabled = true
-        txtDescription.sizeToFit()
+        txtDescription.selectable = false
+        
         stackView.addArrangedSubview(txtDescription)
+        txtDescription.sizeToFit()
+        
+        txtDescription.widthAnchor.constraintEqualToConstant(txtDescription.bounds.width).active = true
+        txtDescription.heightAnchor.constraintEqualToConstant(txtDescription.contentSize.height + 10).active = true
     }
+    
+    func displayImageFullScreen() {
+        print("Gesture detected")
+        presentingViewController.performSegueWithIdentifier("imageFullScreenSegue", sender: imageView)
+    }
+
     
 }

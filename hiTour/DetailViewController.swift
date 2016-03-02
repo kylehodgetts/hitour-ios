@@ -24,17 +24,21 @@ class DetailViewController : UIViewController {
         
         textDetail = UITextView()
         textDetail.editable = false
+        textDetail.scrollEnabled = false
+        textDetail.selectable = false
         
         stackView.addArrangedSubview(textDetail)
         
         self.imageDetail!.image = UIImage(named: prototypeData.imageName)
         self.imageDetail!.autoresizingMask = UIViewAutoresizing.FlexibleWidth
+        
             
         self.titleDetail.text = prototypeData.title
         self.textDetail.text = prototypeData.description
         textDetail.sizeToFit()
         textDetail.heightAnchor.constraintEqualToConstant(textDetail.contentSize.height + 100).active = true
         textDetail.widthAnchor.constraintEqualToConstant(textDetail.contentSize.width).active = true
+        
         
         loadDynamicContent()
         
@@ -58,14 +62,25 @@ class DetailViewController : UIViewController {
                 path = urlFileName
             }
             
-            contentItem = ContentView(frame: CGRect (x: 0, y: 0, width: self.view.bounds.width, height: 400))
+            contentItem = ContentView(frame: CGRect (x: 0, y: 0, width: self.view.bounds.width, height: 350))
             contentItem.populateView(path!, titleText: item[PrototypeDatum.DataTitleKey]!, descriptionText: item[PrototypeDatum.DataDescriptionKey]!)
-            contentItem.heightAnchor.constraintEqualToConstant(400).active = true
+            contentItem.presentingViewController = self
+
+            contentItem.layoutIfNeeded()
+            contentItem.sizeToFit()
+            contentItem.heightAnchor.constraintEqualToConstant(contentItem.frame.height).active = true
             contentItem.widthAnchor.constraintEqualToConstant(400).active = true
             
             stackView.addArrangedSubview(contentItem)
         }
         
     }
-        
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "imageFullScreenSegue" {
+            let destination = segue.destinationViewController as! FullScreenImageViewController
+            let imageV = sender as! UIImageView
+            destination.originalImageView = imageV
+        }
+    }
 }

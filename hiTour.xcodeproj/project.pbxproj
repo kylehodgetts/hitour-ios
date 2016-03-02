@@ -183,6 +183,7 @@
 				6D90EE4F1C7E00B500433E1F /* FeedControllerCell.swift */,
 				6DF7DC4D1C7E72CD00C88B48 /* FeedPageViewController.swift */,
 				45583DB21C82671E0087AB18 /* ContentView.swift */,
+				459A8B461C8662BE009B79F0 /* FullScreenImageViewController.swift */,
 			);
 			name = FeedView;
 			sourceTree = "<group>";
@@ -440,6 +441,7 @@
 				6D90EE5B1C7E00B500433E1F /* DiscoveredBarcodeView.swift in Sources */,
 				6DF7DC4E1C7E72CD00C88B48 /* FeedPageViewController.swift in Sources */,
 				6D90EE5C1C7E00B500433E1F /* FeedController.swift in Sources */,
+				459A8B471C8662BE009B79F0 /* FullScreenImageViewController.swift in Sources */,
 				6D90EE581C7E00B500433E1F /* BarcodeScannerViewController.swift in Sources */,
 				6D90EE611C7E00B500433E1F /* ToursController.swift in Sources */,
 				6DBED3D11C7E021E008BFA30 /* hiTour.xcdatamodeld in Sources */,

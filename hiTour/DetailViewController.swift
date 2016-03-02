@@ -66,6 +66,8 @@ class DetailViewController : UIViewController {
             
             contentItem = ContentView(frame: CGRect (x: 0, y: 0, width: self.view.bounds.width, height: 350))
             contentItem.populateView(path!, titleText: item[PrototypeDatum.DataTitleKey]!, descriptionText: item[PrototypeDatum.DataDescriptionKey]!)
+            contentItem.presentingViewController = self
+
             contentItem.layoutIfNeeded()
             contentItem.sizeToFit()
             contentItem.heightAnchor.constraintEqualToConstant(contentItem.frame.height).active = true
@@ -75,5 +77,12 @@ class DetailViewController : UIViewController {
         }
         
     }
-        
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "imageFullScreenSegue" {
+            let destination = segue.destinationViewController as! FullScreenImageViewController
+            let imageV = sender as! UIImageView
+            destination.originalImageView = imageV
+        }
+    }
 }

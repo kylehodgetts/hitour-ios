@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -362,7 +363,7 @@
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ft9-Jg-epm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="808.5" y="-1059"/>
+            <point key="canvasLocation" x="856" y="-987"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="vg4-wr-7OI">
@@ -435,13 +436,13 @@
                                         <exclude reference="4VC-sv-Ya6"/>
                                         <exclude reference="WfM-PV-FQ7"/>
                                         <exclude reference="uh4-q4-KTj"/>
-                                        <exclude reference="0Ip-Fm-KXV"/>
-                                        <exclude reference="Ou8-wT-MUQ"/>
-                                        <exclude reference="zh1-EF-lJF"/>
                                         <exclude reference="0iF-7f-JK7"/>
                                         <exclude reference="OQt-zQ-Wnc"/>
                                         <exclude reference="eAy-Tv-4BC"/>
                                         <exclude reference="fCH-k1-F09"/>
+                                        <exclude reference="0Ip-Fm-KXV"/>
+                                        <exclude reference="Ou8-wT-MUQ"/>
+                                        <exclude reference="zh1-EF-lJF"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
@@ -454,13 +455,13 @@
                                         <include reference="4VC-sv-Ya6"/>
                                         <include reference="WfM-PV-FQ7"/>
                                         <include reference="uh4-q4-KTj"/>
-                                        <include reference="0Ip-Fm-KXV"/>
-                                        <include reference="Ou8-wT-MUQ"/>
-                                        <include reference="zh1-EF-lJF"/>
                                         <include reference="0iF-7f-JK7"/>
                                         <include reference="OQt-zQ-Wnc"/>
                                         <include reference="eAy-Tv-4BC"/>
                                         <include reference="fCH-k1-F09"/>
+                                        <include reference="0Ip-Fm-KXV"/>
+                                        <include reference="Ou8-wT-MUQ"/>
+                                        <include reference="zh1-EF-lJF"/>
                                     </mask>
                                 </variation>
                             </scrollView>
@@ -502,11 +503,80 @@
                         <outlet property="scrollView" destination="g2B-vI-qch" id="Qbu-Xs-A3K"/>
                         <outlet property="stackView" destination="0G2-QG-UUV" id="fsA-BT-vUi"/>
                         <outlet property="titleDetail" destination="W5a-p2-jy4" id="93l-lv-NEW"/>
+                        <segue destination="eAH-Qq-m4J" kind="presentation" identifier="imageFullScreenSegue" id="7Kk-Hx-7el"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qpe-aJ-SkQ" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="808" y="-195"/>
+            <point key="canvasLocation" x="1618" y="-987"/>
+        </scene>
+        <!--Full Screen Image View Controller-->
+        <scene sceneID="ujM-9t-V0I">
+            <objects>
+                <viewController id="eAH-Qq-m4J" customClass="FullScreenImageViewController" customModule="hiTour" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Cpw-WP-PLg"/>
+                        <viewControllerLayoutGuide type="bottom" id="re4-FD-PGJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vGQ-VH-oUi">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VBk-qy-6B0">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uEQ-ht-dWO">
+                                        <rect key="frame" x="8" y="8" width="584" height="584"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="JgC-Wa-zsp" appends="YES" id="rBq-RM-h9d"/>
+                                        </connections>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XNR-Bs-J2Q">
+                                        <rect key="frame" x="519" y="43" width="46" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <state key="normal" title="X">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="closeImage:" destination="eAH-Qq-m4J" eventType="touchUpInside" id="vYK-iy-8ta"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="uEQ-ht-dWO" firstAttribute="centerY" secondItem="VBk-qy-6B0" secondAttribute="centerY" id="JZI-yI-sov"/>
+                                    <constraint firstItem="XNR-Bs-J2Q" firstAttribute="top" secondItem="uEQ-ht-dWO" secondAttribute="top" id="Lz2-v5-xKz"/>
+                                    <constraint firstItem="XNR-Bs-J2Q" firstAttribute="trailing" secondItem="uEQ-ht-dWO" secondAttribute="trailing" id="O0g-jM-7Mf"/>
+                                    <constraint firstItem="XNR-Bs-J2Q" firstAttribute="width" secondItem="uEQ-ht-dWO" secondAttribute="height" multiplier="23:292" id="RPD-tk-Kao"/>
+                                    <constraint firstItem="uEQ-ht-dWO" firstAttribute="width" secondItem="VBk-qy-6B0" secondAttribute="width" id="YRG-RA-xyt"/>
+                                    <constraint firstItem="uEQ-ht-dWO" firstAttribute="centerX" secondItem="VBk-qy-6B0" secondAttribute="centerX" id="oDT-RR-xVR"/>
+                                    <constraint firstItem="uEQ-ht-dWO" firstAttribute="height" secondItem="VBk-qy-6B0" secondAttribute="height" id="wwr-6p-f7y"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="VBk-qy-6B0" firstAttribute="height" secondItem="vGQ-VH-oUi" secondAttribute="height" id="7bH-5X-G5o"/>
+                            <constraint firstItem="VBk-qy-6B0" firstAttribute="centerY" secondItem="vGQ-VH-oUi" secondAttribute="centerY" id="D1F-lj-hEV"/>
+                            <constraint firstItem="VBk-qy-6B0" firstAttribute="centerX" secondItem="vGQ-VH-oUi" secondAttribute="centerX" id="SHZ-3X-DFx"/>
+                            <constraint firstItem="VBk-qy-6B0" firstAttribute="width" secondItem="vGQ-VH-oUi" secondAttribute="width" id="dER-fq-T8M"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnClose" destination="XNR-Bs-J2Q" id="66q-NV-NYZ"/>
+                        <outlet property="imageView" destination="uEQ-ht-dWO" id="KN1-Qa-kZF"/>
+                        <outlet property="scrollView" destination="VBk-qy-6B0" id="I2V-BZ-td6"/>
+                        <outlet property="tapGesture" destination="JgC-Wa-zsp" id="98m-XJ-dPd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GYQ-k6-mtD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="JgC-Wa-zsp">
+                    <connections>
+                        <action selector="handleTapGesture:" destination="eAH-Qq-m4J" id="nsB-3N-xth"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="2427" y="-1640"/>
         </scene>
     </scenes>
     <resources>

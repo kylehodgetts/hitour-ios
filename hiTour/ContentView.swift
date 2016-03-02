@@ -24,6 +24,8 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
     var txtText : UITextView!
     var imageView : UIImageView!
     
+    var presentingViewController : DetailViewController!
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -102,8 +104,14 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
         imageView.image = UIImage(named: url)
         imageView.layoutIfNeeded()
         imageView.sizeToFit()
+        imageView.userInteractionEnabled = true
         imageView.heightAnchor.constraintEqualToConstant(imageView.frame.height).active = true
         imageView.widthAnchor.constraintEqualToConstant(imageView.frame.width).active = true
+        
+        let tapFullScreenGesture = UITapGestureRecognizer(target: self, action: Selector("displayImageFullScreen"))
+        tapFullScreenGesture.delegate = self
+        imageView.addGestureRecognizer(tapFullScreenGesture)
+        
         stackView.addArrangedSubview(imageView)
     }
     
@@ -131,7 +139,12 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
         
         txtDescription.widthAnchor.constraintEqualToConstant(txtDescription.bounds.width).active = true
         txtDescription.heightAnchor.constraintEqualToConstant(txtDescription.contentSize.height + 10).active = true
-
     }
+    
+    func displayImageFullScreen() {
+        print("Gesture detected")
+        presentingViewController.performSegueWithIdentifier("imageFullScreenSegue", sender: imageView)
+    }
+
     
 }

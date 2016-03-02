@@ -19,6 +19,7 @@ class FullScreenImageViewController : UIViewController{
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet var tapGesture: UITapGestureRecognizer!
     
+    @IBOutlet var pinchGesture: UIPinchGestureRecognizer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +30,7 @@ class FullScreenImageViewController : UIViewController{
     
     @IBAction func handleTapGesture(sender: UITapGestureRecognizer) {
         if sender.numberOfTouches() == 2 {
-            let zoomToRect = CGRect(origin: sender.locationInView(imageView), size: CGSize(width: 50, height: 50))
+            let zoomToRect = CGRect(origin: sender.locationInView(imageView), size: CGSize(width: 10, height: 10))
             scrollView.zoomToRect(zoomToRect, animated: true)
         }
     }
@@ -39,6 +40,12 @@ class FullScreenImageViewController : UIViewController{
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    @IBAction func handlePinchGesture(sender: UIPinchGestureRecognizer) {
+        print("Pinch detected")
+        scrollView.transform = CGAffineTransformScale(scrollView.transform,
+            sender.scale, sender.scale)
+        sender.scale = 1
+    }
     
     
 }

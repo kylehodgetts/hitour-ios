@@ -522,44 +522,45 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VBk-qy-6B0">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" minimumZoomScale="0.5" maximumZoomScale="15" translatesAutoresizingMaskIntoConstraints="NO" id="VBk-qy-6B0">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uEQ-ht-dWO">
-                                        <rect key="frame" x="8" y="8" width="584" height="584"/>
+                                    <imageView multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uEQ-ht-dWO">
+                                        <rect key="frame" x="16" y="-6" width="584" height="584"/>
                                         <gestureRecognizers/>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="JgC-Wa-zsp" appends="YES" id="rBq-RM-h9d"/>
+                                            <outletCollection property="gestureRecognizers" destination="0xD-Qn-dDY" appends="YES" id="wjD-8d-1JF"/>
                                         </connections>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XNR-Bs-J2Q">
-                                        <rect key="frame" x="519" y="43" width="46" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                        <state key="normal" title="X">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="closeImage:" destination="eAH-Qq-m4J" eventType="touchUpInside" id="vYK-iy-8ta"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="uEQ-ht-dWO" firstAttribute="centerY" secondItem="VBk-qy-6B0" secondAttribute="centerY" id="JZI-yI-sov"/>
-                                    <constraint firstItem="XNR-Bs-J2Q" firstAttribute="top" secondItem="uEQ-ht-dWO" secondAttribute="top" id="Lz2-v5-xKz"/>
-                                    <constraint firstItem="XNR-Bs-J2Q" firstAttribute="trailing" secondItem="uEQ-ht-dWO" secondAttribute="trailing" id="O0g-jM-7Mf"/>
-                                    <constraint firstItem="XNR-Bs-J2Q" firstAttribute="width" secondItem="uEQ-ht-dWO" secondAttribute="height" multiplier="23:292" id="RPD-tk-Kao"/>
                                     <constraint firstItem="uEQ-ht-dWO" firstAttribute="width" secondItem="VBk-qy-6B0" secondAttribute="width" id="YRG-RA-xyt"/>
                                     <constraint firstItem="uEQ-ht-dWO" firstAttribute="centerX" secondItem="VBk-qy-6B0" secondAttribute="centerX" id="oDT-RR-xVR"/>
                                     <constraint firstItem="uEQ-ht-dWO" firstAttribute="height" secondItem="VBk-qy-6B0" secondAttribute="height" id="wwr-6p-f7y"/>
                                 </constraints>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XNR-Bs-J2Q">
+                                <rect key="frame" x="534" y="28" width="46" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="X">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="closeImage:" destination="eAH-Qq-m4J" eventType="touchUpInside" id="imv-qc-Jcf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="VBk-qy-6B0" firstAttribute="height" secondItem="vGQ-VH-oUi" secondAttribute="height" id="7bH-5X-G5o"/>
                             <constraint firstItem="VBk-qy-6B0" firstAttribute="centerY" secondItem="vGQ-VH-oUi" secondAttribute="centerY" id="D1F-lj-hEV"/>
+                            <constraint firstItem="XNR-Bs-J2Q" firstAttribute="top" secondItem="Cpw-WP-PLg" secondAttribute="bottom" constant="8" id="Ksz-Ye-Mme"/>
                             <constraint firstItem="VBk-qy-6B0" firstAttribute="centerX" secondItem="vGQ-VH-oUi" secondAttribute="centerX" id="SHZ-3X-DFx"/>
                             <constraint firstItem="VBk-qy-6B0" firstAttribute="width" secondItem="vGQ-VH-oUi" secondAttribute="width" id="dER-fq-T8M"/>
+                            <constraint firstItem="XNR-Bs-J2Q" firstAttribute="width" secondItem="vGQ-VH-oUi" secondAttribute="height" multiplier="23:300" id="dO6-EK-T0s"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="XNR-Bs-J2Q" secondAttribute="trailing" id="fKK-px-uMS"/>
                         </constraints>
                     </view>
                     <connections>
@@ -570,11 +571,16 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GYQ-k6-mtD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="JgC-Wa-zsp">
+                <tapGestureRecognizer numberOfTapsRequired="2" id="JgC-Wa-zsp">
                     <connections>
                         <action selector="handleTapGesture:" destination="eAH-Qq-m4J" id="nsB-3N-xth"/>
                     </connections>
                 </tapGestureRecognizer>
+                <pinchGestureRecognizer id="0xD-Qn-dDY">
+                    <connections>
+                        <action selector="handlePinchGesture:" destination="eAH-Qq-m4J" id="uIs-Pv-ffK"/>
+                    </connections>
+                </pinchGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2427" y="-1640"/>
         </scene>

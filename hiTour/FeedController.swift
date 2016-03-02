@@ -48,15 +48,6 @@ class FeedController: UICollectionViewController {
         let pageView = self.storyboard!.instantiateViewControllerWithIdentifier("FeedPageViewController") as! FeedPageViewController
         pageView.startIndex = indexPath.row
         self.navigationController!.pushViewController(pageView, animated: true)
-        // selectedItem = indexPath.row
-        //performSegueWithIdentifier("FeedPageViewSegue", sender: self)
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        if (segue.identifier == "FeedPageViewSegue") {
-            let viewController = segue.destinationViewController as! FeedPageViewController
-            viewController.startIndex = self.selectedItem
-        }
     }
     
 }

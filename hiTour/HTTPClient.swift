@@ -54,9 +54,13 @@ class HTTPClient {
         let task = self.session.dataTaskWithURL(
             nsURL
             , completionHandler: { (data, response, error) -> Void in
+                if let er = error {
+                    print(er)
+                    cb([])
+                    return
+                }
                 //TODO: error handling and such
                 do {
-                    print(error)
                     let json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as? [[String: AnyObject]]
                     guard let ret = json else {
                         return

@@ -13,11 +13,27 @@ import UIKit
 class ToursController : UICollectionViewController {
     
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
+    var tours: [Tour] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.collectionView?.backgroundColor = UIColor.whiteColor()
+        updateTours()
+        
+        
+    }
+    
+    func updateTours() {
+        let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+        let coredata = delegate?.getCoreData()
+        
+        guard let nTours = coredata?.fetch(name: Tour.entityName).flatMap({$0 as? [Tour]}) else {
+            return
+        }
+        
+        tours = nTours
+        collectionView?.reloadData()
         
     }
     
@@ -27,17 +43,8 @@ class ToursController : UICollectionViewController {
         cell.layer.cornerRadius = 7;
         
         // just for ui testing
-        var institution : String
-        
-        switch(indexPath.row) {
-            case 0: institution = "Royal Brompton Hospital"
-            case 1: institution = "King's College"
-            case 2: institution = "National Portrait Gallery"
-            case 3: institution = "Tate Modern"
-            case 4: institution = "British Museum"
-            case 5: institution = "Science Museum"
-            default: institution = "Institution"
-        }
+        let institution : String = tours[indexPath.row].name!
+
         
         cell.labelTitle.text = institution
         
@@ -46,14 +53,14 @@ class ToursController : UICollectionViewController {
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 6
+        return tours.count
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         //TODO: once data is dinamically loaded pass the correct id of the
         self.tabBarController?.selectedIndex = 0
         let feedControlelr = self.tabBarController?.selectedViewController?.childViewControllers.first! as! FeedController
-        feedControlelr.setTour(indexPath.item)
+        feedControlelr.assignTour(tours[indexPath.row])
     }
     
 }

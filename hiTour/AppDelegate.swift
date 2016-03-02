@@ -14,14 +14,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     lazy var coreDataStack = CoreDataStack()
+    lazy var apiConnector: ApiConnector? = nil
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         let httpClient = HTTPClient(baseUrl: "https://hitour.herokuapp.com/api/A7DE6825FD96CCC79E63C89B55F88")
-        ApiConnector(HTTPClient: httpClient, stack: coreDataStack).updateAll()
-        
-
+        apiConnector = ApiConnector(HTTPClient: httpClient, stack: coreDataStack)
+        apiConnector?.updateAll()
         
         return true
     }
@@ -48,6 +48,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         self.coreDataStack.saveMainContext()
+    }
+    
+    func getCoreData() -> CoreDataStack {
+        return coreDataStack
     }
 
 }

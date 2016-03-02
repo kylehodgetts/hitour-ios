@@ -14,8 +14,8 @@ class FeedController: UICollectionViewController {
         
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
-    var prototypeData:[PrototypeDatum] = []
     var selectedItem = 0
+    var tour: Tour? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,8 +25,14 @@ class FeedController: UICollectionViewController {
         flowLayout.minimumLineSpacing = 2.0
         
         let savedTour = NSUserDefaults.standardUserDefaults().integerForKey("Tour")
+        let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+        let coredata = delegate?.getCoreData()
+        
         if savedTour > 0 {
-           setTour(savedTour)
+            guard let sTour = coredata?.fetch(name: Tour.entityName, predicate: NSPredicate(format: "tourId == \(savedTour)")).flatMap({$0.first as? Tour}) else {
+                return
+            }
+            assignTour(sTour)
         }
         
     }
@@ -34,18 +40,21 @@ class FeedController: UICollectionViewController {
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("FeedControllerCell", forIndexPath: indexPath) as! FeedControllerCell
-        let datum = self.prototypeData[indexPath.row]
-        
-        cell.imageViewFeed?.image = UIImage(named: datum.imageName)
-        cell.imageViewFeed?.contentMode = .ScaleAspectFill
-        cell.labelTitle.text = datum.title
+//        let datum = self.tour.prototypeData[indexPath.row]
+//        
+//        cell.imageViewFeed?.image = UIImage(named: datum.imageName)
+//        cell.imageViewFeed?.contentMode = .ScaleAspectFill
+//        cell.labelTitle.text = datum.title
         
         return cell
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return self.prototypeData.count
+        if let t = self.tour {
+            return t.pointTours!.count
+        } else {
+            return 0
+        }
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
@@ -63,10 +72,10 @@ class FeedController: UICollectionViewController {
         }
     }
     
-    func setTour(tour: Int) -> Void {
+    func assignTour(tour: Tour) -> Void {
         //TODO: Proper loading from the core data
-        prototypeData = Array(PrototypeDatum.getAllData.dropLast(min(tour, PrototypeDatum.getAllData.count - 1)))
-        NSUserDefaults.standardUserDefaults().setInteger(tour, forKey: "Tour")
+        self.tour = tour
+        NSUserDefaults.standardUserDefaults().setInteger(tour.tourId!.integerValue, forKey: "Tour")
         collectionView?.reloadData()
     }
     

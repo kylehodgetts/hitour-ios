@@ -20,8 +20,7 @@ class DetailViewController : UIViewController {
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var scrollView: UIScrollView!
     
-    override func viewDidLoad() {
-        
+    override func viewDidLoad() {        
         textDetail = UITextView()
         textDetail.editable = false
         textDetail.scrollEnabled = false

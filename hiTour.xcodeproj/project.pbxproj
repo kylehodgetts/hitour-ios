@@ -10,6 +10,8 @@
 		451342221C8366040089F2DC /* prototype.txt in Resources */ = {isa = PBXBuildFile; fileRef = 451342211C8366040089F2DC /* prototype.txt */; };
 		45583DB31C82671E0087AB18 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45583DB21C82671E0087AB18 /* ContentView.swift */; };
 		459A8B471C8662BE009B79F0 /* FullScreenImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459A8B461C8662BE009B79F0 /* FullScreenImageViewController.swift */; };
+		6D2B15791C87798800BC5179 /* FeedControllerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D2B15781C87798800BC5179 /* FeedControllerCell.xib */; };
+		6D2B157C1C87815F00BC5179 /* ToursControllerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D2B157B1C87815F00BC5179 /* ToursControllerCell.xib */; };
 		6D8CFD8D1C8662A000F8E8B9 /* Tablet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D8CFD8C1C8662A000F8E8B9 /* Tablet.storyboard */; };
 		6D90EE561C7E00B500433E1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D90EE481C7E00B500433E1F /* AppDelegate.swift */; };
 		6D90EE581C7E00B500433E1F /* BarcodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D90EE4A1C7E00B500433E1F /* BarcodeScannerViewController.swift */; };
@@ -81,8 +83,10 @@
 		4513421A1C83429F0089F2DC /* ultrasound.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = ultrasound.mp4; path = "../../Projects/Project Run/ultrasound.mp4"; sourceTree = "<group>"; };
 		451342211C8366040089F2DC /* prototype.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = prototype.txt; sourceTree = "<group>"; };
 		45583DB21C82671E0087AB18 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		6D8CFD8C1C8662A000F8E8B9 /* Tablet.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tablet.storyboard; sourceTree = "<group>"; };
 		459A8B461C8662BE009B79F0 /* FullScreenImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullScreenImageViewController.swift; sourceTree = "<group>"; };
+		6D2B15781C87798800BC5179 /* FeedControllerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedControllerCell.xib; sourceTree = "<group>"; };
+		6D2B157B1C87815F00BC5179 /* ToursControllerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToursControllerCell.xib; sourceTree = "<group>"; };
+		6D8CFD8C1C8662A000F8E8B9 /* Tablet.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tablet.storyboard; sourceTree = "<group>"; };
 		6D90EE481C7E00B500433E1F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6D90EE4A1C7E00B500433E1F /* BarcodeScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeScannerViewController.swift; sourceTree = "<group>"; };
 		6D90EE4C1C7E00B500433E1F /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -182,6 +186,7 @@
 			children = (
 				6D90EE4C1C7E00B500433E1F /* DetailViewController.swift */,
 				6D90EE4E1C7E00B500433E1F /* FeedController.swift */,
+				6D2B15781C87798800BC5179 /* FeedControllerCell.xib */,
 				6D90EE4F1C7E00B500433E1F /* FeedControllerCell.swift */,
 				6DF7DC4D1C7E72CD00C88B48 /* FeedPageViewController.swift */,
 				45583DB21C82671E0087AB18 /* ContentView.swift */,
@@ -195,6 +200,7 @@
 			children = (
 				6D90EE541C7E00B500433E1F /* ToursController.swift */,
 				6D90EE551C7E00B500433E1F /* ToursControllerCell.swift */,
+				6D2B157B1C87815F00BC5179 /* ToursControllerCell.xib */,
 			);
 			name = ToursView;
 			sourceTree = "<group>";
@@ -405,8 +411,10 @@
 				6DE891A51C83BCDD008D85A1 /* ctscan.mp4 in Resources */,
 				6DE891A61C83BCDD008D85A1 /* fluoroscopy.mp4 in Resources */,
 				6DE891A71C83BCDD008D85A1 /* mriscan.mp4 in Resources */,
+				6D2B157C1C87815F00BC5179 /* ToursControllerCell.xib in Resources */,
 				6DE891A81C83BCDD008D85A1 /* ultrasound.mp4 in Resources */,
 				6DFBC2D41C86434500FAB06F /* 120x120.png in Resources */,
+				6D2B15791C87798800BC5179 /* FeedControllerCell.xib in Resources */,
 				6DBED3D21C7E021E008BFA30 /* LaunchScreen.storyboard in Resources */,
 				451342221C8366040089F2DC /* prototype.txt in Resources */,
 				6DFBC2D21C86422300FAB06F /* 180x180.png in Resources */,

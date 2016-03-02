@@ -165,10 +165,10 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FeedControllerCell" id="CsL-Ec-PZk" customClass="FeedControllerCell" customModule="hiTour" customModuleProvider="target">
-                                <rect key="frame" x="111" y="64" width="378.5" height="185"/>
+                                <rect key="frame" x="111" y="64" width="379" height="185"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="378.5" height="185"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="379" height="185"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZrT-cI-v9T">

@@ -23,7 +23,7 @@ class DetailViewController : UIViewController {
     override func viewDidLoad() {        
         textDetail = UITextView()
         textDetail.editable = false
-        textDetail.scrollEnabled = false
+        textDetail.scrollEnabled = true
         textDetail.selectable = false
         
         stackView.addArrangedSubview(textDetail)

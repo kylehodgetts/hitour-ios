@@ -10,6 +10,7 @@
 		451342221C8366040089F2DC /* prototype.txt in Resources */ = {isa = PBXBuildFile; fileRef = 451342211C8366040089F2DC /* prototype.txt */; };
 		45583DB31C82671E0087AB18 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45583DB21C82671E0087AB18 /* ContentView.swift */; };
 		459A8B471C8662BE009B79F0 /* FullScreenImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459A8B461C8662BE009B79F0 /* FullScreenImageViewController.swift */; };
+		45C734391C87950B0069AF2F /* DynamicContentTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C734381C87950B0069AF2F /* DynamicContentTest.swift */; };
 		6D2B15791C87798800BC5179 /* FeedControllerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D2B15781C87798800BC5179 /* FeedControllerCell.xib */; };
 		6D2B157C1C87815F00BC5179 /* ToursControllerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D2B157B1C87815F00BC5179 /* ToursControllerCell.xib */; };
 		6D8CFD8D1C8662A000F8E8B9 /* Tablet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D8CFD8C1C8662A000F8E8B9 /* Tablet.storyboard */; };
@@ -32,8 +33,6 @@
 		6DE891A71C83BCDD008D85A1 /* mriscan.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DE8919F1C83BC67008D85A1 /* mriscan.mp4 */; };
 		6DE891A81C83BCDD008D85A1 /* ultrasound.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DE891A01C83BC67008D85A1 /* ultrasound.mp4 */; };
 		6DF7DC4E1C7E72CD00C88B48 /* FeedPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF7DC4D1C7E72CD00C88B48 /* FeedPageViewController.swift */; };
-		6DFBC2D21C86422300FAB06F /* 180x180.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DFBC2D11C86422300FAB06F /* 180x180.png */; };
-		6DFBC2D41C86434500FAB06F /* 120x120.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DFBC2D31C86434500FAB06F /* 120x120.png */; };
 		8F1C8FAB1C776E33009C95F4 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1C8FAA1C776E33009C95F4 /* HTTPClient.swift */; };
 		8F1C8FAD1C7770BD009C95F4 /* APITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1C8FAC1C7770BD009C95F4 /* APITests.swift */; };
 		8FF1C6D11C75F73A00F16473 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF1C6D01C75F73A00F16473 /* CoreDataStack.swift */; };
@@ -84,6 +83,7 @@
 		451342211C8366040089F2DC /* prototype.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = prototype.txt; sourceTree = "<group>"; };
 		45583DB21C82671E0087AB18 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		459A8B461C8662BE009B79F0 /* FullScreenImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullScreenImageViewController.swift; sourceTree = "<group>"; };
+		45C734381C87950B0069AF2F /* DynamicContentTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicContentTest.swift; sourceTree = "<group>"; };
 		6D2B15781C87798800BC5179 /* FeedControllerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedControllerCell.xib; sourceTree = "<group>"; };
 		6D2B157B1C87815F00BC5179 /* ToursControllerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToursControllerCell.xib; sourceTree = "<group>"; };
 		6D8CFD8C1C8662A000F8E8B9 /* Tablet.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tablet.storyboard; sourceTree = "<group>"; };
@@ -106,8 +106,6 @@
 		6DE8919F1C83BC67008D85A1 /* mriscan.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = mriscan.mp4; sourceTree = SOURCE_ROOT; };
 		6DE891A01C83BC67008D85A1 /* ultrasound.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ultrasound.mp4; sourceTree = SOURCE_ROOT; };
 		6DF7DC4D1C7E72CD00C88B48 /* FeedPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedPageViewController.swift; sourceTree = "<group>"; };
-		6DFBC2D11C86422300FAB06F /* 180x180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 180x180.png; path = ../../../Downloads/iOS/180x180.png; sourceTree = "<group>"; };
-		6DFBC2D31C86434500FAB06F /* 120x120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 120x120.png; path = "../../../Desktop/documents-export-2016-03-01/iOS/120x120.png"; sourceTree = "<group>"; };
 		8F1C8FAA1C776E33009C95F4 /* HTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		8F1C8FAC1C7770BD009C95F4 /* APITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APITests.swift; sourceTree = "<group>"; };
 		8FF1C6D01C75F73A00F16473 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -273,9 +271,7 @@
 				6D90EE641C7E00E500433E1F /* FeedView */,
 				6D90EE631C7E00D300433E1F /* BarcodeScanner */,
 				6D90EE521C7E00B500433E1F /* Info.plist */,
-				6DFBC2D11C86422300FAB06F /* 180x180.png */,
 				6DBED3CB1C7E021E008BFA30 /* Assets.xcassets */,
-				6DFBC2D31C86434500FAB06F /* 120x120.png */,
 				4513421E1C8342B90089F2DC /* PrototypeFiles */,
 				984EC7C21C7209C200A12379 /* hiTourTests */,
 				8FF1C6D21C75FF9E00F16473 /* models */,
@@ -299,6 +295,7 @@
 			children = (
 				984EC7CE1C7209C200A12379 /* hiTourUITests.swift */,
 				984EC7D01C7209C200A12379 /* Info.plist */,
+				45C734381C87950B0069AF2F /* DynamicContentTest.swift */,
 			);
 			path = hiTourUITests;
 			sourceTree = "<group>";
@@ -413,11 +410,9 @@
 				6DE891A71C83BCDD008D85A1 /* mriscan.mp4 in Resources */,
 				6D2B157C1C87815F00BC5179 /* ToursControllerCell.xib in Resources */,
 				6DE891A81C83BCDD008D85A1 /* ultrasound.mp4 in Resources */,
-				6DFBC2D41C86434500FAB06F /* 120x120.png in Resources */,
 				6D2B15791C87798800BC5179 /* FeedControllerCell.xib in Resources */,
 				6DBED3D21C7E021E008BFA30 /* LaunchScreen.storyboard in Resources */,
 				451342221C8366040089F2DC /* prototype.txt in Resources */,
-				6DFBC2D21C86422300FAB06F /* 180x180.png in Resources */,
 				6D8CFD8D1C8662A000F8E8B9 /* Tablet.storyboard in Resources */,
 				6DBED3D01C7E021E008BFA30 /* Assets.xcassets in Resources */,
 				6D90EE5F1C7E00B500433E1F /* Info.plist in Resources */,
@@ -497,6 +492,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				984EC7CF1C7209C200A12379 /* hiTourUITests.swift in Sources */,
+				45C734391C87950B0069AF2F /* DynamicContentTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

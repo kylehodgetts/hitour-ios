@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		451342221C8366040089F2DC /* prototype.txt in Resources */ = {isa = PBXBuildFile; fileRef = 451342211C8366040089F2DC /* prototype.txt */; };
 		45583DB31C82671E0087AB18 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45583DB21C82671E0087AB18 /* ContentView.swift */; };
+		6D8CFD8D1C8662A000F8E8B9 /* Tablet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D8CFD8C1C8662A000F8E8B9 /* Tablet.storyboard */; };
 		6D90EE561C7E00B500433E1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D90EE481C7E00B500433E1F /* AppDelegate.swift */; };
 		6D90EE581C7E00B500433E1F /* BarcodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D90EE4A1C7E00B500433E1F /* BarcodeScannerViewController.swift */; };
 		6D90EE5A1C7E00B500433E1F /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D90EE4C1C7E00B500433E1F /* DetailViewController.swift */; };
@@ -28,6 +29,8 @@
 		6DE891A71C83BCDD008D85A1 /* mriscan.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DE8919F1C83BC67008D85A1 /* mriscan.mp4 */; };
 		6DE891A81C83BCDD008D85A1 /* ultrasound.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DE891A01C83BC67008D85A1 /* ultrasound.mp4 */; };
 		6DF7DC4E1C7E72CD00C88B48 /* FeedPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF7DC4D1C7E72CD00C88B48 /* FeedPageViewController.swift */; };
+		6DFBC2D21C86422300FAB06F /* 180x180.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DFBC2D11C86422300FAB06F /* 180x180.png */; };
+		6DFBC2D41C86434500FAB06F /* 120x120.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DFBC2D31C86434500FAB06F /* 120x120.png */; };
 		8F1C8FAB1C776E33009C95F4 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1C8FAA1C776E33009C95F4 /* HTTPClient.swift */; };
 		8F1C8FAD1C7770BD009C95F4 /* APITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1C8FAC1C7770BD009C95F4 /* APITests.swift */; };
 		8FF1C6D11C75F73A00F16473 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF1C6D01C75F73A00F16473 /* CoreDataStack.swift */; };
@@ -77,6 +80,7 @@
 		4513421A1C83429F0089F2DC /* ultrasound.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = ultrasound.mp4; path = "../../Projects/Project Run/ultrasound.mp4"; sourceTree = "<group>"; };
 		451342211C8366040089F2DC /* prototype.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = prototype.txt; sourceTree = "<group>"; };
 		45583DB21C82671E0087AB18 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		6D8CFD8C1C8662A000F8E8B9 /* Tablet.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tablet.storyboard; sourceTree = "<group>"; };
 		6D90EE481C7E00B500433E1F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6D90EE4A1C7E00B500433E1F /* BarcodeScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeScannerViewController.swift; sourceTree = "<group>"; };
 		6D90EE4C1C7E00B500433E1F /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -96,6 +100,8 @@
 		6DE8919F1C83BC67008D85A1 /* mriscan.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = mriscan.mp4; sourceTree = SOURCE_ROOT; };
 		6DE891A01C83BC67008D85A1 /* ultrasound.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ultrasound.mp4; sourceTree = SOURCE_ROOT; };
 		6DF7DC4D1C7E72CD00C88B48 /* FeedPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedPageViewController.swift; sourceTree = "<group>"; };
+		6DFBC2D11C86422300FAB06F /* 180x180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 180x180.png; path = ../../../Downloads/iOS/180x180.png; sourceTree = "<group>"; };
+		6DFBC2D31C86434500FAB06F /* 120x120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 120x120.png; path = "../../../Desktop/documents-export-2016-03-01/iOS/120x120.png"; sourceTree = "<group>"; };
 		8F1C8FAA1C776E33009C95F4 /* HTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		8F1C8FAC1C7770BD009C95F4 /* APITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APITests.swift; sourceTree = "<group>"; };
 		8FF1C6D01C75F73A00F16473 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -232,6 +238,7 @@
 				6DBED3CC1C7E021E008BFA30 /* hiTour.xcdatamodeld */,
 				6DBED3CE1C7E021E008BFA30 /* LaunchScreen.storyboard */,
 				6DBED3CF1C7E021E008BFA30 /* Main.storyboard */,
+				6D8CFD8C1C8662A000F8E8B9 /* Tablet.storyboard */,
 				984EC7AA1C7209C200A12379 /* hiTour */,
 				984EC7CD1C7209C200A12379 /* hiTourUITests */,
 				984EC7A91C7209C200A12379 /* Products */,
@@ -257,7 +264,9 @@
 				6D90EE641C7E00E500433E1F /* FeedView */,
 				6D90EE631C7E00D300433E1F /* BarcodeScanner */,
 				6D90EE521C7E00B500433E1F /* Info.plist */,
+				6DFBC2D11C86422300FAB06F /* 180x180.png */,
 				6DBED3CB1C7E021E008BFA30 /* Assets.xcassets */,
+				6DFBC2D31C86434500FAB06F /* 120x120.png */,
 				4513421E1C8342B90089F2DC /* PrototypeFiles */,
 				984EC7C21C7209C200A12379 /* hiTourTests */,
 				8FF1C6D21C75FF9E00F16473 /* models */,
@@ -394,8 +403,11 @@
 				6DE891A61C83BCDD008D85A1 /* fluoroscopy.mp4 in Resources */,
 				6DE891A71C83BCDD008D85A1 /* mriscan.mp4 in Resources */,
 				6DE891A81C83BCDD008D85A1 /* ultrasound.mp4 in Resources */,
+				6DFBC2D41C86434500FAB06F /* 120x120.png in Resources */,
 				6DBED3D21C7E021E008BFA30 /* LaunchScreen.storyboard in Resources */,
 				451342221C8366040089F2DC /* prototype.txt in Resources */,
+				6DFBC2D21C86422300FAB06F /* 180x180.png in Resources */,
+				6D8CFD8D1C8662A000F8E8B9 /* Tablet.storyboard in Resources */,
 				6DBED3D01C7E021E008BFA30 /* Assets.xcassets in Resources */,
 				6D90EE5F1C7E00B500433E1F /* Info.plist in Resources */,
 				6DBED3D31C7E021E008BFA30 /* Main.storyboard in Resources */,

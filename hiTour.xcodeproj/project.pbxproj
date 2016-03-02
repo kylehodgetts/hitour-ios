@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		451342221C8366040089F2DC /* prototype.txt in Resources */ = {isa = PBXBuildFile; fileRef = 451342211C8366040089F2DC /* prototype.txt */; };
 		45583DB31C82671E0087AB18 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45583DB21C82671E0087AB18 /* ContentView.swift */; };
+		459A8B471C8662BE009B79F0 /* FullScreenImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459A8B461C8662BE009B79F0 /* FullScreenImageViewController.swift */; };
 		6D8CFD8D1C8662A000F8E8B9 /* Tablet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D8CFD8C1C8662A000F8E8B9 /* Tablet.storyboard */; };
 		6D90EE561C7E00B500433E1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D90EE481C7E00B500433E1F /* AppDelegate.swift */; };
 		6D90EE581C7E00B500433E1F /* BarcodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D90EE4A1C7E00B500433E1F /* BarcodeScannerViewController.swift */; };
@@ -81,6 +82,7 @@
 		451342211C8366040089F2DC /* prototype.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = prototype.txt; sourceTree = "<group>"; };
 		45583DB21C82671E0087AB18 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6D8CFD8C1C8662A000F8E8B9 /* Tablet.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tablet.storyboard; sourceTree = "<group>"; };
+		459A8B461C8662BE009B79F0 /* FullScreenImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullScreenImageViewController.swift; sourceTree = "<group>"; };
 		6D90EE481C7E00B500433E1F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6D90EE4A1C7E00B500433E1F /* BarcodeScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeScannerViewController.swift; sourceTree = "<group>"; };
 		6D90EE4C1C7E00B500433E1F /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };

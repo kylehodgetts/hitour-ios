@@ -10,62 +10,89 @@ import Foundation
 
 import UIKit
 
+/// Page View Controller that allows swiping between the detail views on a phone.
 class FeedPageViewController : UIPageViewController {
     
     // the data instantiated for a prototype
     let prototypeData = PrototypeDatum.getAllData
     
+    /// The index of a selected item when the Page View Controller is instantiated.
     var startIndex : Int!
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        self.tabBarController?.tabBar.hidden = true
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.tabBarController?.tabBar.hidden = false
-    }
-    
+    /// Initializes the first view controller and a data source.
     override func viewDidLoad() {
         super.viewDidLoad()
         
         dataSource = self
         
-        let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("DetailViewController") as! DetailViewController
-        detailController.prototypeData = self.prototypeData[startIndex]
-        
-        setViewControllers([detailController], direction: .Forward, animated: true, completion: nil)
-        
+        let firstViewController = orderedViewControllers[startIndex]
+        setViewControllers([firstViewController],
+                direction: .Forward,
+                animated: true,
+                completion: nil)
+    }
+    
+    /// - Returns: Array of View Controllers that are being managed by the Page View Controller.
+    private(set) lazy var orderedViewControllers: [DetailViewController] = {
+        var controllers : [DetailViewController] = []
+        for index in 0..<self.prototypeData.count {
+            let dvController = self.newDetailsController()
+            dvController.prototypeData = self.prototypeData[index]
+            controllers.append(dvController)
+        }
+        return controllers
+    }()
+    
+    /// Instantiants a new DetailViewController.
+    private func newDetailsController() -> DetailViewController {
+        return self.storyboard!.instantiateViewControllerWithIdentifier("DetailViewController") as!DetailViewController
     }
 }
 
+/// Implements the Data Source protocol.
 extension FeedPageViewController: UIPageViewControllerDataSource {
     
+    /// - Returns: An appropriate controller when a users tries to access a previous page.
     func pageViewController(pageViewController: UIPageViewController,
         viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-            var beforeController : DetailViewController? = nil
             
-            if(!(startIndex <= 0)) {
-                startIndex = startIndex - 1
-                beforeController = self.storyboard!.instantiateViewControllerWithIdentifier("DetailViewController") as? DetailViewController
-                beforeController!.prototypeData = self.prototypeData[startIndex]
+            guard let viewControllerIndex = orderedViewControllers.indexOf(viewController as!DetailViewController) else {
+                return nil
             }
             
-            return beforeController
+            let previousIndex = viewControllerIndex - 1
+            
+            guard previousIndex >= 0 else {
+                return nil
+            }
+            
+            guard orderedViewControllers.count > previousIndex else {
+                return nil
+            }
+            
+            return orderedViewControllers[previousIndex]
     }
     
+    /// - Returns: An appropriate controller when a users tries to access a subsequent page.
     func pageViewController(pageViewController: UIPageViewController,
         viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-            var afterController : DetailViewController? = nil
             
-            if(!(startIndex >= prototypeData.count - 1)) {
-                startIndex = startIndex + 1
-                afterController = self.storyboard!.instantiateViewControllerWithIdentifier("DetailViewController") as? DetailViewController
-                afterController!.prototypeData = self.prototypeData[startIndex]
+            guard let viewControllerIndex = orderedViewControllers.indexOf(viewController as! DetailViewController) else {
+                return nil
             }
             
-            return afterController
+            let nextIndex = viewControllerIndex + 1
+            let orderedViewControllersCount = orderedViewControllers.count
+            
+            guard orderedViewControllersCount != nextIndex else {
+                return nil
+            }
+            
+            guard orderedViewControllersCount > nextIndex else {
+                return nil
+            }
+            
+            return orderedViewControllers[nextIndex]
     }
     
 }

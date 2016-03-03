@@ -12,7 +12,7 @@ import UIKit
 
 class DetailViewController : UIViewController {
     
-    var prototypeData : PrototypeDatum!
+    var prototypeData : PrototypeDatum! = PrototypeDatum.getAllData[0]
     var textDetail: UITextView!
 
     @IBOutlet weak var imageDetail: UIImageView!

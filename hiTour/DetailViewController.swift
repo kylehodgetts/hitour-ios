@@ -15,7 +15,10 @@ import UIKit
 //  for that particular point.
 class DetailViewController : UIViewController {
     
+    //  Reference variable to prototype data for now
     var prototypeData : PrototypeDatum! = PrototypeDatum.getAllData[0]
+    
+    //  Reference variable to populate the point description text
     var textDetail: UITextView!
 
     //  Outlet reference to the point's image on the storyboard

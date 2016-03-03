@@ -22,10 +22,15 @@ class FeedController: UICollectionViewController {
         collectionView!.registerNib(UINib(nibName: "FeedControllerCell", bundle: nil), forCellWithReuseIdentifier: "FeedControllerCellId")
         
         self.collectionView?.backgroundColor = UIColor.whiteColor()
-        
         flowLayout.minimumLineSpacing = 2.0
-        let screenSize: CGRect = UIScreen.mainScreen().bounds
-        flowLayout.itemSize = CGSize(width: screenSize.width, height: 185)
+
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+            let v = self.storyboard!.instantiateViewControllerWithIdentifier("SplitViewController") as! UISplitViewController
+            flowLayout.itemSize = CGSize(width: v.primaryColumnWidth, height: 185)
+        } else {
+            let screenSize: CGRect = UIScreen.mainScreen().bounds
+            flowLayout.itemSize = CGSize(width: screenSize.width, height: 185)
+        }
 
     }
     
@@ -48,9 +53,15 @@ class FeedController: UICollectionViewController {
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let pageView = self.storyboard!.instantiateViewControllerWithIdentifier("FeedPageViewController") as! FeedPageViewController
-        pageView.startIndex = indexPath.row
-        self.navigationController!.pushViewController(pageView, animated: true)
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+            let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("DetailViewControllerTablet") as!DetailViewController
+            detailController.prototypeData = self.prototypeData[indexPath.row]
+            self.splitViewController!.showDetailViewController(detailController, sender: self)
+        } else {
+            let pageView = self.storyboard!.instantiateViewControllerWithIdentifier("FeedPageViewController") as! FeedPageViewController
+            pageView.startIndex = indexPath.row
+            self.navigationController!.pushViewController(pageView, animated: true)
+        }
     }
     
 }

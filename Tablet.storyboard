@@ -12,16 +12,17 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2zR-7w-i20" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="cXH-Wn-old" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wel-If-R98">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="wel-If-R98">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="riJ-1Z-6yn" kind="relationship" relationship="rootViewController" id="Z1v-ZD-gxO"/>
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="-1955" y="396"/>
+            <point key="canvasLocation" x="-2005" y="396"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="U6e-my-tLk">
@@ -41,7 +42,7 @@
             <objects>
                 <collectionViewController storyboardIdentifier="ToursController" title="Tours" id="DQL-tI-j8z" customClass="ToursController" customModule="hiTour" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="CYn-7k-1Ga">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="0.0" id="RM6-ql-uCl">
                             <size key="itemSize" width="176" height="226"/>
@@ -55,6 +56,7 @@
                             <outlet property="delegate" destination="DQL-tI-j8z" id="jWD-uE-sNm"/>
                         </connections>
                     </collectionView>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <tabBarItem key="tabBarItem" title="Tours" image="tours" id="psV-8v-kX7"/>
                     <connections>
                         <outlet property="flowLayout" destination="RM6-ql-uCl" id="Dg9-5X-pu6"/>
@@ -62,12 +64,13 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="piW-5X-8O8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1152" y="1199"/>
+            <point key="canvasLocation" x="-1248" y="1167"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="tip-dj-hSM">
             <objects>
                 <tabBarController id="riJ-1Z-6yn" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="Dlq-Ia-smP">
                         <nil key="title"/>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="aSY-Vr-qu3">
@@ -77,15 +80,20 @@
                                 <segment title="Camera Off"/>
                                 <segment title="Camera On"/>
                             </segments>
-                            <connections>
-                                <segue destination="hTP-Wg-xaI" kind="showDetail" id="So9-3q-HwM"/>
-                            </connections>
+                            <color key="tintColor" name="controlLightHighlightColor" catalog="System" colorSpace="catalog"/>
                         </segmentedControl>
                     </navigationItem>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="MlB-bU-wYX">
+                    <tabBar key="tabBar" contentMode="scaleToFill" barStyle="black" id="MlB-bU-wYX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
                         <segue destination="FrQ-cS-Vky" kind="relationship" relationship="viewControllers" id="tL1-Na-oi2"/>
@@ -94,14 +102,14 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1b4-ZL-UBs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1128" y="396"/>
+            <point key="canvasLocation" x="-1248" y="396"/>
         </scene>
         <!--Feed-->
         <scene sceneID="uko-Ow-z7G">
             <objects>
                 <collectionViewController storyboardIdentifier="FeedController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FrQ-cS-Vky" customClass="FeedController" customModule="hiTour" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="zI3-nm-Kjv">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="UZc-XD-LlU">
                             <size key="itemSize" width="378.5" height="185"/>
@@ -115,6 +123,7 @@
                             <outlet property="delegate" destination="FrQ-cS-Vky" id="8nf-en-Olp"/>
                         </connections>
                     </collectionView>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <tabBarItem key="tabBarItem" title="Feed" image="feed" id="Z13-z5-dtE"/>
                     <navigationItem key="navigationItem" id="I6U-57-GtQ"/>
                     <connections>
@@ -123,12 +132,12 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kaK-t5-pJr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-441" y="396"/>
+            <point key="canvasLocation" x="-503" y="396"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="PK0-yL-XXL">
             <objects>
-                <viewController storyboardIdentifier="DetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="KfD-xb-DfB" customClass="DetailViewController" customModule="hiTour" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailViewControllerTablet" useStoryboardIdentifierAsRestorationIdentifier="YES" id="KfD-xb-DfB" customClass="DetailViewController" customModule="hiTour" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FJg-aS-9P7"/>
                         <viewControllerLayoutGuide type="bottom" id="4EU-dR-lVi"/>
@@ -210,7 +219,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MES-D1-Yb0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1955" y="-353"/>
+            <point key="canvasLocation" x="-2005" y="-353"/>
         </scene>
         <!--Full Screen Image View Controller-->
         <scene sceneID="jE7-E4-IsV">
@@ -278,7 +287,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="enW-pG-nnZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1128" y="-353"/>
+            <point key="canvasLocation" x="-1248" y="-353"/>
         </scene>
         <!--hiTour-->
         <scene sceneID="QPa-tY-9dg">
@@ -362,11 +371,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0w8-yH-ezh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-646" y="140"/>
+            <point key="canvasLocation" x="-503" y="-353"/>
         </scene>
     </scenes>
     <resources>
         <image name="feed" width="30" height="30"/>
         <image name="tours" width="30" height="30"/>
     </resources>
+    <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

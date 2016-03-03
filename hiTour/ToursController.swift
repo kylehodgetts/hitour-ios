@@ -20,7 +20,12 @@ class ToursController : UICollectionViewController {
         
         self.collectionView?.backgroundColor = UIColor.whiteColor()
         let screenSize: CGRect = UIScreen.mainScreen().bounds
-        flowLayout.itemSize = CGSize(width: (screenSize.width - 22) / 2, height: screenSize.height / 3)
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+            let v = self.storyboard!.instantiateViewControllerWithIdentifier("SplitViewController") as! UISplitViewController
+            flowLayout.itemSize = CGSize(width: v.primaryColumnWidth * 0.98, height: screenSize.height / 3)
+        } else {
+            flowLayout.itemSize = CGSize(width: (screenSize.width - 22) / 2, height: screenSize.height / 3)
+        }
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -52,14 +57,7 @@ class ToursController : UICollectionViewController {
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let popup = UIAlertController()
-        popup.title = "Major 🔑 No " + String(indexPath.row)
-        popup.message = "\nIt's just a prototype 💁"
-        let popupAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default) {
-            action in popup.dismissViewControllerAnimated(true, completion: nil)
-        }
-        popup.addAction(popupAction)
-        self.presentViewController(popup, animated: true, completion: nil)
+
     }
     
 }

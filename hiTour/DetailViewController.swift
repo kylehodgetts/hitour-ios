@@ -12,7 +12,7 @@ import UIKit
 
 class DetailViewController : UIViewController {
     
-    var prototypeData : PrototypeDatum!
+    var prototypeData : PrototypeDatum! = PrototypeDatum.getAllData[0]
     var textDetail: UITextView!
 
     @IBOutlet weak var imageDetail: UIImageView!
@@ -20,10 +20,7 @@ class DetailViewController : UIViewController {
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var scrollView: UIScrollView!
     
-    override func viewDidLoad() {
-        navigationController?.navigationBar.hidden = false
-        navigationController?.hidesBarsOnSwipe = true
-        
+    override func viewDidLoad() {        
         textDetail = UITextView()
         textDetail.editable = false
         textDetail.scrollEnabled = false

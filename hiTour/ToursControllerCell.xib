@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ToursControllerCellId" id="c8u-bq-KSQ" customClass="ToursControllerCell" customModule="hiTour" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="176" height="226"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="176" height="226"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4mF-Kw-sgf">
+                        <rect key="frame" x="8" y="8" width="160" height="210"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                        <color key="textColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="widthClass=compact" fixedFrame="YES">
+                            <rect key="frame" x="8" y="80" width="160" height="65"/>
+                        </variation>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <color key="backgroundColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="0.73999999999999999" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="4mF-Kw-sgf" secondAttribute="bottom" constant="8" id="ZoZ-dL-3e8"/>
+                <constraint firstItem="4mF-Kw-sgf" firstAttribute="leading" secondItem="c8u-bq-KSQ" secondAttribute="leading" constant="8" id="lb2-Tz-t0b"/>
+                <constraint firstAttribute="trailing" secondItem="4mF-Kw-sgf" secondAttribute="trailing" constant="8" id="mZD-0O-MKt"/>
+                <constraint firstItem="4mF-Kw-sgf" firstAttribute="top" secondItem="c8u-bq-KSQ" secondAttribute="top" constant="8" id="pvR-Lv-0Cx"/>
+            </constraints>
+            <connections>
+                <outlet property="labelTitle" destination="4mF-Kw-sgf" id="crX-zL-Az3"/>
+            </connections>
+            <point key="canvasLocation" x="168" y="95"/>
+        </collectionViewCell>
+    </objects>
+</document>

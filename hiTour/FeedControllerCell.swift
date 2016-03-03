@@ -10,9 +10,13 @@ import Foundation
 
 import UIKit
 
+/// Holds outlets for the feed cell.
 class FeedControllerCell: UICollectionViewCell {
     
+    /// Image showing a specific point.
     @IBOutlet weak var imageViewFeed: UIImageView!
+    
+    /// The title of a point.
     @IBOutlet weak var labelTitle: UILabel!
     
 }

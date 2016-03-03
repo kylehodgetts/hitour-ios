@@ -10,19 +10,31 @@ import Foundation
 
 import UIKit
 
+/// View Controller that displays the feed cells.
 class FeedController: UICollectionViewController {
-        
+    
+    /// Flow layout specifies position of each item in the collection.
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
     var selectedItem = 0
     var tour: Tour? = nil
     
+    /// Registers UINib for the cell layout and the size of each cell wrt the screen size.
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView!.registerNib(UINib(nibName: "FeedControllerCell", bundle: nil), forCellWithReuseIdentifier: "FeedControllerCellId")
         
         self.collectionView?.backgroundColor = UIColor.whiteColor()
-        
         flowLayout.minimumLineSpacing = 2.0
+
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+            let v = self.storyboard!.instantiateViewControllerWithIdentifier("SplitViewController") as! UISplitViewController
+            flowLayout.itemSize = CGSize(width: v.primaryColumnWidth, height: 185)
+        } else {
+            let screenSize: CGRect = UIScreen.mainScreen().bounds
+            flowLayout.itemSize = CGSize(width: screenSize.width, height: 185)
+        }
+
         
         let savedTour = NSUserDefaults.standardUserDefaults().integerForKey("Tour")
         let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
@@ -36,19 +48,18 @@ class FeedController: UICollectionViewController {
         }
         
     }
-    
+
+    /// Specifies an image and a title for each cell.
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("FeedControllerCell", forIndexPath: indexPath) as! FeedControllerCell
-//        let datum = self.tour.prototypeData[indexPath.row]
-//        
-//        cell.imageViewFeed?.image = UIImage(named: datum.imageName)
-//        cell.imageViewFeed?.contentMode = .ScaleAspectFill
-//        cell.labelTitle.text = datum.title
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("FeedControllerCellId", forIndexPath: indexPath) as! FeedControllerCell
+        cell.sizeToFit()
+        let datum = self.prototypeData[indexPath.row]
         
         return cell
     }
     
+    /// - Returns: The number of items in the feed collection.
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let t = self.tour {
             return t.pointTours!.count
@@ -57,18 +68,16 @@ class FeedController: UICollectionViewController {
         }
     }
     
+    /// Launches the detail view in a master-detail layout for a tablet and in a new View Controller on a phone.
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let pageView = self.storyboard!.instantiateViewControllerWithIdentifier("FeedPageViewController") as! FeedPageViewController
-        pageView.startIndex = indexPath.row
-        self.navigationController!.pushViewController(pageView, animated: true)
-        // selectedItem = indexPath.row
-        //performSegueWithIdentifier("FeedPageViewSegue", sender: self)
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        if (segue.identifier == "FeedPageViewSegue") {
-            let viewController = segue.destinationViewController as! FeedPageViewController
-            viewController.startIndex = self.selectedItem
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+            let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("DetailViewControllerTablet") as!DetailViewController
+            detailController.prototypeData = self.prototypeData[indexPath.row]
+            self.splitViewController!.showDetailViewController(detailController, sender: self)
+        } else {
+            let pageView = self.storyboard!.instantiateViewControllerWithIdentifier("FeedPageViewController") as! FeedPageViewController
+            pageView.startIndex = indexPath.row
+            self.navigationController!.pushViewController(pageView, animated: true)
         }
     }
     

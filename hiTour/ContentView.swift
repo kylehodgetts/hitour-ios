@@ -12,21 +12,37 @@ import AVFoundation
 import AVKit
 import MediaPlayer
 
+//  Custom UIView class that is used to populate a content data item for a particular point
+//  that normally consists of either a video, image or text along with its title and description.
+//  This view can place the relevant media content.
 class ContentView : UIView, UIGestureRecognizerDelegate {
     
+    //  Stackview to display the items vertically in the right order
     var stackView : UIStackView!
     
+    //  Textview to display the data item's title
     var txtTitle : UITextView!
+    
+    //  Textview to display the data item's description
     var txtDescription : UITextView!
-    var videoTap : UIButton!
+    
+    //  AVPlayer in order to play the data item's video
     var videoPlayer : AVPlayer!
+    
+    //  Video Player View Controller to handle the view and controls for the user to play the video
     var playerController : AVPlayerViewController!
+    
+    //  TextView to hold the data item's text should there not be a video or image
     var txtText : UITextView!
+    
+    //  ImageView to display the data item's image
     var imageView : UIImageView!
     
+    //  Reference to the view controller that is instantiating this content view
     var presentingViewController : DetailViewController!
     
     
+    //  View initializer that constructs and initializes the views
     override init(frame: CGRect) {
         super.init(frame: frame)
         txtTitle = UITextView()
@@ -36,10 +52,13 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
         imageView = UIImageView()
     }
     
+    //  Required initializer by the super parent class
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
+    //  Function that populates the views with their respective data and decides on the correct
+    //  media type views to use e.g. video, image or just text.
     func populateView(url: String, titleText: String, descriptionText: String) {
         
         stackView.bounds = self.bounds
@@ -64,10 +83,13 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
 
     }
     
+    //  Function that handles a tap gesture to the video view controller display so that it shows or hides the
+    //  video player controls upon a tap.
     func showVideoControls(sender: UITapGestureRecognizer? = nil) {
         playerController.showsPlaybackControls = true
     }
     
+    //  Function that adds to the stack view a video and sets up its constraints and tap gesture to display its controls.
     func addVideoContent(url: String) {
         let nsUrl = NSURL(fileURLWithPath: url)
         videoPlayer = AVPlayer(URL: nsUrl)
@@ -85,6 +107,7 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
         
     }
     
+    //  Function that adds text content to the stack view from a file.
     func addTextContent(url: String) {
         do {
             try txtText.text = String(contentsOfFile: url, encoding: NSUTF8StringEncoding)
@@ -99,6 +122,7 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
         stackView.addArrangedSubview(txtText)
     }
     
+    //  Function that adds an image to the stackview from its url resource.
     func addImageContent(url: String) {
         imageView.contentMode = .ScaleAspectFill
         imageView.image = UIImage(named: url)
@@ -115,6 +139,7 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
         stackView.addArrangedSubview(imageView)
     }
     
+    //  Function that adds and populates the title of the data item to the stack view
     func addTitle(titleText: String) {
         txtTitle.text = titleText
         txtTitle.editable = false
@@ -128,6 +153,7 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
         txtTitle.heightAnchor.constraintEqualToConstant(txtTitle.contentSize.height).active = true
     }
     
+    //  Function that adds and populates a description to the stackview of the item data
     func addDescription(descriptionText: String) {
         txtDescription.text = descriptionText
         txtDescription.editable = false
@@ -141,10 +167,10 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
         txtDescription.heightAnchor.constraintEqualToConstant(txtDescription.contentSize.height + 10).active = true
     }
     
+    //  Function that handles when an image is tapped so that it is presented full screen by performing a segue to the 
+    //  FullScreenImageViewController
     func displayImageFullScreen() {
-        print("Gesture detected")
         presentingViewController.performSegueWithIdentifier("imageFullScreenSegue", sender: imageView)
     }
-
     
 }

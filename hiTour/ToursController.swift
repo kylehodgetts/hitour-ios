@@ -10,10 +10,13 @@ import Foundation
 
 import UIKit
 
+/// The collection view that allows switching between tours.
 class ToursController : UICollectionViewController {
     
+    /// The flow layout responsible for defining position of collection cells.
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
+    /// Sets up the size of a collection cell wrt the screen size.
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView!.registerNib(UINib(nibName: "ToursControllerCell", bundle: nil), forCellWithReuseIdentifier: "ToursControllerCellId")
@@ -28,6 +31,7 @@ class ToursController : UICollectionViewController {
         }
     }
     
+    /// Defines layout details for each cell.
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ToursControllerCellId", forIndexPath: indexPath) as! ToursControllerCell
@@ -51,11 +55,13 @@ class ToursController : UICollectionViewController {
         return cell
     }
     
+    /// - Returns: The number of items in the collection.
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         return 6
     }
     
+    /// Switches the tour when the cell has been selected.
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 
     }

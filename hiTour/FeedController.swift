@@ -10,13 +10,15 @@ import Foundation
 
 import UIKit
 
+/// View Controller that displays the feed cells.
 class FeedController: UICollectionViewController {
-        
+    
+    /// Flow layout specifies position of each item in the collection.
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
     let prototypeData = PrototypeDatum.getAllData
-    var selectedItem = 0
     
+    /// Registers UINib for the cell layout and the size of each cell wrt the screen size.
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView!.registerNib(UINib(nibName: "FeedControllerCell", bundle: nil), forCellWithReuseIdentifier: "FeedControllerCellId")
@@ -33,7 +35,8 @@ class FeedController: UICollectionViewController {
         }
 
     }
-    
+
+    /// Specifies an image and a title for each cell.
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("FeedControllerCellId", forIndexPath: indexPath) as! FeedControllerCell
@@ -47,11 +50,13 @@ class FeedController: UICollectionViewController {
         return cell
     }
     
+    /// - Returns: The number of items in the feed collection.
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         return self.prototypeData.count
     }
     
+    /// Launches the detail view in a master-detail layout for a tablet and in a new View Controller on a phone.
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
             let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("DetailViewControllerTablet") as!DetailViewController

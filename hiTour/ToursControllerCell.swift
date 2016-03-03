@@ -10,8 +10,10 @@ import Foundation
 
 import UIKit
 
+/// Holds outlets for the tour cell.
 class ToursControllerCell: UICollectionViewCell {
     
+    /// The title of a tour/insititution.
     @IBOutlet weak var labelTitle: UILabel!
     
 }

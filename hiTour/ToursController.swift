@@ -71,10 +71,16 @@ class ToursController : UICollectionViewController {
     
     /// Switches the tour when the cell has been selected.
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        //TODO: once data is dinamically loaded pass the correct id of the
-        self.tabBarController?.selectedIndex = 0
-        let feedControlelr = self.tabBarController?.selectedViewController?.childViewControllers.first! as! FeedController
-        feedControlelr.assignTour(tours[indexPath.row])
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+            self.tabBarController?.selectedIndex = 0
+            let feedControlelr = self.tabBarController?.selectedViewController as! FeedController
+            feedControlelr.assignTour(tours[indexPath.row])
+            
+        } else {
+            self.tabBarController?.selectedIndex = 0
+            let feedControlelr = self.tabBarController?.selectedViewController?.childViewControllers.first! as! FeedController
+            feedControlelr.assignTour(tours[indexPath.row])
+        }
     }
     
 }

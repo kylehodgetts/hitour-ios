@@ -16,7 +16,7 @@ import UIKit
 class DetailViewController : UIViewController {
     
     //  Reference variable to a point
-    var point : Point!
+    var point : Point?
     
     // Reference to audience that this point if for
     var audience: Audience!
@@ -48,7 +48,7 @@ class DetailViewController : UIViewController {
         
         stackView.addArrangedSubview(textDetail)
         
-        guard let imageData = point.data else {
+        guard let t = point, imageData = point!.data else {
             return
         }
         
@@ -56,8 +56,8 @@ class DetailViewController : UIViewController {
         self.imageDetail!.autoresizingMask = UIViewAutoresizing.FlexibleWidth
         
             
-        self.titleDetail.text = point.name
-        self.textDetail.text = point.descriptionP
+        self.titleDetail.text = t.name
+        self.textDetail.text = t.descriptionP
         textDetail.sizeToFit()
         textDetail.heightAnchor.constraintEqualToConstant(textDetail.contentSize.height + 100).active = true
         textDetail.widthAnchor.constraintEqualToConstant(textDetail.contentSize.width).active = true
@@ -71,7 +71,7 @@ class DetailViewController : UIViewController {
     //  The content view is then added to the stack view in the ranked ordered retirevied.
     func loadDynamicContent() {
         
-        let points = point.getPointDataFor(audience)
+        let points = point!.getPointDataFor(audience)
         
         for data in points {
             

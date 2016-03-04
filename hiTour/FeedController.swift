@@ -90,6 +90,7 @@ class FeedController: UICollectionViewController {
             
             let pt = t.pointTours![indexPath.row] as! PointTour
             detailController.point = pt.point!
+            detailController.audience = t.audience!
             
             self.splitViewController!.showDetailViewController(detailController, sender: self)
         } else {

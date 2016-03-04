@@ -34,6 +34,10 @@ class FullScreenImageViewController : UIViewController, UIScrollViewDelegate {
         scrollView.delegate = self
     }
     
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.All
+    }
+    
     //  Function that deals with the action to close the full screen view controller when the 
     //  'X' close button is tapped by the user to dismiss this view controller.
     @IBAction func closeImage(sender: AnyObject) {

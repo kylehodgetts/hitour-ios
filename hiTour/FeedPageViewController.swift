@@ -14,7 +14,9 @@ import UIKit
 class FeedPageViewController : UIPageViewController {
     
     // the data instantiated for a prototype
-    let prototypeData = PrototypeDatum.getAllData
+    var points: [PointTour] = []
+    
+    var audience: Audience!
     
     /// The index of a selected item when the Page View Controller is instantiated.
     var startIndex : Int!
@@ -35,9 +37,10 @@ class FeedPageViewController : UIPageViewController {
     /// - Returns: Array of View Controllers that are being managed by the Page View Controller.
     private(set) lazy var orderedViewControllers: [DetailViewController] = {
         var controllers : [DetailViewController] = []
-        for index in 0..<self.prototypeData.count {
+        for index in 0..<self.points.count {
             let dvController = self.newDetailsController()
-            dvController.prototypeData = self.prototypeData[index]
+            dvController.point = self.points[index].point!
+            dvController.audience = self.audience
             controllers.append(dvController)
         }
         return controllers

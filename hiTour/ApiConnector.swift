@@ -107,7 +107,16 @@ class ApiConnector{
     /// Fetches the points from the server
     ///
     func fetchPoints(chain: (([Point]) -> Void)? ) -> Void {
-        fetch("points", jsonReader: Point.jsonReader, chain: chain)
+        fetch("points", jsonReader: Point.jsonReader, chain: chain, afterParse: {dict in
+            return { (p) -> Point in
+                if let url = dict["url"] as? String {
+                    self.client.binaryReques(url, cb: { (data) -> Void in
+                        p.data = data
+                    })
+                }
+                return p
+            }
+        })
     }
     
     
@@ -115,7 +124,17 @@ class ApiConnector{
     /// Fetches the data from the server
     ///
     func fetchData(chain: (([Data]) -> Void)? ) -> Void {
-        fetch("data", jsonReader: Data.jsonReader, chain: chain)
+        fetch("data", jsonReader: Data.jsonReader, chain: chain, afterParse: {dict in
+            return { (d) -> Data in
+                if let url = dict["url"] as? String {
+                    self.client.binaryReques(url, cb: { (data) -> Void in
+                        d.data = data
+                    })
+                }
+                return d
+            }
+        })
+
     }
     
     

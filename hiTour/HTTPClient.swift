@@ -73,6 +73,19 @@ class HTTPClient {
         task.resume()
     }
     
+    func binaryReques(fullUrl: String, cb:(NSData?) -> Void) -> Void {
+        let nsURL = NSURL(string: fullUrl)!
+        let task = self.session.dataTaskWithURL(nsURL, completionHandler:{ (data, response, error) -> Void in
+            if let er = error {
+                print(er)
+                cb(nil)
+                return
+            }
+            cb(data)
+        })
+        task.resume()
+    }
+    
     ///
     /// Tears down the HTTPClient
     ///

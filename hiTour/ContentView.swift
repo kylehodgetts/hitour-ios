@@ -59,7 +59,7 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
     
     //  Function that populates the views with their respective data and decides on the correct
     //  media type views to use e.g. video, image or just text.
-    func populateView(url: String, titleText: String, descriptionText: String) {
+    func populateView(data: NSData, titleText: String, descriptionText: String, url: String, dataId: String) {
         
         stackView.bounds = self.bounds
         stackView.frame = stackView.bounds
@@ -72,13 +72,13 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
         addDescription(descriptionText)
         
         if url.containsString(".mp4") {
-            addVideoContent(url)
+            addVideoContent(dataId, data: data)
         }
         else if url.containsString(".txt"){
-            addTextContent(url)
+            addTextContent(url) //FIXME? why does this even exist? only binary files will be added this way, rest is description?
         }
         else {
-            addImageContent(url)
+            addImageContent(data)
         }
 
     }
@@ -90,9 +90,16 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
     }
     
     //  Function that adds to the stack view a video and sets up its constraints and tap gesture to display its controls.
-    func addVideoContent(url: String) {
-        let nsUrl = NSURL(fileURLWithPath: url)
-        videoPlayer = AVPlayer(URL: nsUrl)
+    func addVideoContent(dataId: String, data: NSData) {
+        let tmpDirURL = NSURL.fileURLWithPath(NSTemporaryDirectory(), isDirectory: true)
+        let fileURL = tmpDirURL.URLByAppendingPathComponent(dataId).URLByAppendingPathExtension("mp4")
+        let checkValidation = NSFileManager.defaultManager()
+        
+        if !checkValidation.fileExistsAtPath(fileURL.absoluteString) {
+            data.writeToURL(fileURL, atomically: true)
+        }
+
+        videoPlayer = AVPlayer(URL: fileURL)
         playerController = AVPlayerViewController()
         playerController.videoGravity = AVLayerVideoGravityResizeAspect
         playerController.player = videoPlayer
@@ -123,9 +130,9 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
     }
     
     //  Function that adds an image to the stackview from its url resource.
-    func addImageContent(url: String) {
+    func addImageContent(data: NSData) {
         imageView.contentMode = .ScaleAspectFill
-        imageView.image = UIImage(named: url)
+        imageView.image = UIImage(data: data)
         imageView.layoutIfNeeded()
         imageView.sizeToFit()
         imageView.userInteractionEnabled = true

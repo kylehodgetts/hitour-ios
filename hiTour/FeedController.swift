@@ -54,7 +54,17 @@ class FeedController: UICollectionViewController {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("FeedControllerCellId", forIndexPath: indexPath) as! FeedControllerCell
         cell.sizeToFit()
-        let datum = self.prototypeData[indexPath.row]
+        guard let t = tour else {
+            return cell
+        }
+        let pt = t.pointTours![indexPath.row] as! PointTour
+        
+        cell.labelTitle.text = pt.point?.name
+        
+        guard let image = pt.point!.data else {
+            return cell
+        }
+        cell.imageViewFeed.image = UIImage(data: image)
         
         return cell
     }
@@ -70,19 +80,28 @@ class FeedController: UICollectionViewController {
     
     /// Launches the detail view in a master-detail layout for a tablet and in a new View Controller on a phone.
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        guard let t = tour else {
+            return
+        }
+        
         if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
             let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("DetailViewControllerTablet") as!DetailViewController
-            detailController.prototypeData = self.prototypeData[indexPath.row]
+            
+            
+            let pt = t.pointTours![indexPath.row] as! PointTour
+            detailController.point = pt.point!
+            
             self.splitViewController!.showDetailViewController(detailController, sender: self)
         } else {
             let pageView = self.storyboard!.instantiateViewControllerWithIdentifier("FeedPageViewController") as! FeedPageViewController
             pageView.startIndex = indexPath.row
+            pageView.audience = t.audience!
+            pageView.points = t.pointTours!.array.map({$0 as! PointTour})
             self.navigationController!.pushViewController(pageView, animated: true)
         }
     }
     
     func assignTour(tour: Tour) -> Void {
-        //TODO: Proper loading from the core data
         self.tour = tour
         NSUserDefaults.standardUserDefaults().setInteger(tour.tourId!.integerValue, forKey: "Tour")
         collectionView?.reloadData()

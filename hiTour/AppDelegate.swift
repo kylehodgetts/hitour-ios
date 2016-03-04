@@ -53,6 +53,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.coreDataStack.saveMainContext()
     }
     
+    //  
+    //  Function that allows landscape rotation when an image or video is viewed full screen
+    //  
     func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask {
         if self.window?.rootViewController?.presentedViewController is FullScreenImageViewController {
             return UIInterfaceOrientationMask.All

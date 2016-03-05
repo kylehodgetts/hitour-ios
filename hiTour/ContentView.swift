@@ -97,14 +97,12 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
         playerController.videoGravity = AVLayerVideoGravityResizeAspect
         playerController.player = videoPlayer
         stackView.addArrangedSubview(playerController.view)
-
         playerController.view.heightAnchor.constraintEqualToConstant(playerController.view.frame.height).active = true
         playerController.view.widthAnchor.constraintEqualToConstant(playerController.view.frame.width).active = true
         
         let tap = UITapGestureRecognizer(target: self, action: Selector("showVideoControls"))
         tap.delegate = self
         playerController.view.addGestureRecognizer(tap)
-        
     }
     
     //  Function that adds text content to the stack view from a file.

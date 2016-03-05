@@ -8,6 +8,9 @@
 
 import UIKit
 import CoreData
+import AVFoundation
+import AVKit
+import VideoToolbox
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -48,6 +51,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         self.coreDataStack.saveMainContext()
+    }
+    
+    //  
+    //  Function that allows landscape rotation when an image or video is viewed full screen
+    //  
+    func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask {
+        if self.window?.rootViewController?.presentedViewController is FullScreenImageViewController {
+            return UIInterfaceOrientationMask.All
+        }
+        
+        if ((self.window?.rootViewController?.presentedViewController?.isKindOfClass(NSClassFromString("AVFullScreenViewController").self!)) != nil) {
+            return UIInterfaceOrientationMask.All
+        }
+        return UIInterfaceOrientationMask.Portrait
     }
 
 }

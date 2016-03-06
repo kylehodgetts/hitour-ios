@@ -32,9 +32,11 @@ class FeedPageViewController : UIPageViewController {
     private(set) lazy var orderedViewControllers: [DetailViewController] = {
         var controllers : [DetailViewController] = []
         for index in 0..<self.prototypeData.count {
-            let dvController = self.newDetailsController()
-            dvController.prototypeData = self.prototypeData[index]
-            controllers.append(dvController)
+            if PrototypeDatum.DiscoveredPoints.contains(String(index)) {
+                let dvController = self.newDetailsController()
+                dvController.prototypeData = self.prototypeData[index]
+                controllers.append(dvController)
+            }
         }
         return controllers
     }()

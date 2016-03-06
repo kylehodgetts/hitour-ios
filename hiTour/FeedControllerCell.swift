@@ -15,4 +15,5 @@ class FeedControllerCell: UICollectionViewCell {
     @IBOutlet weak var imageViewFeed: UIImageView!
     @IBOutlet weak var labelTitle: UILabel!
     
+    
 }

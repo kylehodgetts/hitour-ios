@@ -16,6 +16,7 @@ class FeedController: UICollectionViewController {
     
     let prototypeData = PrototypeDatum.getAllData
     var selectedItem = 0
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +39,7 @@ class FeedController: UICollectionViewController {
         cell.imageViewFeed?.image = UIImage(named: datum.imageName)
         cell.imageViewFeed?.contentMode = .ScaleAspectFill
         cell.labelTitle.text = datum.title
-        
+        cell.userInteractionEnabled = isPointDiscovered(indexPath)
         return cell
     }
     
@@ -49,8 +50,17 @@ class FeedController: UICollectionViewController {
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let pageView = self.storyboard!.instantiateViewControllerWithIdentifier("FeedPageViewController") as! FeedPageViewController
-        pageView.startIndex = indexPath.row
+        pageView.startIndex = PrototypeDatum.DiscoveredPoints.indexOf(String(indexPath.row))
         self.navigationController!.pushViewController(pageView, animated: true)
+        
+    }
+    
+    func isPointDiscovered(indexPath: NSIndexPath) -> Bool {
+        return PrototypeDatum.DiscoveredPoints.contains(String(indexPath.row))
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        self.collectionView?.reloadData()
     }
     
 }

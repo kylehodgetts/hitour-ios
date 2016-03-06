@@ -17,7 +17,7 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
     // Capture session for receiving input from the camera */
     let session = AVCaptureSession()
     
-    // Video Preview layer to provide a live video camera feed to the view */
+    // Video Preview layer to provide a live video camera feevaro the view */
     var previewLayer : AVCaptureVideoPreviewLayer?
     
     // View that provides a red rectangle when a QR code has been discovered */
@@ -168,22 +168,9 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
                 identifiedBorder?.hidden = false
                 let identifiedCorners = self.translatePoints(unwraped.corners, fromView: self.view, toView: self.identifiedBorder!)
                 identifiedBorder?.drawBorder(identifiedCorners)
-                //self.identifiedBorder?.hidden = false
                 
                 txtInput.text = unwraped.stringValue
-                
-                let alertView = UIAlertController()
-                alertView.title = "Result"
-                alertView.message = unwraped.stringValue
-                
-                let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
-                    action in alertView.dismissViewControllerAnimated(true, completion: nil)
-                    self.startTimer()
-                    self.session.startRunning()
-                    self.txtInput.text = ""
-                }
-                alertView.addAction(okAction)
-                presentViewController(alertView, animated: true, completion: nil)
+                navigateToPoint(unwraped.stringValue)
                 
                 session.stopRunning()
             }
@@ -194,6 +181,33 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
     //  Closes the keyboard view when the user presses the done button on the keyboard
     @IBAction func textInputDone(sender: UITextField) {
         sender.resignFirstResponder()
+    }
+    
+    func navigateToPoint(pointId : String) {
+        if Int(pointId) <= PrototypeDatum.getAllData.count {
+            if !PrototypeDatum.DiscoveredPoints.contains(pointId) {
+                PrototypeDatum.DiscoveredPoints.append(pointId)
+            }
+            let pageView = self.storyboard!.instantiateViewControllerWithIdentifier("FeedPageViewController") as! FeedPageViewController
+            pageView.startIndex = PrototypeDatum.DiscoveredPoints.count - 1
+            self.navigationController!.pushViewController(pageView, animated: true)
+        }
+        else {
+            let alertView = UIAlertController()
+            alertView.title = "Point Not Found"
+            alertView.message = "Unable to find " + pointId + "\nPlease check and try again."
+            
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
+                action in alertView.dismissViewControllerAnimated(true, completion: nil)
+                self.startTimer()
+                self.session.startRunning()
+               
+            }
+            alertView.addAction(okAction)
+            presentViewController(alertView, animated: true, completion: nil)
+        }
+        self.txtInput.text = ""
+        self.identifiedBorder?.hidden = true
     }
     
 }

@@ -21,8 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        let httpClient = HTTPClient(baseUrl: "https://hitour.herokuapp.com/api/A7DE6825FD96CCC79E63C89B55F88")
-        ApiConnector(HTTPClient: httpClient, stack: coreDataStack).updateAll()
+        //let httpClient = HTTPClient(baseUrl: "https://hitour.herokuapp.com/api/A7DE6825FD96CCC79E63C89B55F88")
+        //ApiConnector(HTTPClient: httpClient, stack: coreDataStack).updateAll()
         
 
         

@@ -183,6 +183,14 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
         sender.resignFirstResponder()
     }
     
+    @IBAction func submitPressed(sender: UIButton) {
+        if txtInput.text?.characters.count > 0 {
+            navigateToPoint(txtInput.text!)
+            txtInput.resignFirstResponder()
+        }
+    }
+    
+    
     func navigateToPoint(pointId : String) {
         if Int(pointId) <= PrototypeDatum.getAllData.count {
             if !PrototypeDatum.DiscoveredPoints.contains(pointId) {

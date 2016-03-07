@@ -66,6 +66,10 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
             }
             errorAlert.addAction(errorAlertOkAction)
         }
+        
+        // Notify when a keyboard appears/disappears from the screen.
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
     }
     
     // MARK: Overrides
@@ -191,5 +195,22 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
     @IBAction func textInputDone(sender: UITextField) {
         sender.resignFirstResponder()
     }
+    
+    /// Move the scanner up when the keyboard appears on the screen.
+    func keyboardWillShow(notification: NSNotification) {
+        
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            self.view.frame.origin.y -= keyboardSize.height
+        }
+        
+    }
+    
+    /// Adjust the scanner when the keyboard disappears from the screen.
+    func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            self.view.frame.origin.y += keyboardSize.height
+        }
+    }
+
     
 }

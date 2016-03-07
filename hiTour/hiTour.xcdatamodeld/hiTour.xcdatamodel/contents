@@ -27,6 +27,7 @@
     </entity>
     <entity name="PointTour" representedClassName=".PointTour" syncable="YES">
         <attribute name="rank" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="scanned" optional="YES" attributeType="Boolean" syncable="YES"/>
         <relationship name="point" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Point" inverseName="pointTours" inverseEntity="Point" syncable="YES"/>
         <relationship name="tour" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Tour" inverseName="pointTours" inverseEntity="Tour" syncable="YES"/>
     </entity>
@@ -46,10 +47,10 @@
     </entity>
     <elements>
         <element name="Audience" positionX="-459" positionY="-541" width="128" height="105"/>
-        <element name="Data" positionX="-279" positionY="-603" width="128" height="135"/>
+        <element name="Data" positionX="-279" positionY="-603" width="128" height="133"/>
         <element name="Point" positionX="97" positionY="-571" width="128" height="105"/>
         <element name="PointData" positionX="-101" positionY="-549" width="128" height="90"/>
-        <element name="PointTour" positionX="-18" positionY="-288" width="128" height="90"/>
+        <element name="PointTour" positionX="-18" positionY="-288" width="128" height="103"/>
         <element name="Session" positionX="-459" positionY="-48" width="128" height="120"/>
         <element name="Tour" positionX="-441" positionY="-250" width="128" height="120"/>
     </elements>

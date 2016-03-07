@@ -20,18 +20,25 @@ class Tour: NSManagedObject {
 class TourReader: JsonReader{
     typealias T = Tour
     
-    func read(dict: [String: AnyObject]) -> ((NSEntityDescription, NSManagedObjectContext) -> Tour)? {
+    func read(dict: [String: AnyObject], stack: CoreDataStack) -> ((NSEntityDescription, NSManagedObjectContext) -> Tour)? {
         guard let id = dict["id"] as? Int, name = dict["name"] as? String else {
             return nil
         }
         
-        return
-            {(entity: NSEntityDescription, context: NSManagedObjectContext) -> Tour in
-                let tour = Tour(entity: entity, insertIntoManagedObjectContext: context)
-                tour.tourId = id
-                tour.name = name
-                
-                return tour
+        let fetch = stack.fetch(name: entityName(), predicate: NSPredicate(format: "tourId = %D", id))
+        
+        if let actual = fetch?.last as? Tour {
+            return {_, _ in actual}
+            
+        } else {
+            return
+                {(entity: NSEntityDescription, context: NSManagedObjectContext) -> Tour in
+                    let tour = Tour(entity: entity, insertIntoManagedObjectContext: context)
+                    tour.tourId = id
+                    tour.name = name
+                    
+                    return tour
+            }
         }
     }
     

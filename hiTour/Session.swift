@@ -19,7 +19,7 @@ class Session: NSManagedObject {
 class SessionReader: JsonReader{
     typealias T = Session
     
-    func read(dict: [String: AnyObject]) -> ((NSEntityDescription, NSManagedObjectContext) -> Session)? {
+    func read(dict: [String: AnyObject], stack: CoreDataStack) -> ((NSEntityDescription, NSManagedObjectContext) -> Session)? {
         guard let id = dict["id"] as? Int, name = dict["name"] as? String else {
             return nil
         }

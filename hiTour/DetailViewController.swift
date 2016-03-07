@@ -16,7 +16,7 @@ import UIKit
 class DetailViewController : UIViewController {
     
     //  Reference variable to prototype data for now
-    var prototypeData : PrototypeDatum!
+    var prototypeData : PrototypeDatum! = PrototypeDatum.getAllData[0]
     
     //  Reference variable to populate the point description text
     var textDetail: UITextView!

@@ -10,26 +10,35 @@ import Foundation
 
 import UIKit
 
+/// View Controller that displays the feed cells.
 class FeedController: UICollectionViewController {
-        
+    
+    /// Flow layout specifies position of each item in the collection.
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
     let prototypeData = PrototypeDatum.getAllData
     var selectedItem = 0
 
     
+    /// Registers UINib for the cell layout and the size of each cell wrt the screen size.
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView!.registerNib(UINib(nibName: "FeedControllerCell", bundle: nil), forCellWithReuseIdentifier: "FeedControllerCellId")
         
         self.collectionView?.backgroundColor = UIColor.whiteColor()
-        
         flowLayout.minimumLineSpacing = 2.0
-        let screenSize: CGRect = UIScreen.mainScreen().bounds
-        flowLayout.itemSize = CGSize(width: screenSize.width, height: 185)
+
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+            let v = self.storyboard!.instantiateViewControllerWithIdentifier("SplitViewController") as! UISplitViewController
+            flowLayout.itemSize = CGSize(width: v.primaryColumnWidth, height: 185)
+        } else {
+            let screenSize: CGRect = UIScreen.mainScreen().bounds
+            flowLayout.itemSize = CGSize(width: screenSize.width, height: 185)
+        }
 
     }
-    
+
+    /// Specifies an image and a title for each cell.
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("FeedControllerCellId", forIndexPath: indexPath) as! FeedControllerCell
@@ -43,15 +52,24 @@ class FeedController: UICollectionViewController {
         return cell
     }
     
+    /// - Returns: The number of items in the feed collection.
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         return self.prototypeData.count
     }
     
+    /// Launches the detail view in a master-detail layout for a tablet and in a new View Controller on a phone.
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let pageView = self.storyboard!.instantiateViewControllerWithIdentifier("FeedPageViewController") as! FeedPageViewController
-        pageView.startIndex = PrototypeDatum.DiscoveredPoints.indexOf(String(indexPath.row))
-        self.navigationController!.pushViewController(pageView, animated: true)
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+            let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("DetailViewControllerTablet") as!DetailViewController
+            detailController.prototypeData = self.prototypeData[indexPath.row]
+            self.splitViewController!.showDetailViewController(detailController, sender: self)
+        }
+        else {
+            let pageView = self.storyboard!.instantiateViewControllerWithIdentifier("FeedPageViewController") as! FeedPageViewController
+            pageView.startIndex = PrototypeDatum.DiscoveredPoints.indexOf(String(indexPath.row))
+            self.navigationController!.pushViewController(pageView, animated: true)
+        }
         
     }
     
@@ -61,6 +79,7 @@ class FeedController: UICollectionViewController {
     
     override func viewDidAppear(animated: Bool) {
         self.collectionView?.reloadData()
+        
     }
     
 }

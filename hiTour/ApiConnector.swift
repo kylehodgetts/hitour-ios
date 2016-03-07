@@ -193,7 +193,6 @@ class ApiConnector{
                 return
             }
             
-
             _ = points.flatMap({pDict -> [Point] in
                 guard let data = pDict["data"] as? [[String: AnyObject]] else {
                     return []
@@ -201,6 +200,11 @@ class ApiConnector{
                 
                 guard let nsPoint = Point.jsonReader.read(pDict, stack: self.coreDataStack).map({self.coreDataStack.insert(Point.entityName, callback: $0)}) else {
                     return []
+                }
+                if let url = pDict["url"] as? String {
+                    self.client.binaryReques(url, cb: { (data) -> Void in
+                        nsPoint.data = data
+                    })
                 }
                 
                 if let tourPoint = PointTour.jsonReader.read(pDict, stack: self.coreDataStack).map({self.coreDataStack.insert(PointTour.entityName, callback: $0)}) {
@@ -231,6 +235,12 @@ class ApiConnector{
                             dataPoint.data = nsData
                         }
                         
+                        if let url = dDict["url"] as? String {
+                            self.client.binaryReques(url, cb: { (data) -> Void in
+                                nsData.data = data
+                            })
+                        }
+                        
                         return [nsData]
                     }
                     return []
@@ -245,18 +255,7 @@ class ApiConnector{
             if let audienceId = tour["audience_id"] as? Int {
                 nsTour.audience = audiencesS.filter({$0.audienceId! == audienceId}).last
             }
-            
-            
-            print("Audiences")
-            print(self.coreDataStack.fetch(name: Audience.entityName))
-            print("Tour")
-            print(self.coreDataStack.fetch(name: Tour.entityName))
-            print("Data")
-            print(self.coreDataStack.fetch(name: Data.entityName))
-            print("Point")
-            print(self.coreDataStack.fetch(name: Point.entityName))
-
-
+        
         }
     }
 }

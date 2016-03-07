@@ -25,6 +25,8 @@
 		6D90EE611C7E00B500433E1F /* ToursController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D90EE541C7E00B500433E1F /* ToursController.swift */; };
 		6D90EE621C7E00B500433E1F /* ToursControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D90EE551C7E00B500433E1F /* ToursControllerCell.swift */; };
 		6DBD48FB1C8DCAA700CB6158 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBD48FA1C8DCAA700CB6158 /* SplitViewController.swift */; };
+		6DBD48FF1C8E219B00CB6158 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBD48FE1C8E219B00CB6158 /* TabBarController.swift */; };
+		6DBD490B1C8E3ADC00CB6158 /* feed-30.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DBD490A1C8E3ADC00CB6158 /* feed-30.png */; };
 		6DBED3D01C7E021E008BFA30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6DBED3CB1C7E021E008BFA30 /* Assets.xcassets */; };
 		6DBED3D11C7E021E008BFA30 /* hiTour.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6DBED3CC1C7E021E008BFA30 /* hiTour.xcdatamodeld */; };
 		6DBED3D21C7E021E008BFA30 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DBED3CE1C7E021E008BFA30 /* LaunchScreen.storyboard */; };
@@ -99,6 +101,8 @@
 		6D90EE541C7E00B500433E1F /* ToursController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToursController.swift; sourceTree = "<group>"; };
 		6D90EE551C7E00B500433E1F /* ToursControllerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToursControllerCell.swift; sourceTree = "<group>"; };
 		6DBD48FA1C8DCAA700CB6158 /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
+		6DBD48FE1C8E219B00CB6158 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		6DBD490A1C8E3ADC00CB6158 /* feed-30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feed-30.png"; path = "../../Downloads/feed-30.png"; sourceTree = "<group>"; };
 		6DBED3CB1C7E021E008BFA30 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6DBED3CD1C7E021E008BFA30 /* hiTour.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = hiTour.xcdatamodel; sourceTree = "<group>"; };
 		6DBED3CE1C7E021E008BFA30 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = hiTour/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -244,6 +248,7 @@
 		984EC79F1C7209C200A12379 = {
 			isa = PBXGroup;
 			children = (
+				6DBD490A1C8E3ADC00CB6158 /* feed-30.png */,
 				6DBED3CC1C7E021E008BFA30 /* hiTour.xcdatamodeld */,
 				6DBED3CE1C7E021E008BFA30 /* LaunchScreen.storyboard */,
 				6DBED3CF1C7E021E008BFA30 /* Main.storyboard */,
@@ -269,6 +274,7 @@
 			children = (
 				6D90EE481C7E00B500433E1F /* AppDelegate.swift */,
 				6DBD48FA1C8DCAA700CB6158 /* SplitViewController.swift */,
+				6DBD48FE1C8E219B00CB6158 /* TabBarController.swift */,
 				6D90EE531C7E00B500433E1F /* PrototypeData.swift */,
 				6D90EE651C7E010E00433E1F /* ToursView */,
 				6D90EE641C7E00E500433E1F /* FeedView */,
@@ -409,6 +415,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6DE891A51C83BCDD008D85A1 /* ctscan.mp4 in Resources */,
+				6DBD490B1C8E3ADC00CB6158 /* feed-30.png in Resources */,
 				6DE891A61C83BCDD008D85A1 /* fluoroscopy.mp4 in Resources */,
 				6DE891A71C83BCDD008D85A1 /* mriscan.mp4 in Resources */,
 				6D2B157C1C87815F00BC5179 /* ToursControllerCell.xib in Resources */,
@@ -465,6 +472,7 @@
 				8FF1C6E31C7603A800F16473 /* Point+CoreDataProperties.swift in Sources */,
 				984EC7AE1C7209C200A12379 /* (null) in Sources */,
 				8FF1C6ED1C7603A800F16473 /* Tour+CoreDataProperties.swift in Sources */,
+				6DBD48FF1C8E219B00CB6158 /* TabBarController.swift in Sources */,
 				8FF1C6EC1C7603A800F16473 /* Audience.swift in Sources */,
 				8FF1C6F01C760F5D00F16473 /* ApiConnector.swift in Sources */,
 				8FF1C6E11C7603A800F16473 /* PointData+CoreDataProperties.swift in Sources */,

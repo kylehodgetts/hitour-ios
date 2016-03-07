@@ -69,7 +69,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="tip-dj-hSM">
             <objects>
-                <tabBarController id="riJ-1Z-6yn" sceneMemberID="viewController">
+                <tabBarController id="riJ-1Z-6yn" customClass="TabBarController" customModule="hiTour" customModuleProvider="target" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="Dlq-Ia-smP">
                         <nil key="title"/>
@@ -80,9 +80,9 @@
                                 <segment title="Camera Off"/>
                                 <segment title="Camera On"/>
                             </segments>
-                            <color key="tintColor" name="controlLightHighlightColor" catalog="System" colorSpace="catalog"/>
+                            <color key="tintColor" red="0.85098039215686272" green="0.88235294117647056" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="hTP-Wg-xaI" kind="popoverPresentation" popoverAnchorView="aSY-Vr-qu3" id="dIo-yY-4Gy">
+                                <segue destination="hTP-Wg-xaI" kind="popoverPresentation" identifier="showScannerSegue" popoverAnchorView="aSY-Vr-qu3" id="dIo-yY-4Gy">
                                     <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                 </segue>
                             </connections>
@@ -101,6 +101,7 @@
                         </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
+                        <outlet property="segmentedControl" destination="aSY-Vr-qu3" id="Ioo-me-UQW"/>
                         <segue destination="FrQ-cS-Vky" kind="relationship" relationship="viewControllers" id="tL1-Na-oi2"/>
                         <segue destination="DQL-tI-j8z" kind="relationship" relationship="viewControllers" id="5kl-t7-vYo"/>
                     </connections>
@@ -158,29 +159,39 @@
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="176"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FGM-BN-xzv">
-                                        <rect key="frame" x="25" y="184" width="110" height="20.5"/>
+                                        <rect key="frame" x="25" y="184" width="110" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="5Wl-UY-fdb">
                                         <rect key="frame" x="8" y="218" width="577" height="374"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
+                                            <constraint firstAttribute="height" constant="374" id="DEi-JH-Hcd"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="612" id="oDW-NZ-Xpf"/>
                                         </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="DEi-JH-Hcd"/>
+                                            </mask>
+                                        </variation>
                                         <variation key="widthClass=compact" ambiguous="YES">
                                             <rect key="frame" x="0.0" y="0.0" width="389" height="612"/>
                                         </variation>
                                     </stackView>
                                 </subviews>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="5Wl-UY-fdb" firstAttribute="leading" secondItem="jxx-GR-t7a" secondAttribute="leading" constant="8" id="BVc-qJ-G8X"/>
                                     <constraint firstItem="jvU-iT-2tf" firstAttribute="leading" secondItem="jxx-GR-t7a" secondAttribute="leading" id="ILy-gx-gbp"/>
+                                    <constraint firstItem="jvU-iT-2tf" firstAttribute="top" secondItem="jxx-GR-t7a" secondAttribute="top" id="JiJ-NY-fL0"/>
                                     <constraint firstItem="5Wl-UY-fdb" firstAttribute="top" secondItem="FGM-BN-xzv" secondAttribute="bottom" constant="8" id="Q2E-DU-t2Q"/>
                                     <constraint firstItem="FGM-BN-xzv" firstAttribute="leading" secondItem="jxx-GR-t7a" secondAttribute="leading" constant="25" id="RSO-cg-uYz"/>
                                     <constraint firstAttribute="trailing" secondItem="5Wl-UY-fdb" secondAttribute="trailing" constant="15" id="S7g-XS-kiQ"/>
                                     <constraint firstItem="jvU-iT-2tf" firstAttribute="width" secondItem="jxx-GR-t7a" secondAttribute="width" id="Uqf-lu-PZn"/>
                                     <constraint firstItem="FGM-BN-xzv" firstAttribute="top" secondItem="jvU-iT-2tf" secondAttribute="bottom" constant="8" id="VRa-bv-qne"/>
+                                    <constraint firstItem="5Wl-UY-fdb" firstAttribute="top" secondItem="jxx-GR-t7a" secondAttribute="top" constant="218" id="bBT-Z8-PLa"/>
                                     <constraint firstAttribute="trailing" secondItem="jvU-iT-2tf" secondAttribute="trailing" id="bS8-rm-eL0"/>
                                     <constraint firstAttribute="bottom" secondItem="5Wl-UY-fdb" secondAttribute="bottom" constant="8" id="hjl-ff-qy7"/>
                                 </constraints>
@@ -201,9 +212,8 @@
                             <constraint firstItem="jxx-GR-t7a" firstAttribute="leading" secondItem="N1R-lj-wdD" secondAttribute="leadingMargin" constant="-20" id="J6q-q3-xon"/>
                             <constraint firstItem="jxx-GR-t7a" firstAttribute="height" secondItem="N1R-lj-wdD" secondAttribute="height" id="Qo9-2G-F1p"/>
                             <constraint firstAttribute="trailingMargin" secondItem="jxx-GR-t7a" secondAttribute="trailing" constant="-20" id="Sgi-cG-Urm"/>
-                            <constraint firstItem="FGM-BN-xzv" firstAttribute="top" secondItem="FJg-aS-9P7" secondAttribute="bottom" constant="164" id="hYJ-94-Ey2"/>
+                            <constraint firstItem="FGM-BN-xzv" firstAttribute="top" secondItem="FJg-aS-9P7" secondAttribute="bottom" constant="164" id="jE5-Gw-E8Z"/>
                             <constraint firstItem="jxx-GR-t7a" firstAttribute="width" secondItem="N1R-lj-wdD" secondAttribute="width" id="jhm-jo-uXk"/>
-                            <constraint firstItem="jvU-iT-2tf" firstAttribute="top" secondItem="FJg-aS-9P7" secondAttribute="bottom" constant="-20" id="y5x-mL-SHh"/>
                         </constraints>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
@@ -299,76 +309,51 @@
                         <viewControllerLayoutGuide type="top" id="6ec-Fk-Llu"/>
                         <viewControllerLayoutGuide type="bottom" id="gmB-DG-Cbu"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Dkj-f9-kmV">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <view key="view" contentMode="scaleToFill" id="Meq-aO-waS">
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C1S-2D-0hh">
-                                <rect key="frame" x="20" y="384" width="560" height="71"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ODr-kT-nI3">
+                                <rect key="frame" x="0.0" y="0.0" width="400" height="467"/>
+                                <color key="backgroundColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32G-ka-mIY">
+                                <rect key="frame" x="0.0" y="467" width="400" height="133"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Code or PIN" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QLp-Za-eFR">
-                                        <rect key="frame" x="8" y="21" width="426" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="🔑 Enter Code or PIN" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kw2-Lo-pDi">
+                                        <rect key="frame" x="24" y="52" width="352" height="30"/>
+                                        <color key="backgroundColor" red="0.85098039219999999" green="0.88235294119999996" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
-                                        <variation key="widthClass=compact" fixedFrame="YES">
-                                            <rect key="frame" x="24" y="78" width="281" height="30"/>
-                                        </variation>
-                                        <connections>
-                                            <action selector="textInputDone:" destination="hTP-Wg-xaI" eventType="primaryActionTriggered" id="279-Gz-yNs"/>
-                                        </connections>
+                                        <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SA2-v3-2lX">
-                                        <rect key="frame" x="442" y="21" width="110" height="30"/>
-                                        <state key="normal" title="Submit"/>
-                                        <variation key="widthClass=compact" fixedFrame="YES">
-                                            <rect key="frame" x="304" y="78" width="68" height="30"/>
-                                        </variation>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <variation key="default">
-                                    <mask key="subviews">
-                                        <exclude reference="QLp-Za-eFR"/>
-                                        <exclude reference="SA2-v3-2lX"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="337" width="400" height="214"/>
-                                    <mask key="subviews">
-                                        <include reference="QLp-Za-eFR"/>
-                                        <include reference="SA2-v3-2lX"/>
-                                    </mask>
-                                </variation>
-                            </view>
-                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4bR-23-dci">
-                                <rect key="frame" x="0.0" y="64" width="600" height="300"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="64" width="400" height="329"/>
-                                </variation>
+                                <constraints>
+                                    <constraint firstItem="Kw2-Lo-pDi" firstAttribute="centerY" secondItem="32G-ka-mIY" secondAttribute="centerY" id="2f0-nd-5wc"/>
+                                    <constraint firstItem="Kw2-Lo-pDi" firstAttribute="leading" secondItem="32G-ka-mIY" secondAttribute="leading" constant="24" id="Msq-ly-9iQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="Kw2-Lo-pDi" secondAttribute="trailing" constant="24" id="Vbe-5G-DC4"/>
+                                    <constraint firstAttribute="height" constant="133" id="lDT-BN-nyY"/>
+                                </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <gestureRecognizers/>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="C1S-2D-0hh"/>
-                                <exclude reference="4bR-23-dci"/>
-                            </mask>
-                        </variation>
-                        <variation key="widthClass=compact">
-                            <mask key="subviews">
-                                <include reference="C1S-2D-0hh"/>
-                                <include reference="4bR-23-dci"/>
-                            </mask>
-                        </variation>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="32G-ka-mIY" firstAttribute="top" secondItem="ODr-kT-nI3" secondAttribute="bottom" id="2Lp-K9-CTx"/>
+                            <constraint firstItem="32G-ka-mIY" firstAttribute="leading" secondItem="Meq-aO-waS" secondAttribute="leadingMargin" constant="-20" id="3Bx-1Y-hKx"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ODr-kT-nI3" secondAttribute="trailing" constant="-20" id="4UC-Xb-s1v"/>
+                            <constraint firstItem="ODr-kT-nI3" firstAttribute="leading" secondItem="Meq-aO-waS" secondAttribute="leadingMargin" constant="-20" id="CXQ-Yi-TJs"/>
+                            <constraint firstItem="32G-ka-mIY" firstAttribute="width" secondItem="Meq-aO-waS" secondAttribute="width" id="LIq-Kh-QAn"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="32G-ka-mIY" secondAttribute="trailing" constant="-20" id="Nab-gZ-9oh"/>
+                            <constraint firstItem="ODr-kT-nI3" firstAttribute="top" secondItem="6ec-Fk-Llu" secondAttribute="bottom" constant="-20" id="Rlc-Yu-N8D"/>
+                            <constraint firstItem="gmB-DG-Cbu" firstAttribute="top" secondItem="32G-ka-mIY" secondAttribute="bottom" id="URn-vg-qKr"/>
+                            <constraint firstItem="ODr-kT-nI3" firstAttribute="width" secondItem="Meq-aO-waS" secondAttribute="width" id="WHK-ZW-uNu"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="hiTour" id="jJU-vd-mDG"/>
                     <connections>
-                        <outlet property="btnSubmit" destination="SA2-v3-2lX" id="0Sj-OC-JyT"/>
-                        <outlet property="cameraView" destination="4bR-23-dci" id="MWw-6U-zlE"/>
-                        <outlet property="codeInputView" destination="C1S-2D-0hh" id="45x-Bf-IwS"/>
-                        <outlet property="txtInput" destination="QLp-Za-eFR" id="MjF-Hy-4Yo"/>
+                        <outlet property="cameraView" destination="ODr-kT-nI3" id="5pF-Ry-Qfc"/>
+                        <outlet property="codeInputView" destination="32G-ka-mIY" id="seT-2U-Sbh"/>
+                        <outlet property="txtInput" destination="Kw2-Lo-pDi" id="nin-nf-pig"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0w8-yH-ezh" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -155,69 +155,104 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IuD-OK-Oxg">
+                                <rect key="frame" x="0.0" y="64" width="600" height="300"/>
+                                <color key="backgroundColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DKA-nn-XcZ">
                                 <rect key="frame" x="20" y="384" width="560" height="71"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Code or PIN" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fxb-cA-wp5">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="🔑 Enter Code or PIN" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fxb-cA-wp5">
                                         <rect key="frame" x="8" y="21" width="426" height="30"/>
+                                        <color key="backgroundColor" red="0.85098039219999999" green="0.88235294119999996" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
-                                        <variation key="widthClass=compact" fixedFrame="YES">
-                                            <rect key="frame" x="24" y="78" width="281" height="30"/>
-                                        </variation>
                                         <connections>
                                             <action selector="textInputDone:" destination="rDu-uS-NhD" eventType="primaryActionTriggered" id="0eq-q4-x2J"/>
                                         </connections>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m57-vH-UoN">
-                                        <rect key="frame" x="442" y="21" width="110" height="30"/>
-                                        <state key="normal" title="Submit"/>
-                                        <variation key="widthClass=compact" fixedFrame="YES">
-                                            <rect key="frame" x="304" y="78" width="68" height="30"/>
-                                        </variation>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Fxb-cA-wp5" secondAttribute="trailing" constant="16" id="7mH-W7-kEQ"/>
+                                    <constraint firstAttribute="height" constant="150" id="Efo-Mu-vng"/>
+                                    <constraint firstItem="Fxb-cA-wp5" firstAttribute="centerY" secondItem="DKA-nn-XcZ" secondAttribute="centerY" id="bo7-xK-g73"/>
+                                    <constraint firstItem="Fxb-cA-wp5" firstAttribute="leading" secondItem="DKA-nn-XcZ" secondAttribute="leading" constant="16" id="l9b-OC-R9F"/>
+                                </constraints>
                                 <variation key="default">
                                     <mask key="subviews">
                                         <exclude reference="Fxb-cA-wp5"/>
-                                        <exclude reference="m57-vH-UoN"/>
+                                    </mask>
+                                    <mask key="constraints">
+                                        <exclude reference="Efo-Mu-vng"/>
+                                        <exclude reference="7mH-W7-kEQ"/>
+                                        <exclude reference="bo7-xK-g73"/>
+                                        <exclude reference="l9b-OC-R9F"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="337" width="400" height="214"/>
+                                <variation key="widthClass=compact">
                                     <mask key="subviews">
                                         <include reference="Fxb-cA-wp5"/>
-                                        <include reference="m57-vH-UoN"/>
                                     </mask>
-                                </variation>
-                            </view>
-                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IuD-OK-Oxg">
-                                <rect key="frame" x="0.0" y="64" width="600" height="300"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="64" width="400" height="329"/>
+                                    <mask key="constraints">
+                                        <include reference="Efo-Mu-vng"/>
+                                        <include reference="7mH-W7-kEQ"/>
+                                        <include reference="bo7-xK-g73"/>
+                                        <include reference="l9b-OC-R9F"/>
+                                    </mask>
                                 </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="DKA-nn-XcZ" firstAttribute="top" secondItem="IuD-OK-Oxg" secondAttribute="bottom" id="0eC-am-aes"/>
+                            <constraint firstItem="IuD-OK-Oxg" firstAttribute="top" secondItem="3zW-bj-tWR" secondAttribute="bottom" id="A9W-3C-gDg"/>
+                            <constraint firstItem="IuD-OK-Oxg" firstAttribute="leading" secondItem="7t4-NW-ffI" secondAttribute="leadingMargin" constant="-20" id="KTk-Kv-Aes"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="DKA-nn-XcZ" secondAttribute="trailing" id="Oqv-mr-1nu">
+                                <variation key="widthClass=compact" constant="-20"/>
+                            </constraint>
+                            <constraint firstItem="DKA-nn-XcZ" firstAttribute="leading" secondItem="7t4-NW-ffI" secondAttribute="leadingMargin" id="Usq-8U-3v9">
+                                <variation key="widthClass=compact" constant="-20"/>
+                            </constraint>
+                            <constraint firstItem="17c-1x-RMR" firstAttribute="top" secondItem="DKA-nn-XcZ" secondAttribute="bottom" id="WsQ-Md-fxB"/>
+                            <constraint firstItem="DKA-nn-XcZ" firstAttribute="width" secondItem="7t4-NW-ffI" secondAttribute="width" id="XFZ-Oh-JFp"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="IuD-OK-Oxg" secondAttribute="trailing" constant="-20" id="Z2G-bp-QHC"/>
+                            <constraint firstItem="IuD-OK-Oxg" firstAttribute="width" secondItem="7t4-NW-ffI" secondAttribute="width" id="wJt-x9-ApQ"/>
+                        </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="DKA-nn-XcZ"/>
                                 <exclude reference="IuD-OK-Oxg"/>
+                                <exclude reference="DKA-nn-XcZ"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="KTk-Kv-Aes"/>
+                                <exclude reference="Z2G-bp-QHC"/>
+                                <exclude reference="wJt-x9-ApQ"/>
+                                <exclude reference="0eC-am-aes"/>
+                                <exclude reference="Oqv-mr-1nu"/>
+                                <exclude reference="Usq-8U-3v9"/>
+                                <exclude reference="XFZ-Oh-JFp"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
-                                <include reference="DKA-nn-XcZ"/>
                                 <include reference="IuD-OK-Oxg"/>
+                                <include reference="DKA-nn-XcZ"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="KTk-Kv-Aes"/>
+                                <include reference="Z2G-bp-QHC"/>
+                                <exclude reference="wJt-x9-ApQ"/>
+                                <include reference="0eC-am-aes"/>
+                                <include reference="Oqv-mr-1nu"/>
+                                <include reference="Usq-8U-3v9"/>
+                                <exclude reference="XFZ-Oh-JFp"/>
                             </mask>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="hiTour" id="oGJ-cO-g8e"/>
                     <connections>
-                        <outlet property="btnSubmit" destination="m57-vH-UoN" id="HFY-2B-ZDd"/>
                         <outlet property="cameraView" destination="IuD-OK-Oxg" id="cE8-Xw-aU9"/>
                         <outlet property="codeInputView" destination="DKA-nn-XcZ" id="ZHK-I7-GSx"/>
                         <outlet property="txtInput" destination="Fxb-cA-wp5" id="Xb4-tH-sNG"/>

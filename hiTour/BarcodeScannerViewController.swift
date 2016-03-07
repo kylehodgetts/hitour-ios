@@ -38,10 +38,6 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
     // Reference to the input text field */
     @IBOutlet weak var txtInput: UITextField!
     
-    // Reference to the submit button */
-    @IBOutlet weak var btnSubmit: UIButton!
-    
-    
     
     // MARK: Initialiser
     
@@ -79,7 +75,7 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
     // The capture session is started to start the live camera feed.
     override func viewDidAppear(animated: Bool) {
         addPreviewLayer()
-        self.view.bringSubviewToFront(codeInputView)
+//        self.view.bringSubviewToFront(codeInputView)
         session.startRunning()
         txtInput.delegate = self
         

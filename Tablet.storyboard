@@ -10,7 +10,6 @@
         <!--Navigation Controller-->
         <scene sceneID="oEN-IJ-Mim">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2zR-7w-i20" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="cXH-Wn-old" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="wel-If-R98">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -21,13 +20,14 @@
                         <segue destination="riJ-1Z-6yn" kind="relationship" relationship="rootViewController" id="Z1v-ZD-gxO"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2zR-7w-i20" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2005" y="396"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="U6e-my-tLk">
             <objects>
-                <splitViewController storyboardIdentifier="SplitViewController" id="hSH-kf-7F0" sceneMemberID="viewController">
+                <splitViewController storyboardIdentifier="SplitViewController" id="hSH-kf-7F0" customClass="SplitViewController" customModule="hiTour" customModuleProvider="target" sceneMemberID="viewController">
                     <connections>
                         <segue destination="cXH-Wn-old" kind="relationship" relationship="masterViewController" id="Cem-MQ-KnP"/>
                         <segue destination="KfD-xb-DfB" kind="relationship" relationship="detailViewController" id="U43-J6-tHr"/>

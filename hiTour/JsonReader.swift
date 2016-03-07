@@ -24,7 +24,7 @@ protocol JsonReader{
     /// Parameters: 
     ///  - dict: A json object wrapped in a dictionary
     ///
-    func read(dict: [String: AnyObject]) -> ((NSEntityDescription, NSManagedObjectContext) -> T)?
+    func read(dict: [String: AnyObject], stack: CoreDataStack) -> ((NSEntityDescription, NSManagedObjectContext) -> T)?
     
     /// The name of the entity this reader is for
     func entityName() -> String

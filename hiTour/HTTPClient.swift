@@ -72,6 +72,26 @@ class HTTPClient {
         })
         task.resume()
     }
+
+    func requestObject(url: String, cb: ([String: AnyObject]) -> Void) -> Void {
+        let nsURL = NSURL(string: baseUrl + "/\(url)")!
+        let task = self.session.dataTaskWithURL(
+        nsURL
+                , completionHandler: { (data, response, error) -> Void in
+            //TODO: error handling and such
+            do {
+                print(error)
+                let json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as? [String: AnyObject]
+                guard let ret = json else {
+                    return
+                }
+                cb(ret)
+            } catch {
+                fatalError("Could not perform the a request to: \(nsURL) due to: \(error)")
+            }
+        })
+        task.resume()
+    }
     
     func binaryReques(fullUrl: String, cb:(NSData?) -> Void) -> Void {
         let nsURL = NSURL(string: fullUrl)!

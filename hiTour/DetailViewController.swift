@@ -101,4 +101,8 @@ class DetailViewController : UIViewController {
             destination.originalImageView = imageV
         }
     }
+    
+        
+    
+    
 }

@@ -8,6 +8,9 @@
 
 import UIKit
 import CoreData
+import AVFoundation
+import AVKit
+import VideoToolbox
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -50,8 +53,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.coreDataStack.saveMainContext()
     }
     
+    ///
+    /// Getter for coredata
+    ///
     func getCoreData() -> CoreDataStack {
         return coreDataStack
+    }
+    //
+    //  Function that allows landscape rotation when an image or video is viewed full screen
+    //  
+    func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask {
+        if self.window?.rootViewController?.presentedViewController is FullScreenImageViewController {
+            return UIInterfaceOrientationMask.All
+        }
+        
+        if ((self.window?.rootViewController?.presentedViewController?.isKindOfClass(NSClassFromString("AVFullScreenViewController").self!)) != nil) {
+            return UIInterfaceOrientationMask.All
+        }
+        return UIInterfaceOrientationMask.Portrait
     }
 
 }

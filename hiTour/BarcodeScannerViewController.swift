@@ -50,7 +50,7 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
     //  Handles error if the camera can't be accessed.
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         let captureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
         do {
             let inputDevice = try AVCaptureDeviceInput(device: captureDevice)
@@ -190,14 +190,46 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
         }
     }
     
+    func isPointFound(pointId : String) -> PointTour! {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate?
+        let currentTour = appDelegate?.getTour()
+        let currentTourPoints = currentTour?.pointTours?.array as! [PointTour]
+        for tourPoint in currentTourPoints {
+            if tourPoint.point?.valueForKey("pointId") as? Int == Int(pointId) {
+                return tourPoint
+            }
+        }
+        return nil
+    }
+    
+    func findDiscoveredPointIndex() -> [PointTour] {
+        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let tour = delegate.getTour()
+        let allPoints = tour?.pointTours?.array as! [PointTour]
+        var discoveredPoints : [PointTour] = []
+        for point in allPoints {
+            if point.scanned == true {
+                discoveredPoints.append(point)
+            }
+        }
+        return discoveredPoints
+    }
     
     func navigateToPoint(pointId : String) {
-        if Int(pointId) <= PrototypeDatum.getAllData.count {
-            if !PrototypeDatum.DiscoveredPoints.contains(pointId) {
-                PrototypeDatum.DiscoveredPoints.append(pointId)
+        
+
+        if let pointFound = isPointFound(pointId) {
+            if pointFound.scanned?.boolValue == false {
+                pointFound.setValue(true.boolValue, forKey: "scanned")
             }
             let pageView = self.storyboard!.instantiateViewControllerWithIdentifier("FeedPageViewController") as! FeedPageViewController
-            pageView.startIndex = PrototypeDatum.DiscoveredPoints.count - 1
+
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate?
+            let currentTour = appDelegate?.getTour()
+            pageView.points = currentTour?.pointTours?.array as! [PointTour]
+            pageView.audience = currentTour?.audience
+            pageView.startIndex = findDiscoveredPointIndex().indexOf(pointFound)
+            
             self.navigationController!.pushViewController(pageView, animated: true)
         }
         else {

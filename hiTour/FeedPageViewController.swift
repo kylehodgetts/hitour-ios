@@ -17,7 +17,7 @@ class FeedPageViewController : UIPageViewController {
     var points: [PointTour] = []
     
     var audience: Audience!
-    
+        
     /// The index of a selected item when the Page View Controller is instantiated.
     var startIndex : Int!
     
@@ -38,10 +38,12 @@ class FeedPageViewController : UIPageViewController {
     private(set) lazy var orderedViewControllers: [DetailViewController] = {
         var controllers : [DetailViewController] = []
         for index in 0..<self.points.count {
-            let dvController = self.newDetailsController()
-            dvController.point = self.points[index].point!
-            dvController.audience = self.audience
-            controllers.append(dvController)
+            if self.points[index].scanned!.boolValue {
+                let dvController = self.newDetailsController()
+                dvController.point = self.points[index].point!
+                dvController.audience = self.audience
+                controllers.append(dvController)
+            }
         }
         return controllers
     }()

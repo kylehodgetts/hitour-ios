@@ -62,10 +62,8 @@ class FeedController: UICollectionViewController {
         
         cell.labelTitle.text = pt.point?.name
         
-        cell.imageViewFeed?.image = UIImage(named: datum.imageName)
         cell.imageViewFeed?.contentMode = .ScaleAspectFill
-        cell.labelTitle.text = datum.title
-        cell.userInteractionEnabled = isPointDiscovered(indexPath)
+        cell.userInteractionEnabled = pt.scanned!.boolValue
 
         guard let image = pt.point!.data else {
             return cell
@@ -102,18 +100,25 @@ class FeedController: UICollectionViewController {
         }
         else {
             let pageView = self.storyboard!.instantiateViewControllerWithIdentifier("FeedPageViewController") as! FeedPageViewController
-            pageView.startIndex = PrototypeDatum.DiscoveredPoints.indexOf(String(indexPath.row))
             pageView.audience = t.audience!
             pageView.points = t.pointTours!.array.map({$0 as! PointTour})
+            let pt = t.pointTours![indexPath.row] as! PointTour
+            pageView.startIndex = foundPoints().indexOf(pt)
             self.navigationController!.pushViewController(pageView, animated: true)
         }
+    }
+    
+    func foundPoints() -> [PointTour] {
+        let allPoints = tour?.pointTours?.array as! [PointTour]
+        var discoveredPoints : [PointTour] = []
+        for point in allPoints {
+            if point.scanned == true {
+                discoveredPoints.append(point)
+            }
+        }
+        return discoveredPoints
+    }
         
-    }
-    
-    func isPointDiscovered(indexPath: NSIndexPath) -> Bool {
-        return PrototypeDatum.DiscoveredPoints.contains(String(indexPath.row))
-    }
-    
     override func viewDidAppear(animated: Bool) {
         self.collectionView?.reloadData()
         

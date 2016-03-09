@@ -9,6 +9,7 @@
 import AVFoundation
 import UIKit
 
+/// Delegate used to inform the TabBarController that a modal view has been dismissed on a tablet.
 protocol BarcodeScannerDelegate: class {
     func didModalDismiss(sender: BarcodeScannerViewController)
 }
@@ -41,8 +42,7 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
     // Reference to the input text field */
     @IBOutlet weak var txtInput: UITextField!
     
-    var tapBGGesture: UITapGestureRecognizer!
-    
+    /// Reference to the delegate
     weak var delegate: BarcodeScannerDelegate?
     
     
@@ -95,15 +95,6 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
             errorAlert.popoverPresentationController?.sourceRect = self.cameraView.frame
             self.presentViewController(errorAlert, animated: true, completion: nil)
         }
-        
-        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
-            tapBGGesture = UITapGestureRecognizer(target: self, action: "settingsBGTapped:")
-            tapBGGesture.delegate = self
-            tapBGGesture.numberOfTapsRequired = 1
-            tapBGGesture.cancelsTouchesInView = false
-        
-            self.view.window!.addGestureRecognizer(tapBGGesture)
-        }
     }
     
     
@@ -111,10 +102,6 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
     
     override func viewWillDisappear(animated: Bool) {
         session.stopRunning()
-        
-        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
-            self.view.window!.removeGestureRecognizer(tapBGGesture)
-        }
     }
     
     
@@ -231,28 +218,14 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
         }
     }
     
-    func settingsBGTapped(sender: UITapGestureRecognizer){
-        if sender.state == UIGestureRecognizerState.Ended{
-            guard let presentedView = presentedViewController?.view else {
-                return
-            }
-            
-            if !CGRectContainsPoint(presentedView.bounds, sender.locationInView(presentedView)) {
-                self.dismissViewControllerAnimated(true, completion: { () -> Void in
-                })
-            }
-        }
-    }
-    
-    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
-    }
-    
     override func viewDidDisappear(animated: Bool) {
         if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
             delegate?.didModalDismiss(self)
         }
     }
 
+    @IBAction func dismissDialog(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     
 }

@@ -77,8 +77,8 @@
                             <rect key="frame" x="180" y="7" width="240" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
-                                <segment title="Camera Off"/>
-                                <segment title="Camera On"/>
+                                <segment title="Scanner Off"/>
+                                <segment title="Scanner On"/>
                             </segments>
                             <color key="tintColor" red="0.85098039215686272" green="0.88235294117647056" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
@@ -312,8 +312,16 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32G-ka-mIY">
                                 <rect key="frame" x="0.0" y="467" width="600" height="133"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="🔑 Enter Code or PIN" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kw2-Lo-pDi">
-                                        <rect key="frame" x="24" y="46.5" width="552" height="40"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xze-bk-MBB">
+                                        <rect key="frame" x="507" y="86" width="69" height="35"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <state key="normal" title="Cancel"/>
+                                        <connections>
+                                            <action selector="dismissDialog:" destination="hTP-Wg-xaI" eventType="touchUpInside" id="gcO-Ae-aIw"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="🔑 Enter a passphrase" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kw2-Lo-pDi">
+                                        <rect key="frame" x="24" y="32" width="552" height="40"/>
                                         <color key="backgroundColor" red="0.85098039219999999" green="0.88235294119999996" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="fUQ-dW-0bk"/>
@@ -324,10 +332,12 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="Kw2-Lo-pDi" firstAttribute="centerY" secondItem="32G-ka-mIY" secondAttribute="centerY" id="2f0-nd-5wc"/>
                                     <constraint firstItem="Kw2-Lo-pDi" firstAttribute="leading" secondItem="32G-ka-mIY" secondAttribute="leading" constant="24" id="Msq-ly-9iQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="xze-bk-MBB" secondAttribute="trailing" constant="24" id="Tik-m3-21g"/>
                                     <constraint firstAttribute="trailing" secondItem="Kw2-Lo-pDi" secondAttribute="trailing" constant="24" id="Vbe-5G-DC4"/>
+                                    <constraint firstItem="xze-bk-MBB" firstAttribute="top" secondItem="Kw2-Lo-pDi" secondAttribute="bottom" constant="14" id="h0R-Wc-f2z"/>
                                     <constraint firstAttribute="height" constant="133" id="lDT-BN-nyY"/>
+                                    <constraint firstAttribute="bottom" secondItem="xze-bk-MBB" secondAttribute="bottom" constant="12" id="vBS-Sz-wDp"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -339,6 +349,7 @@
                             <constraint firstItem="ODr-kT-nI3" firstAttribute="leading" secondItem="Meq-aO-waS" secondAttribute="leadingMargin" constant="-20" id="CXQ-Yi-TJs"/>
                             <constraint firstItem="32G-ka-mIY" firstAttribute="width" secondItem="Meq-aO-waS" secondAttribute="width" id="LIq-Kh-QAn"/>
                             <constraint firstAttribute="trailingMargin" secondItem="32G-ka-mIY" secondAttribute="trailing" constant="-20" id="Nab-gZ-9oh"/>
+                            <constraint firstItem="Kw2-Lo-pDi" firstAttribute="top" secondItem="ODr-kT-nI3" secondAttribute="bottom" constant="32" id="Obq-bd-KDI"/>
                             <constraint firstItem="ODr-kT-nI3" firstAttribute="top" secondItem="6ec-Fk-Llu" secondAttribute="bottom" constant="-20" id="Rlc-Yu-N8D"/>
                             <constraint firstItem="gmB-DG-Cbu" firstAttribute="top" secondItem="32G-ka-mIY" secondAttribute="bottom" id="URn-vg-qKr"/>
                             <constraint firstItem="ODr-kT-nI3" firstAttribute="width" secondItem="Meq-aO-waS" secondAttribute="width" id="WHK-ZW-uNu"/>
@@ -353,7 +364,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0w8-yH-ezh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-503" y="-353"/>
+            <point key="canvasLocation" x="-557" y="-330"/>
         </scene>
     </scenes>
     <resources>

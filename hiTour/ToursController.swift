@@ -71,6 +71,8 @@ class ToursController : UICollectionViewController {
     
     /// Switches the tour when the cell has been selected.
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+        delegate?.setTour(tours[indexPath.row])
         if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
             self.tabBarController?.selectedIndex = 0
             let feedControlelr = self.tabBarController?.selectedViewController as! FeedController

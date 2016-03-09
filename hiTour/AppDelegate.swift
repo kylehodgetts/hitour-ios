@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     lazy var coreDataStack = CoreDataStack()
     lazy var apiConnector: ApiConnector? = nil
+    var currentTour: Tour? = nil
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -59,6 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func getCoreData() -> CoreDataStack {
         return coreDataStack
     }
+    
     //
     //  Function that allows landscape rotation when an image or video is viewed full screen
     //  
@@ -71,6 +73,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return UIInterfaceOrientationMask.All
         }
         return UIInterfaceOrientationMask.Portrait
+    }
+    
+    ///
+    /// A setter for current tour
+    ///
+    func setTour(tour: Tour) -> Void {
+        self.currentTour = tour
+    }
+    
+    ///
+    /// A getter for current tour
+    ///
+    func getTour() -> Tour? {
+        return currentTour
     }
 
 }

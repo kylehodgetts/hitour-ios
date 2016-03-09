@@ -2,7 +2,7 @@
 //  Point+CoreDataProperties.swift
 //  hiTour
 //
-//  Created by Charlie Baker on 06/03/2016.
+//  Created by Adam Chlupacek on 04/03/16.
 //  Copyright © 2016 stranders.kcl.ac.uk. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -16,8 +16,9 @@ extension Point {
 
     @NSManaged var name: String?
     @NSManaged var pointId: NSNumber?
-    @NSManaged var discovered: NSNumber?
-    @NSManaged var pointData: NSSet?
+    @NSManaged var data: NSData?
+    @NSManaged var descriptionP: String?
+    @NSManaged var pointData: NSOrderedSet?
     @NSManaged var pointTours: NSSet?
 
 }

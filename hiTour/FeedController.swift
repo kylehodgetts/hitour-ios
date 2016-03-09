@@ -18,7 +18,7 @@ class FeedController: UICollectionViewController {
     
     let prototypeData = PrototypeDatum.getAllData
     var selectedItem = 0
-
+    var tour: Tour? = nil
     
     /// Registers UINib for the cell layout and the size of each cell wrt the screen size.
     override func viewDidLoad() {
@@ -36,6 +36,18 @@ class FeedController: UICollectionViewController {
             flowLayout.itemSize = CGSize(width: screenSize.width, height: 185)
         }
 
+        
+        let savedTour = NSUserDefaults.standardUserDefaults().integerForKey("Tour")
+        let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+        let coredata = delegate?.getCoreData()
+        
+        if savedTour > 0 {
+            guard let sTour = coredata?.fetch(name: Tour.entityName, predicate: NSPredicate(format: "tourId == \(savedTour)")).flatMap({$0.first as? Tour}) else {
+                return
+            }
+            assignTour(sTour)
+        }
+        
     }
 
     /// Specifies an image and a title for each cell.
@@ -43,31 +55,56 @@ class FeedController: UICollectionViewController {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("FeedControllerCellId", forIndexPath: indexPath) as! FeedControllerCell
         cell.sizeToFit()
-        let datum = self.prototypeData[indexPath.row]
+        guard let t = tour else {
+            return cell
+        }
+        let pt = t.pointTours![indexPath.row] as! PointTour
+        
+        cell.labelTitle.text = pt.point?.name
         
         cell.imageViewFeed?.image = UIImage(named: datum.imageName)
         cell.imageViewFeed?.contentMode = .ScaleAspectFill
         cell.labelTitle.text = datum.title
         cell.userInteractionEnabled = isPointDiscovered(indexPath)
+
+        guard let image = pt.point!.data else {
+            return cell
+        }
+        cell.imageViewFeed.image = UIImage(data: image)
+        
         return cell
     }
     
     /// - Returns: The number of items in the feed collection.
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return self.prototypeData.count
+        if let t = self.tour {
+            return t.pointTours!.count
+        } else {
+            return 0
+        }
     }
     
     /// Launches the detail view in a master-detail layout for a tablet and in a new View Controller on a phone.
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        guard let t = tour else {
+            return
+        }
+        
         if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
             let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("DetailViewControllerTablet") as!DetailViewController
-            detailController.prototypeData = self.prototypeData[indexPath.row]
+            
+            
+            let pt = t.pointTours![indexPath.row] as! PointTour
+            detailController.point = pt.point!
+            detailController.audience = t.audience!
+            
             self.splitViewController!.showDetailViewController(detailController, sender: self)
         }
         else {
             let pageView = self.storyboard!.instantiateViewControllerWithIdentifier("FeedPageViewController") as! FeedPageViewController
             pageView.startIndex = PrototypeDatum.DiscoveredPoints.indexOf(String(indexPath.row))
+            pageView.audience = t.audience!
+            pageView.points = t.pointTours!.array.map({$0 as! PointTour})
             self.navigationController!.pushViewController(pageView, animated: true)
         }
         
@@ -80,6 +117,12 @@ class FeedController: UICollectionViewController {
     override func viewDidAppear(animated: Bool) {
         self.collectionView?.reloadData()
         
+    }
+    
+    func assignTour(tour: Tour) -> Void {
+        self.tour = tour
+        NSUserDefaults.standardUserDefaults().setInteger(tour.tourId!.integerValue, forKey: "Tour")
+        collectionView?.reloadData()
     }
     
 }

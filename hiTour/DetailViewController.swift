@@ -15,8 +15,11 @@ import UIKit
 //  for that particular point.
 class DetailViewController : UIViewController {
     
-    //  Reference variable to prototype data for now
-    var prototypeData : PrototypeDatum! = PrototypeDatum.getAllData[0]
+    //  Reference variable to a point
+    var point : Point?
+    
+    // Reference to audience that this point if for
+    var audience: Audience!
     
     //  Reference variable to populate the point description text
     var textDetail: UITextView!
@@ -45,12 +48,16 @@ class DetailViewController : UIViewController {
         
         stackView.addArrangedSubview(textDetail)
         
-        self.imageDetail!.image = UIImage(named: prototypeData.imageName)
+        guard let t = point, imageData = point!.data else {
+            return
+        }
+        
+        self.imageDetail!.image = UIImage(data: imageData)
         self.imageDetail!.autoresizingMask = UIViewAutoresizing.FlexibleWidth
         
             
-        self.titleDetail.text = prototypeData.title
-        self.textDetail.text = prototypeData.description
+        self.titleDetail.text = t.name
+        self.textDetail.text = t.descriptionP
         textDetail.sizeToFit()
         textDetail.heightAnchor.constraintEqualToConstant(textDetail.contentSize.height + 100).active = true
         textDetail.widthAnchor.constraintEqualToConstant(textDetail.contentSize.width).active = true
@@ -63,24 +70,16 @@ class DetailViewController : UIViewController {
     //  image or text file.
     //  The content view is then added to the stack view in the ranked ordered retirevied.
     func loadDynamicContent() {
-        let pointData = PrototypeDatum.getPointData(prototypeData.title)
         
-        for item in pointData {
-            let urlString = item[PrototypeDatum.DataURLKey]
-            let urlFileName = (urlString! as NSString).substringToIndex(Int((urlString?.characters.count)!)-4)
-            let urlFileExt = (urlString! as NSString).substringFromIndex(Int((urlString?.characters.count)!)-3)
+        let points = point!.getPointDataFor(audience)
+        
+        for data in points {
             
             var contentItem :ContentView!
-            let path : String!
-            if urlFileExt != "jpg" {
-                path = NSBundle.mainBundle().pathForResource(urlFileName, ofType: urlFileExt)
-            }
-            else {
-                path = urlFileName
-            }
             
             contentItem = ContentView(frame: CGRect (x: 0, y: 0, width: self.view.bounds.width, height: 350))
-            contentItem.populateView(path!, titleText: item[PrototypeDatum.DataTitleKey]!, descriptionText: item[PrototypeDatum.DataDescriptionKey]!)
+            print(data.data!.title!)
+            contentItem.populateView(data.data!.data!, titleText: data.data!.title!, descriptionText: data.data!.descriptionD!, url: data.data!.url!, dataId: "\(data.data!.dataId!)-\(audience.audienceId!)")
             contentItem.presentingViewController = self
 
             contentItem.layoutIfNeeded()

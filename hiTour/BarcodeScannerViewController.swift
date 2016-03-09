@@ -9,10 +9,13 @@
 import AVFoundation
 import UIKit
 
+protocol BarcodeScannerDelegate: class {
+    func didModalDismiss(sender: BarcodeScannerViewController)
+}
 
 // Class that implements a QR Barcode Scanner within a UIView by using the device main camera.
 // Then inputs the results into the text field on the view.
-class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputObjectsDelegate, UITextFieldDelegate {
+class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputObjectsDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate {
     
     // Capture session for receiving input from the camera */
     let session = AVCaptureSession()
@@ -38,6 +41,10 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
     // Reference to the input text field */
     @IBOutlet weak var txtInput: UITextField!
     
+    var tapBGGesture: UITapGestureRecognizer!
+    
+    weak var delegate: BarcodeScannerDelegate?
+    
     
     // MARK: Initialiser
     
@@ -46,7 +53,7 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
     //  Handles error if the camera can't be accessed.
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         let captureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
         do {
             let inputDevice = try AVCaptureDeviceInput(device: captureDevice)
@@ -88,7 +95,15 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
             errorAlert.popoverPresentationController?.sourceRect = self.cameraView.frame
             self.presentViewController(errorAlert, animated: true, completion: nil)
         }
-
+        
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+            tapBGGesture = UITapGestureRecognizer(target: self, action: "settingsBGTapped:")
+            tapBGGesture.delegate = self
+            tapBGGesture.numberOfTapsRequired = 1
+            tapBGGesture.cancelsTouchesInView = false
+        
+            self.view.window!.addGestureRecognizer(tapBGGesture)
+        }
     }
     
     
@@ -96,6 +111,10 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
     
     override func viewWillDisappear(animated: Bool) {
         session.stopRunning()
+        
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+            self.view.window!.removeGestureRecognizer(tapBGGesture)
+        }
     }
     
     
@@ -209,6 +228,29 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
     func keyboardWillHide(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
             self.view.frame.origin.y += keyboardSize.height
+        }
+    }
+    
+    func settingsBGTapped(sender: UITapGestureRecognizer){
+        if sender.state == UIGestureRecognizerState.Ended{
+            guard let presentedView = presentedViewController?.view else {
+                return
+            }
+            
+            if !CGRectContainsPoint(presentedView.bounds, sender.locationInView(presentedView)) {
+                self.dismissViewControllerAnimated(true, completion: { () -> Void in
+                })
+            }
+        }
+    }
+    
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+            delegate?.didModalDismiss(self)
         }
     }
 

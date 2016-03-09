@@ -9,26 +9,25 @@
 import Foundation
 import UIKit
 
-class TabBarController: UITabBarController, UIPopoverPresentationControllerDelegate {
+class TabBarController: UITabBarController {
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
-    override func viewDidLoad() {
-    }
-    
-    
-    func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
-        self.segmentedControl.selectedSegmentIndex = 0
-    }
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        //segue for the popover configuration window
         if segue.identifier == "showScannerSegue" {
-            if let controller = segue.destinationViewController as? UIViewController {
-                controller.popoverPresentationController!.delegate = self
-                controller.preferredContentSize = CGSize(width: 700, height: 550)
-            }
+            let controller = segue.destinationViewController as! BarcodeScannerViewController
+            
+            let frameView = self.parentViewController?.splitViewController?.view
+            controller.preferredContentSize = CGSize(width: (frameView?.bounds.width)! * 0.65, height: (frameView?.bounds.height)! * 0.8)
+            
+            controller.modalPresentationStyle = UIModalPresentationStyle.FormSheet;
+            controller.delegate = self
         }
     }
-    
+}
+
+extension TabBarController: BarcodeScannerDelegate {
+    func didModalDismiss(sender: BarcodeScannerViewController) {
+        segmentedControl.selectedSegmentIndex = 0
+    }
 }

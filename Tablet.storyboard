@@ -159,18 +159,26 @@
                                             <constraint firstAttribute="height" constant="173" id="iK1-hE-y5q"/>
                                         </constraints>
                                     </imageView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3yi-hq-PnJ">
-                                        <rect key="frame" x="12" y="218" width="576" height="700"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3yi-hq-PnJ">
+                                        <rect key="frame" x="0.0" y="218" width="600" height="600"/>
                                         <subviews>
-                                            <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="5Wl-UY-fdb">
-                                                <rect key="frame" x="0.0" y="0.0" width="576" height="700"/>
+                                            <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="5Wl-UY-fdb">
+                                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             </stackView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="5Wl-UY-fdb" firstAttribute="height" secondItem="3yi-hq-PnJ" secondAttribute="height" id="1Hr-6s-sti"/>
                                             <constraint firstItem="5Wl-UY-fdb" firstAttribute="width" secondItem="3yi-hq-PnJ" secondAttribute="width" id="C3Y-dJ-N2x"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="600" id="R7g-ej-7Jr"/>
+                                            <constraint firstItem="5Wl-UY-fdb" firstAttribute="width" secondItem="3yi-hq-PnJ" secondAttribute="width" id="kWv-EV-Hcl"/>
                                         </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="1Hr-6s-sti"/>
+                                                <exclude reference="C3Y-dJ-N2x"/>
+                                            </mask>
+                                        </variation>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FGM-BN-xzv">
                                         <rect key="frame" x="12" y="181" width="42" height="20.5"/>
@@ -183,13 +191,19 @@
                                 <constraints>
                                     <constraint firstItem="jvU-iT-2tf" firstAttribute="width" secondItem="jxx-GR-t7a" secondAttribute="width" id="05X-9M-H80"/>
                                     <constraint firstItem="jvU-iT-2tf" firstAttribute="top" secondItem="jxx-GR-t7a" secondAttribute="top" id="0Ul-I5-OSa"/>
-                                    <constraint firstAttribute="bottom" secondItem="3yi-hq-PnJ" secondAttribute="bottom" constant="-318" id="1cD-9Q-H1O"/>
+                                    <constraint firstAttribute="bottom" secondItem="3yi-hq-PnJ" secondAttribute="bottom" id="1cD-9Q-H1O"/>
                                     <constraint firstItem="5Wl-UY-fdb" firstAttribute="top" secondItem="FGM-BN-xzv" secondAttribute="bottom" constant="16.5" id="IXz-Ks-JfR"/>
-                                    <constraint firstItem="3yi-hq-PnJ" firstAttribute="leading" secondItem="jxx-GR-t7a" secondAttribute="leading" constant="12" id="Xrf-8n-fU6"/>
-                                    <constraint firstAttribute="trailing" secondItem="3yi-hq-PnJ" secondAttribute="trailing" constant="12" id="djJ-SE-id5"/>
+                                    <constraint firstItem="3yi-hq-PnJ" firstAttribute="top" secondItem="FGM-BN-xzv" secondAttribute="bottom" constant="16.5" id="Ufb-Ap-n3K"/>
+                                    <constraint firstItem="3yi-hq-PnJ" firstAttribute="leading" secondItem="jxx-GR-t7a" secondAttribute="leading" id="Xrf-8n-fU6"/>
+                                    <constraint firstAttribute="trailing" secondItem="3yi-hq-PnJ" secondAttribute="trailing" id="djJ-SE-id5"/>
                                     <constraint firstItem="FGM-BN-xzv" firstAttribute="leading" secondItem="jxx-GR-t7a" secondAttribute="leading" constant="12" id="e6V-8Y-ish"/>
                                     <constraint firstItem="FGM-BN-xzv" firstAttribute="top" secondItem="jvU-iT-2tf" secondAttribute="bottom" constant="8" id="qnU-MT-Pfm"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="IXz-Ks-JfR"/>
+                                    </mask>
+                                </variation>
                                 <variation key="widthClass=compact">
                                     <mask key="subviews">
                                         <include reference="jvU-iT-2tf"/>
@@ -206,6 +220,7 @@
                             <constraint firstItem="4EU-dR-lVi" firstAttribute="top" secondItem="jxx-GR-t7a" secondAttribute="bottom" id="Mce-i2-3aO"/>
                             <constraint firstAttribute="trailingMargin" secondItem="jxx-GR-t7a" secondAttribute="trailing" constant="-20" id="dt2-nY-nuQ"/>
                             <constraint firstItem="jxx-GR-t7a" firstAttribute="top" secondItem="FJg-aS-9P7" secondAttribute="bottom" constant="-20" id="nFB-JL-wPU"/>
+                            <constraint firstItem="3yi-hq-PnJ" firstAttribute="width" secondItem="N1R-lj-wdD" secondAttribute="width" id="tDk-ny-csa"/>
                         </constraints>
                         <variation key="widthClass=compact">
                             <mask key="subviews">

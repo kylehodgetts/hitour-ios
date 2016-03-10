@@ -17,4 +17,5 @@ class SplitViewController: UISplitViewController {
         self.maximumPrimaryColumnWidth = 400
         self.preferredPrimaryColumnWidthFraction = 0.33
     }
+
 }

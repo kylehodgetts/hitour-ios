@@ -308,6 +308,9 @@
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L7b-qJ-AHX">
                                         <rect key="frame" x="0.0" y="0.0" width="0.0" height="128"/>
+                                        <variation key="widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="-64" width="405" height="218"/>
+                                        </variation>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W5a-p2-jy4">
                                         <rect key="frame" x="-42" y="-21" width="42" height="21"/>
@@ -318,15 +321,15 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="z6t-JN-G2p">
                                         <rect key="frame" x="0.0" y="0.0" width="110" height="200"/>
                                         <subviews>
-                                            <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="0G2-QG-UUV">
+                                            <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="0G2-QG-UUV">
                                                 <rect key="frame" x="0.0" y="0.0" width="110" height="200"/>
-                                                <variation key="widthClass=compact" ambiguous="YES">
+                                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
                                                     <rect key="frame" x="0.0" y="0.0" width="389" height="612"/>
                                                 </variation>
                                             </stackView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="612" id="mqk-Vf-LiI"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="mqk-Vf-LiI"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -427,6 +430,7 @@
                             </mask>
                         </variation>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
                         <outlet property="imageDetail" destination="L7b-qJ-AHX" id="vnA-3V-5j4"/>
                         <outlet property="scrollView" destination="g2B-vI-qch" id="Qbu-Xs-A3K"/>

@@ -24,8 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let httpClient = HTTPClient(baseUrl: "https://hitour.herokuapp.com/api/A7DE6825FD96CCC79E63C89B55F88")
 //        ApiConnector(HTTPClient: httpClient, stack: coreDataStack).updateAll()
         
-
-        
         return true
     }
 

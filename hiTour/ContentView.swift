@@ -65,8 +65,8 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
         stackView.frame = stackView.bounds
         stackView.axis = UILayoutConstraintAxis.Vertical
         stackView.alignment = UIStackViewAlignment.Fill
+        stackView.distribution = .FillProportionally
         stackView.spacing = 0
-        self.addSubview(stackView)
         
         addTitle(titleText)
         addDescription(descriptionText)
@@ -80,6 +80,9 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
         else {
             addImageContent(url)
         }
+        
+        stackView.sizeToFit()
+        self.addSubview(stackView)
 
     }
     
@@ -97,8 +100,8 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
         playerController.videoGravity = AVLayerVideoGravityResizeAspect
         playerController.player = videoPlayer
         stackView.addArrangedSubview(playerController.view)
-        playerController.view.heightAnchor.constraintEqualToConstant(playerController.view.frame.height).active = true
-        playerController.view.widthAnchor.constraintEqualToConstant(playerController.view.frame.width).active = true
+//        playerController.view.heightAnchor.constraintEqualToConstant(playerController.view.frame.height).active = true
+//        playerController.view.widthAnchor.constraintEqualToConstant(playerController.view.frame.width).active = true
         
         let tap = UITapGestureRecognizer(target: self, action: Selector("showVideoControls"))
         tap.delegate = self
@@ -114,9 +117,10 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
             print("Error reading text file resource")
         }
         txtText.editable = false
+        txtText.scrollEnabled = false
         txtTitle.selectable = false
-        txtText.widthAnchor.constraintEqualToConstant(txtText.contentSize.width).active = true
-        txtText.heightAnchor.constraintEqualToConstant(txtText.contentSize.height + 250).active = true
+//        txtText.widthAnchor.constraintEqualToConstant(txtText.contentSize.width).active = true
+//        txtText.heightAnchor.constraintEqualToConstant(txtText.contentSize.height + 250).active = true
         stackView.addArrangedSubview(txtText)
     }
     
@@ -127,8 +131,8 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
         imageView.layoutIfNeeded()
         imageView.sizeToFit()
         imageView.userInteractionEnabled = true
-        imageView.heightAnchor.constraintEqualToConstant(imageView.frame.height).active = true
-        imageView.widthAnchor.constraintEqualToConstant(imageView.frame.width).active = true
+//        imageView.heightAnchor.constraintEqualToConstant(imageView.frame.height).active = true
+//        imageView.widthAnchor.constraintEqualToConstant(imageView.frame.width).active = true
         
         let tapFullScreenGesture = UITapGestureRecognizer(target: self, action: Selector("displayImageFullScreen"))
         tapFullScreenGesture.delegate = self
@@ -144,25 +148,26 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
         txtTitle.selectable = false
         txtTitle.scrollEnabled = false
         txtTitle.font = UIFont.boldSystemFontOfSize(16)
-        stackView.addArrangedSubview(txtTitle)
         
         txtTitle.layoutIfNeeded()
         txtTitle.sizeToFit()
-        txtTitle.heightAnchor.constraintEqualToConstant(txtTitle.contentSize.height).active = true
+//        txtTitle.heightAnchor.constraintEqualToConstant(txtTitle.contentSize.height).active = true
+        stackView.addArrangedSubview(txtTitle)
+
     }
     
     //  Function that adds and populates a description to the stackview of the item data
     func addDescription(descriptionText: String) {
         txtDescription.text = descriptionText
         txtDescription.editable = false
-        txtDescription.scrollEnabled = true
+        txtDescription.scrollEnabled = false
         txtDescription.selectable = false
         
-        stackView.addArrangedSubview(txtDescription)
         txtDescription.sizeToFit()
+        stackView.addArrangedSubview(txtDescription)
         
-        txtDescription.widthAnchor.constraintEqualToConstant(txtDescription.bounds.width).active = true
-        txtDescription.heightAnchor.constraintEqualToConstant(txtDescription.contentSize.height + 10).active = true
+//        txtDescription.widthAnchor.constraintEqualToConstant(txtDescription.bounds.width).active = true
+//        txtDescription.heightAnchor.constraintEqualToConstant(txtDescription.contentSize.height + 10).active = true
     }
     
     //  Function that handles when an image is tapped so that it is presented full screen by performing a segue to the 

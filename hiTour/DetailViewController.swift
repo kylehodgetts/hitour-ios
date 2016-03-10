@@ -40,10 +40,8 @@ class DetailViewController : UIViewController {
     override func viewDidLoad() {        
         textDetail = UITextView()
         textDetail.editable = false
-        textDetail.scrollEnabled = true
+        textDetail.scrollEnabled = false
         textDetail.selectable = false
-        
-        stackView.addArrangedSubview(textDetail)
         
         self.imageDetail!.image = UIImage(named: prototypeData.imageName)
         self.imageDetail!.autoresizingMask = UIViewAutoresizing.FlexibleWidth
@@ -52,8 +50,9 @@ class DetailViewController : UIViewController {
         self.titleDetail.text = prototypeData.title
         self.textDetail.text = prototypeData.description
         textDetail.sizeToFit()
-        textDetail.heightAnchor.constraintEqualToConstant(textDetail.contentSize.height + 100).active = true
-        textDetail.widthAnchor.constraintEqualToConstant(textDetail.contentSize.width).active = true
+//        textDetail.heightAnchor.constraintEqualToConstant(textDetail.frame.height).active = true
+//        textDetail.widthAnchor.constraintEqualToConstant(stackView.bounds.width).active = true
+        stackView.addArrangedSubview(textDetail)
         
         loadDynamicContent()
     }
@@ -79,16 +78,23 @@ class DetailViewController : UIViewController {
                 path = urlFileName
             }
             
-            contentItem = ContentView(frame: CGRect (x: 0, y: 0, width: self.view.bounds.width, height: 350))
+
+            if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+                contentItem = ContentView(frame: CGRect (x: 0, y: 0, width: stackView.bounds.width, height: 500))
+            } else {
+                contentItem = ContentView(frame: CGRect (x: 0, y: 0, width: self.view.bounds.width, height: 350))
+            }
+            
             contentItem.populateView(path!, titleText: item[PrototypeDatum.DataTitleKey]!, descriptionText: item[PrototypeDatum.DataDescriptionKey]!)
             contentItem.presentingViewController = self
 
             contentItem.layoutIfNeeded()
             contentItem.sizeToFit()
             contentItem.heightAnchor.constraintEqualToConstant(contentItem.frame.height).active = true
-            contentItem.widthAnchor.constraintEqualToConstant(400).active = true
+            contentItem.widthAnchor.constraintEqualToConstant(contentItem.frame.width).active = true
             
             stackView.addArrangedSubview(contentItem)
+            stackView.sizeToFit()
         }
         
     }

@@ -19,5 +19,6 @@ class FeedControllerCell: UICollectionViewCell {
     /// The title of a point.
     @IBOutlet weak var labelTitle: UILabel!
     
+    @IBOutlet weak var lockedView: UIView!
     
 }

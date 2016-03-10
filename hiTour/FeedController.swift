@@ -64,6 +64,8 @@ class FeedController: UICollectionViewController {
         
         cell.imageViewFeed?.contentMode = .ScaleAspectFill
         cell.userInteractionEnabled = pt.scanned!.boolValue
+        cell.lockedView.hidden = pt.scanned!.boolValue
+        
 
         guard let image = pt.point!.data else {
             return cell

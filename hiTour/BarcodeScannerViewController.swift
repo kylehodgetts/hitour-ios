@@ -190,6 +190,7 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
         }
     }
     
+    /// Checks if the point id received as input has already been discovered returning a boolean
     func isPointFound(pointId : String) -> PointTour! {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate?
         let currentTour = appDelegate?.getTour()
@@ -202,6 +203,7 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
         return nil
     }
     
+    /// Finds an array of all the currently discovered points on the tour and returns a PointTour array
     func findDiscoveredPointIndex() -> [PointTour] {
         let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let tour = delegate.getTour()
@@ -215,8 +217,9 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
         return discoveredPoints
     }
     
+    /// Navigates to the detail view if the point id received as input is a valid point in the currently selected tour.
+    /// Otherwise a Point Not Found dialog is displayed to the user
     func navigateToPoint(pointId : String) {
-        
 
         if let pointFound = isPointFound(pointId) {
             if pointFound.scanned?.boolValue == false {

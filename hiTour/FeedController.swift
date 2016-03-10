@@ -2,7 +2,7 @@
 //  FeedController.swift
 //  hiTour
 //
-//  Created by Dominik Kulon on 22/02/2016.
+//  Created by Dominik Kulon & Charlie Baker on 22/02/2016.
 //  Copyright © 2016 stranders.kcl.ac.uk. All rights reserved.
 //
 
@@ -110,6 +110,7 @@ class FeedController: UICollectionViewController {
         }
     }
     
+    /// Loads all currently discovered points and returns a PointTour array
     func foundPoints() -> [PointTour] {
         let allPoints = tour?.pointTours?.array as! [PointTour]
         var discoveredPoints : [PointTour] = []
@@ -120,12 +121,14 @@ class FeedController: UICollectionViewController {
         }
         return discoveredPoints
     }
-        
+    
+    /// Reloads all the cells with their updated states
     override func viewDidAppear(animated: Bool) {
         self.collectionView?.reloadData()
         
     }
     
+    /// Assigns the currently selected tour
     func assignTour(tour: Tour) -> Void {
         self.tour = tour
         NSUserDefaults.standardUserDefaults().setInteger(tour.tourId!.integerValue, forKey: "Tour")

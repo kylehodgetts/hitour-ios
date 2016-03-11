@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="14F27" minimumToolsVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15D21" minimumToolsVersion="Automatic">
     <entity name="Audience" representedClassName=".Audience" syncable="YES">
         <attribute name="audienceId" attributeType="Integer 32" defaultValueString="0" indexed="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -7,6 +7,7 @@
         <relationship name="tour" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tour" inverseName="audience" inverseEntity="Tour" syncable="YES"/>
     </entity>
     <entity name="Data" representedClassName=".Data" syncable="YES">
+        <attribute name="data" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="dataId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="descriptionD" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
@@ -15,10 +16,12 @@
         <relationship name="pointData" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PointData" inverseName="data" inverseEntity="PointData" syncable="YES"/>
     </entity>
     <entity name="Point" representedClassName=".Point" syncable="YES">
+        <attribute name="data" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="descriptionP" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="pointId" attributeType="Integer 32" defaultValueString="0" indexed="YES" syncable="YES"/>
-        <relationship name="pointData" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PointData" inverseName="point" inverseEntity="PointData" syncable="YES"/>
-        <relationship name="pointTours" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PointTour" inverseName="point" inverseEntity="PointTour" syncable="YES"/>
+        <relationship name="pointData" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="PointData" inverseName="point" inverseEntity="PointData" syncable="YES"/>
+        <relationship name="pointTours" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="PointTour" inverseName="point" inverseEntity="PointTour" syncable="YES"/>
     </entity>
     <entity name="PointData" representedClassName=".PointData" syncable="YES">
         <attribute name="rank" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -27,6 +30,7 @@
     </entity>
     <entity name="PointTour" representedClassName=".PointTour" syncable="YES">
         <attribute name="rank" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="scanned" optional="YES" attributeType="Boolean" syncable="YES"/>
         <relationship name="point" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Point" inverseName="pointTours" inverseEntity="Point" syncable="YES"/>
         <relationship name="tour" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Tour" inverseName="pointTours" inverseEntity="Tour" syncable="YES"/>
     </entity>
@@ -41,15 +45,15 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tourId" attributeType="Integer 32" defaultValueString="0" indexed="YES" syncable="YES"/>
         <relationship name="audience" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Audience" inverseName="tour" inverseEntity="Audience" syncable="YES"/>
-        <relationship name="pointTours" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PointTour" inverseName="tour" inverseEntity="PointTour" syncable="YES"/>
+        <relationship name="pointTours" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="PointTour" inverseName="tour" inverseEntity="PointTour" syncable="YES"/>
         <relationship name="sessions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Session" inverseName="tour" inverseEntity="Session" syncable="YES"/>
     </entity>
     <elements>
         <element name="Audience" positionX="-459" positionY="-541" width="128" height="105"/>
-        <element name="Data" positionX="-279" positionY="-603" width="128" height="135"/>
-        <element name="Point" positionX="97" positionY="-571" width="128" height="105"/>
+        <element name="Data" positionX="-279" positionY="-603" width="128" height="150"/>
+        <element name="Point" positionX="97" positionY="-571" width="128" height="135"/>
         <element name="PointData" positionX="-101" positionY="-549" width="128" height="90"/>
-        <element name="PointTour" positionX="-18" positionY="-288" width="128" height="90"/>
+        <element name="PointTour" positionX="-18" positionY="-288" width="128" height="103"/>
         <element name="Session" positionX="-459" positionY="-48" width="128" height="120"/>
         <element name="Tour" positionX="-441" positionY="-250" width="128" height="120"/>
     </elements>

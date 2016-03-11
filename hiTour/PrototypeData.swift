@@ -23,6 +23,8 @@ struct PrototypeDatum {
     static let DataDescriptionKey = "DataDescription"
     static let DataURLKey = "PointURL"
     
+    static var DiscoveredPoints = [String]()
+    
     
     init(dictionary: [String : String]) {
         self.title = dictionary[PrototypeDatum.TitleKey]!

@@ -20,7 +20,7 @@ class PointData: NSManagedObject {
 class PointDataReader: JsonReader{
     typealias T = PointData
     
-    func read(dict: [String: AnyObject]) -> ((NSEntityDescription, NSManagedObjectContext) -> PointData)? {
+    func read(dict: [String: AnyObject], stack: CoreDataStack) -> ((NSEntityDescription, NSManagedObjectContext) -> PointData)? {
         guard let rank = dict["rank"] as? Int else {
             return nil
         }

@@ -29,36 +29,7 @@ class ApiConnector{
     func updateAll(chain: (() -> Void)? = nil) -> Void {
         coreDataStack.deleteAll()
         coreDataStack.saveMainContext()
-        var ptFinished = false
-        var pdFinished = false
-        var daFinished = false
-        
-        func doneConcurent() -> Void {
-            guard ptFinished && pdFinished && daFinished else {
-                return
-            }
-            if let cb = chain {
-              cb()
-            }
-        }
-        
-        fetchPoints { (points) -> Void in
-            self.fetchAudience({ (audiences) -> Void in
-                self.fetchData({ (data) -> Void in
-                    self.fetchTours(audiences, chain: { (tours) -> Void in
-                        self.fetchPointTour(tours, points: points, chain: { _ in
-                            ptFinished = true; doneConcurent()
-                        })
-                        self.fetchPointData(data, points: points, chain: { _ in
-                            pdFinished = true; doneConcurent()
-                        })
-                        self.fetchDataAudiences(data, audiences: audiences, chain: { _ in
-                            daFinished = true; doneConcurent()
-                        })
-                    })
-                })
-            })
-        }
+        fetchAllCauseWeDumb()
     }
     
     ///
@@ -79,7 +50,7 @@ class ApiConnector{
     ) -> Void {
         client.request(url) { (dicts) -> Void in
             let objs = dicts.flatMap({ dict -> R.T? in
-                jsonReader.read(dict)
+                jsonReader.read(dict, stack: self.coreDataStack)
                 .map({self.coreDataStack.insert(jsonReader.entityName(), callback: $0)})
                 .map(afterParse(dict))
             })
@@ -107,7 +78,16 @@ class ApiConnector{
     /// Fetches the points from the server
     ///
     func fetchPoints(chain: (([Point]) -> Void)? ) -> Void {
-        fetch("points", jsonReader: Point.jsonReader, chain: chain)
+        fetch("points", jsonReader: Point.jsonReader, chain: chain, afterParse: {dict in
+            return { (p) -> Point in
+                if let url = dict["url"] as? String {
+                    self.client.binaryReques(url, cb: { (data) -> Void in
+                        p.data = data
+                    })
+                }
+                return p
+            }
+        })
     }
     
     
@@ -115,7 +95,17 @@ class ApiConnector{
     /// Fetches the data from the server
     ///
     func fetchData(chain: (([Data]) -> Void)? ) -> Void {
-        fetch("data", jsonReader: Data.jsonReader, chain: chain)
+        fetch("data", jsonReader: Data.jsonReader, chain: chain, afterParse: {dict in
+            return { (d) -> Data in
+                if let url = dict["url"] as? String {
+                    self.client.binaryReques(url, cb: { (data) -> Void in
+                        d.data = data
+                    })
+                }
+                return d
+            }
+        })
+
     }
     
     
@@ -183,7 +173,89 @@ class ApiConnector{
             }
         }
     }
-    
-    
 
+    func fetchAllCauseWeDumb(chain: (() -> Void)? = nil) -> Void {
+
+        client.requestObject("Unguessable983") { (dict:[String: AnyObject] ) -> Void in
+            guard let tour = dict["tours"] as? [String: AnyObject] else {
+                //TODO allert in case something wrong...
+                return
+            }
+            
+            guard let points = tour["points"] as? [[String: AnyObject]] else {
+                //TODO alert in case points do not exist or smthing
+                return
+            }
+            
+            var audiencesS = Set<Audience>()
+            
+            guard let nsTour = Tour.jsonReader.read(tour, stack: self.coreDataStack).map({self.coreDataStack.insert(Tour.entityName, callback: $0)}) else {
+                return
+            }
+            
+            _ = points.flatMap({pDict -> [Point] in
+                guard let data = pDict["data"] as? [[String: AnyObject]] else {
+                    return []
+                }
+                
+                guard let nsPoint = Point.jsonReader.read(pDict, stack: self.coreDataStack).map({self.coreDataStack.insert(Point.entityName, callback: $0)}) else {
+                    return []
+                }
+                if let url = pDict["url"] as? String {
+                    self.client.binaryReques(url, cb: { (data) -> Void in
+                        nsPoint.data = data
+                    })
+                }
+                
+                if let tourPoint = PointTour.jsonReader.read(pDict, stack: self.coreDataStack).map({self.coreDataStack.insert(PointTour.entityName, callback: $0)}) {
+                    tourPoint.tour = nsTour
+                    tourPoint.point = nsPoint
+                }
+
+                
+               _ = data.flatMap({dDict -> [Data] in
+                    guard let audiences = dDict["audiences"] as? [[String: AnyObject]] else {
+                        return []
+                    }
+                    
+                    let dataAudience = audiences.flatMap({aDict -> [Audience] in
+                        if let audience = Audience.jsonReader.read(aDict, stack: self.coreDataStack).map({self.coreDataStack.insert(Audience.entityName, callback: $0)}) {
+                            audiencesS.insert(audience)
+                            return [audience]
+                        }
+                        return []
+                    })
+                
+                    if let nsData = Data.jsonReader.read(dDict, stack: self.coreDataStack).map({self.coreDataStack.insert(Data.entityName, callback: $0)}) {
+                        let nAudience = (dataAudience as [AnyObject]) + nsData.audience!.allObjects
+                        nsData.audience = NSSet(array: nAudience)
+                        
+                        if let dataPoint = PointData.jsonReader.read(dDict, stack: self.coreDataStack).map({self.coreDataStack.insert(PointData.entityName, callback: $0)}) {
+                            dataPoint.point = nsPoint
+                            dataPoint.data = nsData
+                        }
+                        
+                        if let url = dDict["url"] as? String {
+                            self.client.binaryReques(url, cb: { (data) -> Void in
+                                nsData.data = data
+                            })
+                        }
+                        
+                        return [nsData]
+                    }
+                    return []
+                
+                
+                })
+                
+                return [nsPoint]
+                
+            })
+            
+            if let audienceId = tour["audience_id"] as? Int {
+                nsTour.audience = audiencesS.filter({$0.audienceId! == audienceId}).last
+            }
+        
+        }
+    }
 }

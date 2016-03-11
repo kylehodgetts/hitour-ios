@@ -21,17 +21,23 @@ class Audience: NSManagedObject {
 class AudienceReader: JsonReader{
     typealias T = Audience
     
-    func read(dict: [String: AnyObject]) -> ((NSEntityDescription, NSManagedObjectContext) -> Audience)? {
-        guard let id = dict["id"] as? Int, name = dict["name"] as? String else {
+    func read(dict: [String: AnyObject], stack: CoreDataStack) -> ((NSEntityDescription, NSManagedObjectContext) -> Audience)? {
+        guard let id = dict["id"] as? Int else {
             return nil
         }
         
-        return
-            {(entity: NSEntityDescription, context: NSManagedObjectContext) -> Audience in
-                let audience = Audience(entity: entity, insertIntoManagedObjectContext: context)
-                audience.audienceId = id
-                audience.name = name                
-                return audience
+        let fetch = stack.fetch(name: entityName(), predicate: NSPredicate(format: "audienceId = %D", id))
+        
+        if let actual = fetch?.last as? Audience {
+            return {_, _ in actual}
+            
+        } else {
+            return
+                {(entity: NSEntityDescription, context: NSManagedObjectContext) -> Audience in
+                    let audience = Audience(entity: entity, insertIntoManagedObjectContext: context)
+                    audience.audienceId = id
+                    return audience
+            }
         }
     }
     

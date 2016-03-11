@@ -17,14 +17,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     lazy var coreDataStack = CoreDataStack()
+    lazy var apiConnector: ApiConnector? = nil
+    var currentTour: Tour? = nil
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         let httpClient = HTTPClient(baseUrl: "https://hitour.herokuapp.com/api/A7DE6825FD96CCC79E63C89B55F88")
-        ApiConnector(HTTPClient: httpClient, stack: coreDataStack).updateAll()
-        
-
+        apiConnector = ApiConnector(HTTPClient: httpClient, stack: coreDataStack)
+        apiConnector?.updateAll()
         
         return true
     }
@@ -53,7 +54,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.coreDataStack.saveMainContext()
     }
     
-    //  
+    ///
+    /// Getter for coredata
+    ///
+    func getCoreData() -> CoreDataStack {
+        return coreDataStack
+    }
+    
+    //
     //  Function that allows landscape rotation when an image or video is viewed full screen
     //  
     func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask {
@@ -65,6 +73,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return UIInterfaceOrientationMask.All
         }
         return UIInterfaceOrientationMask.Portrait
+    }
+    
+    ///
+    /// A setter for current tour
+    ///
+    func setTour(tour: Tour) -> Void {
+        self.currentTour = tour
+    }
+    
+    ///
+    /// A getter for current tour
+    ///
+    func getTour() -> Tour? {
+        return currentTour
     }
 
 }

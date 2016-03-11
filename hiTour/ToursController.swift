@@ -15,6 +15,7 @@ class ToursController : UICollectionViewController {
     
     /// The flow layout responsible for defining position of collection cells.
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
+    var tours: [Tour] = []
     
     /// Sets up the size of a collection cell wrt the screen size.
     override func viewDidLoad() {
@@ -29,6 +30,22 @@ class ToursController : UICollectionViewController {
         } else {
             flowLayout.itemSize = CGSize(width: (screenSize.width - 22) / 2, height: screenSize.height / 3)
         }
+        updateTours()
+        
+        
+    }
+    
+    func updateTours() {
+        let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+        let coredata = delegate?.getCoreData()
+        
+        guard let nTours = coredata?.fetch(name: Tour.entityName).flatMap({$0 as? [Tour]}) else {
+            return
+        }
+        
+        tours = nTours
+        collectionView?.reloadData()
+        
     }
     
     /// Defines layout details for each cell.
@@ -38,17 +55,8 @@ class ToursController : UICollectionViewController {
         cell.layer.cornerRadius = 7;
         
         // just for ui testing
-        var institution : String
-        
-        switch(indexPath.row) {
-            case 0: institution = "Royal Brompton Hospital"
-            case 1: institution = "King's College"
-            case 2: institution = "National Portrait Gallery"
-            case 3: institution = "Tate Modern"
-            case 4: institution = "British Museum"
-            case 5: institution = "Science Museum"
-            default: institution = "Institution"
-        }
+        let institution : String = tours[indexPath.row].name!
+
         
         cell.labelTitle.text = institution
         
@@ -58,12 +66,23 @@ class ToursController : UICollectionViewController {
     /// - Returns: The number of items in the collection.
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 6
+        return tours.count
     }
     
     /// Switches the tour when the cell has been selected.
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-
+        let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+        delegate?.setTour(tours[indexPath.row])
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+            self.tabBarController?.selectedIndex = 0
+            let feedControlelr = self.tabBarController?.selectedViewController as! FeedController
+            feedControlelr.assignTour(tours[indexPath.row])
+            
+        } else {
+            self.tabBarController?.selectedIndex = 0
+            let feedControlelr = self.tabBarController?.selectedViewController?.childViewControllers.first! as! FeedController
+            feedControlelr.assignTour(tours[indexPath.row])
+        }
     }
     
 }

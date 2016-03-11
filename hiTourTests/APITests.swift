@@ -22,7 +22,7 @@ class MOCKSession: URLSessionProtocol {
         
         switch (surl){
             case "/points":
-                returnData = "[{\"id\":1,\"name\":\"POINT1\"},{\"id\":2,\"name\":\"POINT2\"}]"
+                returnData = "[{\"id\":1,\"name\":\"POINT1\",\"description\":\"DPOINT1\"},{\"id\":2,\"name\":\"POINT2\",\"description\":\"DPOINT2\"}]"
             
             case "/data":
                 returnData = "[{\"id\":1,\"title\":\"DATA1\", \"description\":\"Description1\",\"url\":\"http://s.hswstatic.com/gif/mri-10.jpg\"},{\"id\":2,\"title\":\"DATA2\", \"description\":\"Description2\",\"url\":\"http://s.hswstatic.com/gif/mri-10.jpg\"}]"
@@ -43,7 +43,8 @@ class MOCKSession: URLSessionProtocol {
                 returnData = "[{\"id\":1,\"datum_id\":1,\"audience_id\":1},{\"id\":2,\"datum_id\":2,\"audience_id\":1}]"
             
             default:
-                {}()
+                completionHandler(NSData(), nil, nil)
+                return MOCKDataTask()
             
         }
         

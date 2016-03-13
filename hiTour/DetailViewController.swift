@@ -13,7 +13,7 @@ import UIKit
 //  View Controller in order to display the detail for a particular point in a tour.
 //  This includes a title, description and dyanmic views to populate each peice of data content
 //  for that particular point.
-class DetailViewController : UIViewController {
+class DetailViewController : UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     //  Reference variable to a point
     var point : Point?
@@ -23,9 +23,15 @@ class DetailViewController : UIViewController {
     
     //  Reference variable to populate the point description text
     var textDetail: UITextView!
+    
+    var pointData: [PointData]!
 
     //  Outlet reference to the point's image on the storyboard
     @IBOutlet weak var imageDetail: UIImageView!
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
     //  Outlet reference to the point's name title labe on the storyboard
     @IBOutlet weak var titleDetail: UILabel!
@@ -37,65 +43,42 @@ class DetailViewController : UIViewController {
     //  Set's up and instantiates all of the views including setting the values for the point's
     //  title, description and image
     //  Calls the function to populate the view controller with its content data into the stackview
-    override func viewDidLoad() {        
-        textDetail = UITextView()
-        textDetail.editable = false
-        textDetail.scrollEnabled = false
-        textDetail.selectable = false
-//        
-//        stackView.addArrangedSubview(textDetail)
+    override func viewDidLoad() {
+        collectionView!.delegate = self
+        collectionView!.dataSource = self
+        collectionView!.registerNib(UINib(nibName: "ImageDataViewCell", bundle: nil), forCellWithReuseIdentifier: "ImageDataViewCellId")
+        collectionView!.registerNib(UINib(nibName: "TextDataViewCell", bundle: nil), forCellWithReuseIdentifier: "TextDataViewCellId")
+        collectionView!.registerNib(UINib(nibName: "VideoDataViewCell", bundle: nil), forCellWithReuseIdentifier: "VideoDataViewCellId")
+        
+        flowLayout.minimumLineSpacing = 0.0
         
         guard let t = point, imageData = point!.data else {
             return
         }
         
+        pointData = point!.getPointDataFor(audience)
         self.imageDetail!.image = UIImage(data: imageData)
         self.imageDetail!.autoresizingMask = UIViewAutoresizing.FlexibleWidth
         
             
         self.titleDetail.text = t.name
-        self.textDetail.text = t.descriptionP
-        textDetail.sizeToFit()
-//        textDetail.heightAnchor.constraintEqualToConstant(textDetail.frame.height).active = true
-//        textDetail.widthAnchor.constraintEqualToConstant(stackView.bounds.width).active = true
-//        stackView.addArrangedSubview(textDetail)
-        
-        loadDynamicContent()
-        
+//        self.textDetail.text = t.descriptionP
+        //                contentItem.populateView(data.data!.data!, titleText: data.data!.title!, descriptionText: data.data!.descriptionD!, url: data.data!.url!, dataId: "\(data.data!.dataId!)-\(audience.audienceId!)")
     }
     
-    //  Loads the point's content data by retrieving and array of its content data then preparing the path to its resource file
-    //  to then instantiate a ContentView and populating the content view with the data item's title, description and either a video,
-    //  image or text file.
-    //  The content view is then added to the stack view in the ranked ordered retirevied.
-    func loadDynamicContent() {
-        
-        let points = point!.getPointDataFor(audience)
-        
-//        clearStackView()
-        
-            for data in points {
-                
-//                var contentItem :ContentView!
-//                
-//                if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
-//                    contentItem = ContentView(frame: CGRect (x: 0, y: 0, width: stackView.bounds.width, height: 500))
-//                } else {
-//                    contentItem = ContentView(frame: CGRect (x: 0, y: 0, width: self.view.bounds.width, height: 350))
-//                }
-//                contentItem.populateView(data.data!.data!, titleText: data.data!.title!, descriptionText: data.data!.descriptionD!, url: data.data!.url!, dataId: "\(data.data!.dataId!)-\(audience.audienceId!)")
-//                contentItem.presentingViewController = self
-//                
-//                contentItem.layoutIfNeeded()
-//                contentItem.sizeToFit()
-//                contentItem.heightAnchor.constraintEqualToConstant(contentItem.frame.height).active = true
-//                contentItem.widthAnchor.constraintEqualToConstant(contentItem.frame.width).active = true
-//                
-//                stackView.addArrangedSubview(contentItem)
-//                stackView.sizeToFit()
-            }
-        
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("TextDataViewCellId", forIndexPath: indexPath) as! TextDataViewCell
+        cell.title.text = pointData[indexPath.row].data!.title!
+        cell.dataDescription.text = pointData[indexPath.row].data!.descriptionD!
+        return cell
     }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return pointData.count
+    }
+    
+    
     
     //  Prepares the view controller segue for when an image is tapped, the image displays full screen for the user to
     //  zoom and pan the image. This function prepares the FullScreenImageViewController with the image that the user has tapped on.

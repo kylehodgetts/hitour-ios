@@ -7,7 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="bvm-PY-zQI">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="VideoDataViewCellId" id="bvm-PY-zQI" customClass="VideoDataViewCell" customModule="hiTour" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="518" height="452"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -47,6 +47,11 @@
                 <constraint firstItem="rnh-6B-OHW" firstAttribute="top" secondItem="bvm-PY-zQI" secondAttribute="top" constant="8" id="wWg-Sz-e7u"/>
             </constraints>
             <size key="customSize" width="518" height="452"/>
+            <connections>
+                <outlet property="dataDescription" destination="mgd-cn-paA" id="hNc-Yx-r4w"/>
+                <outlet property="title" destination="rnh-6B-OHW" id="7lZ-et-gf7"/>
+                <outlet property="videoView" destination="RbT-NL-i3s" id="9pL-tp-u7t"/>
+            </connections>
             <point key="canvasLocation" x="254" y="291"/>
         </collectionViewCell>
     </objects>

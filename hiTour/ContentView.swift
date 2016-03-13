@@ -177,5 +177,5 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
     func displayImageFullScreen() {
         presentingViewController.performSegueWithIdentifier("imageFullScreenSegue", sender: imageView)
     }
-    
+        
 }

@@ -19,4 +19,7 @@ class FeedControllerCell: UICollectionViewCell {
     /// The title of a point.
     @IBOutlet weak var labelTitle: UILabel!
     
+    /// Reference to the locked view.
+    @IBOutlet weak var lockedView: UIView!
+    
 }

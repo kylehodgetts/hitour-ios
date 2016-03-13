@@ -30,9 +30,6 @@ class DetailViewController : UIViewController {
     //  Outlet reference to the point's name title labe on the storyboard
     @IBOutlet weak var titleDetail: UILabel!
     
-    //  Outlet reference to the stack view that contains all the dynamic content data views
-    @IBOutlet weak var stackView: UIStackView!
-    
     //  Outlet reference to the main scroll view for the view controller on the storyboard
     @IBOutlet weak var scrollView: UIScrollView!
     
@@ -45,8 +42,8 @@ class DetailViewController : UIViewController {
         textDetail.editable = false
         textDetail.scrollEnabled = false
         textDetail.selectable = false
-        
-        stackView.addArrangedSubview(textDetail)
+//        
+//        stackView.addArrangedSubview(textDetail)
         
         guard let t = point, imageData = point!.data else {
             return
@@ -61,7 +58,7 @@ class DetailViewController : UIViewController {
         textDetail.sizeToFit()
 //        textDetail.heightAnchor.constraintEqualToConstant(textDetail.frame.height).active = true
 //        textDetail.widthAnchor.constraintEqualToConstant(stackView.bounds.width).active = true
-        stackView.addArrangedSubview(textDetail)
+//        stackView.addArrangedSubview(textDetail)
         
         loadDynamicContent()
         
@@ -75,27 +72,27 @@ class DetailViewController : UIViewController {
         
         let points = point!.getPointDataFor(audience)
         
-        clearStackView()
+//        clearStackView()
         
             for data in points {
                 
-                var contentItem :ContentView!
-                
-                if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
-                    contentItem = ContentView(frame: CGRect (x: 0, y: 0, width: stackView.bounds.width, height: 500))
-                } else {
-                    contentItem = ContentView(frame: CGRect (x: 0, y: 0, width: self.view.bounds.width, height: 350))
-                }
-                contentItem.populateView(data.data!.data!, titleText: data.data!.title!, descriptionText: data.data!.descriptionD!, url: data.data!.url!, dataId: "\(data.data!.dataId!)-\(audience.audienceId!)")
-                contentItem.presentingViewController = self
-                
-                contentItem.layoutIfNeeded()
-                contentItem.sizeToFit()
-                contentItem.heightAnchor.constraintEqualToConstant(contentItem.frame.height).active = true
-                contentItem.widthAnchor.constraintEqualToConstant(contentItem.frame.width).active = true
-                
-                stackView.addArrangedSubview(contentItem)
-                stackView.sizeToFit()
+//                var contentItem :ContentView!
+//                
+//                if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+//                    contentItem = ContentView(frame: CGRect (x: 0, y: 0, width: stackView.bounds.width, height: 500))
+//                } else {
+//                    contentItem = ContentView(frame: CGRect (x: 0, y: 0, width: self.view.bounds.width, height: 350))
+//                }
+//                contentItem.populateView(data.data!.data!, titleText: data.data!.title!, descriptionText: data.data!.descriptionD!, url: data.data!.url!, dataId: "\(data.data!.dataId!)-\(audience.audienceId!)")
+//                contentItem.presentingViewController = self
+//                
+//                contentItem.layoutIfNeeded()
+//                contentItem.sizeToFit()
+//                contentItem.heightAnchor.constraintEqualToConstant(contentItem.frame.height).active = true
+//                contentItem.widthAnchor.constraintEqualToConstant(contentItem.frame.width).active = true
+//                
+//                stackView.addArrangedSubview(contentItem)
+//                stackView.sizeToFit()
             }
         
     }
@@ -112,26 +109,26 @@ class DetailViewController : UIViewController {
     
     // Closes down the view by ensuring any videos that are playing are stopped when the view is dismissed
     override func viewDidDisappear(animated: Bool) {
-        let subviews = self.stackView.subviews
-        for subview in subviews {
-            if subview is ContentView {
-                let contentView = subview as! ContentView
-                if contentView.videoPlayer != nil && contentView.videoPlayer.rate != 0 && contentView.videoPlayer.error == nil {
-                    contentView.videoPlayer.pause()
-                }
-            }
-        }
+//        let subviews = self.stackView.subviews
+//        for subview in subviews {
+//            if subview is ContentView {
+//                let contentView = subview as! ContentView
+//                if contentView.videoPlayer != nil && contentView.videoPlayer.rate != 0 && contentView.videoPlayer.error == nil {
+//                    contentView.videoPlayer.pause()
+//                }
+//            }
+//        }
     }
     
     // Clears the stack view items of content data for it to be reloaded with up to to date content from core data
-    func clearStackView() {
-        let stackViewItems = stackView.arrangedSubviews
-        for item in stackViewItems {
-            if item is ContentView {
-                stackView.removeArrangedSubview(item)
-            }
-        }
-    }
-        
+//    func clearStackView() {
+//        let stackViewItems = stackView.arrangedSubviews
+//        for item in stackViewItems {
+//            if item is ContentView {
+//                stackView.removeArrangedSubview(item)
+//            }
+//        }
+//    }
+    
     
 }

@@ -63,6 +63,7 @@ class DetailViewController : UIViewController {
         textDetail.widthAnchor.constraintEqualToConstant(textDetail.contentSize.width).active = true
         
         loadDynamicContent()
+        
     }
     
     //  Loads the point's content data by retrieving and array of its content data then preparing the path to its resource file
@@ -73,22 +74,25 @@ class DetailViewController : UIViewController {
         
         let points = point!.getPointDataFor(audience)
         
-        for data in points {
-            
-            var contentItem :ContentView!
-            
-            contentItem = ContentView(frame: CGRect (x: 0, y: 0, width: self.view.bounds.width, height: 350))
-            print(data.data!.title!)
-            contentItem.populateView(data.data!.data!, titleText: data.data!.title!, descriptionText: data.data!.descriptionD!, url: data.data!.url!, dataId: "\(data.data!.dataId!)-\(audience.audienceId!)")
-            contentItem.presentingViewController = self
-
-            contentItem.layoutIfNeeded()
-            contentItem.sizeToFit()
-            contentItem.heightAnchor.constraintEqualToConstant(contentItem.frame.height).active = true
-            contentItem.widthAnchor.constraintEqualToConstant(400).active = true
-            
-            stackView.addArrangedSubview(contentItem)
-        }
+        clearStackView()
+        
+            for data in points {
+                
+                var contentItem :ContentView!
+                
+                contentItem = ContentView(frame: CGRect (x: 0, y: 0, width: self.view.bounds.width, height: 350))
+                print(data.data!.title!)
+                contentItem.populateView(data.data!.data!, titleText: data.data!.title!, descriptionText: data.data!.descriptionD!, url: data.data!.url!, dataId: "\(data.data!.dataId!)-\(audience.audienceId!)")
+                contentItem.presentingViewController = self
+                
+                contentItem.layoutIfNeeded()
+                contentItem.sizeToFit()
+                contentItem.heightAnchor.constraintEqualToConstant(contentItem.frame.height).active = true
+                contentItem.widthAnchor.constraintEqualToConstant(400).active = true
+                
+                stackView.addArrangedSubview(contentItem)
+            }
+        
         
     }
     
@@ -102,7 +106,28 @@ class DetailViewController : UIViewController {
         }
     }
     
-        
+    // Closes down the view by ensuring any videos that are playing are stopped when the view is dismissed
+    override func viewDidDisappear(animated: Bool) {
+        let subviews = self.stackView.subviews
+        for subview in subviews {
+            if subview is ContentView {
+                let contentView = subview as! ContentView
+                if contentView.videoPlayer != nil && contentView.videoPlayer.rate != 0 && contentView.videoPlayer.error == nil {
+                    contentView.videoPlayer.pause()
+                }
+            }
+        }
+    }
     
+    // Clears the stack view items of content data for it to be reloaded with up to to date content from core data
+    func clearStackView() {
+        let stackViewItems = stackView.arrangedSubviews
+        for item in stackViewItems {
+            if item is ContentView {
+                stackView.removeArrangedSubview(item)
+            }
+        }
+    }
+        
     
 }

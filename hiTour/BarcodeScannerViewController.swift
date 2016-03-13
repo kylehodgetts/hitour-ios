@@ -170,7 +170,7 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
                 identifiedBorder?.drawBorder(identifiedCorners)
                 
                 txtInput.text = unwraped.stringValue
-                navigateToPoint(unwraped.stringValue)
+                processInput(unwraped.stringValue)
                 
                 session.stopRunning()
             }
@@ -185,9 +185,42 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
     
     @IBAction func submitPressed(sender: UIButton) {
         if txtInput.text?.characters.count > 0 {
-            navigateToPoint(txtInput.text!)
+            processInput(txtInput.text!)
             txtInput.resignFirstResponder()
         }
+    }
+    
+    func processInput(text: String){
+        if(text.hasPrefix("SN")) {
+            handleSessionScan(text.substringFromIndex(text.startIndex.advancedBy(2)))
+        } else  if(text.hasPrefix("PT")){
+            navigateToPoint(text.substringFromIndex(text.startIndex.advancedBy(2)))
+        }
+    
+    }
+    
+    func handleSessionScan(session: String){
+        print(session)
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate?
+        let coreData = appDelegate?.getCoreData();
+        let fetch = coreData?.fetch(name: Session.entityName, predicate: NSPredicate(format: "sessionCode = %D", session));
+        if let _ = fetch?.last as? Session {
+            return //Found a session that already has been scanned in, continue on..., possibly navigate to Feed for the tour?
+        }
+        print("yep")
+
+        let ses = coreData?.insert(Session.entityName, callback: {entity, context in
+            let ses = Session(entity: entity, insertIntoManagedObjectContext: context);
+            ses.sessionCode = session;
+            return ses;
+        });
+        
+        print("Kep")
+
+        
+        appDelegate?.getApi()?.fetchTour((ses as? Session)!)
+        
+        
     }
     
     /// Checks if the point id received as input has already been discovered returning a boolean

@@ -61,6 +61,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return coreDataStack
     }
     
+    func getApi() -> ApiConnector? {
+        return apiConnector
+    }
+    
     //
     //  Function that allows landscape rotation when an image or video is viewed full screen
     //  
@@ -88,6 +92,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func getTour() -> Tour? {
         return currentTour
     }
+    
+
 
 }
 

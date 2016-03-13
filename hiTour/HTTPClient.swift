@@ -49,11 +49,12 @@ class HTTPClient {
     ///  - url: The end of the url that is appended to the base url of the HTTPClient, should not contain the preceding /
     ///  - cb:  The callback that is called once the request is finished and parsed
     ///
-    func request(url: String, cb: ([[String: AnyObject]]) -> Void) -> Void {
+    func request(url: String, cb: ([[String: AnyObject]]) -> Void, onResponse: (NSURLResponse -> Void)? = nil) -> Void {
         let nsURL = NSURL(string: baseUrl + "/\(url)")!
         let task = self.session.dataTaskWithURL(
             nsURL
             , completionHandler: { (data, response, error) -> Void in
+                _ = onResponse.map({f in response.map(f)})
                 if let er = error {
                     print(er)
                     cb([])
@@ -73,23 +74,24 @@ class HTTPClient {
         task.resume()
     }
 
-    func requestObject(url: String, cb: ([String: AnyObject]) -> Void) -> Void {
+    func requestObject(url: String, onResponse: (NSURLResponse? -> Bool) = {(a:NSURLResponse?) -> Bool in return true}, cb: ([String: AnyObject]) -> Void) -> Void {
         let nsURL = NSURL(string: baseUrl + "/\(url)")!
         let task = self.session.dataTaskWithURL(
-        nsURL
-                , completionHandler: { (data, response, error) -> Void in
-            //TODO: error handling and such
-            do {
-                print(error)
-                let json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as? [String: AnyObject]
-                guard let ret = json else {
-                    return
+            nsURL
+            , completionHandler: { (data, response, error) -> Void in
+                if (onResponse(response)) {
+                    do {
+                        print(error)
+                        let json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as? [String: AnyObject]
+                        guard let ret = json else {
+                            return
+                        }
+                        cb(ret)
+                    } catch {
+                        fatalError("Could not perform the a request to: \(nsURL) due to: \(error)")
+                    }
                 }
-                cb(ret)
-            } catch {
-                fatalError("Could not perform the a request to: \(nsURL) due to: \(error)")
-            }
-        })
+            })
         task.resume()
     }
     

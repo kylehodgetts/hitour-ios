@@ -78,7 +78,9 @@ class FeedController: UICollectionViewController {
     /// - Returns: The number of items in the feed collection.
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let t = self.tour {
-            return t.pointTours!.count
+            print(t)
+            print(t.pointTours)
+            return 0
         } else {
             return 0
         }

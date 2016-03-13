@@ -14,5 +14,5 @@ class ImageDataViewCell: UICollectionViewCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var dataDescription: UITextView!
     @IBOutlet weak var imageView: UIImageView!
-
+    
 }

@@ -13,6 +13,6 @@ class VideoDataViewCell: UICollectionViewCell {
     
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var dataDescription: UITextView!
-    @IBOutlet weak var videoView: UIView!
+    @IBOutlet weak var videStackView: UIStackView!
     
 }

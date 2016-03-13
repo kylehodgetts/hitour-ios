@@ -27,30 +27,29 @@
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
-                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RbT-NL-i3s">
-                        <rect key="frame" x="25" y="147" width="469" height="288"/>
-                        <color key="backgroundColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
-                    </view>
+                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="FA0-Lw-jAU">
+                        <rect key="frame" x="25" y="145" width="469" height="299"/>
+                    </stackView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
                 <constraint firstItem="rnh-6B-OHW" firstAttribute="leading" secondItem="bvm-PY-zQI" secondAttribute="leading" constant="8" id="10h-yf-fJs"/>
+                <constraint firstItem="FA0-Lw-jAU" firstAttribute="top" secondItem="mgd-cn-paA" secondAttribute="bottom" constant="8" id="9eq-fS-z0N"/>
                 <constraint firstItem="mgd-cn-paA" firstAttribute="leading" secondItem="bvm-PY-zQI" secondAttribute="leading" constant="25" id="Ec3-JW-UK9"/>
-                <constraint firstAttribute="bottom" secondItem="RbT-NL-i3s" secondAttribute="bottom" constant="17" id="J2o-gF-YIl"/>
+                <constraint firstAttribute="trailing" secondItem="FA0-Lw-jAU" secondAttribute="trailing" constant="24" id="NgG-cb-eKy"/>
                 <constraint firstAttribute="trailing" secondItem="mgd-cn-paA" secondAttribute="trailing" constant="24" id="RTC-aS-oLI"/>
                 <constraint firstItem="mgd-cn-paA" firstAttribute="top" secondItem="rnh-6B-OHW" secondAttribute="bottom" constant="-2" id="SXL-cg-emI"/>
-                <constraint firstAttribute="trailing" secondItem="RbT-NL-i3s" secondAttribute="trailing" constant="24" id="V7d-ON-GV8"/>
                 <constraint firstAttribute="trailing" secondItem="rnh-6B-OHW" secondAttribute="trailing" constant="15" id="eC3-TU-5LV"/>
-                <constraint firstItem="RbT-NL-i3s" firstAttribute="leading" secondItem="bvm-PY-zQI" secondAttribute="leading" constant="25" id="hsX-Lf-RkJ"/>
-                <constraint firstItem="RbT-NL-i3s" firstAttribute="top" secondItem="mgd-cn-paA" secondAttribute="bottom" constant="10" id="uBD-Da-wDO"/>
+                <constraint firstAttribute="bottom" secondItem="FA0-Lw-jAU" secondAttribute="bottom" constant="8" id="oWY-J0-Lbu"/>
+                <constraint firstItem="FA0-Lw-jAU" firstAttribute="leading" secondItem="bvm-PY-zQI" secondAttribute="leading" constant="25" id="vFR-Ox-cxJ"/>
                 <constraint firstItem="rnh-6B-OHW" firstAttribute="top" secondItem="bvm-PY-zQI" secondAttribute="top" constant="8" id="wWg-Sz-e7u"/>
             </constraints>
             <size key="customSize" width="518" height="452"/>
             <connections>
                 <outlet property="dataDescription" destination="mgd-cn-paA" id="hNc-Yx-r4w"/>
                 <outlet property="title" destination="rnh-6B-OHW" id="7lZ-et-gf7"/>
-                <outlet property="videoView" destination="RbT-NL-i3s" id="9pL-tp-u7t"/>
+                <outlet property="videStackView" destination="FA0-Lw-jAU" id="aNg-hP-8u2"/>
             </connections>
             <point key="canvasLocation" x="254" y="291"/>
         </collectionViewCell>

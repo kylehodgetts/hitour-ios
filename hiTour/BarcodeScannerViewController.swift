@@ -187,6 +187,7 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
     //  Closes the keyboard view when the user presses the done button on the keyboard
     @IBAction func textInputDone(sender: UITextField) {
         sender.resignFirstResponder()
+        submit()
     }
     
     /// Move the scanner up when the keyboard appears on the screen.
@@ -215,7 +216,7 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
-    @IBAction func submitPressed(sender: UIButton) {
+    func submit() {
         if txtInput.text?.characters.count > 0 {
             navigateToPoint(txtInput.text!)
             txtInput.resignFirstResponder()
@@ -257,15 +258,22 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
             if pointFound.scanned?.boolValue == false {
                 pointFound.setValue(true.boolValue, forKey: "scanned")
             }
-            let pageView = self.storyboard!.instantiateViewControllerWithIdentifier("FeedPageViewController") as! FeedPageViewController
-
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate?
-            let currentTour = appDelegate?.getTour()
-            pageView.points = currentTour?.pointTours?.array as! [PointTour]
-            pageView.audience = currentTour?.audience
-            pageView.startIndex = findDiscoveredPointIndex().indexOf(pointFound)
             
-            self.navigationController!.pushViewController(pageView, animated: true)
+            if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
+                let pageView = self.storyboard!.instantiateViewControllerWithIdentifier("FeedPageViewController") as! FeedPageViewController
+
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate?
+                let currentTour = appDelegate?.getTour()
+                pageView.points = currentTour?.pointTours?.array as! [PointTour]
+                pageView.audience = currentTour?.audience
+                pageView.startIndex = findDiscoveredPointIndex().indexOf(pointFound)
+            
+                self.navigationController!.pushViewController(pageView, animated: true)
+            } else {
+                self.dismissViewControllerAnimated(true, completion: nil)
+                // TODO populate the details view and update the feed
+            }
+
         }
         else {
             let alertView = UIAlertController()

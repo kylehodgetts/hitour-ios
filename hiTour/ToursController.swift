@@ -54,9 +54,7 @@ class ToursController : UICollectionViewController {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ToursControllerCellId", forIndexPath: indexPath) as! ToursControllerCell
         cell.layer.cornerRadius = 7;
         
-        // just for ui testing
         let institution : String = tours[indexPath.row].name!
-
         
         cell.labelTitle.text = institution
         

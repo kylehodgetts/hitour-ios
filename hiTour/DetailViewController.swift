@@ -66,6 +66,7 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
         }
         
         pointData = point!.getPointDataFor(audience)
+
         self.imageDetail!.image = UIImage(data: imageData)
         self.imageDetail!.autoresizingMask = UIViewAutoresizing.FlexibleWidth
         
@@ -85,18 +86,24 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
             cell.title.text = pointData[indexPath.row].data!.title!
             cell.dataDescription.text = pointData[indexPath.row].data!.descriptionD!
             addVideoContent(cell, dataId: "\(pointData[indexPath.row].data!.dataId!)-\(audience.audienceId!)", data: pointData[indexPath.row].data!.data!)
+            collectionView.sizeToFit()
+
             return cell
         } else if url.containsString(".txt"){
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("TextDataViewCellId", forIndexPath: indexPath) as! TextDataViewCell
             cell.title.text = pointData[indexPath.row].data!.title!
             cell.dataDescription.text = pointData[indexPath.row].data!.descriptionD!
             addTextContent(cell, url: url)
+            collectionView.sizeToFit()
+
             return cell
         } else {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ImageDataViewCellId", forIndexPath: indexPath) as! ImageDataViewCell
             cell.title.text = pointData[indexPath.row].data!.title!
             cell.dataDescription.text = pointData[indexPath.row].data!.descriptionD!
             cell.imageView.image = UIImage(data: pointData[indexPath.row].data!.data!)
+            collectionView.sizeToFit()
+
             return cell
         }
     }

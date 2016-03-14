@@ -16,7 +16,6 @@ class FeedController: UICollectionViewController {
     /// Flow layout specifies position of each item in the collection.
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
-    let prototypeData = PrototypeDatum.getAllData
     var selectedItem = 0
     var tour: Tour? = nil
     

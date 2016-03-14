@@ -84,7 +84,8 @@
             <connections>
                 <outlet property="imageViewFeed" destination="gHP-Nl-FAh" id="q8S-zx-WBy"/>
                 <outlet property="labelTitle" destination="z7V-36-Hpu" id="g2d-xc-Lvz"/>
-                <outlet property="lockedView" destination="rfd-3l-EYB" id="yyx-9z-3hj"/>
+                <outlet property="lockView" destination="0xo-Fx-ofk" id="MpL-g0-HSr"/>
+                <outlet property="transparentView" destination="rfd-3l-EYB" id="QHy-lN-TV3"/>
             </connections>
             <point key="canvasLocation" x="280.5" y="512.5"/>
         </collectionViewCell>

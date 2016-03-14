@@ -74,21 +74,32 @@ class HTTPClient {
         task.resume()
     }
 
-    func requestObject(url: String, onResponse: (NSURLResponse? -> Bool) = {(a:NSURLResponse?) -> Bool in return true}, cb: ([String: AnyObject]) -> Void) -> Void {
+    func requestObject(
+        url: String
+        , onResponse: (NSURLResponse? -> Bool) = {(a:NSURLResponse?) -> Bool in return true}
+        , onError: (() -> Void)? = nil
+        , onParseFail: (() -> Void)? = nil //HERE just because of how we are returning the data now..., the onResponse should work properly once we fix the statusCOdes of our reply messages, ie getting 401 for wrong SessionKey
+        ,cb: ([String: AnyObject]
+        ) -> Void) -> Void {
         let nsURL = NSURL(string: baseUrl + "/\(url)")!
         let task = self.session.dataTaskWithURL(
             nsURL
             , completionHandler: { (data, response, error) -> Void in
+                if let er = error {
+                    print(er)
+                    _ = onError.map({$0()})
+                    return
+                }
                 if (onResponse(response)) {
                     do {
-                        print(error)
                         let json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as? [String: AnyObject]
                         guard let ret = json else {
                             return
                         }
                         cb(ret)
                     } catch {
-                        fatalError("Could not perform the a request to: \(nsURL) due to: \(error)")
+                        print("Could not perform the a request to: \(nsURL) due to: \(error)")
+                        _ = onParseFail.map({$0()})
                     }
                 }
             })

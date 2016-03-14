@@ -35,18 +35,6 @@ class FeedController: UICollectionViewController {
             let screenSize: CGRect = UIScreen.mainScreen().bounds
             flowLayout.itemSize = CGSize(width: screenSize.width, height: 185)
         }
-
-        
-        let savedTour = NSUserDefaults.standardUserDefaults().integerForKey("Tour")
-        let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
-        let coredata = delegate?.getCoreData()
-        
-        if savedTour > 0 {
-            guard let sTour = coredata?.fetch(name: Tour.entityName, predicate: NSPredicate(format: "tourId == \(savedTour)")).flatMap({$0.first as? Tour}) else {
-                return
-            }
-            assignTour(sTour)
-        }
         
     }
 
@@ -78,9 +66,7 @@ class FeedController: UICollectionViewController {
     /// - Returns: The number of items in the feed collection.
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let t = self.tour {
-            print(t)
-            print(t.pointTours)
-            return 0
+            return t.pointTours!.count
         } else {
             return 0
         }

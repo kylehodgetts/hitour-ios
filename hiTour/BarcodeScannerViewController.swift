@@ -203,22 +203,35 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
         print(session)
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate?
         let coreData = appDelegate?.getCoreData();
-        let fetch = coreData?.fetch(name: Session.entityName, predicate: NSPredicate(format: "sessionCode = %D", session));
-        if let _ = fetch?.last as? Session {
-            return //Found a session that already has been scanned in, continue on..., possibly navigate to Feed for the tour?
+        let fetch = coreData?.fetch(name: Session.entityName, predicate: NSPredicate(format: "sessionCode = %@", session));
+        var ses = fetch?.last as? Session
+        if var _ = ses  { } else {
+            ses = coreData?.insert(Session.entityName, callback: {entity, context in
+                let s = Session(entity: entity, insertIntoManagedObjectContext: context);
+                s.sessionCode = session;
+                return s;
+            }) as? Session
         }
-        print("yep")
-
-        let ses = coreData?.insert(Session.entityName, callback: {entity, context in
-            let ses = Session(entity: entity, insertIntoManagedObjectContext: context);
-            ses.sessionCode = session;
-            return ses;
+        
+        coreData?.saveMainContext();
+        appDelegate?.getApi()?.fetchTour(ses!, chain: {t in
+            if let tour = t {
+                appDelegate?.setTour(tour)
+                if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+                    self.tabBarController?.selectedIndex = 0
+                    let feedControlelr = self.tabBarController?.selectedViewController as! FeedController
+                    feedControlelr.assignTour(tour)
+                    
+                } else {
+                    self.tabBarController?.selectedIndex = 0
+                    let feedControlelr = self.tabBarController?.selectedViewController?.childViewControllers.first! as! FeedController
+                    feedControlelr.assignTour(tour)
+                }
+            } else {
+                //TODO display no session for meh...
+            }
+            
         });
-        
-        print("Kep")
-
-        
-        appDelegate?.getApi()?.fetchTour((ses as? Session)!)
         
         
     }

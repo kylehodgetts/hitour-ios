@@ -33,7 +33,7 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
     //  Video Player View Controller to handle the view and controls for the user to play the video
     var playerController : AVPlayerViewController!
     
-    var pointData: [PointData]!
+    var pointData: [PointData] = []
 
     //  Outlet reference to the point's image on the storyboard
     @IBOutlet weak var imageDetail: UIImageView!

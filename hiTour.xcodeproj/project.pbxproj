@@ -31,6 +31,7 @@
 		6DBAC9531C95E8710092CAB8 /* ImageDataViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBAC9521C95E8710092CAB8 /* ImageDataViewCell.swift */; };
 		6DBAC9551C96123B0092CAB8 /* TextDataViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBAC9541C96123B0092CAB8 /* TextDataViewCell.swift */; };
 		6DBAC9571C9612B90092CAB8 /* VideoDataViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBAC9561C9612B90092CAB8 /* VideoDataViewCell.swift */; };
+		6DBAC9591C96495B0092CAB8 /* lock.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DBAC9581C96495B0092CAB8 /* lock.png */; };
 		6DBD48FB1C8DCAA700CB6158 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBD48FA1C8DCAA700CB6158 /* SplitViewController.swift */; };
 		6DBD48FF1C8E219B00CB6158 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBD48FE1C8E219B00CB6158 /* TabBarController.swift */; };
 		6DBD490B1C8E3ADC00CB6158 /* feed-30.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DBD490A1C8E3ADC00CB6158 /* feed-30.png */; };
@@ -114,6 +115,7 @@
 		6DBAC9521C95E8710092CAB8 /* ImageDataViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDataViewCell.swift; sourceTree = "<group>"; };
 		6DBAC9541C96123B0092CAB8 /* TextDataViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextDataViewCell.swift; sourceTree = "<group>"; };
 		6DBAC9561C9612B90092CAB8 /* VideoDataViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDataViewCell.swift; sourceTree = "<group>"; };
+		6DBAC9581C96495B0092CAB8 /* lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = lock.png; path = ../../../Desktop/lock.png; sourceTree = "<group>"; };
 		6DBD48FA1C8DCAA700CB6158 /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		6DBD48FE1C8E219B00CB6158 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		6DBD490A1C8E3ADC00CB6158 /* feed-30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feed-30.png"; path = "../../Downloads/feed-30.png"; sourceTree = "<group>"; };
@@ -299,6 +301,7 @@
 		984EC7AA1C7209C200A12379 /* hiTour */ = {
 			isa = PBXGroup;
 			children = (
+				6DBAC9581C96495B0092CAB8 /* lock.png */,
 				6D90EE481C7E00B500433E1F /* AppDelegate.swift */,
 				6DBD48FA1C8DCAA700CB6158 /* SplitViewController.swift */,
 				6DBD48FE1C8E219B00CB6158 /* TabBarController.swift */,
@@ -445,6 +448,7 @@
 			files = (
 				6DBAC94D1C95CBEE0092CAB8 /* ImageDataViewCell.xib in Resources */,
 				6DE891A51C83BCDD008D85A1 /* ctscan.mp4 in Resources */,
+				6DBAC9591C96495B0092CAB8 /* lock.png in Resources */,
 				6DBD490B1C8E3ADC00CB6158 /* feed-30.png in Resources */,
 				6DE891A61C83BCDD008D85A1 /* fluoroscopy.mp4 in Resources */,
 				6DE891A71C83BCDD008D85A1 /* mriscan.mp4 in Resources */,

@@ -223,9 +223,13 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
                     feedControlelr.assignTour(tour)
                     
                 } else {
-                    self.tabBarController?.selectedIndex = 0
-                    let feedControlelr = self.tabBarController?.selectedViewController?.childViewControllers.first! as! FeedController
-                    feedControlelr.assignTour(tour)
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.tabBarController?.selectedIndex = 0
+                        print("COntroller",self.tabBarController)
+                        let feedControlelr = self.tabBarController?.selectedViewController?.childViewControllers.first! as! FeedController
+                        print("Feeder", feedControlelr)
+                        feedControlelr.assignTour(tour)
+                    });                    
                 }
             } else {
                 //TODO display no session for meh...

@@ -453,10 +453,10 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="B3t-lK-rpY"/>
                                 <exclude reference="7p7-J1-80o"/>
                                 <exclude reference="GcC-i5-b7B"/>
                                 <exclude reference="M4K-xT-Iw6"/>
-                                <exclude reference="B3t-lK-rpY"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -464,10 +464,10 @@
                                 <include reference="g2B-vI-qch"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="B3t-lK-rpY"/>
                                 <include reference="7p7-J1-80o"/>
                                 <include reference="GcC-i5-b7B"/>
                                 <include reference="M4K-xT-Iw6"/>
-                                <include reference="B3t-lK-rpY"/>
                             </mask>
                         </variation>
                     </view>

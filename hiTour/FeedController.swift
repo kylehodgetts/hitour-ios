@@ -75,7 +75,7 @@ class FeedController: UICollectionViewController {
             cell.labelTitle.text = "Feedback Quiz"
             cell.imageViewFeed.image = UIImage(named: "quizicon")
             cell.imageViewFeed.contentMode = .ScaleAspectFit
-            cell.backgroundColor = UIColor.init(colorLiteralRed: 153, green: 202, blue: 251, alpha: 1)
+            cell.imageViewFeed.backgroundColor = UIColor.init(colorLiteralRed: 255/255.0, green: 203/255.0, blue: 135/255.0, alpha: 1)
             
             let allDiscovered = areAllPointsDiscovered()
             cell.transparentView.hidden = allDiscovered

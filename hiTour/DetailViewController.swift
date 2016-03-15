@@ -17,6 +17,8 @@ import MediaPlayer
 ///  for that particular point.
 class DetailViewController : UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate, UICollectionViewDelegateFlowLayout {
     
+    let TEST = "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24"
+    
     ///  Reference variable to a point
     var point : Point?
     
@@ -89,7 +91,7 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
             
             return cell
         } else if url.containsString(".txt") {
-            
+        
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("TextDataViewCellId", forIndexPath: indexPath) as! TextDataViewCell
             
             cell.title.text = pointData[indexPath.row].data!.title!
@@ -122,10 +124,28 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
         return pointData.count
     }
     
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        
+        var height : CGFloat = 300 + calculateTextViewHeight(pointData[indexPath.row].data!.descriptionD!)
+        let url = pointData[indexPath.row].data!.url!
+
+        if url.containsString(".txt") {
+            do {
+                let text = try String(contentsOfFile: url, encoding: NSUTF8StringEncoding)
+                height += calculateTextViewHeight(text) - 200
+            } catch {
+                print("Error reading text file resource")
+            }
+        }
+        
+        return CGSizeMake(collectionView.frame.width, height)
+    }
+    
     func addTextContent(let cell: TextDataViewCell, url: String) {
         do {
             try cell.dataText.text = String(contentsOfFile: url, encoding: NSUTF8StringEncoding)
         } catch {
+            cell.dataText.text = ""
             print("Error reading text file resource")
         }
     }
@@ -181,4 +201,16 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
         }
     }
     
+    func calculateTextViewHeight(text: String) -> CGFloat {
+        let textView = UITextView()
+        textView.scrollEnabled = false
+        textView.text = text
+        let fixedWidth = collectionView.frame.width * 0.8
+        textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.max))
+        let newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.max))
+        var newFrame = textView.frame
+        newFrame.size = CGSize(width: max(newSize.width, fixedWidth), height: newSize.height)
+        textView.frame = newFrame;
+        return textView.frame.height + 16
+    }
 }

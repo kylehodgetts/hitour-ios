@@ -24,16 +24,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="749" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hCn-yf-9lW">
-                                <rect key="frame" x="8" y="35" width="323" height="149.5"/>
+                                <rect key="frame" x="8" y="35" width="323" height="94.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fbc-Lt-rFR">
-                                <rect key="frame" x="0.0" y="192" width="339" height="200"/>
+                                <rect key="frame" x="0.0" y="137" width="339" height="255"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="Led-lp-ify"/>
+                                    <constraint firstAttribute="height" constant="255" id="Led-lp-ify"/>
                                 </constraints>
                             </imageView>
                         </subviews>

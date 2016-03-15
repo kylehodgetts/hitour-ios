@@ -9,9 +9,11 @@
 import Foundation
 import SystemConfiguration
 
-
+///  Class created to hold a helper method to check for network connectivity
 class Reachability {
     
+    ///  Function that trys to access the internet and returns a boolean if it has connectivity
+    ///  to the internet.
     class func isConnectedToNetwork() -> Bool {
         var zeroAddress = sockaddr(sa_len: 0, sa_family: 0, sa_data: (0,0,0,0,0,0,0,0,0,0,0,0,0,0))
         zeroAddress.sa_len = UInt8(sizeofValue(zeroAddress))

@@ -170,7 +170,7 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
                 identifiedBorder?.drawBorder(identifiedCorners)
                 
                 txtInput.text = unwraped.stringValue
-                navigateToPoint(unwraped.stringValue)
+                processInput(unwraped.stringValue)
                 
                 session.stopRunning()
             }
@@ -185,9 +185,81 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
     
     @IBAction func submitPressed(sender: UIButton) {
         if txtInput.text?.characters.count > 0 {
-            navigateToPoint(txtInput.text!)
+            processInput(txtInput.text!)
             txtInput.resignFirstResponder()
         }
+    }
+    
+    func processInput(text: String){
+        if(text.hasPrefix("SN")) {
+            handleSessionScan(text.substringFromIndex(text.startIndex.advancedBy(2)))
+        } else  if(text.hasPrefix("POINT-")){
+            navigateToPoint(text.substringFromIndex(text.startIndex.advancedBy(6)))
+        }
+    
+    }
+    
+    func handleSessionScan(session: String){
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate?
+        let coreData = appDelegate?.getCoreData();
+        let fetch = coreData?.fetch(name: Session.entityName, predicate: NSPredicate(format: "sessionCode = %@", session));
+        var ses = fetch?.last as? Session
+        if var _ = ses  { } else {
+            ses = coreData?.insert(Session.entityName, callback: {entity, context in
+                let s = Session(entity: entity, insertIntoManagedObjectContext: context);
+                s.sessionCode = session;
+                return s;
+            }) as? Session
+        }
+        
+        coreData?.saveMainContext();
+        
+        
+        let overlay = UIView(frame: self.view.frame)
+        let label = UILabel(frame: overlay.frame)
+        label.text = "Updating, please wait..."
+        label.center = overlay.center
+        label.textAlignment = .Center
+        overlay.addSubview(label)
+        overlay.backgroundColor = UIColor.grayColor()
+        overlay.alpha = 0.5
+        tabBarController?.view.addSubview(overlay)
+        
+        appDelegate?.getApi()?.fetchTour(ses!, chain: {t in
+            dispatch_async(dispatch_get_main_queue(), {
+                if let tour = t {
+                    coreData?.saveMainContext();
+                    appDelegate?.setTour(tour)
+                    if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+                        self.tabBarController?.selectedIndex = 0
+                        let feedControlelr = self.tabBarController?.selectedViewController as! FeedController
+                        feedControlelr.assignTour(tour)
+                        overlay.removeFromSuperview()
+                    } else {
+                        self.tabBarController?.selectedIndex = 0
+                        let feedControlelr = self.tabBarController?.selectedViewController?.childViewControllers.first! as! FeedController
+                        feedControlelr.assignTour(tour)
+                        overlay.removeFromSuperview()
+                    }
+                } else {
+                    let alertView = UIAlertController()
+                    alertView.title = "Session invalid"
+                    alertView.message = "The session key: \(session) is not valid"
+                    
+                    let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
+                        action in alertView.dismissViewControllerAnimated(true, completion: nil)
+                        self.startTimer()
+                        self.session.startRunning()
+                    }
+                    alertView.addAction(okAction)
+                    self.presentViewController(alertView, animated: true, completion: nil)
+
+                    overlay.removeFromSuperview()
+                }
+            });
+        });
+        
+        
     }
     
     /// Checks if the point id received as input has already been discovered returning a boolean
@@ -225,15 +297,18 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
             if pointFound.scanned?.boolValue == false {
                 pointFound.setValue(true.boolValue, forKey: "scanned")
             }
-            let pageView = self.storyboard!.instantiateViewControllerWithIdentifier("FeedPageViewController") as! FeedPageViewController
+            (UIApplication.sharedApplication().delegate as! AppDelegate?)?.getCoreData().saveMainContext()
 
+            let pageView = self.storyboard!.instantiateViewControllerWithIdentifier("FeedPageViewController") as! FeedPageViewController
+            
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate?
             let currentTour = appDelegate?.getTour()
             pageView.points = currentTour?.pointTours?.array as! [PointTour]
             pageView.audience = currentTour?.audience
             pageView.startIndex = findDiscoveredPointIndex().indexOf(pointFound)
             
-            self.navigationController!.pushViewController(pageView, animated: true)
+            (self.tabBarController?.viewControllers?[0] as! UINavigationController).pushViewController(pageView, animated: true)
+            self.tabBarController?.selectedIndex = 0
         }
         else {
             let alertView = UIAlertController()

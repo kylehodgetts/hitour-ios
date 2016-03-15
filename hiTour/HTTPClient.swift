@@ -49,11 +49,12 @@ class HTTPClient {
     ///  - url: The end of the url that is appended to the base url of the HTTPClient, should not contain the preceding /
     ///  - cb:  The callback that is called once the request is finished and parsed
     ///
-    func request(url: String, cb: ([[String: AnyObject]]) -> Void) -> Void {
+    func request(url: String, cb: ([[String: AnyObject]]) -> Void, onResponse: (NSURLResponse -> Void)? = nil) -> Void {
         let nsURL = NSURL(string: baseUrl + "/\(url)")!
         let task = self.session.dataTaskWithURL(
             nsURL
             , completionHandler: { (data, response, error) -> Void in
+                _ = onResponse.map({f in response.map(f)})
                 if let er = error {
                     print(er)
                     cb([])
@@ -73,23 +74,35 @@ class HTTPClient {
         task.resume()
     }
 
-    func requestObject(url: String, cb: ([String: AnyObject]) -> Void) -> Void {
+    func requestObject(
+        url: String
+        , onResponse: (NSURLResponse? -> Bool) = {(a:NSURLResponse?) -> Bool in return true}
+        , onError: (() -> Void)? = nil
+        , onParseFail: (() -> Void)? = nil //HERE just because of how we are returning the data now..., the onResponse should work properly once we fix the statusCOdes of our reply messages, ie getting 401 for wrong SessionKey
+        ,cb: ([String: AnyObject]
+        ) -> Void) -> Void {
         let nsURL = NSURL(string: baseUrl + "/\(url)")!
         let task = self.session.dataTaskWithURL(
-        nsURL
-                , completionHandler: { (data, response, error) -> Void in
-            //TODO: error handling and such
-            do {
-                print(error)
-                let json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as? [String: AnyObject]
-                guard let ret = json else {
+            nsURL
+            , completionHandler: { (data, response, error) -> Void in
+                if let er = error {
+                    print(er)
+                    _ = onError.map({$0()})
                     return
                 }
-                cb(ret)
-            } catch {
-                fatalError("Could not perform the a request to: \(nsURL) due to: \(error)")
-            }
-        })
+                if (onResponse(response)) {
+                    do {
+                        let json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as? [String: AnyObject]
+                        guard let ret = json else {
+                            return
+                        }
+                        cb(ret)
+                    } catch {
+                        print("Could not perform the a request to: \(nsURL) due to: \(error)")
+                        _ = onParseFail.map({$0()})
+                    }
+                }
+            })
         task.resume()
     }
     

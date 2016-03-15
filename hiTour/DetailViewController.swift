@@ -81,10 +81,11 @@ class DetailViewController : UIViewController {
                 var contentItem :ContentView!
                 
                 contentItem = ContentView(frame: CGRect (x: 0, y: 0, width: self.view.bounds.width, height: 350))
-                print(data.data!.title!)
-                contentItem.populateView(data.data!.data!, titleText: data.data!.title!, descriptionText: data.data!.descriptionD!, url: data.data!.url!, dataId: "\(data.data!.dataId!)-\(audience.audienceId!)")
-                contentItem.presentingViewController = self
+                if let showData = data.data?.data, title = data.data?.title, description = data.data?.descriptionD, url = data.data?.url, dataId = data.data?.dataId {
+                    contentItem.populateView(showData, titleText: title, descriptionText: description, url: url, dataId: "\(dataId)")
+                }
                 
+                contentItem.presentingViewController = self
                 contentItem.layoutIfNeeded()
                 contentItem.sizeToFit()
                 contentItem.heightAnchor.constraintEqualToConstant(contentItem.frame.height).active = true

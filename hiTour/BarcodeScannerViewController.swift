@@ -193,14 +193,13 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
     func processInput(text: String){
         if(text.hasPrefix("SN")) {
             handleSessionScan(text.substringFromIndex(text.startIndex.advancedBy(2)))
-        } else  if(text.hasPrefix("PT")){
-            navigateToPoint(text.substringFromIndex(text.startIndex.advancedBy(2)))
+        } else  if(text.hasPrefix("POINT-")){
+            navigateToPoint(text.substringFromIndex(text.startIndex.advancedBy(6)))
         }
     
     }
     
     func handleSessionScan(session: String){
-        print(session)
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate?
         let coreData = appDelegate?.getCoreData();
         let fetch = coreData?.fetch(name: Session.entityName, predicate: NSPredicate(format: "sessionCode = %@", session));
@@ -214,6 +213,14 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
         }
         
         coreData?.saveMainContext();
+        
+        
+        let overlay = UIView(frame: self.view.frame)
+        
+        overlay.backgroundColor = UIColor.grayColor()
+        overlay.alpha = 0.5
+        tabBarController?.view.addSubview(overlay)
+        
         appDelegate?.getApi()?.fetchTour(ses!, chain: {t in
             if let tour = t {
                 appDelegate?.setTour(tour)
@@ -224,10 +231,9 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
                     
                 } else {
                     dispatch_async(dispatch_get_main_queue(), {
+                        overlay.removeFromSuperview()
                         self.tabBarController?.selectedIndex = 0
-                        print("COntroller",self.tabBarController)
                         let feedControlelr = self.tabBarController?.selectedViewController?.childViewControllers.first! as! FeedController
-                        print("Feeder", feedControlelr)
                         feedControlelr.assignTour(tour)
                     });                    
                 }
@@ -275,15 +281,18 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
             if pointFound.scanned?.boolValue == false {
                 pointFound.setValue(true.boolValue, forKey: "scanned")
             }
-            let pageView = self.storyboard!.instantiateViewControllerWithIdentifier("FeedPageViewController") as! FeedPageViewController
+            (UIApplication.sharedApplication().delegate as! AppDelegate?)?.getCoreData().saveMainContext()
 
+            let pageView = self.storyboard!.instantiateViewControllerWithIdentifier("FeedPageViewController") as! FeedPageViewController
+            
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate?
             let currentTour = appDelegate?.getTour()
             pageView.points = currentTour?.pointTours?.array as! [PointTour]
             pageView.audience = currentTour?.audience
             pageView.startIndex = findDiscoveredPointIndex().indexOf(pointFound)
             
-            self.navigationController!.pushViewController(pageView, animated: true)
+            (self.tabBarController?.viewControllers?[0] as! UINavigationController).pushViewController(pageView, animated: true)
+            self.tabBarController?.selectedIndex = 0
         }
         else {
             let alertView = UIAlertController()

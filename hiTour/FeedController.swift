@@ -119,6 +119,7 @@ class FeedController: UICollectionViewController {
     /// Assigns the currently selected tour
     func assignTour(tour: Tour) -> Void {
         self.tour = tour
+        (self.tabBarController?.viewControllers?[0] as! UINavigationController).popToRootViewControllerAnimated(false)
         NSUserDefaults.standardUserDefaults().setInteger(tour.tourId!.integerValue, forKey: "Tour")
         collectionView?.reloadData()
     }

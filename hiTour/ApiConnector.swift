@@ -131,9 +131,7 @@ class ApiConnector{
             guard let resp = response as? NSHTTPURLResponse else {
                 return true; //NO RESPONSE.. most likely an error, should return true as default
             }
-            
-            print("Code: ",resp.statusCode)
-            
+                        
             if (resp.statusCode == 200) {
                 //SHOULD BE OK
                 return true;
@@ -161,6 +159,12 @@ class ApiConnector{
                 return
             }
             
+            guard let tourSession = dict["tour_session"] as? [String:AnyObject], start = tourSession["start_date"] as? String, duration = tourSession["duration"] as? Int  else {
+                //TODO allert in case something wrong...
+                return
+            }
+            
+            
             guard let points = tour["points"] as? [[String: AnyObject]] else {
                 //TODO alert in case points do not exist or smthing
                 return
@@ -173,6 +177,9 @@ class ApiConnector{
             }
             
             session.tour = nsTour;
+            let dateFormater = NSDateFormatter()
+            dateFormater.dateFormat =  "yyyy-MM-dd"
+            session.endData = dateFormater.dateFromString(start)?.dateByAddingTimeInterval(NSTimeInterval(60*60*24*duration))
             
             _ = points.flatMap({pDict -> [Point] in
                 guard let data = pDict["data"] as? [[String: AnyObject]] else {

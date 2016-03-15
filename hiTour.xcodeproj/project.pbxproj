@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		450610551C987DB800D05EBB /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450610541C987DB800D05EBB /* QuizViewController.swift */; };
+		4506105A1C98AC0400D05EBB /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450610591C98AC0400D05EBB /* Reachability.swift */; };
 		451342221C8366040089F2DC /* prototype.txt in Resources */ = {isa = PBXBuildFile; fileRef = 451342211C8366040089F2DC /* prototype.txt */; };
 		459A8B471C8662BE009B79F0 /* FullScreenImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459A8B461C8662BE009B79F0 /* FullScreenImageViewController.swift */; };
 		45C734391C87950B0069AF2F /* DynamicContentTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C734381C87950B0069AF2F /* DynamicContentTest.swift */; };
@@ -86,6 +87,7 @@
 
 /* Begin PBXFileReference section */
 		450610541C987DB800D05EBB /* QuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
+		450610591C98AC0400D05EBB /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		451342181C83429F0089F2DC /* ctscan.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = ctscan.mp4; path = "../../Projects/Project Run/ctscan.mp4"; sourceTree = "<group>"; };
 		451342191C83429F0089F2DC /* mriscan.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = mriscan.mp4; path = "../../Projects/Project Run/mriscan.mp4"; sourceTree = "<group>"; };
 		4513421A1C83429F0089F2DC /* ultrasound.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = ultrasound.mp4; path = "../../Projects/Project Run/ultrasound.mp4"; sourceTree = "<group>"; };
@@ -181,6 +183,14 @@
 				450610541C987DB800D05EBB /* QuizViewController.swift */,
 			);
 			name = QuizView;
+			sourceTree = "<group>";
+		};
+		450610581C98ABE500D05EBB /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				450610591C98AC0400D05EBB /* Reachability.swift */,
+			);
+			name = Network;
 			sourceTree = "<group>";
 		};
 		4513421E1C8342B90089F2DC /* PrototypeFiles */ = {
@@ -311,6 +321,7 @@
 				450610531C987D5100D05EBB /* QuizView */,
 				6DBED3CB1C7E021E008BFA30 /* Assets.xcassets */,
 				6D90EE521C7E00B500433E1F /* Info.plist */,
+				450610581C98ABE500D05EBB /* Network */,
 				4513421E1C8342B90089F2DC /* PrototypeFiles */,
 				984EC7C21C7209C200A12379 /* hiTourTests */,
 				8FF1C6D21C75FF9E00F16473 /* models */,
@@ -522,6 +533,7 @@
 				8FF1C6EE1C7603A800F16473 /* Tour.swift in Sources */,
 				8FF1C6E51C7603A800F16473 /* Data+CoreDataProperties.swift in Sources */,
 				8FF1C6E71C7603A800F16473 /* Session+CoreDataProperties.swift in Sources */,
+				4506105A1C98AC0400D05EBB /* Reachability.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

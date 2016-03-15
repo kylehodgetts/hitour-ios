@@ -13,15 +13,17 @@ import UIKit
 class QuizViewController : UIViewController {
     
     @IBOutlet weak var webView: UIWebView!
+    var currentTour : Tour!
+    var quizURL : String!
     
     
     override func viewDidLoad() {
-        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let coreData = delegate.getCoreData()
-        
-        
-        
+        quizURL = currentTour.quizUrl
+        webView.loadRequest(NSURLRequest(URL: NSURL(string: quizURL)!))
+        webView.keyboardDisplayRequiresUserAction = true
+        webView.scrollView.showsHorizontalScrollIndicator = false        
     }
+    
     
     
 }

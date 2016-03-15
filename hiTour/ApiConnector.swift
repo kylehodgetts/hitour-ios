@@ -29,9 +29,10 @@ class ApiConnector{
     func updateAll(chain: (() -> Void)? = nil) -> Void {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             if let sessions = self.coreDataStack.fetch(name: Session.entityName).flatMap({$0 as? [Session]}){
+                print("Sessions",sessions)
                 var finished = 0;
                 func tryUpdate() -> Void {
-                    if(finished == sessions.count) {
+                    if(finished >= sessions.count) {
                         dispatch_async(dispatch_get_main_queue(), {
                             // update some UI
                             _ = chain.map({$0()});
@@ -45,6 +46,7 @@ class ApiConnector{
                         tryUpdate()
                     })
                 }
+                tryUpdate()
             }
 
         });

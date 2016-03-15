@@ -36,6 +36,31 @@ class FeedController: UICollectionViewController {
             flowLayout.itemSize = CGSize(width: screenSize.width, height: 185)
         }
         
+        ///Add overlay that says updating....
+        let overlay = UIView(frame: self.view.frame)
+        let label = UILabel(frame: overlay.frame)
+        label.text = "Updating, please wait..."
+        label.center = overlay.center
+        label.textAlignment = .Center
+        overlay.addSubview(label)
+        overlay.backgroundColor = UIColor.grayColor()
+        overlay.alpha = 0.5
+        tabBarController?.view.addSubview(overlay)
+        
+        ///Update all, remove overlay once update is done
+        let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+        delegate?.getApi()?.updateAll{_ in
+            print("yellow")
+            let tourId = NSUserDefaults.standardUserDefaults().integerForKey("Tour")
+            if (tourId > 0) {
+                if let tour = delegate?.getCoreData().fetch(name: Tour.entityName, predicate: NSPredicate(format: "tourId = %D", tourId))?.last as? Tour {
+                    self.assignTour(tour)
+                }
+            }
+            overlay.removeFromSuperview()
+        }
+        
+        
     }
 
     /// Specifies an image and a title for each cell.
@@ -80,7 +105,6 @@ class FeedController: UICollectionViewController {
         
         if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
             let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("DetailViewControllerTablet") as!DetailViewController
-            
             
             let pt = t.pointTours![indexPath.row] as! PointTour
             detailController.point = pt.point!

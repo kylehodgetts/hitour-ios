@@ -45,6 +45,7 @@
     </entity>
     <entity name="Tour" representedClassName=".Tour" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="quizUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tourId" attributeType="Integer 32" defaultValueString="0" indexed="YES" syncable="YES"/>
         <relationship name="audience" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Audience" inverseName="tour" inverseEntity="Audience" syncable="YES"/>
         <relationship name="pointTours" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="PointTour" inverseName="tour" inverseEntity="PointTour" syncable="YES"/>
@@ -57,6 +58,6 @@
         <element name="PointData" positionX="-101" positionY="-549" width="128" height="90"/>
         <element name="PointTour" positionX="-18" positionY="-288" width="128" height="103"/>
         <element name="Session" positionX="-459" positionY="-48" width="128" height="120"/>
-        <element name="Tour" positionX="-441" positionY="-250" width="128" height="120"/>
+        <element name="Tour" positionX="-441" positionY="-250" width="128" height="135"/>
     </elements>
 </model>

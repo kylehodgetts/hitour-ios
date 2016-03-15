@@ -216,31 +216,47 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
         
         
         let overlay = UIView(frame: self.view.frame)
-        
+        let label = UILabel(frame: overlay.frame)
+        label.text = "Updating, please wait..."
+        label.center = overlay.center
+        label.textAlignment = .Center
+        overlay.addSubview(label)
         overlay.backgroundColor = UIColor.grayColor()
         overlay.alpha = 0.5
         tabBarController?.view.addSubview(overlay)
         
         appDelegate?.getApi()?.fetchTour(ses!, chain: {t in
-            if let tour = t {
-                appDelegate?.setTour(tour)
-                if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
-                    self.tabBarController?.selectedIndex = 0
-                    let feedControlelr = self.tabBarController?.selectedViewController as! FeedController
-                    feedControlelr.assignTour(tour)
-                    
-                } else {
-                    dispatch_async(dispatch_get_main_queue(), {
+            dispatch_async(dispatch_get_main_queue(), {
+                if let tour = t {
+                    coreData?.saveMainContext();
+                    appDelegate?.setTour(tour)
+                    if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+                        self.tabBarController?.selectedIndex = 0
+                        let feedControlelr = self.tabBarController?.selectedViewController as! FeedController
+                        feedControlelr.assignTour(tour)
                         overlay.removeFromSuperview()
+                    } else {
                         self.tabBarController?.selectedIndex = 0
                         let feedControlelr = self.tabBarController?.selectedViewController?.childViewControllers.first! as! FeedController
                         feedControlelr.assignTour(tour)
-                    });                    
+                        overlay.removeFromSuperview()
+                    }
+                } else {
+                    let alertView = UIAlertController()
+                    alertView.title = "Session invalid"
+                    alertView.message = "The session key: \(session) is not valid"
+                    
+                    let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {
+                        action in alertView.dismissViewControllerAnimated(true, completion: nil)
+                        self.startTimer()
+                        self.session.startRunning()
+                    }
+                    alertView.addAction(okAction)
+                    self.presentViewController(alertView, animated: true, completion: nil)
+
+                    overlay.removeFromSuperview()
                 }
-            } else {
-                //TODO display no session for meh...
-            }
-            
+            });
         });
         
         

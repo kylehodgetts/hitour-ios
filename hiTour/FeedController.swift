@@ -34,18 +34,31 @@ class FeedController: UICollectionViewController {
             let screenSize: CGRect = UIScreen.mainScreen().bounds
             flowLayout.itemSize = CGSize(width: screenSize.width, height: 185)
         }
-
         
-        let savedTour = NSUserDefaults.standardUserDefaults().integerForKey("Tour")
+        ///Add overlay that says updating....
+        let overlay = UIView(frame: self.view.frame)
+        let label = UILabel(frame: overlay.frame)
+        label.text = "Updating, please wait..."
+        label.center = overlay.center
+        label.textAlignment = .Center
+        overlay.addSubview(label)
+        overlay.backgroundColor = UIColor.grayColor()
+        overlay.alpha = 0.5
+        tabBarController?.view.addSubview(overlay)
+        
+        ///Update all, remove overlay once update is done
         let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
-        let coredata = delegate?.getCoreData()
-        
-        if savedTour > 0 {
-            guard let sTour = coredata?.fetch(name: Tour.entityName, predicate: NSPredicate(format: "tourId == \(savedTour)")).flatMap({$0.first as? Tour}) else {
-                return
+        delegate?.getApi()?.updateAll{_ in
+            print("yellow")
+            let tourId = NSUserDefaults.standardUserDefaults().integerForKey("Tour")
+            if (tourId > 0) {
+                if let tour = delegate?.getCoreData().fetch(name: Tour.entityName, predicate: NSPredicate(format: "tourId = %D", tourId))?.last as? Tour {
+                    self.assignTour(tour)
+                }
             }
-            assignTour(sTour)
+            overlay.removeFromSuperview()
         }
+        
         
     }
 
@@ -93,7 +106,6 @@ class FeedController: UICollectionViewController {
         if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
             let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("DetailViewControllerTablet") as!DetailViewController
             
-            
             let pt = t.pointTours![indexPath.row] as! PointTour
             detailController.point = pt.point!
             detailController.audience = t.audience!
@@ -131,6 +143,7 @@ class FeedController: UICollectionViewController {
     /// Assigns the currently selected tour
     func assignTour(tour: Tour) -> Void {
         self.tour = tour
+        (self.tabBarController?.viewControllers?[0] as! UINavigationController).popToRootViewControllerAnimated(false)
         NSUserDefaults.standardUserDefaults().setInteger(tour.tourId!.integerValue, forKey: "Tour")
         collectionView?.reloadData()
     }

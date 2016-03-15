@@ -138,21 +138,22 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
     
     //  Function that adds to the stack view a video and sets up its constraints and tap gesture to display its controls.
     func addVideoContent(cell: VideoDataViewCell, dataId: String, data: NSData) {
+
         let tmpDirURL = NSURL.fileURLWithPath(NSTemporaryDirectory(), isDirectory: true)
         let fileURL = tmpDirURL.URLByAppendingPathComponent(dataId).URLByAppendingPathExtension("mp4")
         let checkValidation = NSFileManager.defaultManager()
         
         if !checkValidation.fileExistsAtPath(fileURL.absoluteString) {
+            
             data.writeToURL(fileURL, atomically: true)
+            let videoPlayer = AVPlayer(URL: fileURL)
+            let playerController = AVPlayerViewController()
+            playerController.videoGravity = AVLayerVideoGravityResizeAspect
+            playerController.player = videoPlayer
+            cell.videStackView.addArrangedSubview(playerController.view)
+        
+            videoPlayers.append(videoPlayer)
         }
-        
-        let videoPlayer = AVPlayer(URL: fileURL)
-        let playerController = AVPlayerViewController()
-        playerController.videoGravity = AVLayerVideoGravityResizeAspect
-        playerController.player = videoPlayer
-        cell.videStackView.addArrangedSubview(playerController.view)
-        
-        videoPlayers.append(videoPlayer)
        
 //        let tap = UITapGestureRecognizer(target: self, action: Selector("showVideoControls"))
 //        tap.delegate = self

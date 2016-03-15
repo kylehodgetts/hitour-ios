@@ -9,10 +9,13 @@
 import Foundation
 import UIKit
 
+/// Tab Controller that is displayed as a master view on tablets.
 class TabBarController: UITabBarController {
     
+    /// Reference to the segmetnted control that launches the Scanner on tablets.
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
+    /// Launch the BarcodeScannerViewController as a dialog on tablets.
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showScannerSegue" {
             let controller = segue.destinationViewController as! BarcodeScannerViewController
@@ -26,7 +29,10 @@ class TabBarController: UITabBarController {
     }
 }
 
+/// Delegate for the barcode scanner.
 extension TabBarController: BarcodeScannerDelegate {
+    
+    /// Toggle the segmented control when the dialog disappears.
     func didModalDismiss(sender: BarcodeScannerViewController) {
         segmentedControl.selectedSegmentIndex = 0
     }

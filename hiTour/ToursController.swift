@@ -52,10 +52,9 @@ class ToursController : UICollectionViewController {
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ToursControllerCellId", forIndexPath: indexPath) as! ToursControllerCell
+        
         cell.layer.cornerRadius = 7;
-        
         let institution : String = tours[indexPath.row].name!
-        
         cell.labelTitle.text = institution
         
         return cell

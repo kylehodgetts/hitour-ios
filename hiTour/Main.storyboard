@@ -369,9 +369,6 @@
                                         <exclude reference="O9A-wm-cey"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <exclude reference="0Ip-Fm-KXV"/>
-                                        <exclude reference="Ou8-wT-MUQ"/>
-                                        <exclude reference="zh1-EF-lJF"/>
                                         <exclude reference="4VC-sv-Ya6"/>
                                         <exclude reference="WfM-PV-FQ7"/>
                                         <exclude reference="uh4-q4-KTj"/>
@@ -379,6 +376,9 @@
                                         <exclude reference="Eo7-nG-dpn"/>
                                         <exclude reference="Rbb-RI-9mg"/>
                                         <exclude reference="xHY-pY-ct2"/>
+                                        <exclude reference="0Ip-Fm-KXV"/>
+                                        <exclude reference="Ou8-wT-MUQ"/>
+                                        <exclude reference="zh1-EF-lJF"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
@@ -388,9 +388,6 @@
                                         <include reference="O9A-wm-cey"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <include reference="0Ip-Fm-KXV"/>
-                                        <include reference="Ou8-wT-MUQ"/>
-                                        <include reference="zh1-EF-lJF"/>
                                         <include reference="4VC-sv-Ya6"/>
                                         <include reference="WfM-PV-FQ7"/>
                                         <include reference="uh4-q4-KTj"/>
@@ -398,6 +395,9 @@
                                         <include reference="Eo7-nG-dpn"/>
                                         <include reference="Rbb-RI-9mg"/>
                                         <include reference="xHY-pY-ct2"/>
+                                        <include reference="0Ip-Fm-KXV"/>
+                                        <include reference="Ou8-wT-MUQ"/>
+                                        <include reference="zh1-EF-lJF"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">

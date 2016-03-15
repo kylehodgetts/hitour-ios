@@ -13,7 +13,6 @@ import UIKit
 class QuizViewController : UIViewController {
     
     @IBOutlet weak var webView: UIWebView!
-    @IBOutlet weak var scrollView: UIScrollView!
     
     
     override func viewDidLoad() {

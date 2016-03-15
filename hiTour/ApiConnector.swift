@@ -27,160 +27,145 @@ class ApiConnector{
     /// Drops all data from the coreData and updates them with new values from the server
     ///
     func updateAll(chain: (() -> Void)? = nil) -> Void {
-        coreDataStack.deleteAll()
-        coreDataStack.saveMainContext()
-        fetchAllCauseWeDumb()
-    }
-    
-    ///
-    /// A generic fetch method to fetch data from a given url, and then parse them
-    ///
-    /// Parameters:
-    ///  - url: The end url to be fetched rom the api
-    ///  - jsonReader: The reader for the objects returned from the api
-    ///  - chain: An option of function taht is called once the request is finnished
-    ///  - afterParse: A curried function that takes takes the json object and then the already parsed object and does actions
-    ///     that need to be done in order to keep the validity of the object
-    ///
-    internal func fetch<R: JsonReader where R.T: NSManagedObject>(
-        url: String
-        , jsonReader: R
-        , chain: (([R.T]) -> Void)? = nil
-        , afterParse: ([String: AnyObject]) -> ((R.T) -> R.T) = {(_) -> ((R.T) -> R.T) in {$0} }
-    ) -> Void {
-        client.request(url) { (dicts) -> Void in
-            let objs = dicts.flatMap({ dict -> R.T? in
-                jsonReader.read(dict, stack: self.coreDataStack)
-                .map({self.coreDataStack.insert(jsonReader.entityName(), callback: $0)})
-                .map(afterParse(dict))
-            })
-            if let cb = chain {
-                cb(objs)
-            }
-        }
-    }
-    
-    ///
-    /// Fetches tours from the server
-    ///
-    func fetchTours(audiences: [Audience], chain: (([Tour]) -> Void)? ) -> Void {
-        fetch("tours", jsonReader: Tour.jsonReader, chain: chain, afterParse: {dict in
-            return { (t) -> Tour in
-                if let audienceId = dict["audience_id"] as? Int, idx = audiences.indexOf({$0.audienceId == audienceId}) {
-                    t.audience = audiences[idx]
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            if let sessions = self.coreDataStack.fetch(name: Session.entityName).flatMap({$0 as? [Session]}){
+                print("Sessions",sessions)
+                var finished = 0;
+                func tryUpdate() -> Void {
+                    if(finished >= sessions.count) {
+                        dispatch_async(dispatch_get_main_queue(), {
+                            // update some UI
+                            _ = chain.map({$0()});
+                        });
+                    }
                 }
-                return t
-            }
-        })
-    }
-    
-    ///
-    /// Fetches the points from the server
-    ///
-    func fetchPoints(chain: (([Point]) -> Void)? ) -> Void {
-        fetch("points", jsonReader: Point.jsonReader, chain: chain, afterParse: {dict in
-            return { (p) -> Point in
-                if let url = dict["url"] as? String {
-                    self.client.binaryReques(url, cb: { (data) -> Void in
-                        p.data = data
+                for session in sessions {
+                    self.fetchTour(session, chain: {_ in
+                        finished++
+                        self.coreDataStack.saveMainContext()
+                        tryUpdate()
                     })
                 }
-                return p
+                tryUpdate()
             }
-        })
-    }
-    
-    
-    ///
-    /// Fetches the data from the server
-    ///
-    func fetchData(chain: (([Data]) -> Void)? ) -> Void {
-        fetch("data", jsonReader: Data.jsonReader, chain: chain, afterParse: {dict in
-            return { (d) -> Data in
-                if let url = dict["url"] as? String {
-                    self.client.binaryReques(url, cb: { (data) -> Void in
-                        d.data = data
-                    })
-                }
-                return d
-            }
-        })
 
+        });
     }
     
     
-    ///
-    /// Fetches the audiences from the server
-    ///
-    func fetchAudience(chain: (([Audience]) -> Void)? ) -> Void {
-        fetch("audiences", jsonReader: Audience.jsonReader, chain: chain)
-    }
-    
-    ///
-    /// Fetches the point - tour relationsships from the srever
-    ///
-    func fetchPointTour(tours: [Tour], points: [Point], chain: (([PointTour]) -> Void)? = nil ) -> Void {
-        fetch("tour_points", jsonReader: PointTour.jsonReader, chain: chain, afterParse: {dict in
-            return { (pt) -> PointTour in
-                if let tourId = dict["tour_id"] as? Int, idx = tours.indexOf({$0.tourId == tourId}){
-                    pt.tour = tours[idx]
-                }
-                
-                if let pointId = dict["point_id"] as? Int, idx = points.indexOf({$0.pointId == pointId}){
-                    pt.point = points[idx]
-                }
-                
-                return pt
+    func deletePoint(point: Point) -> Void {
+        guard let pointData = point.pointData?.array as? [PointData] else {
+            coreDataStack.delete(point)
+            return
+        }
+        
+        for pd in pointData {
+            let data = pd.data!
+            if (data.pointData?.count == 1){
+                coreDataStack.delete(data);
             }
-        })
+            
+            coreDataStack.delete(pd);
+        }
+        
+        coreDataStack.delete(point);
     }
     
-    ///
-    /// Fetches teh point - data relationships from the server
-    ///
-    func fetchPointData(data: [Data], points: [Point], chain: (([PointData]) -> Void)? = nil ) -> Void {
-        fetch("point_data", jsonReader: PointData.jsonReader, chain: chain, afterParse: {dict in
-            return { (pd) -> PointData in
-                if let dataId = dict["datum_id"] as? Int, idx = data.indexOf({$0.dataId == dataId}){
-                    pd.data = data[idx]
-                }
-                
-                if let pointId = dict["point_id"] as? Int, idx = points.indexOf({$0.pointId == pointId}){
-                    pd.point = points[idx]
-                }
-                
-                return pd
+    func deleteTour(tour: Tour) -> Void {
+        guard let tourPoints = tour.pointTours?.array as? [PointTour] else {
+            coreDataStack.delete(tour);
+            return
+        }
+        
+        for tourPoint in tourPoints {
+            let point = tourPoint.point!
+            if (point.pointTours?.count == 1){
+                deletePoint(point);
             }
-        })
+            
+            coreDataStack.delete(tourPoint);
+        }
+        
+        coreDataStack.delete(tour);
+    
+    }
+    
+    func deleteSession(session: Session) -> Void{
+        //TODO: Delete all data that has smthing to do with this session
+        guard let tour = session.tour else {
+            coreDataStack.delete(session);
+            return;
+        }
+        
+        guard let sessions = tour.sessions?.allObjects as? [Session] else {
+            deleteTour(tour);
+            coreDataStack.delete(session);
+            return;
+        }
+        
+        //Multiple session keys loaded, no need to delete tour
+        if(sessions.count > 1){
+            coreDataStack.delete(session);
+            return;
+        }
+        
+        deleteTour(tour);
+        coreDataStack.delete(session);
+        
     }
 
-    
     ///
-    /// Fetches teh data - audience relationships from the server
+    /// !!! ATTENTIONE !!! 
+    /// DO NOT TOUCH THIS UNLESS YOU ARE REALLY SURE WHAT YOU ARE DOING
+    /// HAS WEIRD ASS DEPENDEDNCIES ALL OVER THE FUNCTION...
     ///
-    func fetchDataAudiences(data: [Data], audiences: [Audience], chain: (() -> Void)? = nil ) -> Void {
-        client.request("data_audiences") { (dicts) -> Void in
-            dicts.forEach({ dict in
-                if let audienceId = dict["audience_id"] as? Int, adx = audiences.indexOf({$0.audienceId == audienceId}), dataId = dict["datum_id"] as? Int, ddx = data.indexOf({$0.dataId == dataId}){
-                    let data = data[ddx]
-                    var newAudience = [audiences[adx] as AnyObject]
-                    newAudience += data.audience!.allObjects
-                    data.audience = NSSet(array: newAudience)
-                }
-            })
-            if let cb = chain {
-                cb()
+    ///
+    func fetchTour(session: Session, chain: ((Tour?) -> Void)? = nil) -> Void {
+        var outStandingRequests = 0;
+        
+        func tryCallBack(tour: Tour){
+            if(outStandingRequests <= 0) {
+                _ = chain.map({$0(tour)})
             }
         }
-    }
+        
+        func tourOnResponse(response: NSURLResponse?) -> Bool{
+            guard let resp = response as? NSHTTPURLResponse else {
+                return true; //NO RESPONSE.. most likely an error, should return true as default
+            }
+                        
+            if (resp.statusCode == 200) {
+                //SHOULD BE OK
+                return true;
+            } else if (resp.statusCode == 401) {
+                //WRONG SESSION KEY, procede to delete all to do with seš
+                deleteSession(session);
+                _ = chain.map({$0(nil)})
+                return false;
+            }
+            return true // return true as default... mostlikely will result into an error anyway...
+            
+        }
 
-    func fetchAllCauseWeDumb(chain: (() -> Void)? = nil) -> Void {
-
-        client.requestObject("Unguessable983") { (dict:[String: AnyObject] ) -> Void in
+        client.requestObject(
+            session.sessionCode!
+            , onResponse: tourOnResponse
+            , onError: {_ in _ = chain.map({$0(nil)})}
+            , onParseFail: {_ in
+                self.deleteSession(session)
+                _ = chain.map({$0(nil)})
+            }
+        ) { (dict:[String: AnyObject] ) -> Void in
             guard let tour = dict["tours"] as? [String: AnyObject] else {
                 //TODO allert in case something wrong...
                 return
             }
+            
+            guard let tourSession = dict["tour_session"] as? [String:AnyObject], start = tourSession["start_date"] as? String, duration = tourSession["duration"] as? Int  else {
+                //TODO allert in case something wrong...
+                return
+            }
+            
             
             guard let points = tour["points"] as? [[String: AnyObject]] else {
                 //TODO alert in case points do not exist or smthing
@@ -193,6 +178,11 @@ class ApiConnector{
                 return
             }
             
+            session.tour = nsTour;
+            let dateFormater = NSDateFormatter()
+            dateFormater.dateFormat =  "yyyy-MM-dd"
+            session.endData = dateFormater.dateFromString(start)?.dateByAddingTimeInterval(NSTimeInterval(60*60*24*duration))
+            
             _ = points.flatMap({pDict -> [Point] in
                 guard let data = pDict["data"] as? [[String: AnyObject]] else {
                     return []
@@ -201,16 +191,39 @@ class ApiConnector{
                 guard let nsPoint = Point.jsonReader.read(pDict, stack: self.coreDataStack).map({self.coreDataStack.insert(Point.entityName, callback: $0)}) else {
                     return []
                 }
-                if let url = pDict["url"] as? String {
-                    self.client.binaryReques(url, cb: { (data) -> Void in
-                        nsPoint.data = data
-                    })
+                
+                func dowloadPointData(){
+                    outStandingRequests++;
+                    if let url = pDict["url"] as? String {
+                        print("Getting pointD")
+                        self.client.binaryReques(url, cb: { (data) -> Void in
+                            nsPoint.data = data
+                            outStandingRequests--
+                            tryCallBack(nsTour)
+                        })
+                    }
                 }
                 
-                if let tourPoint = PointTour.jsonReader.read(pDict, stack: self.coreDataStack).map({self.coreDataStack.insert(PointTour.entityName, callback: $0)}) {
-                    tourPoint.tour = nsTour
-                    tourPoint.point = nsPoint
+                let pointUpdated = pDict["updated_at"] as? String;
+                
+                if let date = nsPoint.dateUpdated {
+                    if(pointUpdated != date){
+                        dowloadPointData()
+                    }
+                } else {
+                    dowloadPointData();
                 }
+                nsPoint.dateUpdated = pointUpdated;
+                
+                if let pts = nsPoint.pointTours?.array as? [PointTour] {
+                    if(!pts.contains({$0.tour == nsTour})){
+                        if let tourPoint = PointTour.jsonReader.read(pDict, stack: self.coreDataStack).map({self.coreDataStack.insert(PointTour.entityName, callback: $0)}) {
+                            tourPoint.tour = nsTour
+                            tourPoint.point = nsPoint
+                        }
+                    }
+                }
+
 
                 
                _ = data.flatMap({dDict -> [Data] in
@@ -230,16 +243,38 @@ class ApiConnector{
                         let nAudience = (dataAudience as [AnyObject]) + nsData.audience!.allObjects
                         nsData.audience = NSSet(array: nAudience)
                         
-                        if let dataPoint = PointData.jsonReader.read(dDict, stack: self.coreDataStack).map({self.coreDataStack.insert(PointData.entityName, callback: $0)}) {
-                            dataPoint.point = nsPoint
-                            dataPoint.data = nsData
+                        if let pds = nsData.pointData?.allObjects as? [PointData] {
+                            if(!pds.contains({$0.point == nsPoint})){
+                                if let dataPoint = PointData.jsonReader.read(dDict, stack: self.coreDataStack).map({self.coreDataStack.insert(PointData.entityName, callback: $0)}) {
+                                    dataPoint.point = nsPoint
+                                    dataPoint.data = nsData
+                                }
+                            }
+                        }
+
+                        
+                        func downloadDataData() {
+                            outStandingRequests++
+                            if let url = dDict["url"] as? String {
+                                self.client.binaryReques(url, cb: { (data) -> Void in
+                                    nsData.data = data
+                                    outStandingRequests--
+                                    tryCallBack(nsTour)
+                                })
+                            }
                         }
                         
-                        if let url = dDict["url"] as? String {
-                            self.client.binaryReques(url, cb: { (data) -> Void in
-                                nsData.data = data
-                            })
+                        let dataUpdated = dDict["updated_at"] as? String;
+                        
+                        if let dataDate = nsData.dataUpdated {
+                            if(dataUpdated != dataDate){
+                                downloadDataData()
+                            }
+                        } else {
+                            downloadDataData();
                         }
+
+                        nsData.dataUpdated = dataUpdated;
                         
                         return [nsData]
                     }
@@ -255,6 +290,8 @@ class ApiConnector{
             if let audienceId = tour["audience_id"] as? Int {
                 nsTour.audience = audiencesS.filter({$0.audienceId! == audienceId}).last
             }
+            
+            tryCallBack(nsTour)
         
         }
     }

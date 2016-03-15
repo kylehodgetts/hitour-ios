@@ -101,8 +101,14 @@ class CoreDataStack{
         }
     }
     
+    func delete(object: NSManagedObject) -> Void {
+        managedObjectContext.deleteObject(object);
+    }
+    
     func deleteAll() -> Void {
         managedObjectContext.reset()
     }
+    
+    
     
 }

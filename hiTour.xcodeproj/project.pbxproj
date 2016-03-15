@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		450610551C987DB800D05EBB /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450610541C987DB800D05EBB /* QuizViewController.swift */; };
 		4506105A1C98AC0400D05EBB /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450610591C98AC0400D05EBB /* Reachability.swift */; };
+		450610601C98C5A800D05EBB /* QuizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506105F1C98C5A800D05EBB /* QuizTests.swift */; };
 		451342221C8366040089F2DC /* prototype.txt in Resources */ = {isa = PBXBuildFile; fileRef = 451342211C8366040089F2DC /* prototype.txt */; };
 		459A8B471C8662BE009B79F0 /* FullScreenImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459A8B461C8662BE009B79F0 /* FullScreenImageViewController.swift */; };
 		45C734391C87950B0069AF2F /* DynamicContentTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C734381C87950B0069AF2F /* DynamicContentTest.swift */; };
@@ -88,6 +89,7 @@
 /* Begin PBXFileReference section */
 		450610541C987DB800D05EBB /* QuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
 		450610591C98AC0400D05EBB /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		4506105F1C98C5A800D05EBB /* QuizTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizTests.swift; sourceTree = "<group>"; };
 		451342181C83429F0089F2DC /* ctscan.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = ctscan.mp4; path = "../../Projects/Project Run/ctscan.mp4"; sourceTree = "<group>"; };
 		451342191C83429F0089F2DC /* mriscan.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = mriscan.mp4; path = "../../Projects/Project Run/mriscan.mp4"; sourceTree = "<group>"; };
 		4513421A1C83429F0089F2DC /* ultrasound.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = ultrasound.mp4; path = "../../Projects/Project Run/ultrasound.mp4"; sourceTree = "<group>"; };
@@ -347,6 +349,7 @@
 				984EC7D01C7209C200A12379 /* Info.plist */,
 				45C734381C87950B0069AF2F /* DynamicContentTest.swift */,
 				45D87F171C90F7F600962CCF /* PointDiscoveryTest.swift */,
+				4506105F1C98C5A800D05EBB /* QuizTests.swift */,
 			);
 			path = hiTourUITests;
 			sourceTree = "<group>";
@@ -552,6 +555,7 @@
 			files = (
 				984EC7CF1C7209C200A12379 /* hiTourUITests.swift in Sources */,
 				45D87F181C90F7F600962CCF /* PointDiscoveryTest.swift in Sources */,
+				450610601C98C5A800D05EBB /* QuizTests.swift in Sources */,
 				45C734391C87950B0069AF2F /* DynamicContentTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

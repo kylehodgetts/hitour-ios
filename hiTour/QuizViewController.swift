@@ -9,9 +9,11 @@
 import Foundation
 import UIKit
 
-
+//  View controller to handle the display of the Quiz to the user and handle 
+//  the network connectivity issues
 class QuizViewController : UIViewController {
     
+    //  Outlet reference to the web container view
     @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var refreshView: UIView!
     

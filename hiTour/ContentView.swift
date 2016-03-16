@@ -75,7 +75,7 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
             addVideoContent(dataId, data: data)
         }
         else if url.containsString(".txt"){
-            addTextContent(url) //FIXME? why does this even exist? only binary files will be added this way, rest is description?
+            addTextContent(data)
         }
         else {
             addImageContent(data)
@@ -113,13 +113,8 @@ class ContentView : UIView, UIGestureRecognizerDelegate {
     }
     
     //  Function that adds text content to the stack view from a file.
-    func addTextContent(url: String) {
-        do {
-            try txtText.text = String(contentsOfFile: url, encoding: NSUTF8StringEncoding)
-        }
-        catch {
-            print("Error reading text file resource")
-        }
+    func addTextContent(data: NSData) {
+        txtText.text =  String(data: data, encoding: NSUTF8StringEncoding)
         txtText.editable = false
         txtTitle.selectable = false
         txtText.widthAnchor.constraintEqualToConstant(txtText.contentSize.width).active = true

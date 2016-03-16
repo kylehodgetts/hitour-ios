@@ -16,7 +16,6 @@ class FeedController: UICollectionViewController {
     /// Flow layout specifies position of each item in the collection.
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
-    let prototypeData = PrototypeDatum.getAllData
     var selectedItem = 0
     var tour: Tour? = nil
     
@@ -36,7 +35,7 @@ class FeedController: UICollectionViewController {
             flowLayout.itemSize = CGSize(width: screenSize.width, height: 185)
         }
         
-        ///Add overlay that says updating....
+        /// Add overlay that says updating....
         let overlay = UIView(frame: self.view.frame)
         let label = UILabel(frame: overlay.frame)
         label.text = "Updating, please wait..."
@@ -47,7 +46,7 @@ class FeedController: UICollectionViewController {
         overlay.alpha = 0.5
         tabBarController?.view.addSubview(overlay)
         
-        ///Update all, remove overlay once update is done
+        /// Update all, remove overlay once update is done
         let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
         delegate?.getApi()?.updateAll{_ in
             print("yellow")
@@ -67,7 +66,7 @@ class FeedController: UICollectionViewController {
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("FeedControllerCellId", forIndexPath: indexPath) as! FeedControllerCell
-        cell.sizeToFit()
+
         guard let t = tour else {
             return cell
         }
@@ -77,8 +76,9 @@ class FeedController: UICollectionViewController {
         
         cell.imageViewFeed?.contentMode = .ScaleAspectFill
         cell.userInteractionEnabled = pt.scanned!.boolValue
-        cell.lockedView.hidden = pt.scanned!.boolValue
-        
+        cell.lockView.hidden = pt.scanned!.boolValue
+        cell.transparentView.hidden = pt.scanned!.boolValue
+
 
         guard let image = pt.point!.data else {
             return cell
@@ -143,7 +143,6 @@ class FeedController: UICollectionViewController {
     /// Assigns the currently selected tour
     func assignTour(tour: Tour) -> Void {
         self.tour = tour
-        (self.tabBarController?.viewControllers?[0] as! UINavigationController).popToRootViewControllerAnimated(false)
         NSUserDefaults.standardUserDefaults().setInteger(tour.tourId!.integerValue, forKey: "Tour")
         collectionView?.reloadData()
     }

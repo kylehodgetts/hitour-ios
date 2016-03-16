@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -20,6 +19,17 @@
                         <variation key="widthClass=compact" fixedFrame="YES">
                             <rect key="frame" x="0.0" y="0.0" width="378.5" height="185"/>
                         </variation>
+                    </imageView>
+                    <view alpha="0.84999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rfd-3l-EYB">
+                        <rect key="frame" x="0.0" y="0.0" width="391" height="185"/>
+                        <color key="backgroundColor" red="0.043137254901960784" green="0.066666666666666666" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock" translatesAutoresizingMaskIntoConstraints="NO" id="0xo-Fx-ofk">
+                        <rect key="frame" x="147" y="33" width="96" height="96"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="96" id="KSq-f0-QPj"/>
+                            <constraint firstAttribute="width" constant="96" id="ysE-Tm-KX8"/>
+                        </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Og7-JO-621">
                         <rect key="frame" x="0.0" y="145" width="391" height="40"/>
@@ -46,51 +56,41 @@
                             <rect key="frame" x="0.0" y="145" width="378.5" height="40"/>
                         </variation>
                     </view>
-                    <view alpha="0.5" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rfd-3l-EYB">
-                        <rect key="frame" x="0.0" y="0.0" width="391" height="185"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="lock" translatesAutoresizingMaskIntoConstraints="NO" id="0xo-Fx-ofk">
-                                <rect key="frame" x="173" y="64" width="44" height="57"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="0xo-Fx-ofk" secondAttribute="bottom" constant="64" id="6ia-S7-RAp"/>
-                            <constraint firstItem="0xo-Fx-ofk" firstAttribute="width" secondItem="rfd-3l-EYB" secondAttribute="height" multiplier="11:32" id="c9Q-4W-yYr"/>
-                            <constraint firstAttribute="trailing" secondItem="0xo-Fx-ofk" secondAttribute="trailing" constant="174" id="fAA-c3-d5j"/>
-                            <constraint firstItem="0xo-Fx-ofk" firstAttribute="leading" secondItem="rfd-3l-EYB" secondAttribute="leading" constant="173" id="ghA-uW-AtX"/>
-                            <constraint firstItem="0xo-Fx-ofk" firstAttribute="top" secondItem="rfd-3l-EYB" secondAttribute="top" constant="64" id="mVx-Er-pu5"/>
-                            <constraint firstItem="0xo-Fx-ofk" firstAttribute="centerY" secondItem="rfd-3l-EYB" secondAttribute="centerY" id="vpA-ub-cIc"/>
-                            <constraint firstItem="0xo-Fx-ofk" firstAttribute="centerX" secondItem="rfd-3l-EYB" secondAttribute="centerX" id="wbf-lJ-cJp"/>
-                        </constraints>
-                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
+                <constraint firstItem="0xo-Fx-ofk" firstAttribute="top" secondItem="IAr-Hn-5Me" secondAttribute="top" constant="33" id="05p-Cw-53Z"/>
                 <constraint firstAttribute="bottom" secondItem="Og7-JO-621" secondAttribute="bottom" id="AaA-iG-Nus"/>
                 <constraint firstItem="Og7-JO-621" firstAttribute="leading" secondItem="IAr-Hn-5Me" secondAttribute="leading" id="BGC-xr-HGl"/>
+                <constraint firstAttribute="trailing" secondItem="rfd-3l-EYB" secondAttribute="trailing" id="Bw8-ad-GwS"/>
+                <constraint firstItem="z7V-36-Hpu" firstAttribute="top" secondItem="0xo-Fx-ofk" secondAttribute="bottom" constant="24" id="K5D-UC-Grd"/>
                 <constraint firstItem="gHP-Nl-FAh" firstAttribute="height" secondItem="IAr-Hn-5Me" secondAttribute="height" id="LPf-rJ-U3G"/>
+                <constraint firstAttribute="bottom" secondItem="rfd-3l-EYB" secondAttribute="bottom" id="MMN-g7-prD"/>
                 <constraint firstItem="Og7-JO-621" firstAttribute="width" secondItem="IAr-Hn-5Me" secondAttribute="width" id="MVK-wf-Ccz"/>
                 <constraint firstItem="gHP-Nl-FAh" firstAttribute="width" secondItem="IAr-Hn-5Me" secondAttribute="width" id="OuM-eH-7Bf"/>
                 <constraint firstItem="gHP-Nl-FAh" firstAttribute="top" secondItem="IAr-Hn-5Me" secondAttribute="top" id="Q3U-EG-lV4"/>
                 <constraint firstAttribute="trailing" secondItem="gHP-Nl-FAh" secondAttribute="trailing" id="TLJ-dU-nhR"/>
+                <constraint firstItem="rfd-3l-EYB" firstAttribute="height" secondItem="IAr-Hn-5Me" secondAttribute="height" id="TZX-hx-GEa"/>
+                <constraint firstItem="rfd-3l-EYB" firstAttribute="width" secondItem="IAr-Hn-5Me" secondAttribute="width" id="YTM-Zx-cuN"/>
                 <constraint firstAttribute="trailing" secondItem="Og7-JO-621" secondAttribute="trailing" id="a42-YC-pFY"/>
+                <constraint firstItem="rfd-3l-EYB" firstAttribute="leading" secondItem="IAr-Hn-5Me" secondAttribute="leading" id="hjf-b9-gXN"/>
+                <constraint firstItem="0xo-Fx-ofk" firstAttribute="centerX" secondItem="IAr-Hn-5Me" secondAttribute="centerX" id="jpS-ER-JFu"/>
                 <constraint firstItem="gHP-Nl-FAh" firstAttribute="leading" secondItem="IAr-Hn-5Me" secondAttribute="leading" id="qMf-CH-KeY"/>
-                <constraint firstItem="rfd-3l-EYB" firstAttribute="height" secondItem="gHP-Nl-FAh" secondAttribute="height" id="tLA-gr-vt9"/>
+                <constraint firstItem="rfd-3l-EYB" firstAttribute="top" secondItem="IAr-Hn-5Me" secondAttribute="top" id="rAt-1h-vmh"/>
                 <constraint firstAttribute="bottom" secondItem="gHP-Nl-FAh" secondAttribute="bottom" id="vTp-Od-YRf"/>
-                <constraint firstItem="rfd-3l-EYB" firstAttribute="width" secondItem="gHP-Nl-FAh" secondAttribute="width" id="zhR-uH-hza"/>
             </constraints>
             <size key="customSize" width="391" height="185"/>
             <connections>
                 <outlet property="imageViewFeed" destination="gHP-Nl-FAh" id="q8S-zx-WBy"/>
                 <outlet property="labelTitle" destination="z7V-36-Hpu" id="g2d-xc-Lvz"/>
-                <outlet property="lockedView" destination="rfd-3l-EYB" id="yyx-9z-3hj"/>
+                <outlet property="lockView" destination="0xo-Fx-ofk" id="MpL-g0-HSr"/>
+                <outlet property="transparentView" destination="rfd-3l-EYB" id="QHy-lN-TV3"/>
             </connections>
             <point key="canvasLocation" x="280.5" y="512.5"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="lock" width="565" height="800"/>
+        <image name="lock" width="72" height="72"/>
     </resources>
 </document>

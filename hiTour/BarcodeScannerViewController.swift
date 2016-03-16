@@ -9,45 +9,50 @@
 import AVFoundation
 import UIKit
 
+/// Delegate used to inform the TabBarController that a modal view has been dismissed on a tablet.
+protocol BarcodeScannerDelegate: class {
+    func didModalDismiss(sender: BarcodeScannerViewController)
+    func didItemScan(tour: Tour, sender: BarcodeScannerViewController)
+    func didPointScan(currentTour: Tour, startIndex: Int, sender: BarcodeScannerViewController)
+}
 
-// Class that implements a QR Barcode Scanner within a UIView by using the device main camera.
-// Then inputs the results into the text field on the view.
-class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputObjectsDelegate, UITextFieldDelegate {
+/// Class that implements a QR Barcode Scanner within a UIView by using the device main camera.
+/// Then inputs the results into the text field on the view.
+class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputObjectsDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate {
     
-    // Capture session for receiving input from the camera */
+    /// Capture session for receiving input from the camera */
     let session = AVCaptureSession()
     
-    // Video Preview layer to provide a live video camera feevaro the view */
+    /// Video Preview layer to provide a live video camera feevaro the view */
     var previewLayer : AVCaptureVideoPreviewLayer?
     
-    // View that provides a red rectangle when a QR code has been discovered */
+    /// View that provides a red rectangle when a QR code has been discovered */
     var identifiedBorder : DiscoveredBardCodeView?
     
-    // Timer to remove the red rectangle after a small moment */
+    /// Timer to remove the red rectangle after a small moment */
     var timer : NSTimer!
     
-    // Error Alert to be displayed */
+    /// Error Alert to be displayed */
     var errorAlert : UIAlertController!
     
-    // Reference to the Storyboards camera view */
+    /// Reference to the Storyboards camera view */
     @IBOutlet weak var cameraView: UIView!
     
-    // Reference to the View containing the text field and button */
+    /// Reference to the View containing the text field and button */
     @IBOutlet weak var codeInputView: UIView!
     
-    // Reference to the input text field */
+    /// Reference to the input text field */
     @IBOutlet weak var txtInput: UITextField!
     
-    // Reference to the submit button */
-    @IBOutlet weak var btnSubmit: UIButton!
-    
+    /// Reference to the delegate
+    weak var delegate: BarcodeScannerDelegate?
     
     
     // MARK: Initialiser
     
     
-    //  Starts a new capture device session which only accepts QR codes as the output produced by the session
-    //  Handles error if the camera can't be accessed.
+    ///  Starts a new capture device session which only accepts QR codes as the output produced by the session
+    ///  Handles error if the camera can't be accessed.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -70,16 +75,19 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
             }
             errorAlert.addAction(errorAlertOkAction)
         }
+        
+        // Notify when a keyboard appears/disappears from the screen.
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
     }
     
     // MARK: Overrides
     
     
-    // When the view appears on the device, the preview layer is added and the input view brought forward.
-    // The capture session is started to start the live camera feed.
+    /// When the view appears on the device, the preview layer is added and the input view brought forward.
+    /// The capture session is started to start the live camera feed.
     override func viewDidAppear(animated: Bool) {
         addPreviewLayer()
-        self.view.bringSubviewToFront(codeInputView)
         session.startRunning()
         txtInput.delegate = self
         
@@ -88,12 +96,10 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
             errorAlert.popoverPresentationController?.sourceRect = self.cameraView.frame
             self.presentViewController(errorAlert, animated: true, completion: nil)
         }
-
     }
     
     
-    //  Stops the capture session when the view is no longer visible
-    
+    ///  Stops the capture session when the view is no longer visible
     override func viewWillDisappear(animated: Bool) {
         session.stopRunning()
     }
@@ -102,8 +108,8 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
     // MARK: Actions
     
     
-    // Sets up the video preview layer to handle the live camera feed and prepares the view to be displayed when a
-    // QR code has been discovered.
+    /// Sets up the video preview layer to handle the live camera feed and prepares the view to be displayed when a
+    /// QR code has been discovered.
     func addPreviewLayer() {
         previewLayer = AVCaptureVideoPreviewLayer(session: session)
         previewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
@@ -123,8 +129,8 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
     }
     
     
-    //  Translates the points for each received from the capture session by the camera.
-    //  @return Array of CGPoint's
+    ///  Translates the points for each received from the capture session by the camera.
+    ///  - Returns: Array of CGPoint's
     func translatePoints(points: [AnyObject], fromView: UIView, toView: UIView) -> [CGPoint] {
         var translatedPoints : [CGPoint] = []
         for point in points {
@@ -139,7 +145,7 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
     }
     
     
-    //  Starts the timer to remove the discovered red rectangle view around a found QR code when the session is to be started again.
+    ///  Starts the timer to remove the discovered red rectangle view around a found QR code when the session is to be started again.
     func startTimer() {
         if timer?.valid != true {
             timer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: "removeBorder", userInfo: nil, repeats: false)
@@ -150,14 +156,13 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
     }
     
     
-    // Hides the discovered red rectangle from the view
-    
+    /// Hides the discovered red rectangle from the view.
     func removeBorder() {
         self.identifiedBorder?.hidden = true
     }
     
     
-    //  When a QR code has been discovered puts the result into the textfield and stops the capture session.
+    ///  When a QR code has been discovered puts the result into the textfield and stops the capture session.
     func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
         for data in metadataObjects {
             let metaData = data as! AVMetadataObject
@@ -178,12 +183,41 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
     }
 
     
-    //  Closes the keyboard view when the user presses the done button on the keyboard
+    ///  Closes the keyboard view when the user presses the done button on the keyboard
     @IBAction func textInputDone(sender: UITextField) {
         sender.resignFirstResponder()
+        submit()
     }
     
-    @IBAction func submitPressed(sender: UIButton) {
+    /// Move the scanner up when the keyboard appears on the screen.
+    func keyboardWillShow(notification: NSNotification) {
+        
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            self.view.frame.origin.y -= keyboardSize.height
+        }
+        
+    }
+    
+    /// Adjust the scanner when the keyboard disappears from the screen.
+    func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            self.view.frame.origin.y += keyboardSize.height
+        }
+    }
+    
+    /// Invoke a delegate when the view disappears on the tablet to toggle the segmented control.
+    override func viewDidDisappear(animated: Bool) {
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+            delegate?.didModalDismiss(self)
+        }
+    }
+
+    /// Dismiss a dialog after clicking the Cancel button.
+    @IBAction func dismissDialog(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+
+    func submit() {
         if txtInput.text?.characters.count > 0 {
             processInput(txtInput.text!)
             txtInput.resignFirstResponder()
@@ -231,10 +265,9 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
                     coreData?.saveMainContext();
                     appDelegate?.setTour(tour)
                     if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
-                        self.tabBarController?.selectedIndex = 0
-                        let feedControlelr = self.tabBarController?.selectedViewController as! FeedController
-                        feedControlelr.assignTour(tour)
+                        self.delegate!.didItemScan(tour, sender: self)
                         overlay.removeFromSuperview()
+                        self.dismissViewControllerAnimated(true, completion: nil)
                     } else {
                         self.tabBarController?.selectedIndex = 0
                         let feedControlelr = self.tabBarController?.selectedViewController?.childViewControllers.first! as! FeedController
@@ -266,6 +299,7 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
     func isPointFound(pointId : String) -> PointTour! {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate?
         let currentTour = appDelegate?.getTour()
+        // TODO: The app crashes if the tour was not explicitly selected from the collection view
         let currentTourPoints = currentTour?.pointTours?.array as! [PointTour]
         for tourPoint in currentTourPoints {
             if tourPoint.point?.valueForKey("pointId") as? Int == Int(pointId) {
@@ -297,18 +331,28 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
             if pointFound.scanned?.boolValue == false {
                 pointFound.setValue(true.boolValue, forKey: "scanned")
             }
-            (UIApplication.sharedApplication().delegate as! AppDelegate?)?.getCoreData().saveMainContext()
-
-            let pageView = self.storyboard!.instantiateViewControllerWithIdentifier("FeedPageViewController") as! FeedPageViewController
             
+            (UIApplication.sharedApplication().delegate as! AppDelegate?)?.getCoreData().saveMainContext()
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate?
             let currentTour = appDelegate?.getTour()
-            pageView.points = currentTour?.pointTours?.array as! [PointTour]
-            pageView.audience = currentTour?.audience
-            pageView.startIndex = findDiscoveredPointIndex().indexOf(pointFound)
+            let startIndex = findDiscoveredPointIndex().indexOf(pointFound)
             
-            (self.tabBarController?.viewControllers?[0] as! UINavigationController).pushViewController(pageView, animated: true)
-            self.tabBarController?.selectedIndex = 0
+            if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
+                
+                let pageView = self.storyboard!.instantiateViewControllerWithIdentifier("FeedPageViewController") as! FeedPageViewController
+                
+                pageView.points = currentTour?.pointTours?.array as! [PointTour]
+                pageView.audience = currentTour?.audience
+                pageView.startIndex = startIndex
+                
+                (self.tabBarController?.viewControllers?[0] as! UINavigationController).pushViewController(pageView, animated: true)
+                self.tabBarController?.selectedIndex = 0
+                
+            } else {
+                
+                self.dismissViewControllerAnimated(true, completion: nil)
+                delegate?.didPointScan(currentTour!, startIndex: startIndex!, sender: self)
+            }
         }
         else {
             let alertView = UIAlertController()

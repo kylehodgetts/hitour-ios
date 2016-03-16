@@ -14,14 +14,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="518" height="452"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rnh-6B-OHW">
-                        <rect key="frame" x="8" y="8" width="495" height="26.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rnh-6B-OHW">
+                        <rect key="frame" x="16" y="8" width="487" height="26.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="mgd-cn-paA">
-                        <rect key="frame" x="25" y="32.5" width="469" height="148.5"/>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="749" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="mgd-cn-paA">
+                        <rect key="frame" x="24" y="32.5" width="470" height="148.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -43,9 +43,9 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
-                <constraint firstItem="rnh-6B-OHW" firstAttribute="leading" secondItem="bvm-PY-zQI" secondAttribute="leading" constant="8" id="10h-yf-fJs"/>
+                <constraint firstItem="rnh-6B-OHW" firstAttribute="leading" secondItem="bvm-PY-zQI" secondAttribute="leading" constant="16" id="10h-yf-fJs"/>
                 <constraint firstItem="FA0-Lw-jAU" firstAttribute="top" secondItem="mgd-cn-paA" secondAttribute="bottom" constant="8" id="9eq-fS-z0N"/>
-                <constraint firstItem="mgd-cn-paA" firstAttribute="leading" secondItem="bvm-PY-zQI" secondAttribute="leading" constant="25" id="Ec3-JW-UK9"/>
+                <constraint firstItem="mgd-cn-paA" firstAttribute="leading" secondItem="bvm-PY-zQI" secondAttribute="leading" constant="24" id="Ec3-JW-UK9"/>
                 <constraint firstAttribute="trailing" secondItem="FA0-Lw-jAU" secondAttribute="trailing" constant="24" id="NgG-cb-eKy"/>
                 <constraint firstAttribute="trailing" secondItem="mgd-cn-paA" secondAttribute="trailing" constant="24" id="RTC-aS-oLI"/>
                 <constraint firstItem="mgd-cn-paA" firstAttribute="top" secondItem="rnh-6B-OHW" secondAttribute="bottom" constant="-2" id="SXL-cg-emI"/>

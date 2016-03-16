@@ -13,6 +13,7 @@
 		45D87F181C90F7F600962CCF /* PointDiscoveryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D87F171C90F7F600962CCF /* PointDiscoveryTest.swift */; };
 		6D2B15791C87798800BC5179 /* FeedControllerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D2B15781C87798800BC5179 /* FeedControllerCell.xib */; };
 		6D2B157C1C87815F00BC5179 /* ToursControllerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D2B157B1C87815F00BC5179 /* ToursControllerCell.xib */; };
+		6D4C9F291C98D99200C8F869 /* CollectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4C9F281C98D99200C8F869 /* CollectionHeader.swift */; };
 		6D8CFD8D1C8662A000F8E8B9 /* Tablet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D8CFD8C1C8662A000F8E8B9 /* Tablet.storyboard */; };
 		6D90EE561C7E00B500433E1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D90EE481C7E00B500433E1F /* AppDelegate.swift */; };
 		6D90EE581C7E00B500433E1F /* BarcodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D90EE4A1C7E00B500433E1F /* BarcodeScannerViewController.swift */; };
@@ -93,6 +94,7 @@
 		45D87F171C90F7F600962CCF /* PointDiscoveryTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointDiscoveryTest.swift; sourceTree = "<group>"; };
 		6D2B15781C87798800BC5179 /* FeedControllerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedControllerCell.xib; sourceTree = "<group>"; };
 		6D2B157B1C87815F00BC5179 /* ToursControllerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToursControllerCell.xib; sourceTree = "<group>"; };
+		6D4C9F281C98D99200C8F869 /* CollectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionHeader.swift; sourceTree = "<group>"; };
 		6D8CFD8C1C8662A000F8E8B9 /* Tablet.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tablet.storyboard; sourceTree = "<group>"; };
 		6D90EE481C7E00B500433E1F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6D90EE4A1C7E00B500433E1F /* BarcodeScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeScannerViewController.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 				6D90EE4F1C7E00B500433E1F /* FeedControllerCell.swift */,
 				6DF7DC4D1C7E72CD00C88B48 /* FeedPageViewController.swift */,
 				459A8B461C8662BE009B79F0 /* FullScreenImageViewController.swift */,
+				6D4C9F281C98D99200C8F869 /* CollectionHeader.swift */,
 			);
 			name = FeedView;
 			sourceTree = "<group>";
@@ -497,6 +500,7 @@
 				6DBD48FF1C8E219B00CB6158 /* TabBarController.swift in Sources */,
 				8FF1C6EC1C7603A800F16473 /* Audience.swift in Sources */,
 				8FF1C6F01C760F5D00F16473 /* ApiConnector.swift in Sources */,
+				6D4C9F291C98D99200C8F869 /* CollectionHeader.swift in Sources */,
 				8FF1C6E11C7603A800F16473 /* PointData+CoreDataProperties.swift in Sources */,
 				984EC7B41C7209C200A12379 /* (null) in Sources */,
 				6DBAC9531C95E8710092CAB8 /* ImageDataViewCell.swift in Sources */,

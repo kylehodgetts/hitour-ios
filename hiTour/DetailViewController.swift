@@ -33,9 +33,6 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
     
     /// Array storing data for the current point.
     var pointData: [PointData] = []
-
-    ///  Outlet reference to the point's image on the storyboard
-    @IBOutlet weak var imageDetail: UIImageView!
     
     /// Reference to the collection view on the storyboard.
     @IBOutlet weak var collectionView: UICollectionView!
@@ -43,13 +40,9 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
     /// Reference to the flow layout on the storyboard.
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
-    ///  Outlet reference to the point's name title labe on the storyboard
-    @IBOutlet weak var titleDetail: UILabel!
-    
-    ///  Outlet reference to the main scroll view for the view controller on the storyboard
-    @IBOutlet weak var scrollView: UIScrollView!
-    
     var tapFullScreenGesture: UITapGestureRecognizer!
+    
+    var imageDetail: UIImage!
     
     
     ///  Set's up and instantiates all of the views including setting the values for the point's
@@ -63,39 +56,44 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
         collectionView!.registerNib(UINib(nibName: "VideoDataViewCell", bundle: nil), forCellWithReuseIdentifier: "VideoDataViewCellId")
         
         flowLayout.minimumLineSpacing = 0.0
+        flowLayout.headerReferenceSize.height = 200
         
         guard let t = point, imageData = point!.data else {
             return
         }
         
         pointData = point!.getPointDataFor(audience)
-
-        self.imageDetail!.image = UIImage(data: imageData)
-        self.imageDetail!.autoresizingMask = UIViewAutoresizing.FlexibleWidth
-        
-        self.titleDetail.text = t.name
-//        self.textDetail.text = t.descriptionP
     }
     
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let url = pointData[indexPath.row].data!.url!
+        if(indexPath.row == 0) {
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("TextDataViewCellId", forIndexPath: indexPath) as! TextDataViewCell
+            
+            cell.title.text = point!.name
+            cell.dataDescription.text = point!.descriptionP
+            cell.dataText.text = ""
+            
+            return cell
+        }
+        
+        let url = pointData[indexPath.row - 1].data!.url!
        
         if url.containsString(".mp4") {
             
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("VideoDataViewCellId", forIndexPath: indexPath) as! VideoDataViewCell
             
-            cell.title.text = pointData[indexPath.row].data!.title!
-            cell.dataDescription.text = pointData[indexPath.row].data!.descriptionD!
-            addVideoContent(cell, dataId: "\(pointData[indexPath.row].data!.dataId!)-\(audience.audienceId!)", data: pointData[indexPath.row].data!.data!)
+            cell.title.text = pointData[indexPath.row - 1].data!.title!
+            cell.dataDescription.text = pointData[indexPath.row - 1].data!.descriptionD!
+            addVideoContent(cell, dataId: "\(pointData[indexPath.row - 1].data!.dataId!)-\(audience.audienceId!)", data: pointData[indexPath.row - 1].data!.data!)
             
             return cell
         } else if url.containsString(".txt") {
         
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("TextDataViewCellId", forIndexPath: indexPath) as! TextDataViewCell
             
-            cell.title.text = pointData[indexPath.row].data!.title!
-            cell.dataDescription.text = pointData[indexPath.row].data!.descriptionD!
+            cell.title.text = pointData[indexPath.row - 1].data!.title!
+            cell.dataDescription.text = pointData[indexPath.row - 1].data!.descriptionD!
             addTextContent(cell, url: url)
             
             return cell
@@ -103,9 +101,9 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ImageDataViewCellId", forIndexPath: indexPath) as! ImageDataViewCell
             cell.presentingViewController = self
             
-            cell.title.text = pointData[indexPath.row].data!.title!
-            cell.dataDescription.text = pointData[indexPath.row].data!.descriptionD!
-            cell.imageView.image = UIImage(data: pointData[indexPath.row].data!.data!)
+            cell.title.text = pointData[indexPath.row - 1].data!.title!
+            cell.dataDescription.text = pointData[indexPath.row - 1].data!.descriptionD!
+            cell.imageView.image = UIImage(data: pointData[indexPath.row - 1].data!.data!)
             
             return cell
         }
@@ -121,13 +119,20 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
     
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return pointData.count
+        return pointData.count + 1
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        if(indexPath.row == 0) {
+            var height : CGFloat = 24 + calculateTextViewHeight(point!.name!)
+            if let descriptionHeight = point!.descriptionP {
+                height += calculateTextViewHeight(descriptionHeight)
+            }
+            return CGSizeMake(collectionView.frame.width, height)
+        }
         
-        var height : CGFloat = 300 + calculateTextViewHeight(pointData[indexPath.row].data!.descriptionD!)
-        let url = pointData[indexPath.row].data!.url!
+        var height : CGFloat = 300 + calculateTextViewHeight(pointData[indexPath.row - 1].data!.descriptionD!)
+        let url = pointData[indexPath.row - 1].data!.url!
 
         if url.containsString(".txt") {
             do {
@@ -138,7 +143,16 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
             }
         }
         
+        
         return CGSizeMake(collectionView.frame.width, height)
+    }
+    
+    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "CollectionHeader", forIndexPath: indexPath) as! CollectionHeader
+        if let imageData = point!.data {
+            headerView.headerImage.image = UIImage(data: imageData)
+        }
+        return headerView
     }
     
     func addTextContent(let cell: TextDataViewCell, url: String) {

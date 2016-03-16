@@ -172,7 +172,13 @@
                                         </connections>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="No Internet Connection Detected" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YDT-kb-EOC">
-                                        <rect key="frame" x="11" y="152" width="265" height="21"/>
+                                        <rect key="frame" x="11" y="138" width="265" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Tap Icon To Retry" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Grp-a7-0Qt">
+                                        <rect key="frame" x="68" y="160" width="150" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -180,13 +186,16 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="YDT-kb-EOC" secondAttribute="trailing" constant="8" id="9wl-Zo-IUh"/>
-                                    <constraint firstItem="YDT-kb-EOC" firstAttribute="top" secondItem="i3B-gZ-9An" secondAttribute="bottom" constant="16" id="ACw-gt-N4Z"/>
-                                    <constraint firstItem="i3B-gZ-9An" firstAttribute="leading" secondItem="b27-L3-MYQ" secondAttribute="leading" constant="22" id="JQC-ey-jQj"/>
-                                    <constraint firstAttribute="bottom" secondItem="YDT-kb-EOC" secondAttribute="bottom" constant="22" id="Xc7-ja-wgJ"/>
-                                    <constraint firstItem="YDT-kb-EOC" firstAttribute="leading" secondItem="b27-L3-MYQ" secondAttribute="leading" constant="11" id="bWW-dX-8Nb"/>
-                                    <constraint firstAttribute="trailing" secondItem="i3B-gZ-9An" secondAttribute="trailing" constant="22" id="tzD-nT-G9n"/>
-                                    <constraint firstItem="i3B-gZ-9An" firstAttribute="top" secondItem="b27-L3-MYQ" secondAttribute="top" constant="8" id="xNH-W0-rtz"/>
+                                    <constraint firstItem="i3B-gZ-9An" firstAttribute="top" secondItem="b27-L3-MYQ" secondAttribute="top" constant="8" id="1nB-QQ-Zpg"/>
+                                    <constraint firstItem="Grp-a7-0Qt" firstAttribute="top" secondItem="YDT-kb-EOC" secondAttribute="bottom" constant="1" id="3Tn-pH-ldM"/>
+                                    <constraint firstItem="Grp-a7-0Qt" firstAttribute="leading" secondItem="b27-L3-MYQ" secondAttribute="leading" constant="68" id="RRk-WE-Rc8"/>
+                                    <constraint firstAttribute="trailing" secondItem="Grp-a7-0Qt" secondAttribute="trailing" constant="66" id="dHA-nI-F4n"/>
+                                    <constraint firstAttribute="bottom" secondItem="Grp-a7-0Qt" secondAttribute="bottom" id="dhf-dt-hNC"/>
+                                    <constraint firstAttribute="trailing" secondItem="i3B-gZ-9An" secondAttribute="trailing" constant="22" id="es2-4C-Upu"/>
+                                    <constraint firstAttribute="trailing" secondItem="YDT-kb-EOC" secondAttribute="trailing" constant="8" id="gcf-Fw-HvP"/>
+                                    <constraint firstItem="YDT-kb-EOC" firstAttribute="leading" secondItem="b27-L3-MYQ" secondAttribute="leading" constant="11" id="j3v-a2-hlW"/>
+                                    <constraint firstItem="i3B-gZ-9An" firstAttribute="leading" secondItem="b27-L3-MYQ" secondAttribute="leading" constant="22" id="nmh-oB-fLt"/>
+                                    <constraint firstItem="YDT-kb-EOC" firstAttribute="top" secondItem="i3B-gZ-9An" secondAttribute="bottom" constant="2" id="rAC-MH-MaJ"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -414,7 +423,6 @@
                             <constraint firstItem="O9A-wm-cey" firstAttribute="leading" secondItem="gjQ-Gt-HMM" secondAttribute="leadingMargin" constant="-20" id="dAp-wj-1wQ"/>
                             <constraint firstItem="Ifl-t0-U8A" firstAttribute="top" secondItem="O9A-wm-cey" secondAttribute="bottom" id="ypR-7O-g2B"/>
                         </constraints>
-
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
@@ -425,7 +433,6 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qpe-aJ-SkQ" sceneMemberID="firstResponder"/>
             </objects>
-
             <point key="canvasLocation" x="838" y="-317"/>
         </scene>
         <!--Full Screen Image View Controller-->

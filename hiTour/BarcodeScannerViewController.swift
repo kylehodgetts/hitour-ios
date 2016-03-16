@@ -13,6 +13,7 @@ import UIKit
 protocol BarcodeScannerDelegate: class {
     func didModalDismiss(sender: BarcodeScannerViewController)
     func didItemScan(tour: Tour, sender: BarcodeScannerViewController)
+    func didPointScan(currentTour: Tour, startIndex: Int, sender: BarcodeScannerViewController)
 }
 
 // Class that implements a QR Barcode Scanner within a UIView by using the device main camera.
@@ -331,25 +332,26 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
                 pointFound.setValue(true.boolValue, forKey: "scanned")
             }
             
+            (UIApplication.sharedApplication().delegate as! AppDelegate?)?.getCoreData().saveMainContext()
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate?
+            let currentTour = appDelegate?.getTour()
+            let startIndex = findDiscoveredPointIndex().indexOf(pointFound)
+            
             if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-
-                (UIApplication.sharedApplication().delegate as! AppDelegate?)?.getCoreData().saveMainContext()
                 
                 let pageView = self.storyboard!.instantiateViewControllerWithIdentifier("FeedPageViewController") as! FeedPageViewController
                 
-                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate?
-                let currentTour = appDelegate?.getTour()
                 pageView.points = currentTour?.pointTours?.array as! [PointTour]
                 pageView.audience = currentTour?.audience
-                pageView.startIndex = findDiscoveredPointIndex().indexOf(pointFound)
+                pageView.startIndex = startIndex
                 
                 (self.tabBarController?.viewControllers?[0] as! UINavigationController).pushViewController(pageView, animated: true)
                 self.tabBarController?.selectedIndex = 0
                 
-
             } else {
+                
                 self.dismissViewControllerAnimated(true, completion: nil)
-                // TODO populate the details view and update the feed
+                delegate?.didPointScan(currentTour!, startIndex: startIndex!, sender: self)
             }
         }
         else {

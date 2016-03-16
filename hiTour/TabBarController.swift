@@ -41,4 +41,14 @@ extension TabBarController: BarcodeScannerDelegate {
         self.selectedIndex = 0
         (self.selectedViewController as! FeedController).assignTour(tour)
     }
+    
+    func didPointScan(currentTour: Tour, startIndex: Int, sender: BarcodeScannerViewController) {
+        let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("DetailViewControllerTablet") as!DetailViewController
+        let pt = currentTour.pointTours![startIndex] as! PointTour
+        detailController.point = pt.point!
+        detailController.audience = currentTour.audience
+        self.showDetailViewController(detailController, sender: self)
+    }
+
+
 }

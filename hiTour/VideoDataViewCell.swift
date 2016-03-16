@@ -24,6 +24,7 @@ class VideoDataViewCell: UICollectionViewCell {
     /// The point data (video).
     @IBOutlet weak var videStackView: UIStackView!
     
+    /// A reference to the AVPlayerViewController for a video added to the videStackView.
     var playerController: AVPlayerViewController?
     
 }

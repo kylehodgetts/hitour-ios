@@ -2,7 +2,7 @@
 //  DetailViewController.swift
 //  hiTour
 //
-//  Created by Dominik Kulon & Charlie Baker on 23/02/2016.
+//  Created by Dominik Kulon & Charlie Baker on 16/03/2016.
 //  Copyright © 2016 stranders.kcl.ac.uk. All rights reserved.
 //
 
@@ -38,8 +38,10 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
     /// Reference to the flow layout on the storyboard.
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
+    /// Gesture recognizers for images and videos.
     var tapFullScreenGesture: UITapGestureRecognizer!
     
+    /// Image dispalyed in a header.
     var imageDetail: UIImage!
     
     
@@ -56,7 +58,7 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
         flowLayout.minimumLineSpacing = 0.0
         flowLayout.headerReferenceSize.height = 200
         
-        tapFullScreenGesture = UITapGestureRecognizer(target: self, action: Selector("displayImageFullScreen:"))
+        tapFullScreenGesture = UITapGestureRecognizer(target: self, action: Selector("recognizeTapOnCell:"))
         tapFullScreenGesture.delegate = self
         collectionView?.addGestureRecognizer(tapFullScreenGesture)
 
@@ -67,7 +69,7 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
         pointData = point!.getPointDataFor(audience)
     }
     
-    
+    /// Initialize cells with appropriate data for each data view.
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         if(indexPath.row == 0) {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("TextDataViewCellId", forIndexPath: indexPath) as! TextDataViewCell
@@ -110,10 +112,12 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
         }
     }
     
+    /// Return the number of cells i.e. points for a given tour plus a tour description at the beginning.
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return pointData.count + 1
     }
     
+    /// Calculate dynamic height for each cell.
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         if(indexPath.row == 0) {
             var height : CGFloat = 24 + calculateTextViewHeight(point!.name!)
@@ -140,6 +144,7 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
         return CGSizeMake(collectionView.frame.width, height)
     }
     
+    /// Initialize the header with an image.
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "CollectionHeader", forIndexPath: indexPath) as! CollectionHeader
         if let imageData = point!.data {
@@ -148,6 +153,7 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
         return headerView
     }
     
+    /// Add text from the .txt file to a cell.
     func addTextContent(let cell: TextDataViewCell, url: String) {
         do {
             try cell.dataText.text = String(contentsOfFile: url, encoding: NSUTF8StringEncoding)
@@ -157,25 +163,27 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
         }
     }
     
-        func displayImageFullScreen(recognizer: UIGestureRecognizer) {
+    /// Invoked by a gesture recognizer to display images in the full screen mode and show media controls for videos.
+    func recognizeTapOnCell(recognizer: UIGestureRecognizer) {
 
-            if recognizer.state == UIGestureRecognizerState.Ended {
-                let location = recognizer.locationInView(self.collectionView)
-                if let tappedIndexPath = collectionView.indexPathForItemAtPoint(location) {
-                    if let tappedCell = self.collectionView.cellForItemAtIndexPath(tappedIndexPath) as? ImageDataViewCell {
-                        performSegueWithIdentifier("imageFullScreenSegue", sender: tappedCell.imageView)
-                    } else if let tappedCell = self.collectionView.cellForItemAtIndexPath(tappedIndexPath) as? VideoDataViewCell {
-                        //  Handles a tap gesture to the video view controller display so that it shows or hides the
-                        //  video player controls upon a tap.
-                        if let playerController = tappedCell.playerController {
-                            playerController.showsPlaybackControls = true
-                        }
+        if recognizer.state == UIGestureRecognizerState.Ended {
+            let location = recognizer.locationInView(self.collectionView)
+            if let tappedIndexPath = collectionView.indexPathForItemAtPoint(location) {
+                if let tappedCell = self.collectionView.cellForItemAtIndexPath(tappedIndexPath) as? ImageDataViewCell {
+                    // Display the image in the full screen mode.
+                    performSegueWithIdentifier("imageFullScreenSegue", sender: tappedCell.imageView)
+                } else if let tappedCell = self.collectionView.cellForItemAtIndexPath(tappedIndexPath) as? VideoDataViewCell {
+                    //  Handles a tap gesture to the video view controller display so that it shows or hides the
+                    //  video player controls upon a tap.
+                    if let playerController = tappedCell.playerController {
+                        playerController.showsPlaybackControls = true
                     }
                 }
             }
         }
+    }
     
-    //  Function that adds to the stack view a video and sets up its constraints and tap gesture to display its controls.
+    ///  Function that adds to the stack view a video and sets up its constraints and tap gesture to display its controls.
     func addVideoContent(cell: VideoDataViewCell, dataId: String, data: NSData) {
 
         let tmpDirURL = NSURL.fileURLWithPath(NSTemporaryDirectory(), isDirectory: true)
@@ -196,8 +204,8 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
         }
     }
     
-    //  Prepares the view controller segue for when an image is tapped, the image displays full screen for the user to
-    //  zoom and pan the image. This function prepares the FullScreenImageViewController with the image that the user has tapped on.
+    ///  Prepares the view controller segue for when an image is tapped, the image displays full screen for the user to
+    ///  zoom and pan the image. This function prepares the FullScreenImageViewController with the image that the user has tapped on.
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "imageFullScreenSegue" {
             let destination = segue.destinationViewController as! FullScreenImageViewController
@@ -206,7 +214,7 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
         }
     }
     
-    // Closes down the view by ensuring any videos that are playing are stopped when the view is dismissed
+    /// Closes down the view by ensuring any videos that are playing are stopped when the view is dismissed
     override func viewDidDisappear(animated: Bool) {
         for video in videoPlayers {
             if video != nil && video.rate != 0 && video.error == nil {
@@ -215,6 +223,7 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
         }
     }
     
+    /// Calculate the height of a text view in a cell for a given text.
     func calculateTextViewHeight(text: String) -> CGFloat {
         let textView = UITextView()
         textView.scrollEnabled = false

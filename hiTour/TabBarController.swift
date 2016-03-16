@@ -37,11 +37,13 @@ extension TabBarController: BarcodeScannerDelegate {
         segmentedControl.selectedSegmentIndex = 0
     }
     
+    /// Assign the tour after scanning a valid tour passphrase.
     func didItemScan(tour: Tour, sender: BarcodeScannerViewController) {
         self.selectedIndex = 0
         (self.selectedViewController as! FeedController).assignTour(tour)
     }
     
+    /// Display the point after scanning a valid point passphrase.
     func didPointScan(currentTour: Tour, startIndex: Int, sender: BarcodeScannerViewController) {
         let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("DetailViewControllerTablet") as!DetailViewController
         let pt = currentTour.pointTours![startIndex] as! PointTour

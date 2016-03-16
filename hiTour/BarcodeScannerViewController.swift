@@ -299,6 +299,7 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
     func isPointFound(pointId : String) -> PointTour! {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate?
         let currentTour = appDelegate?.getTour()
+        // TODO: The app crashes if the tour was not explicitly selected from the collection view
         let currentTourPoints = currentTour?.pointTours?.array as! [PointTour]
         for tourPoint in currentTourPoints {
             if tourPoint.point?.valueForKey("pointId") as? Int == Int(pointId) {

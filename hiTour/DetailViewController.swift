@@ -98,7 +98,7 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
             
             cell.title.text = pointData[indexPath.row - 1].data!.title!
             cell.dataDescription.text = pointData[indexPath.row - 1].data!.descriptionD!
-            addTextContent(cell, url: url)
+            addTextContent(cell, data: pointData[indexPath.row - 1].data!.data!)
             
             return cell
         } else {
@@ -129,14 +129,13 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
         
         var height : CGFloat = 300 + calculateTextViewHeight(pointData[indexPath.row - 1].data!.descriptionD!)
         let url = pointData[indexPath.row - 1].data!.url!
+        let data = pointData[indexPath.row - 1].data!.data!
 
         if url.containsString(".txt") {
             height = 128
-            do {
-                let text = try String(contentsOfFile: url, encoding: NSUTF8StringEncoding)
-                height += calculateTextViewHeight(text)
-            } catch {
-                print("Error reading text file resource")
+            if let text = String(data: data, encoding: NSUTF8StringEncoding) {
+                let whiteLines = text.componentsSeparatedByString("\\n").count
+                height += calculateTextViewHeight(text) + CGFloat(whiteLines * 24)
             }
         }
         
@@ -154,13 +153,8 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
     }
     
     /// Add text from the .txt file to a cell.
-    func addTextContent(let cell: TextDataViewCell, url: String) {
-        do {
-            try cell.dataText.text = String(contentsOfFile: url, encoding: NSUTF8StringEncoding)
-        } catch {
-            cell.dataText.text = ""
-            print("Error reading text file resource")
-        }
+    func addTextContent(let cell: TextDataViewCell, data: NSData) {
+        cell.dataText.text = String(data: data, encoding: NSUTF8StringEncoding)
     }
     
     /// Invoked by a gesture recognizer to display images in the full screen mode and show media controls for videos.
@@ -228,7 +222,7 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
         let textView = UITextView()
         textView.scrollEnabled = false
         textView.text = text
-        let fixedWidth = collectionView.frame.width * 0.8
+        let fixedWidth = collectionView.frame.width * 0.6
         textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.max))
         let newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.max))
         var newFrame = textView.frame

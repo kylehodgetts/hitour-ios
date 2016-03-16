@@ -56,7 +56,11 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
         flowLayout.minimumLineSpacing = 0.0
         flowLayout.headerReferenceSize.height = 200
         
-        guard let t = point, imageData = point!.data else {
+        tapFullScreenGesture = UITapGestureRecognizer(target: self, action: Selector("displayImageFullScreen:"))
+        tapFullScreenGesture.delegate = self
+        collectionView?.addGestureRecognizer(tapFullScreenGesture)
+
+        guard let _ = point, _ = point!.data else {
             return
         }
         
@@ -97,7 +101,6 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
             return cell
         } else {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ImageDataViewCellId", forIndexPath: indexPath) as! ImageDataViewCell
-            cell.presentingViewController = self
             
             cell.title.text = pointData[indexPath.row - 1].data!.title!
             cell.dataDescription.text = pointData[indexPath.row - 1].data!.descriptionD!
@@ -106,15 +109,6 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
             return cell
         }
     }
-    
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        print("ABBBA1")
-        if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? ImageDataViewCell {
-            print("ABBBA2")
-            self.performSegueWithIdentifier("imageFullScreenSegue", sender: cell.imageView)
-        }
-    }
-    
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return pointData.count + 1
@@ -163,11 +157,23 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
         }
     }
     
-    //  Function that handles a tap gesture to the video view controller display so that it shows or hides the
-    //  video player controls upon a tap.
-//    func showVideoControls(sender: UITapGestureRecognizer? = nil) {
-//        playerController.showsPlaybackControls = true
-//    }
+        func displayImageFullScreen(recognizer: UIGestureRecognizer) {
+
+            if recognizer.state == UIGestureRecognizerState.Ended {
+                let location = recognizer.locationInView(self.collectionView)
+                if let tappedIndexPath = collectionView.indexPathForItemAtPoint(location) {
+                    if let tappedCell = self.collectionView.cellForItemAtIndexPath(tappedIndexPath) as? ImageDataViewCell {
+                        performSegueWithIdentifier("imageFullScreenSegue", sender: tappedCell.imageView)
+                    } else if let tappedCell = self.collectionView.cellForItemAtIndexPath(tappedIndexPath) as? VideoDataViewCell {
+                        //  Handles a tap gesture to the video view controller display so that it shows or hides the
+                        //  video player controls upon a tap.
+                        if let playerController = tappedCell.playerController {
+                            playerController.showsPlaybackControls = true
+                        }
+                    }
+                }
+            }
+        }
     
     //  Function that adds to the stack view a video and sets up its constraints and tap gesture to display its controls.
     func addVideoContent(cell: VideoDataViewCell, dataId: String, data: NSData) {
@@ -183,22 +189,17 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
             let playerController = AVPlayerViewController()
             playerController.videoGravity = AVLayerVideoGravityResizeAspect
             playerController.player = videoPlayer
+            cell.playerController = playerController
             cell.videStackView.addArrangedSubview(playerController.view)
         
             videoPlayers.append(videoPlayer)
         }
-       
-//        let tap = UITapGestureRecognizer(target: self, action: Selector("showVideoControls"))
-//        tap.delegate = self
-//        playerController.view.addGestureRecognizer(tap)
     }
     
     //  Prepares the view controller segue for when an image is tapped, the image displays full screen for the user to
     //  zoom and pan the image. This function prepares the FullScreenImageViewController with the image that the user has tapped on.
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        print("ABBBA3")
         if segue.identifier == "imageFullScreenSegue" {
-            print("ABBBA4")
             let destination = segue.destinationViewController as! FullScreenImageViewController
             let imageV = sender as! UIImageView
             destination.originalImageView = imageV

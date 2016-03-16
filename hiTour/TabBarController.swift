@@ -36,4 +36,9 @@ extension TabBarController: BarcodeScannerDelegate {
     func didModalDismiss(sender: BarcodeScannerViewController) {
         segmentedControl.selectedSegmentIndex = 0
     }
+    
+    func didItemScan(tour: Tour, sender: BarcodeScannerViewController) {
+        self.selectedIndex = 0
+        (self.selectedViewController as! FeedController).assignTour(tour)
+    }
 }

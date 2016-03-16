@@ -135,9 +135,10 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
         let url = pointData[indexPath.row - 1].data!.url!
 
         if url.containsString(".txt") {
+            height = 128
             do {
                 let text = try String(contentsOfFile: url, encoding: NSUTF8StringEncoding)
-                height += calculateTextViewHeight(text) - 200
+                height += calculateTextViewHeight(text)
             } catch {
                 print("Error reading text file resource")
             }

@@ -12,6 +12,7 @@ import UIKit
 /// Delegate used to inform the TabBarController that a modal view has been dismissed on a tablet.
 protocol BarcodeScannerDelegate: class {
     func didModalDismiss(sender: BarcodeScannerViewController)
+    func didItemScan(tour: Tour, sender: BarcodeScannerViewController)
 }
 
 // Class that implements a QR Barcode Scanner within a UIView by using the device main camera.
@@ -264,10 +265,9 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
                     coreData?.saveMainContext();
                     appDelegate?.setTour(tour)
                     if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
-                        self.tabBarController?.selectedIndex = 0
-                        let feedControlelr = self.tabBarController?.selectedViewController as! FeedController
-                        feedControlelr.assignTour(tour)
+                        self.delegate!.didItemScan(tour, sender: self)
                         overlay.removeFromSuperview()
+                        self.dismissViewControllerAnimated(true, completion: nil)
                     } else {
                         self.tabBarController?.selectedIndex = 0
                         let feedControlelr = self.tabBarController?.selectedViewController?.childViewControllers.first! as! FeedController

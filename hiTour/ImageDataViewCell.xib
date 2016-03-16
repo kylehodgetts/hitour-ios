@@ -18,32 +18,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="339" height="392"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b3J-fV-lOd">
-                                <rect key="frame" x="8" y="8" width="323" height="27"/>
+
+                                <rect key="frame" x="16" y="8" width="315" height="26.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="749" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hCn-yf-9lW">
-                                <rect key="frame" x="8" y="35" width="323" height="150"/>
+
+                                <rect key="frame" x="24" y="35" width="307" height="94.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fbc-Lt-rFR">
-                                <rect key="frame" x="0.0" y="192" width="339" height="200"/>
+                                <rect key="frame" x="0.0" y="137" width="339" height="255"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="Led-lp-ify"/>
+                                    <constraint firstAttribute="height" constant="255" id="Led-lp-ify"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="hCn-yf-9lW" secondAttribute="trailing" constant="8" id="9eK-2u-I7D"/>
-                            <constraint firstItem="hCn-yf-9lW" firstAttribute="leading" secondItem="iRA-T2-dWG" secondAttribute="leading" constant="8" id="CUh-VC-T3a"/>
+                            <constraint firstItem="hCn-yf-9lW" firstAttribute="leading" secondItem="iRA-T2-dWG" secondAttribute="leading" constant="24" id="CUh-VC-T3a"/>
                             <constraint firstAttribute="bottom" secondItem="fbc-Lt-rFR" secondAttribute="bottom" id="DOW-5F-xNP"/>
                             <constraint firstAttribute="trailing" secondItem="b3J-fV-lOd" secondAttribute="trailing" constant="8" id="Hyt-hN-lZR"/>
-                            <constraint firstItem="b3J-fV-lOd" firstAttribute="leading" secondItem="iRA-T2-dWG" secondAttribute="leading" constant="8" id="KJy-uG-92j"/>
+                            <constraint firstItem="b3J-fV-lOd" firstAttribute="leading" secondItem="iRA-T2-dWG" secondAttribute="leading" constant="16" id="KJy-uG-92j"/>
                             <constraint firstItem="fbc-Lt-rFR" firstAttribute="leading" secondItem="iRA-T2-dWG" secondAttribute="leading" id="Rvk-64-b4d"/>
                             <constraint firstItem="fbc-Lt-rFR" firstAttribute="top" secondItem="hCn-yf-9lW" secondAttribute="bottom" constant="7.5" id="U88-fU-dpF"/>
                             <constraint firstItem="hCn-yf-9lW" firstAttribute="leading" secondItem="b3J-fV-lOd" secondAttribute="trailing" constant="-323" id="b7t-gv-egy"/>

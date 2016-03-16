@@ -8,6 +8,9 @@
 
 import Foundation
 import UIKit
+import AVFoundation
+import AVKit
+import MediaPlayer
 
 /// The data view cell containing the title, description, and video.
 class VideoDataViewCell: UICollectionViewCell {
@@ -20,5 +23,8 @@ class VideoDataViewCell: UICollectionViewCell {
     
     /// The point data (video).
     @IBOutlet weak var videStackView: UIStackView!
+    
+    /// A reference to the AVPlayerViewController for a video added to the videStackView.
+    var playerController: AVPlayerViewController?
     
 }

@@ -13,9 +13,10 @@ import UIKit
 /// Page View Controller that allows swiping between the detail views on a phone.
 class FeedPageViewController : UIPageViewController {
     
-    // the data instantiated for a prototype
+    /// The data instantiated for a prototype.
     var points: [PointTour] = []
     
+    /// Audience for a selected tour.
     var audience: Audience!
         
     /// The index of a selected item when the Page View Controller is instantiated.

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /// The data view cell containing the title, description, and image.
-class ImageDataViewCell: UICollectionViewCell {
+class ImageDataViewCell: UICollectionViewCell, UIGestureRecognizerDelegate {
     
     /// The title of the point data.
     @IBOutlet weak var title: UILabel!
@@ -20,22 +20,5 @@ class ImageDataViewCell: UICollectionViewCell {
     
     /// The point data (image).
     @IBOutlet weak var imageView: UIImageView!
-    
-    /// Reference to the DetailViewController instantiating this view.
-    var presentingViewController : DetailViewController!
-    
-//    func addGestureRecognizer() {
-//        let tapFullScreenGesture = UITapGestureRecognizer(target: self, action: Selector("displayImageFullScreen"))
-//        tapFullScreenGesture.delegate = self
-//        imageView.addGestureRecognizer(tapFullScreenGesture)
-//        print("func gesture")
-//    }
-//    
-//    //  Function that handles when an image is tapped so that it is presented full screen by performing a segue to the
-//    //  FullScreenImageViewController
-//    func displayImageFullScreen() {
-//        print("func perform")
-//        presentingViewController.performSegueWithIdentifier("imageFullScreenSegue", sender: imageView)
-//    }
     
 }

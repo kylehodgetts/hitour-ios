@@ -16,6 +16,7 @@
 		45D87F181C90F7F600962CCF /* PointDiscoveryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D87F171C90F7F600962CCF /* PointDiscoveryTest.swift */; };
 		6D2B15791C87798800BC5179 /* FeedControllerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D2B15781C87798800BC5179 /* FeedControllerCell.xib */; };
 		6D2B157C1C87815F00BC5179 /* ToursControllerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D2B157B1C87815F00BC5179 /* ToursControllerCell.xib */; };
+		6D4C9F291C98D99200C8F869 /* CollectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4C9F281C98D99200C8F869 /* CollectionHeader.swift */; };
 		6D8CFD8D1C8662A000F8E8B9 /* Tablet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D8CFD8C1C8662A000F8E8B9 /* Tablet.storyboard */; };
 		6D90EE561C7E00B500433E1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D90EE481C7E00B500433E1F /* AppDelegate.swift */; };
 		6D90EE581C7E00B500433E1F /* BarcodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D90EE4A1C7E00B500433E1F /* BarcodeScannerViewController.swift */; };
@@ -38,10 +39,6 @@
 		6DBED3D11C7E021E008BFA30 /* hiTour.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6DBED3CC1C7E021E008BFA30 /* hiTour.xcdatamodeld */; };
 		6DBED3D21C7E021E008BFA30 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DBED3CE1C7E021E008BFA30 /* LaunchScreen.storyboard */; };
 		6DBED3D31C7E021E008BFA30 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DBED3CF1C7E021E008BFA30 /* Main.storyboard */; };
-		6DE891A51C83BCDD008D85A1 /* ctscan.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DE8919D1C83BC67008D85A1 /* ctscan.mp4 */; };
-		6DE891A61C83BCDD008D85A1 /* fluoroscopy.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DE8919E1C83BC67008D85A1 /* fluoroscopy.mp4 */; };
-		6DE891A71C83BCDD008D85A1 /* mriscan.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DE8919F1C83BC67008D85A1 /* mriscan.mp4 */; };
-		6DE891A81C83BCDD008D85A1 /* ultrasound.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DE891A01C83BC67008D85A1 /* ultrasound.mp4 */; };
 		6DF7DC4E1C7E72CD00C88B48 /* FeedPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF7DC4D1C7E72CD00C88B48 /* FeedPageViewController.swift */; };
 		8F1C8FAB1C776E33009C95F4 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1C8FAA1C776E33009C95F4 /* HTTPClient.swift */; };
 		8F1C8FAD1C7770BD009C95F4 /* APITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1C8FAC1C7770BD009C95F4 /* APITests.swift */; };
@@ -99,6 +96,7 @@
 		45D87F171C90F7F600962CCF /* PointDiscoveryTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointDiscoveryTest.swift; sourceTree = "<group>"; };
 		6D2B15781C87798800BC5179 /* FeedControllerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedControllerCell.xib; sourceTree = "<group>"; };
 		6D2B157B1C87815F00BC5179 /* ToursControllerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToursControllerCell.xib; sourceTree = "<group>"; };
+		6D4C9F281C98D99200C8F869 /* CollectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionHeader.swift; sourceTree = "<group>"; };
 		6D8CFD8C1C8662A000F8E8B9 /* Tablet.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tablet.storyboard; sourceTree = "<group>"; };
 		6D90EE481C7E00B500433E1F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6D90EE4A1C7E00B500433E1F /* BarcodeScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeScannerViewController.swift; sourceTree = "<group>"; };
@@ -121,10 +119,6 @@
 		6DBED3CD1C7E021E008BFA30 /* hiTour.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = hiTour.xcdatamodel; sourceTree = "<group>"; };
 		6DBED3CE1C7E021E008BFA30 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = hiTour/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6DBED3CF1C7E021E008BFA30 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = hiTour/Main.storyboard; sourceTree = "<group>"; };
-		6DE8919D1C83BC67008D85A1 /* ctscan.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ctscan.mp4; sourceTree = SOURCE_ROOT; };
-		6DE8919E1C83BC67008D85A1 /* fluoroscopy.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = fluoroscopy.mp4; sourceTree = SOURCE_ROOT; };
-		6DE8919F1C83BC67008D85A1 /* mriscan.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = mriscan.mp4; sourceTree = SOURCE_ROOT; };
-		6DE891A01C83BC67008D85A1 /* ultrasound.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ultrasound.mp4; sourceTree = SOURCE_ROOT; };
 		6DF7DC4D1C7E72CD00C88B48 /* FeedPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedPageViewController.swift; sourceTree = "<group>"; };
 		8F1C8FAA1C776E33009C95F4 /* HTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		8F1C8FAC1C7770BD009C95F4 /* APITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APITests.swift; sourceTree = "<group>"; };
@@ -206,6 +200,7 @@
 			name = PrototypeFiles;
 			sourceTree = "<group>";
 		};
+
 		6D90EE631C7E00D300433E1F /* BarcodeScanner */ = {
 			isa = PBXGroup;
 			children = (
@@ -224,6 +219,7 @@
 				6D90EE4F1C7E00B500433E1F /* FeedControllerCell.swift */,
 				6DF7DC4D1C7E72CD00C88B48 /* FeedPageViewController.swift */,
 				459A8B461C8662BE009B79F0 /* FullScreenImageViewController.swift */,
+				6D4C9F281C98D99200C8F869 /* CollectionHeader.swift */,
 			);
 			name = FeedView;
 			sourceTree = "<group>";
@@ -265,10 +261,6 @@
 		8FF1C6D21C75FF9E00F16473 /* models */ = {
 			isa = PBXGroup;
 			children = (
-				6DE8919D1C83BC67008D85A1 /* ctscan.mp4 */,
-				6DE8919E1C83BC67008D85A1 /* fluoroscopy.mp4 */,
-				6DE8919F1C83BC67008D85A1 /* mriscan.mp4 */,
-				6DE891A01C83BC67008D85A1 /* ultrasound.mp4 */,
 				8FF1C6D31C7603A800F16473 /* PointData+CoreDataProperties.swift */,
 				8FF1C6D41C7603A800F16473 /* PointData.swift */,
 				8FF1C6D51C7603A800F16473 /* Point+CoreDataProperties.swift */,
@@ -325,6 +317,7 @@
 				6D90EE521C7E00B500433E1F /* Info.plist */,
 				450610581C98ABE500D05EBB /* Network */,
 				4513421E1C8342B90089F2DC /* PrototypeFiles */,
+
 				984EC7C21C7209C200A12379 /* hiTourTests */,
 				8FF1C6D21C75FF9E00F16473 /* models */,
 				8FF1C6CF1C75F71A00F16473 /* coreData */,
@@ -460,15 +453,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				6DBAC94D1C95CBEE0092CAB8 /* ImageDataViewCell.xib in Resources */,
-				6DE891A51C83BCDD008D85A1 /* ctscan.mp4 in Resources */,
-				6DE891A61C83BCDD008D85A1 /* fluoroscopy.mp4 in Resources */,
-				6DE891A71C83BCDD008D85A1 /* mriscan.mp4 in Resources */,
 				6DBAC94F1C95D1210092CAB8 /* TextDataViewCell.xib in Resources */,
 				6D2B157C1C87815F00BC5179 /* ToursControllerCell.xib in Resources */,
-				6DE891A81C83BCDD008D85A1 /* ultrasound.mp4 in Resources */,
 				6D2B15791C87798800BC5179 /* FeedControllerCell.xib in Resources */,
 				6DBED3D21C7E021E008BFA30 /* LaunchScreen.storyboard in Resources */,
-				451342221C8366040089F2DC /* prototype.txt in Resources */,
 				6D8CFD8D1C8662A000F8E8B9 /* Tablet.storyboard in Resources */,
 				6DBED3D01C7E021E008BFA30 /* Assets.xcassets in Resources */,
 				6D90EE5F1C7E00B500433E1F /* Info.plist in Resources */,
@@ -522,6 +510,7 @@
 				6DBD48FF1C8E219B00CB6158 /* TabBarController.swift in Sources */,
 				8FF1C6EC1C7603A800F16473 /* Audience.swift in Sources */,
 				8FF1C6F01C760F5D00F16473 /* ApiConnector.swift in Sources */,
+				6D4C9F291C98D99200C8F869 /* CollectionHeader.swift in Sources */,
 				8FF1C6E11C7603A800F16473 /* PointData+CoreDataProperties.swift in Sources */,
 				984EC7B41C7209C200A12379 /* (null) in Sources */,
 				6DBAC9531C95E8710092CAB8 /* ImageDataViewCell.swift in Sources */,

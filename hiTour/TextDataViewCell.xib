@@ -14,21 +14,24 @@
                 <rect key="frame" x="0.0" y="0.0" width="518" height="452"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="976-Rp-PAZ">
-                        <rect key="frame" x="8" y="8" width="495" height="27"/>
+
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="976-Rp-PAZ">
+                        <rect key="frame" x="16" y="8" width="487" height="26.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="cCm-cN-TaD">
-                        <rect key="frame" x="25" y="33" width="469" height="150"/>
+
+                        <rect key="frame" x="24" y="32.5" width="470" height="150"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="249" misplaced="YES" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="DQw-6H-sq9">
-                        <rect key="frame" x="25" y="192" width="469" height="243"/>
+
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="249" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="DQw-6H-sq9">
+                        <rect key="frame" x="24" y="192" width="470" height="242.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -41,11 +44,11 @@
                 <constraint firstItem="cCm-cN-TaD" firstAttribute="top" secondItem="976-Rp-PAZ" secondAttribute="bottom" constant="-2" id="6a4-dT-26p"/>
                 <constraint firstAttribute="trailing" secondItem="DQw-6H-sq9" secondAttribute="trailing" constant="24" id="6jb-v1-nN2"/>
                 <constraint firstAttribute="trailing" secondItem="cCm-cN-TaD" secondAttribute="trailing" constant="24" id="J8V-5m-Xc7"/>
-                <constraint firstItem="DQw-6H-sq9" firstAttribute="leading" secondItem="pcM-pd-V0B" secondAttribute="leading" constant="25" id="Pby-v2-Vyt"/>
+                <constraint firstItem="DQw-6H-sq9" firstAttribute="leading" secondItem="pcM-pd-V0B" secondAttribute="leading" constant="24" id="Pby-v2-Vyt"/>
                 <constraint firstItem="976-Rp-PAZ" firstAttribute="top" secondItem="pcM-pd-V0B" secondAttribute="top" constant="8" id="VYn-gE-fzw"/>
                 <constraint firstItem="DQw-6H-sq9" firstAttribute="top" secondItem="cCm-cN-TaD" secondAttribute="bottom" constant="10" id="ehl-BP-4VR"/>
-                <constraint firstItem="cCm-cN-TaD" firstAttribute="leading" secondItem="pcM-pd-V0B" secondAttribute="leading" constant="25" id="n8X-6F-giP"/>
-                <constraint firstItem="976-Rp-PAZ" firstAttribute="leading" secondItem="pcM-pd-V0B" secondAttribute="leading" constant="8" id="oq2-xK-3jZ"/>
+                <constraint firstItem="cCm-cN-TaD" firstAttribute="leading" secondItem="pcM-pd-V0B" secondAttribute="leading" constant="24" id="n8X-6F-giP"/>
+                <constraint firstItem="976-Rp-PAZ" firstAttribute="leading" secondItem="pcM-pd-V0B" secondAttribute="leading" constant="16" id="oq2-xK-3jZ"/>
                 <constraint firstAttribute="bottom" secondItem="DQw-6H-sq9" secondAttribute="bottom" constant="17" id="oxt-0X-8Gw"/>
                 <constraint firstAttribute="trailing" secondItem="976-Rp-PAZ" secondAttribute="trailing" constant="15" id="pLA-TW-ukk"/>
             </constraints>

@@ -16,4 +16,6 @@ class ToursControllerCell: UICollectionViewCell {
     /// The title of a tour/insititution.
     @IBOutlet weak var labelTitle: UILabel!
     
+    /// The tour expiration date.
+    @IBOutlet weak var labelDate: UILabel!
 }

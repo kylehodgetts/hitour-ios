@@ -54,6 +54,7 @@ class FeedController: UICollectionViewController {
             if (tourId > 0) {
                 if let tour = delegate?.getCoreData().fetch(name: Tour.entityName, predicate: NSPredicate(format: "tourId = %D", tourId))?.last as? Tour {
                     self.assignTour(tour)
+                    delegate?.currentTour = tour
                 }
             }
             overlay.removeFromSuperview()

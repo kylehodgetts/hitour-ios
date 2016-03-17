@@ -106,6 +106,27 @@ class QuizTests: XCTestCase {
         XCUIApplication().childrenMatchingType(.Window).elementBoundByIndex(0).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).elementBoundByIndex(1).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.tap()
         XCUIApplication().childrenMatchingType(.Window).elementBoundByIndex(0).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).elementBoundByIndex(1).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.tap()
     }
+    
+    ///  Tests a quiz can be done and answers submitted
+    func testQuizFunctionality() {
+        
+        let app = XCUIApplication()
+        
+        app.collectionViews.staticTexts["Feedback Quiz"].tap()
+        
+        NSThread.sleepForTimeInterval(5)
+        
+        let element = app.childrenMatchingType(.Window).elementBoundByIndex(0).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).elementBoundByIndex(1).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element
+        element.tap()
+        element.tap()
+        element.tap()
+        element.tap()
+        element.tap()
+        element.tap()
+        element.tap()
+        app.buttons["cloud SUBMIT ANSWERS"].tap()
+        
+    }
 
     
 }

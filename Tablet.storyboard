@@ -345,9 +345,87 @@
             </objects>
             <point key="canvasLocation" x="-557" y="-330"/>
         </scene>
+        <!--Quiz View Controller-->
+        <scene sceneID="XZo-08-nuq">
+            <objects>
+                <viewController storyboardIdentifier="QuizViewController" id="Jvv-Ec-OrI" customClass="QuizViewController" customModule="hiTour" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6EU-6E-nb3"/>
+                        <viewControllerLayoutGuide type="bottom" id="4QB-ff-iTP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="SeM-L5-jG6">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dyg-mC-AYo">
+                                <rect key="frame" x="0.0" y="20" width="600" height="537"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                            </webView>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Waj-BG-Dyb">
+                                <rect key="frame" x="109" y="114" width="413" height="405"/>
+                                <subviews>
+                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="refresh" translatesAutoresizingMaskIntoConstraints="NO" id="0NL-lX-Wbv">
+                                        <rect key="frame" x="151" y="163" width="240" height="128"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="9z3-Lp-xFL" appends="YES" id="TrH-6u-zZY"/>
+                                        </connections>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="No Internet Connection Detected" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rIW-gC-qa7">
+                                        <rect key="frame" x="140" y="293" width="265" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Tap Icon To Retry" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vH6-aP-TSa">
+                                        <rect key="frame" x="197" y="315" width="150" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="vH6-aP-TSa" secondAttribute="bottom" id="ITy-hk-4uf"/>
+                                    <constraint firstAttribute="trailing" secondItem="rIW-gC-qa7" secondAttribute="trailing" constant="8" id="LTU-Ar-p66"/>
+                                    <constraint firstAttribute="trailing" secondItem="vH6-aP-TSa" secondAttribute="trailing" constant="66" id="Xv6-sn-9kC"/>
+                                    <constraint firstItem="rIW-gC-qa7" firstAttribute="top" secondItem="0NL-lX-Wbv" secondAttribute="bottom" constant="2" id="ark-Ox-sKZ"/>
+                                    <constraint firstItem="rIW-gC-qa7" firstAttribute="leading" secondItem="Waj-BG-Dyb" secondAttribute="leading" constant="11" id="fJF-nj-P2i"/>
+                                    <constraint firstItem="0NL-lX-Wbv" firstAttribute="leading" secondItem="Waj-BG-Dyb" secondAttribute="leading" constant="22" id="hbb-eJ-4Nr"/>
+                                    <constraint firstItem="0NL-lX-Wbv" firstAttribute="top" secondItem="Waj-BG-Dyb" secondAttribute="top" constant="8" id="hsQ-L7-1e4"/>
+                                    <constraint firstAttribute="trailing" secondItem="0NL-lX-Wbv" secondAttribute="trailing" constant="22" id="oOs-9Q-u3D"/>
+                                    <constraint firstItem="vH6-aP-TSa" firstAttribute="top" secondItem="rIW-gC-qa7" secondAttribute="bottom" constant="1" id="opO-Be-wf1"/>
+                                    <constraint firstItem="vH6-aP-TSa" firstAttribute="leading" secondItem="Waj-BG-Dyb" secondAttribute="leading" constant="68" id="sr4-Tp-pcH"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Dyg-mC-AYo" firstAttribute="height" secondItem="SeM-L5-jG6" secondAttribute="height" id="3vQ-sW-gW6"/>
+                            <constraint firstItem="Waj-BG-Dyb" firstAttribute="centerX" secondItem="SeM-L5-jG6" secondAttribute="centerX" id="4fE-eD-LdE"/>
+                            <constraint firstItem="Dyg-mC-AYo" firstAttribute="width" secondItem="SeM-L5-jG6" secondAttribute="width" id="4sE-5X-hyN"/>
+                            <constraint firstItem="Waj-BG-Dyb" firstAttribute="centerY" secondItem="SeM-L5-jG6" secondAttribute="centerY" id="HX7-9K-en0"/>
+                            <constraint firstItem="4QB-ff-iTP" firstAttribute="top" secondItem="Dyg-mC-AYo" secondAttribute="bottom" id="JGH-Ff-syp"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="refreshView" destination="Waj-BG-Dyb" id="bxS-mL-8wZ"/>
+                        <outlet property="webView" destination="Dyg-mC-AYo" id="Bre-el-WTW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h5Q-XP-rJ1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="9z3-Lp-xFL">
+                    <connections>
+                        <action selector="doRefresh:" destination="Jvv-Ec-OrI" id="ZAg-Su-VF1"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="-503" y="1178"/>
+        </scene>
     </scenes>
     <resources>
         <image name="feed" width="30" height="30"/>
+        <image name="refresh" width="256" height="256"/>
         <image name="tours" width="30" height="30"/>
     </resources>
     <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>

@@ -138,11 +138,90 @@
                     <connections>
                         <outlet property="flowLayout" destination="4KB-bT-Q6H" id="VuG-pr-9u1"/>
                         <segue destination="e5H-su-sJU" kind="show" identifier="FeedPageViewSegue" id="LQg-Ti-aCB"/>
+                        <segue destination="KW1-di-CeR" kind="show" identifier="quizViewControllerSegue" id="5Go-8K-yL7"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="48o-fl-WiL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="43.5" y="-317"/>
+        </scene>
+        <!--Quiz View Controller-->
+        <scene sceneID="c5M-Mk-fen">
+            <objects>
+                <viewController storyboardIdentifier="QuizViewController" id="KW1-di-CeR" customClass="QuizViewController" customModule="hiTour" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CeK-ey-XT5"/>
+                        <viewControllerLayoutGuide type="bottom" id="1in-Ng-q8o"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zhG-Tk-rpM">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ro2-SR-um2">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                            </webView>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b27-L3-MYQ">
+                                <rect key="frame" x="158" y="209" width="284" height="181"/>
+                                <subviews>
+                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="refresh" translatesAutoresizingMaskIntoConstraints="NO" id="i3B-gZ-9An">
+                                        <rect key="frame" x="22" y="8" width="240" height="128"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="Tef-G7-A3V" appends="YES" id="YbY-yi-lDa"/>
+                                        </connections>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="No Internet Connection Detected" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YDT-kb-EOC">
+                                        <rect key="frame" x="11" y="138" width="265" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Tap Icon To Retry" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Grp-a7-0Qt">
+                                        <rect key="frame" x="68" y="160" width="150" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="i3B-gZ-9An" firstAttribute="top" secondItem="b27-L3-MYQ" secondAttribute="top" constant="8" id="1nB-QQ-Zpg"/>
+                                    <constraint firstItem="Grp-a7-0Qt" firstAttribute="top" secondItem="YDT-kb-EOC" secondAttribute="bottom" constant="1" id="3Tn-pH-ldM"/>
+                                    <constraint firstItem="Grp-a7-0Qt" firstAttribute="leading" secondItem="b27-L3-MYQ" secondAttribute="leading" constant="68" id="RRk-WE-Rc8"/>
+                                    <constraint firstAttribute="trailing" secondItem="Grp-a7-0Qt" secondAttribute="trailing" constant="66" id="dHA-nI-F4n"/>
+                                    <constraint firstAttribute="bottom" secondItem="Grp-a7-0Qt" secondAttribute="bottom" id="dhf-dt-hNC"/>
+                                    <constraint firstAttribute="trailing" secondItem="i3B-gZ-9An" secondAttribute="trailing" constant="22" id="es2-4C-Upu"/>
+                                    <constraint firstAttribute="trailing" secondItem="YDT-kb-EOC" secondAttribute="trailing" constant="8" id="gcf-Fw-HvP"/>
+                                    <constraint firstItem="YDT-kb-EOC" firstAttribute="leading" secondItem="b27-L3-MYQ" secondAttribute="leading" constant="11" id="j3v-a2-hlW"/>
+                                    <constraint firstItem="i3B-gZ-9An" firstAttribute="leading" secondItem="b27-L3-MYQ" secondAttribute="leading" constant="22" id="nmh-oB-fLt"/>
+                                    <constraint firstItem="YDT-kb-EOC" firstAttribute="top" secondItem="i3B-gZ-9An" secondAttribute="bottom" constant="2" id="rAC-MH-MaJ"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ro2-SR-um2" firstAttribute="height" secondItem="zhG-Tk-rpM" secondAttribute="height" id="G24-n0-1jt"/>
+                            <constraint firstItem="b27-L3-MYQ" firstAttribute="centerX" secondItem="zhG-Tk-rpM" secondAttribute="centerX" id="Pp1-0H-tim"/>
+                            <constraint firstItem="ro2-SR-um2" firstAttribute="width" secondItem="zhG-Tk-rpM" secondAttribute="width" id="hPX-7h-oan"/>
+                            <constraint firstItem="b27-L3-MYQ" firstAttribute="centerY" secondItem="zhG-Tk-rpM" secondAttribute="centerY" id="r7Y-s6-HFX"/>
+                            <constraint firstItem="1in-Ng-q8o" firstAttribute="top" secondItem="ro2-SR-um2" secondAttribute="bottom" id="s8j-WE-VDL"/>
+                            <constraint firstItem="ro2-SR-um2" firstAttribute="top" secondItem="CeK-ey-XT5" secondAttribute="bottom" constant="-64" id="zc2-wp-Ybf"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="refreshView" destination="b27-L3-MYQ" id="37Z-4O-KHu"/>
+                        <outlet property="webView" destination="ro2-SR-um2" id="BDt-SF-Kkn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5vb-fu-OXm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Tef-G7-A3V">
+                    <connections>
+                        <action selector="doRefresh:" destination="KW1-di-CeR" id="OmR-mM-ZNn"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="838" y="104"/>
         </scene>
         <!--hiTour-->
         <scene sceneID="EiM-DD-fot">
@@ -419,12 +498,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GYQ-k6-mtD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1977" y="-1212"/>
+            <point key="canvasLocation" x="2381" y="-1035"/>
         </scene>
     </scenes>
     <resources>
         <image name="feed" width="30" height="30"/>
         <image name="qrcode" width="30" height="30"/>
+        <image name="refresh" width="256" height="256"/>
         <image name="tours" width="30" height="30"/>
     </resources>
 </document>

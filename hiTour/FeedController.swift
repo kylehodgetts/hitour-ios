@@ -70,28 +70,40 @@ class FeedController: UICollectionViewController {
         guard let t = tour else {
             return cell
         }
-        let pt = t.pointTours![indexPath.row] as! PointTour
         
-        cell.labelTitle.text = pt.point?.name
-        
-        cell.imageViewFeed?.contentMode = .ScaleAspectFill
-        cell.userInteractionEnabled = pt.scanned!.boolValue
-        cell.lockView.hidden = pt.scanned!.boolValue
-        cell.transparentView.hidden = pt.scanned!.boolValue
-
-
-        guard let image = pt.point!.data else {
-            return cell
+        if indexPath.row >= t.pointTours?.count {
+            cell.labelTitle.text = "Feedback Quiz"
+            cell.imageViewFeed.image = UIImage(named: "quizicon")
+            cell.imageViewFeed.contentMode = .ScaleAspectFit
+            cell.imageViewFeed.backgroundColor = UIColor.init(colorLiteralRed: 255/255.0, green: 203/255.0, blue: 135/255.0, alpha: 1)
+            
+            let allDiscovered = areAllPointsDiscovered()
+            cell.transparentView.hidden = allDiscovered
+            cell.userInteractionEnabled = allDiscovered
+            cell.lockView.hidden = allDiscovered
         }
-        cell.imageViewFeed.image = UIImage(data: image)
-        
+        else {
+            let pt = t.pointTours![indexPath.row] as! PointTour
+            
+            cell.labelTitle.text = pt.point?.name
+            
+            cell.imageViewFeed?.contentMode = .ScaleAspectFill
+            cell.userInteractionEnabled = pt.scanned!.boolValue
+            cell.lockView.hidden = pt.scanned!.boolValue
+            cell.transparentView.hidden = pt.scanned!.boolValue
+            
+            guard let image = pt.point!.data else {
+                return cell
+            }
+            cell.imageViewFeed.image = UIImage(data: image)
+        }
         return cell
     }
     
     /// - Returns: The number of items in the feed collection.
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let t = self.tour {
-            return t.pointTours!.count
+            return t.pointTours!.count + 1 // 1 added for the Feedback Quiz
         } else {
             return 0
         }
@@ -104,13 +116,26 @@ class FeedController: UICollectionViewController {
         }
         
         if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
-            let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("DetailViewControllerTablet") as!DetailViewController
-            
-            let pt = t.pointTours![indexPath.row] as! PointTour
-            detailController.point = pt.point!
-            detailController.audience = t.audience!
-            
-            self.splitViewController!.showDetailViewController(detailController, sender: self)
+            if indexPath.row >= t.pointTours?.count {
+                let quizView = self.storyboard!.instantiateViewControllerWithIdentifier("QuizViewController") as! QuizViewController
+                quizView.currentTour = tour
+                
+                self.splitViewController?.showDetailViewController(quizView, sender: self)
+            }
+            else {
+                let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("DetailViewControllerTablet") as!DetailViewController
+                
+                let pt = t.pointTours![indexPath.row] as! PointTour
+                detailController.point = pt.point!
+                detailController.audience = t.audience!
+                
+                self.splitViewController!.showDetailViewController(detailController, sender: self)
+            }
+        }
+        else if indexPath.row >= t.pointTours?.count {
+            let quizView = self.storyboard!.instantiateViewControllerWithIdentifier("QuizViewController") as! QuizViewController
+            quizView.currentTour = tour
+            self.navigationController?.pushViewController(quizView, animated: true)
         }
         else {
             let pageView = self.storyboard!.instantiateViewControllerWithIdentifier("FeedPageViewController") as! FeedPageViewController
@@ -145,6 +170,16 @@ class FeedController: UICollectionViewController {
         self.tour = tour
         NSUserDefaults.standardUserDefaults().setInteger(tour.tourId!.integerValue, forKey: "Tour")
         collectionView?.reloadData()
+    }
+    
+    func areAllPointsDiscovered() -> Bool {
+        let points = tour?.pointTours?.array as! [PointTour]
+        for point in points {
+            if point.scanned == false {
+                return false
+            }
+        }
+        return true
     }
     
 }

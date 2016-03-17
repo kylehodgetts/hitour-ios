@@ -33,6 +33,9 @@ class QuizTests: XCTestCase {
     func testQuizAccessible() {
         
         let app = XCUIApplication()
+        
+        NSThread.sleepForTimeInterval(2)
+        
         let tabBarsQuery = app.tabBars
         let scannerButton = tabBarsQuery.buttons["Scanner"]
         scannerButton.tap()
@@ -40,50 +43,63 @@ class QuizTests: XCTestCase {
         let okButton = app.sheets["Input Device Error"].collectionViews.buttons["Ok"]
         okButton.tap()
         
-        let enterAPassphraseTextField = app.textFields["\\Ud83d\\Udd11 Enter a passphrase"]
+        let enterAPassphraseTextField = app.textFields["Enter a passphrase"]
+        enterAPassphraseTextField.tap()
         enterAPassphraseTextField.tap()
         enterAPassphraseTextField.typeText("SNPenguins123")
         
         let doneButton = app.buttons["Done"]
         doneButton.tap()
-        app.typeText("\n")
-        scannerButton.tap()
-        okButton.tap()
-        enterAPassphraseTextField.tap()
-        enterAPassphraseTextField.typeText("POIT-2")
-        app.typeText("\r")
         
-        let feedButton = tabBarsQuery.buttons["Feed"]
-        feedButton.tap()
+        NSThread.sleepForTimeInterval(2)
+        
         scannerButton.tap()
         okButton.tap()
-        okButton.tap()
         enterAPassphraseTextField.tap()
-        enterAPassphraseTextField.tap()
+        
+        let deleteKey = app.keys["delete"]
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
         enterAPassphraseTextField.typeText("POINT-2")
         app.typeText("\r")
+        
+        NSThread.sleepForTimeInterval(2)
+        
         scannerButton.tap()
         okButton.tap()
+        enterAPassphraseTextField.tap()
         enterAPassphraseTextField.tap()
         enterAPassphraseTextField.typeText("POINT-4")
-        doneButton.tap()
-        app.typeText("\n")
+        app.typeText("\r")
+        
+        NSThread.sleepForTimeInterval(2)
+        
         scannerButton.tap()
         okButton.tap()
         enterAPassphraseTextField.tap()
+        enterAPassphraseTextField.tap()
         enterAPassphraseTextField.typeText("POINT-5")
-        app.typeText("\r")
-        feedButton.tap()
-        
-        XCUIApplication().collectionViews.images["quizicon"].tap()
-        
-        
-        
+        doneButton.tap()
+        tabBarsQuery.buttons["Feed"].tap()
+        XCUIApplication().collectionViews.staticTexts["Feedback Quiz"].tap()
     }
     
     // Tests the quiz loads when network connection
     func testQuizFunctionalityWhenNetworkConnection() {
-        XCUIApplication().collectionViews.images["quizicon"].tap()
+        XCUIApplication().collectionViews.staticTexts["Feedback Quiz"].tap()
+        
+        NSThread.sleepForTimeInterval(5)
         
         
         XCUIApplication().childrenMatchingType(.Window).elementBoundByIndex(0).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).elementBoundByIndex(1).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.tap()

@@ -23,17 +23,40 @@
                             <rect key="frame" x="8" y="80" width="160" height="65"/>
                         </variation>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available until:" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="juA-KH-Eoo">
+                        <rect key="frame" x="42.5" y="180" width="92.5" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="widthClass=compact" fixedFrame="YES">
+                            <rect key="frame" x="8" y="80" width="160" height="65"/>
+                        </variation>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16/03/2016" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T7g-mE-4LN">
+                        <rect key="frame" x="51" y="197" width="74" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="widthClass=compact" fixedFrame="YES">
+                            <rect key="frame" x="8" y="80" width="160" height="65"/>
+                        </variation>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <color key="backgroundColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="0.73999999999999999" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="T7g-mE-4LN" secondAttribute="bottom" constant="12" id="N7c-Yw-RJ0"/>
+                <constraint firstItem="T7g-mE-4LN" firstAttribute="centerX" secondItem="c8u-bq-KSQ" secondAttribute="centerX" id="Nch-P7-IWB"/>
+                <constraint firstItem="T7g-mE-4LN" firstAttribute="top" secondItem="juA-KH-Eoo" secondAttribute="bottom" id="OBL-hA-5NY"/>
+                <constraint firstItem="juA-KH-Eoo" firstAttribute="centerX" secondItem="c8u-bq-KSQ" secondAttribute="centerX" id="RUi-lH-CBk"/>
                 <constraint firstAttribute="bottom" secondItem="4mF-Kw-sgf" secondAttribute="bottom" constant="8" id="ZoZ-dL-3e8"/>
                 <constraint firstItem="4mF-Kw-sgf" firstAttribute="leading" secondItem="c8u-bq-KSQ" secondAttribute="leading" constant="8" id="lb2-Tz-t0b"/>
                 <constraint firstAttribute="trailing" secondItem="4mF-Kw-sgf" secondAttribute="trailing" constant="8" id="mZD-0O-MKt"/>
                 <constraint firstItem="4mF-Kw-sgf" firstAttribute="top" secondItem="c8u-bq-KSQ" secondAttribute="top" constant="8" id="pvR-Lv-0Cx"/>
             </constraints>
             <connections>
+                <outlet property="labelDate" destination="T7g-mE-4LN" id="9Cn-N2-FMW"/>
                 <outlet property="labelTitle" destination="4mF-Kw-sgf" id="crX-zL-Az3"/>
             </connections>
             <point key="canvasLocation" x="168" y="95"/>

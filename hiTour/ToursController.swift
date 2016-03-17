@@ -56,6 +56,7 @@ class ToursController : UICollectionViewController {
         cell.layer.cornerRadius = 7;
         let institution : String = tours[indexPath.row].name!
         cell.labelTitle.text = institution
+        cell.labelDate.text = "Dominik Kulon"
         
         return cell
     }

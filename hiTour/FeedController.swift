@@ -115,19 +115,27 @@ class FeedController: UICollectionViewController {
             return
         }
         
-        if indexPath.row >= t.pointTours?.count {
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+            if indexPath.row >= t.pointTours?.count {
+                let quizView = self.storyboard!.instantiateViewControllerWithIdentifier("QuizViewController") as! QuizViewController
+                quizView.currentTour = tour
+                
+                self.splitViewController?.showDetailViewController(quizView, sender: self)
+            }
+            else {
+                let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("DetailViewControllerTablet") as!DetailViewController
+                
+                let pt = t.pointTours![indexPath.row] as! PointTour
+                detailController.point = pt.point!
+                detailController.audience = t.audience!
+                
+                self.splitViewController!.showDetailViewController(detailController, sender: self)
+            }
+        }
+        else if indexPath.row >= t.pointTours?.count {
             let quizView = self.storyboard!.instantiateViewControllerWithIdentifier("QuizViewController") as! QuizViewController
             quizView.currentTour = tour
             self.navigationController?.pushViewController(quizView, animated: true)
-        }
-        else if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
-            let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("DetailViewControllerTablet") as!DetailViewController
-            
-            let pt = t.pointTours![indexPath.row] as! PointTour
-            detailController.point = pt.point!
-            detailController.audience = t.audience!
-            
-            self.splitViewController!.showDetailViewController(detailController, sender: self)
         }
         else {
             let pageView = self.storyboard!.instantiateViewControllerWithIdentifier("FeedPageViewController") as! FeedPageViewController

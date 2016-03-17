@@ -56,18 +56,32 @@ class ToursController : UICollectionViewController {
         cell.layer.cornerRadius = 7;
         let institution : String = tours[indexPath.row].name!
         cell.labelTitle.text = institution
+        cell.labelDate.text = "N/A"
         
         let tour = tours[indexPath.row]
         if let sessions = tour.sessions {
-            if let session = sessions.anyObject() {
-                if let date = session.endDate {
+            let latestSession =
+            (sessions.allObjects as? [Session])
+                .flatMap({s in s.reduce(nil, combine: {(acc: Session?, ses: Session) in
+                    if let accDate = acc?.endData, sesDate = ses.endData {
+                        if(accDate.earlierDate(sesDate) == sesDate) {
+                            return acc
+                        } else {
+                            return ses
+                        }
+                    } else {
+                        return ses
+                    }
+                })
+            })
+            if let session = latestSession {
+                if let date = session.endData {
                     let dateFormatter = NSDateFormatter()
-                    dateFormatter.dateFormat = "dd/mm/yyyy"
-                    cell.labelDate.text = dateFormatter.stringFromDate(date!)
+                    dateFormatter.dateFormat = "dd/MM/yyyy"
+                    cell.labelDate.text = dateFormatter.stringFromDate(date)
+                    print(date)
                 }
             }
-        } else {
-            cell.labelDate.text = "N/A"
         }
         
         return cell

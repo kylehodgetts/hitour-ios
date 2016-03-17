@@ -56,7 +56,19 @@ class ToursController : UICollectionViewController {
         cell.layer.cornerRadius = 7;
         let institution : String = tours[indexPath.row].name!
         cell.labelTitle.text = institution
-        cell.labelDate.text = "Dominik Kulon"
+        
+        let tour = tours[indexPath.row]
+        if let sessions = tour.sessions {
+            if let session = sessions.anyObject() {
+                if let date = session.endDate {
+                    let dateFormatter = NSDateFormatter()
+                    dateFormatter.dateFormat = "dd/mm/yyyy"
+                    cell.labelDate.text = dateFormatter.stringFromDate(date!)
+                }
+            }
+        } else {
+            cell.labelDate.text = "N/A"
+        }
         
         return cell
     }

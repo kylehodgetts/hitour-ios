@@ -97,6 +97,7 @@ class QuizTests: XCTestCase {
     
     // Tests the quiz loads when network connection
     func testQuizFunctionalityWhenNetworkConnection() {
+        NSThread.sleepForTimeInterval(5)
         XCUIApplication().collectionViews.staticTexts["Feedback Quiz"].tap()
         
         NSThread.sleepForTimeInterval(5)

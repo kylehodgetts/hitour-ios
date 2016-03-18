@@ -29,101 +29,62 @@ class DynamicContentTest: XCTestCase {
         super.tearDown()
     }
     
-    //  Test that checks the CTScan content has been correctly populated and displayed in the correct order
-    func testCTScanContent() {
-        let app = XCUIApplication()
-        app.collectionViews.images["ctscan"].tap()
-        app.staticTexts["Computed tomography"].tap()
-        
-        XCTAssert(app.staticTexts["Computed tomography"].exists)
-        
-        let scrollViewsQuery = app.scrollViews
-        let element = scrollViewsQuery.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element
-        let textView = element.childrenMatchingType(.TextView).element
-        textView.tap()
-        textView.tap()
-        textView.tap()
-       
-        
-        let element3 = element.childrenMatchingType(.Other).elementBoundByIndex(0).childrenMatchingType(.Other).element
-        let textView2 = element3.childrenMatchingType(.TextView).elementBoundByIndex(0)
-        textView2.tap()
-        textView2.tap()
-        
-        XCTAssert(app.textViews["What Happens In a CT Scan?"].exists)
-        XCTAssert(textView2.exists)
-        
-        element3.childrenMatchingType(.TextView).elementBoundByIndex(1).tap()
-        
-        let elementsQuery = scrollViewsQuery.otherElements
-        let videoElement = elementsQuery.otherElements["Video"]
-        videoElement.tap()
-        videoElement.tap()
-        
-        XCTAssert(app.otherElements["Video"].exists)
-        
-        let element2 = element.childrenMatchingType(.Other).elementBoundByIndex(1).childrenMatchingType(.Other).element
-        element2.childrenMatchingType(.TextView).elementBoundByIndex(0).tap()
-        element2.childrenMatchingType(.TextView).elementBoundByIndex(1).tap()
-        
-        XCTAssert(app.textViews["Image Results of a CT Scan"].exists)
-        XCTAssert(app.textViews["Image of a patients scan results from having a CT Scan"].exists)
-        elementsQuery.images["mriscanresult1"].tap()
-        XCTAssert(app.images["mriscanresult1"].exists)
-    }
-    
-    //  Test that checks the Fluoroscopy content has been dynamically populated correctly
-    func testFluroscopyContent() {
-        
-        let app = XCUIApplication()
-        XCTAssert(app.collectionViews.images["fluoroscopy"].exists)
-        app.staticTexts["Fluoroscopy Suite"].tap()
-        
-        XCTAssert(app.staticTexts["Fluoroscopy Suite"].exists)
-        
-        let element = app.scrollViews.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element
-        element.childrenMatchingType(.TextView).element.tap()
-        XCTAssert(element.exists)
-        
-        let element2 = element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element
-        element2.childrenMatchingType(.TextView).elementBoundByIndex(0).tap()
-        element2.childrenMatchingType(.TextView).elementBoundByIndex(1).tap()
-        XCTAssert(element2.exists)
-        
-        let textView = element2.childrenMatchingType(.TextView).elementBoundByIndex(2)
-        textView.tap()
-        textView.tap()
-        XCTAssert(textView.exists)
-    }
-    
     //  Test that checks the video content is dynamically populated correctly as well as check their controls work
     //  as expected in both normal mode and full screen mode. So that the user is able to control the videos
     func testVideoContent() {
         
         let app = XCUIApplication()
-        app.collectionViews.images["ctscan"].tap()
         
-        let scrollViewsQuery = app.scrollViews
-        let element = scrollViewsQuery.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element
-        let textView = element.childrenMatchingType(.TextView).element
-        textView.tap()
-        textView.tap()
+        NSThread.sleepForTimeInterval(5)
         
-        let elementsQuery = scrollViewsQuery.otherElements
-        elementsQuery.buttons["PlayButton"].tap()
+        let tabBarsQuery = app.tabBars
+        let scannerButton = tabBarsQuery.buttons["Scanner"]
+        scannerButton.tap()
         
-        let videoElement = elementsQuery.otherElements["Video"]
-        videoElement.tap()
-        elementsQuery.buttons["PauseButton"].tap()
-
-        XCTAssert(videoElement.exists)
+        let okButton = app.sheets["Input Device Error"].collectionViews.buttons["Ok"]
+        okButton.tap()
         
-        elementsQuery.buttons["EnterFullScreenButton"].tap()
-        app.buttons["Play"].tap()
-        app.otherElements["Video"].tap()
-        app.buttons["pause.button"].tap()
+        let enterAPassphraseTextField = app.textFields["Enter a passphrase"]
+        enterAPassphraseTextField.tap()
+        enterAPassphraseTextField.tap()
+        enterAPassphraseTextField.typeText("SNneckwear73")
+        app.typeText("\r")
+        
+        NSThread.sleepForTimeInterval(20)
+        
+        scannerButton.tap()
+        okButton.tap()
+        enterAPassphraseTextField.tap()
+        enterAPassphraseTextField.tap()
+        
+        let deleteKey = app.keys["delete"]
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        
+        enterAPassphraseTextField.typeText("POINT-1")
+        app.typeText("\r")
+        
+        NSThread.sleepForTimeInterval(5)
+        
+        let collectionViewsQuery2 = app.collectionViews
+        collectionViewsQuery2.cells.otherElements.containingType(.StaticText, identifier:"Fluroscopy System Video - Modified").childrenMatchingType(.TextView).element.swipeUp()
+        
+        let collectionViewsQuery = collectionViewsQuery2
+        collectionViewsQuery.buttons["PlayButton"].tap()
+        collectionViewsQuery.otherElements["Video"].tap()
+        collectionViewsQuery.buttons["EnterFullScreenButton"].tap()
         app.buttons["Done"].tap()
-        videoElement.tap()
+        
     }
     
     //  Test that checks image content is dynamically populated correctly and also tests the functionality of the images
@@ -132,21 +93,101 @@ class DynamicContentTest: XCTestCase {
     func testImageContent() {
         
         let app = XCUIApplication()
-        app.collectionViews.images["ctscan"].tap()
         
-        let scrollViewsQuery = app.scrollViews
-        let textView = scrollViewsQuery.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.TextView).element
-        textView.swipeUp()
-        textView.tap()
-        textView.tap()
-        scrollViewsQuery.otherElements.images["mriscanresult1"].tap()
+        NSThread.sleepForTimeInterval(5)
+        
+        let scannerButton = app.tabBars.buttons["Scanner"]
+        scannerButton.tap()
+        
+        let okButton = app.sheets["Input Device Error"].collectionViews.buttons["Ok"]
+        okButton.tap()
+        
+        let enterAPassphraseTextField = app.textFields["Enter a passphrase"]
+        enterAPassphraseTextField.tap()
+        enterAPassphraseTextField.tap()
+        enterAPassphraseTextField.typeText("SNneckwear73")
+        app.typeText("\r")
+        
+        NSThread.sleepForTimeInterval(10)
+        
+        scannerButton.tap()
+        okButton.tap()
+        enterAPassphraseTextField.tap()
+        enterAPassphraseTextField.tap()
+        
+        let deleteKey = app.keys["delete"]
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        enterAPassphraseTextField.typeText("POINT-5")
+        app.typeText("\r")
+        
+        NSThread.sleepForTimeInterval(5)
+        app.collectionViews.staticTexts["Nuclear Scan"].tap()
         
         let element = app.childrenMatchingType(.Window).elementBoundByIndex(0).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element
         element.tap()
         element.tap()
-        XCTAssert(element.exists)
-
         app.buttons["X"].tap()
+        
+    }
+    
+    /// Test to check that text content is correctly shown
+    func testTextContent() {
+        let app = XCUIApplication()
+        
+        NSThread.sleepForTimeInterval(5)
+        
+        let scannerButton = app.tabBars.buttons["Scanner"]
+        scannerButton.tap()
+        
+        let okButton = app.sheets["Input Device Error"].collectionViews.buttons["Ok"]
+        okButton.tap()
+        
+        let enterAPassphraseTextField = app.textFields["Enter a passphrase"]
+        enterAPassphraseTextField.tap()
+        enterAPassphraseTextField.tap()
+        enterAPassphraseTextField.typeText("SNneckwear73")
+        app.typeText("\r")
+        
+        NSThread.sleepForTimeInterval(10)
+        
+        scannerButton.tap()
+        okButton.tap()
+        enterAPassphraseTextField.tap()
+        enterAPassphraseTextField.tap()
+        
+        let deleteKey = app.keys["delete"]
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        enterAPassphraseTextField.typeText("POINT-5")
+        app.typeText("\r")
+        
+        NSThread.sleepForTimeInterval(5)
+        
+        
+        let cellsQuery = XCUIApplication().collectionViews.cells
+        cellsQuery.otherElements.containingType(.StaticText, identifier:"Nuclear Medicine").childrenMatchingType(.TextView).elementBoundByIndex(0).swipeUp()
+        cellsQuery.otherElements.containingType(.StaticText, identifier:"What is nuclear medicine?").childrenMatchingType(.TextView).elementBoundByIndex(1).tap()
     }
 
 }

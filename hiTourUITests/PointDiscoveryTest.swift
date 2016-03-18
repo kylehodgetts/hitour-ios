@@ -27,52 +27,219 @@ class PointDiscoveryTest: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-
-    func testPointDiscovery() {
-        
-        let app = XCUIApplication()
-        let tabBarsQuery = app.tabBars
-        tabBarsQuery.buttons["Tours"].tap()
-        app.collectionViews.staticTexts["Imaging Tour: A-Level"].tap()
-        tabBarsQuery.buttons["Scanner"].tap()
-        
-        let okButton = app.sheets["Input Device Error"].collectionViews.buttons["Ok"]
-        okButton.tap()
-        okButton.tap()
-        okButton.tap()
-        
-        let enterCodeOrPinTextField = app.textFields["Enter Code or PIN"]
-        enterCodeOrPinTextField.tap()
-        enterCodeOrPinTextField.typeText("2")
-        app.buttons["Submit"].tap()
-        
-        let element = app.scrollViews.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element
-        element.childrenMatchingType(.TextView).element.pressForDuration(0.5);
-        element.childrenMatchingType(.Other).elementBoundByIndex(0).childrenMatchingType(.Other).element.childrenMatchingType(.TextView).elementBoundByIndex(0).tap()
-        element.childrenMatchingType(.Other).elementBoundByIndex(1).childrenMatchingType(.Other).element.childrenMatchingType(.TextView).elementBoundByIndex(0).tap()
-        tabBarsQuery.buttons["Feed"].tap()
-        
-    }
     
+    /// Test to check that when a point is scanned it goes to the correct point Detail View
     func testScannedPointNavigation() {
         
         let app = XCUIApplication()
-        let tabBarsQuery = app.tabBars
-        tabBarsQuery.buttons["Tours"].tap()
-        app.collectionViews.staticTexts["Imaging Tour: A-Level"].tap()
-        tabBarsQuery.buttons["Scanner"].tap()
+        
+        NSThread.sleepForTimeInterval(4)
+        
+        app.tabBars.buttons["Scanner"].tap()
         app.sheets["Input Device Error"].collectionViews.buttons["Ok"].tap()
         
-        let enterCodeOrPinTextField = app.textFields["Enter Code or PIN"]
-        enterCodeOrPinTextField.tap()
-        enterCodeOrPinTextField.typeText("3")
-        app.buttons["Submit"].tap()
+        let enterAPassphraseTextField = app.textFields["Enter a passphrase"]
+        enterAPassphraseTextField.tap()
+        enterAPassphraseTextField.tap()
         
-        let element = app.scrollViews.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element
-        element.childrenMatchingType(.TextView).element.tap()
-        element.childrenMatchingType(.Other).elementBoundByIndex(1).childrenMatchingType(.Other).element.childrenMatchingType(.TextView).elementBoundByIndex(0).tap()
+        let shiftButton = app.buttons["shift"]
+        shiftButton.tap()
+        shiftButton.tap()
+        shiftButton.tap()
+        shiftButton.tap()
+        enterAPassphraseTextField.typeText("SNP")
+        shiftButton.tap()
+        enterAPassphraseTextField.typeText("enguins")
+        
+        let moreNumbersKey = app.keys["more, numbers"]
+        moreNumbersKey.tap()
+        enterAPassphraseTextField.typeText("123")
+        app.buttons["Done"].tap()
+        
+        NSThread.sleepForTimeInterval(4)
+        
+        
+        app.tabBars.buttons["Scanner"].tap()
+        app.sheets["Input Device Error"].collectionViews.buttons["Ok"].tap()
+        
+        enterAPassphraseTextField.tap()
+        enterAPassphraseTextField.tap()
+        enterAPassphraseTextField.tap()
+        enterAPassphraseTextField.tap()
+        
+        shiftButton.tap()
+        shiftButton.tap()
+        enterAPassphraseTextField.typeText("POINT")
+        
+        moreNumbersKey.tap()
+        enterAPassphraseTextField.typeText("-2")
+        app.buttons["Done"].tap()
         
     }
     
+    
+    func testOnlyUnlockedPointAccessible() {
+        
+        let app = XCUIApplication()
+        
+        NSThread.sleepForTimeInterval(4)
+        
+        app.tabBars.buttons["Scanner"].tap()
+        app.sheets["Input Device Error"].collectionViews.buttons["Ok"].tap()
+        
+        let enterAPassphraseTextField = app.textFields["Enter a passphrase"]
+        enterAPassphraseTextField.tap()
+        enterAPassphraseTextField.tap()
+        
+        let shiftButton = app.buttons["shift"]
+        shiftButton.tap()
+        shiftButton.tap()
+        shiftButton.tap()
+        shiftButton.tap()
+        enterAPassphraseTextField.typeText("SNP")
+        shiftButton.tap()
+        enterAPassphraseTextField.typeText("enguins")
+        
+        let moreNumbersKey = app.keys["more, numbers"]
+        moreNumbersKey.tap()
+        enterAPassphraseTextField.typeText("123")
+        app.buttons["Done"].tap()
+        
+        NSThread.sleepForTimeInterval(4)
+
+        let collectionViewsQuery = app.collectionViews
+        collectionViewsQuery.staticTexts["Angiography"].tap()
+        app.navigationBars["hiTour.FeedPageView"].buttons["hiTour"].tap()
+        collectionViewsQuery.staticTexts["Nuclear Medicine"].tap()
+        collectionViewsQuery.staticTexts["Magnetic Resonance Imaging (MRI)"].tap()
+        
+    }
+    
+    /// Test that checks manual input of a point id displays the correct point
+    func testManualPointEntryDiscovery() {
+        
+        let app = XCUIApplication()
+        
+        NSThread.sleepForTimeInterval(4)
+        
+        app.tabBars.buttons["Scanner"].tap()
+        app.sheets["Input Device Error"].collectionViews.buttons["Ok"].tap()
+        
+        let enterAPassphraseTextField = app.textFields["Enter a passphrase"]
+        enterAPassphraseTextField.tap()
+        enterAPassphraseTextField.tap()
+        
+        let shiftButton = app.buttons["shift"]
+        shiftButton.tap()
+        shiftButton.tap()
+        shiftButton.tap()
+        shiftButton.tap()
+        enterAPassphraseTextField.typeText("SNP")
+        shiftButton.tap()
+        enterAPassphraseTextField.typeText("enguins")
+        
+        let moreNumbersKey = app.keys["more, numbers"]
+        moreNumbersKey.tap()
+        enterAPassphraseTextField.typeText("123")
+        app.buttons["Done"].tap()
+        
+        NSThread.sleepForTimeInterval(4)
+
+        
+        app.tabBars.buttons["Scanner"].tap()
+        app.sheets["Input Device Error"].collectionViews.buttons["Ok"].tap()
+        
+        enterAPassphraseTextField.tap()
+        enterAPassphraseTextField.tap()
+        let deleteKey = app.keys["delete"]
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        
+        shiftButton.tap()
+        shiftButton.tap()
+        enterAPassphraseTextField.typeText("POINT")
+        
+        moreNumbersKey.tap()
+        enterAPassphraseTextField.typeText("-5")
+        
+        let app2 = app
+        app2.buttons["Done"].tap()
+        app2.collectionViews.staticTexts["Nuclear Medicine"].tap()
+    }
+    
+    /// Test that checks points scanned not on the tour are correctly handled by showing the user
+    /// an error message that the point is not found
+    func testIncorrectPointScannedIsHandled() {
+        let app = XCUIApplication()
+        
+        NSThread.sleepForTimeInterval(4)
+        
+        app.tabBars.buttons["Scanner"].tap()
+        app.sheets["Input Device Error"].collectionViews.buttons["Ok"].tap()
+        
+        let enterAPassphraseTextField = app.textFields["Enter a passphrase"]
+        enterAPassphraseTextField.tap()
+        enterAPassphraseTextField.tap()
+        
+        let shiftButton = app.buttons["shift"]
+        shiftButton.tap()
+        shiftButton.tap()
+        shiftButton.tap()
+        shiftButton.tap()
+        enterAPassphraseTextField.typeText("SNP")
+        shiftButton.tap()
+        enterAPassphraseTextField.typeText("enguins")
+        
+        let moreNumbersKey = app.keys["more, numbers"]
+        moreNumbersKey.tap()
+        enterAPassphraseTextField.typeText("123")
+        app.buttons["Done"].tap()
+        
+        NSThread.sleepForTimeInterval(4)
+
+        
+        app.tabBars.buttons["Scanner"].tap()
+        
+        let okButton = app.sheets["Input Device Error"].collectionViews.buttons["Ok"]
+        okButton.tap()
+        
+        enterAPassphraseTextField.tap()
+        enterAPassphraseTextField.tap()
+        let deleteKey = app.keys["delete"]
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        
+        shiftButton.tap()
+        shiftButton.tap()
+        enterAPassphraseTextField.typeText("POINT")
+        
+        moreNumbersKey.tap()
+        enterAPassphraseTextField.typeText("-1")
+        app.buttons["Done"].tap()
+        app.sheets["Point Not Found"].collectionViews.buttons["OK"].tap()
+        
+    }
     
 }

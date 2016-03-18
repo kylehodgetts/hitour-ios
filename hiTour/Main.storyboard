@@ -242,7 +242,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DKA-nn-XcZ">
                                 <rect key="frame" x="20" y="384" width="560" height="71"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="🔑 Enter a passphrase" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fxb-cA-wp5">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a passphrase" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fxb-cA-wp5">
                                         <rect key="frame" x="8" y="21" width="426" height="30"/>
                                         <color key="backgroundColor" red="0.85098039219999999" green="0.88235294119999996" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>

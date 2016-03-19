@@ -27,6 +27,7 @@ class TabBarController: UITabBarController {
             controller.delegate = self
             
             (UIApplication.sharedApplication().delegate as! AppDelegate).feedController = self.viewControllers![0] as? FeedController
+            (UIApplication.sharedApplication().delegate as! AppDelegate).tourController = self.viewControllers![1] as? ToursController
         }
     }
 }

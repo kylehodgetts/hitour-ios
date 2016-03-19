@@ -25,6 +25,8 @@ class TabBarController: UITabBarController {
             
             controller.modalPresentationStyle = UIModalPresentationStyle.FormSheet;
             controller.delegate = self
+            
+            (UIApplication.sharedApplication().delegate as! AppDelegate).feedController = self.viewControllers![0] as? FeedController
         }
     }
 }

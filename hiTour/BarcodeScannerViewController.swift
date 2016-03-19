@@ -362,6 +362,7 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
                 
                 self.dismissViewControllerAnimated(true, completion: nil)
                 delegate?.didPointScan(currentTour!, startIndex: startIndex!, sender: self)
+                appDelegate?.feedController?.viewDidAppear(true)
             }
         }
         else {

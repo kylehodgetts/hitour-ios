@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var coreDataStack = CoreDataStack()
     lazy var apiConnector: ApiConnector? = nil
     var currentTour: Tour? = nil
+    var feedController : FeedController? = nil
+    var tourController : ToursController? = nil
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {

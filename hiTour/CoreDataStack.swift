@@ -106,9 +106,17 @@ class CoreDataStack{
     }
     
     func deleteAll() -> Void {
-        managedObjectContext.reset()
+        deleteEntity(Tour.entityName)
+        deleteEntity(Session.entityName)
+        deleteEntity(Data.entityName)
+        deleteEntity(Point.entityName)
+        deleteEntity(PointData.entityName)
+        deleteEntity(PointTour.entityName)
+        deleteEntity(Audience.entityName)
     }
     
-    
+    func deleteEntity(entity: String){
+        fetch(name: entity)?.forEach(self.delete)
+    }
     
 }

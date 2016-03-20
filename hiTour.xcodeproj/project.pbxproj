@@ -42,6 +42,8 @@
 		6DF7DC4E1C7E72CD00C88B48 /* FeedPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF7DC4D1C7E72CD00C88B48 /* FeedPageViewController.swift */; };
 		8F1C8FAB1C776E33009C95F4 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1C8FAA1C776E33009C95F4 /* HTTPClient.swift */; };
 		8F1C8FAD1C7770BD009C95F4 /* APITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1C8FAC1C7770BD009C95F4 /* APITests.swift */; };
+		8FC00D521C9B144D007D2DB9 /* Optional_Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC00D511C9B144D007D2DB9 /* Optional_Ext.swift */; };
+		8FC00D551C9DD2D3007D2DB9 /* CoredataTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC00D531C9DD24C007D2DB9 /* CoredataTest.swift */; };
 		8FF1C6D11C75F73A00F16473 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF1C6D01C75F73A00F16473 /* CoreDataStack.swift */; };
 		8FF1C6E11C7603A800F16473 /* PointData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF1C6D31C7603A800F16473 /* PointData+CoreDataProperties.swift */; };
 		8FF1C6E21C7603A800F16473 /* PointData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF1C6D41C7603A800F16473 /* PointData.swift */; };
@@ -122,6 +124,8 @@
 		6DF7DC4D1C7E72CD00C88B48 /* FeedPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedPageViewController.swift; sourceTree = "<group>"; };
 		8F1C8FAA1C776E33009C95F4 /* HTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		8F1C8FAC1C7770BD009C95F4 /* APITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APITests.swift; sourceTree = "<group>"; };
+		8FC00D511C9B144D007D2DB9 /* Optional_Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Optional_Ext.swift; sourceTree = "<group>"; };
+		8FC00D531C9DD24C007D2DB9 /* CoredataTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoredataTest.swift; sourceTree = "<group>"; };
 		8FF1C6D01C75F73A00F16473 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		8FF1C6D31C7603A800F16473 /* PointData+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PointData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8FF1C6D41C7603A800F16473 /* PointData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointData.swift; sourceTree = "<group>"; };
@@ -321,6 +325,7 @@
 				984EC7C21C7209C200A12379 /* hiTourTests */,
 				8FF1C6D21C75FF9E00F16473 /* models */,
 				8FF1C6CF1C75F71A00F16473 /* coreData */,
+				8FC00D511C9B144D007D2DB9 /* Optional_Ext.swift */,
 			);
 			path = hiTour;
 			sourceTree = "<group>";
@@ -331,6 +336,7 @@
 				984EC7C31C7209C200A12379 /* hiTourTests.swift */,
 				984EC7C51C7209C200A12379 /* Info.plist */,
 				8F1C8FAC1C7770BD009C95F4 /* APITests.swift */,
+				8FC00D531C9DD24C007D2DB9 /* CoredataTest.swift */,
 			);
 			path = hiTourTests;
 			sourceTree = SOURCE_ROOT;
@@ -515,6 +521,8 @@
 				984EC7B41C7209C200A12379 /* (null) in Sources */,
 				6DBAC9531C95E8710092CAB8 /* ImageDataViewCell.swift in Sources */,
 				450610551C987DB800D05EBB /* QuizViewController.swift in Sources */,
+				45583DB31C82671E0087AB18 /* ContentView.swift in Sources */,
+				8FC00D521C9B144D007D2DB9 /* Optional_Ext.swift in Sources */,
 				8FF1C6E91C7603A800F16473 /* PointTour+CoreDataProperties.swift in Sources */,
 				6DBAC9571C9612B90092CAB8 /* VideoDataViewCell.swift in Sources */,
 				8FF1C6E21C7603A800F16473 /* PointData.swift in Sources */,
@@ -535,6 +543,7 @@
 			files = (
 				8F1C8FAD1C7770BD009C95F4 /* APITests.swift in Sources */,
 				984EC7C41C7209C200A12379 /* hiTourTests.swift in Sources */,
+				8FC00D551C9DD2D3007D2DB9 /* CoredataTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

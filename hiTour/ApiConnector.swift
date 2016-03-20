@@ -29,7 +29,6 @@ class ApiConnector{
     func updateAll(chain: (() -> Void)? = nil) -> Void {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             if let sessions = self.coreDataStack.fetch(name: Session.entityName).flatMap({$0 as? [Session]}){
-                print("Sessions",sessions)
                 var finished = 0;
                 func tryUpdate() -> Void {
                     if(finished >= sessions.count) {
@@ -37,22 +36,30 @@ class ApiConnector{
                             // update some UI
                             _ = chain.map({$0()});
                         });
+                    } else {
+                        fetchBySession(sessions[finished])
                     }
                 }
-                for session in sessions {
+                
+                func fetchBySession(session: Session){
+                    print("Fetching", session.sessionCode)
                     self.fetchTour(session, chain: {_ in
                         finished++
                         self.coreDataStack.saveMainContext()
                         tryUpdate()
                     })
                 }
+
                 tryUpdate()
             }
 
         });
     }
     
-    
+    ///
+    /// Delets a point from the core data, as well as data assigned to the point, in case they are not being used anywhere else
+    ///
+    ///
     func deletePoint(point: Point) -> Void {
         guard let pointData = point.pointData?.array as? [PointData] else {
             coreDataStack.delete(point)
@@ -71,6 +78,10 @@ class ApiConnector{
         coreDataStack.delete(point);
     }
     
+    ///
+    /// Deletes a tour from the core data
+    ///
+    ///
     func deleteTour(tour: Tour) -> Void {
         guard let tourPoints = tour.pointTours?.array as? [PointTour] else {
             coreDataStack.delete(tour);
@@ -90,7 +101,12 @@ class ApiConnector{
     
     }
     
+    ///
+    /// Deletes a session from core data
+    ///
+    ///
     func deleteSession(session: Session) -> Void{
+        print("DELETING SES")
         //TODO: Delete all data that has smthing to do with this session
         guard let tour = session.tour else {
             coreDataStack.delete(session);
@@ -113,21 +129,121 @@ class ApiConnector{
         coreDataStack.delete(session);
         
     }
-
+    
     ///
-    /// !!! ATTENTIONE !!! 
+    /// !!! ATTENTIONE !!!
     /// DO NOT TOUCH THIS UNLESS YOU ARE REALLY SURE WHAT YOU ARE DOING
     /// HAS WEIRD ASS DEPENDEDNCIES ALL OVER THE FUNCTION...
     ///
+    /// It is a function with many sub functions, that are being called
     ///
     func fetchTour(session: Session, chain: ((Tour?) -> Void)? = nil) -> Void {
         var outStandingRequests = 0;
+        var audiencesS = Set<Audience>()
         
         func tryCallBack(tour: Tour){
             if(outStandingRequests <= 0) {
                 _ = chain.map({$0(tour)})
             }
         }
+        
+        func downloadBinary(url: String?, nsTour: Tour, after: (NSData?) -> Void) {
+            outStandingRequests++
+            url.forEach({
+                self.client.binaryReques($0, cb: { (data) -> Void in
+                    after(data)
+                    outStandingRequests--
+                    tryCallBack(nsTour)
+                })
+ 
+            })
+        }
+        
+        func parsePoints(nsTour: Tour) -> ([String: AnyObject]) -> [Point] {
+            func parse(pDict: [String: AnyObject]) -> [Point] {
+                guard let
+                    data = pDict["data"] as? [[String: AnyObject]]
+                    ,nsPoint = Point.jsonReader.read(pDict, stack: self.coreDataStack).map({self.coreDataStack.insert(Point.entityName, callback: $0)})
+                    ,pointUpdated = pDict["updated_at"] as? String
+                else {
+                    return []
+                }
+                
+                func dowloadPointData(){
+                    downloadBinary(pDict["url"] as? String, nsTour: nsTour){ data in
+                        nsPoint.data = data
+                        nsPoint.dateUpdated = pointUpdated;
+                    }
+                }
+                
+                nsPoint.dateUpdated.fold(dowloadPointData())({(date: String) in
+                    if(pointUpdated != date) {return dowloadPointData()}
+                    else { return {}() }
+                })
+
+                (nsPoint.pointTours?.array as? [PointTour]).forEach{pts in
+                    if(!pts.contains({$0.tour == nsTour})){
+                        PointTour.jsonReader.read(pDict, stack: self.coreDataStack).map({self.coreDataStack.insert(PointTour.entityName, callback: $0)}).forEach{tourPoint in
+                            tourPoint.tour = nsTour
+                            tourPoint.point = nsPoint
+                        }
+                    }
+                }
+                
+                _ = data.flatMap(parseData(nsPoint, nsTour: nsTour))
+                
+                return [nsPoint]
+                
+            }
+            return parse
+        }
+        
+        func parseData(nsPoint: Point, nsTour: Tour) -> ([String: AnyObject]) -> [Data] {
+            func parse(dDict: [String: AnyObject]) -> [Data] {
+                guard let audiences = dDict["audiences"] as? [[String: AnyObject]], dataUpdated = dDict["updated_at"] as? String else {
+                    return []
+                }
+                
+                let dataAudience = audiences.flatMap({aDict -> [Audience] in
+                    if let audience = Audience.jsonReader.read(aDict, stack: self.coreDataStack).map({self.coreDataStack.insert(Audience.entityName, callback: $0)}) {
+                        audiencesS.insert(audience)
+                        return [audience]
+                    }
+                    return []
+                })
+                
+                if let nsData = Data.jsonReader.read(dDict, stack: self.coreDataStack).map({self.coreDataStack.insert(Data.entityName, callback: $0)}) {
+                    let nAudience = (dataAudience as [AnyObject]) + nsData.audience!.allObjects
+                    nsData.audience = NSSet(array: nAudience)
+                    
+                    if let pds = nsData.pointData?.allObjects as? [PointData] {
+                        if(!pds.contains({$0.point == nsPoint})){
+                            if let dataPoint = PointData.jsonReader.read(dDict, stack: self.coreDataStack).map({self.coreDataStack.insert(PointData.entityName, callback: $0)}) {
+                                dataPoint.point = nsPoint
+                                dataPoint.data = nsData
+                            }
+                        }
+                    }
+                    
+                    func downloadDataData() {
+                        downloadBinary(dDict["url"] as? String, nsTour: nsTour){data in
+                            nsData.data = data
+                            nsData.dataUpdated = dataUpdated;
+                        }
+                    }
+                    
+                    nsData.dataUpdated.fold(downloadDataData())({ (date: String) in
+                        if(dataUpdated != date){ downloadDataData()}
+                        else { return {}() }
+                    })
+                    
+                    return [nsData]
+                }
+                return []
+            }
+            return parse
+        }
+
         
         func tourOnResponse(response: NSURLResponse?) -> Bool{
             guard let resp = response as? NSHTTPURLResponse else {
@@ -146,6 +262,7 @@ class ApiConnector{
             return true // return true as default... mostlikely will result into an error anyway...
             
         }
+        
 
         client.requestObject(
             session.sessionCode!
@@ -156,143 +273,40 @@ class ApiConnector{
                 _ = chain.map({$0(nil)})
             }
         ) { (dict:[String: AnyObject] ) -> Void in
-            guard let tour = dict["tours"] as? [String: AnyObject] else {
+            print("Shoul happen only once...")
+            guard let
+                tour = dict["tours"] as? [String: AnyObject]
+                , points = tour["points"] as? [[String: AnyObject]]
+                , tourSession = dict["tour_session"] as? [String:AnyObject]
+                , start = tourSession["start_date"] as? String
+                , duration = tourSession["duration"] as? Int
+            else {
                 //TODO allert in case something wrong...
                 return
             }
             
-            guard let tourSession = dict["tour_session"] as? [String:AnyObject], start = tourSession["start_date"] as? String, duration = tourSession["duration"] as? Int  else {
-                //TODO allert in case something wrong...
-                return
+            Tour.jsonReader.read(tour, stack: self.coreDataStack).map({self.coreDataStack.insert(Tour.entityName, callback: $0)}).forEach{ nsTour in
+                session.tour = nsTour;
+                let dateFormater = NSDateFormatter()
+                dateFormater.dateFormat =  "yyyy-MM-dd"
+                session.endData = dateFormater.dateFromString(start)?.dateByAddingTimeInterval(NSTimeInterval(60*60*24*duration))
+                
+                _ = points.flatMap(parsePoints(nsTour))
+                
+                (tour["audience_id"] as? Int).forEach { audienceId in
+                    nsTour.audience = audiencesS.filter({$0.audienceId! == audienceId}).last
+                }
+                
+                tryCallBack(nsTour)
             }
-            
-            
-            guard let points = tour["points"] as? [[String: AnyObject]] else {
-                //TODO alert in case points do not exist or smthing
-                return
-            }
-            
-            var audiencesS = Set<Audience>()
-            
-            guard let nsTour = Tour.jsonReader.read(tour, stack: self.coreDataStack).map({self.coreDataStack.insert(Tour.entityName, callback: $0)}) else {
-                return
-            }
-            
-            session.tour = nsTour;
-            let dateFormater = NSDateFormatter()
-            dateFormater.dateFormat =  "yyyy-MM-dd"
-            session.endData = dateFormater.dateFromString(start)?.dateByAddingTimeInterval(NSTimeInterval(60*60*24*duration))
-            
-            _ = points.flatMap({pDict -> [Point] in
-                guard let data = pDict["data"] as? [[String: AnyObject]] else {
-                    return []
-                }
-                
-                guard let nsPoint = Point.jsonReader.read(pDict, stack: self.coreDataStack).map({self.coreDataStack.insert(Point.entityName, callback: $0)}) else {
-                    return []
-                }
-                
-                func dowloadPointData(){
-                    outStandingRequests++;
-                    if let url = pDict["url"] as? String {
-                        print("Getting pointD")
-                        self.client.binaryReques(url, cb: { (data) -> Void in
-                            nsPoint.data = data
-                            outStandingRequests--
-                            tryCallBack(nsTour)
-                        })
-                    }
-                }
-                
-                let pointUpdated = pDict["updated_at"] as? String;
-                
-                if let date = nsPoint.dateUpdated {
-                    if(pointUpdated != date){
-                        dowloadPointData()
-                    }
-                } else {
-                    dowloadPointData();
-                }
-                nsPoint.dateUpdated = pointUpdated;
-                
-                if let pts = nsPoint.pointTours?.array as? [PointTour] {
-                    if(!pts.contains({$0.tour == nsTour})){
-                        if let tourPoint = PointTour.jsonReader.read(pDict, stack: self.coreDataStack).map({self.coreDataStack.insert(PointTour.entityName, callback: $0)}) {
-                            tourPoint.tour = nsTour
-                            tourPoint.point = nsPoint
-                        }
-                    }
-                }
-
-
-                
-               _ = data.flatMap({dDict -> [Data] in
-                    guard let audiences = dDict["audiences"] as? [[String: AnyObject]] else {
-                        return []
-                    }
-                    
-                    let dataAudience = audiences.flatMap({aDict -> [Audience] in
-                        if let audience = Audience.jsonReader.read(aDict, stack: self.coreDataStack).map({self.coreDataStack.insert(Audience.entityName, callback: $0)}) {
-                            audiencesS.insert(audience)
-                            return [audience]
-                        }
-                        return []
-                    })
-                
-                    if let nsData = Data.jsonReader.read(dDict, stack: self.coreDataStack).map({self.coreDataStack.insert(Data.entityName, callback: $0)}) {
-                        let nAudience = (dataAudience as [AnyObject]) + nsData.audience!.allObjects
-                        nsData.audience = NSSet(array: nAudience)
-                        
-                        if let pds = nsData.pointData?.allObjects as? [PointData] {
-                            if(!pds.contains({$0.point == nsPoint})){
-                                if let dataPoint = PointData.jsonReader.read(dDict, stack: self.coreDataStack).map({self.coreDataStack.insert(PointData.entityName, callback: $0)}) {
-                                    dataPoint.point = nsPoint
-                                    dataPoint.data = nsData
-                                }
-                            }
-                        }
-
-                        
-                        func downloadDataData() {
-                            outStandingRequests++
-                            if let url = dDict["url"] as? String {
-                                self.client.binaryReques(url, cb: { (data) -> Void in
-                                    nsData.data = data
-                                    outStandingRequests--
-                                    tryCallBack(nsTour)
-                                })
-                            }
-                        }
-                        
-                        let dataUpdated = dDict["updated_at"] as? String;
-                        
-                        if let dataDate = nsData.dataUpdated {
-                            if(dataUpdated != dataDate){
-                                downloadDataData()
-                            }
-                        } else {
-                            downloadDataData();
-                        }
-
-                        nsData.dataUpdated = dataUpdated;
-                        
-                        return [nsData]
-                    }
-                    return []
-                
-                
-                })
-                
-                return [nsPoint]
-                
-            })
-            
-            if let audienceId = tour["audience_id"] as? Int {
-                nsTour.audience = audiencesS.filter({$0.audienceId! == audienceId}).last
-            }
-            
-            tryCallBack(nsTour)
-        
         }
     }
 }
+
+
+
+
+
+
+
+

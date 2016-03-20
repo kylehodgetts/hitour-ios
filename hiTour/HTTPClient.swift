@@ -27,6 +27,8 @@ protocol URLSessionProtocol {
     /// Used to tear down the session, new requests cannot be made, but the current will be finished
     ///
     func finishTasksAndInvalidate() -> Void
+    
+    
 }
 
 ///

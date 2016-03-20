@@ -15,45 +15,41 @@ import XCTest
 ///
 class MOCKSession: URLSessionProtocol {
     
+    private var sessionValid = true;
+    
     func dataTaskWithURL(url: NSURL, completionHandler: DataTaskResult) -> NSURLSessionDataTask {
         let surl = url.standardizedURL!.absoluteString
         var returnData = ""
-        print(surl)
         
         switch (surl){
-            case "/points":
-                returnData = "[{\"id\":1,\"name\":\"POINT1\",\"description\":\"DPOINT1\"},{\"id\":2,\"name\":\"POINT2\",\"description\":\"DPOINT2\"}]"
-            
-            case "/data":
-                returnData = "[{\"id\":1,\"title\":\"DATA1\", \"description\":\"Description1\",\"url\":\"http://s.hswstatic.com/gif/mri-10.jpg\"},{\"id\":2,\"title\":\"DATA2\", \"description\":\"Description2\",\"url\":\"http://s.hswstatic.com/gif/mri-10.jpg\"}]"
-            
-            case "/audiences":
-                returnData = "[{\"id\":1,\"name\":\"AUDIENCE1\"},{\"id\":2,\"name\":\"AUDIENCE2\"}]"
-            
-            case "/tours":
-                returnData = "[{\"id\":1,\"name\":\"TOUR1\",\"audience_id\": 1}]"
-            
-            case "/tour_points":
-                returnData = "[{\"id\":1,\"tour_id\":1,\"point_id\":1, \"rank\":0}, {\"id\":2,\"tour_id\":1,\"point_id\": 2, \"rank\":1}]"
-            
-            case "/point_data":
-                returnData = "[{\"id\":1,\"datum_id\":1,\"point_id\":1,\"rank\":0}, {\"id\":2,\"datum_id\":2,\"point_id\": 1,\"rank\":1}]"
-                
-            case "/data_audiences":
-                returnData = "[{\"id\":1,\"datum_id\":1,\"audience_id\":1},{\"id\":2,\"datum_id\":2,\"audience_id\":1}]"
+            case "/session1":
+                if(sessionValid){
+                    returnData = "{\"tour_session\":{\"id\":1,\"tour_id\":1,\"start_date\":\"2016-03-16\",\"duration\":30,\"passphrase\":\"session1\",\"created_at\":\"2016-03-15T16:06:35.315Z\",\"updated_at\":\"2016-03-15T16:06:35.315Z\",\"name\":\"Tour with 1st year students\"},\"tours\":{\"id\":1,\"created_at\":\"2016-03-15T16:06:35.089Z\",\"updated_at\":\"2016-03-16T02:54:11.686Z\",\"name\":\"TOUR1\",\"audience_id\":1,\"quiz_url\":\"quiz/address\",\"points\":[{\"id\":1,\"name\":\"POINT1\",\"created_at\":\"2016-03-15T16:06:34.833Z\",\"updated_at\":\"2016-03-15T16:06:34.833Z\",\"url\":\"https://s3-us-west-2.amazonaws.com/hitourbucket/ExampleData/PointPhoto/fluroscopy.jpg\",\"description\":\"This is a test description\",\"rank\":1,\"data\":[{\"id\":1,\"title\":\"DATA1\",\"description\":\"This video shows a detailed overview of the fluroscopy machine\",\"url\":\"https://s3-us-west-2.amazonaws.com/hitourbucket/ExampleData/Fluoroscopy/OCH%27s+New+Fluoroscopy+System.mp4\",\"created_at\":\"2016-03-15T16:06:34.514Z\",\"updated_at\":\"2016-03-16T02:54:40.187Z\",\"rank\":1,\"audiences\":[{\"id\":1},{\"id\":2}]},{\"id\":2,\"title\":\"DATA2\",\"description\":\"A ER45SI edition fluroscopy machine.\",\"url\":\"https://s3-us-west-2.amazonaws.com/hitourbucket/ExampleData/Fluoroscopy/c-arm_fluoroscopy.jpg\",\"created_at\":\"2016-03-15T16:06:34.567Z\",\"updated_at\":\"2016-03-15T16:06:34.567Z\",\"rank\":2,\"audiences\":[{\"id\":1},{\"id\":2}]}]},{\"id\":2,\"name\":\"POINT2\",\"created_at\":\"2016-03-15T16:06:34.852Z\",\"updated_at\":\"2016-03-15T16:06:34.852Z\",\"url\":\"https://s3-us-west-2.amazonaws.com/hitourbucket/ExampleData/PointPhoto/angiography.jpg\",\"description\":\"This is a test description\",\"rank\":3,\"data\":[{\"id\":3,\"title\":\"DATA3\",\"description\":\"This is a microscopic look at a arteria. It shows how amazing the human body is. I have also run out of things to write.\",\"url\":\"https://s3-us-west-2.amazonaws.com/hitourbucket/ExampleData/Angiography/Cerebral_angiography%2C_arteria_vertebralis_sinister_injection.jpg\",\"created_at\":\"2016-03-15T16:06:34.595Z\",\"updated_at\":\"2016-03-15T16:06:34.595Z\",\"rank\":1,\"audiences\":[{\"id\":1},{\"id\":2}]},{\"id\":4,\"title\":\"DATA4\",\"description\":\"A brief overview of what an angiography.\",\"url\":\"https://s3-us-west-2.amazonaws.com/hitourbucket/ExampleData/Angiography/angiography.txt\",\"created_at\":\"2016-03-15T16:06:34.626Z\",\"updated_at\":\"2016-03-15T16:06:34.626Z\",\"rank\":2,\"audiences\":[{\"id\":1},{\"id\":2}]}]},{\"id\":3,\"name\":\"POINT3\",\"created_at\":\"2016-03-15T16:06:34.863Z\",\"updated_at\":\"2016-03-15T16:06:34.863Z\",\"url\":\"https://s3-us-west-2.amazonaws.com/hitourbucket/ExampleData/PointPhoto/Intravenous+Urograms.png\",\"description\":\"This is a test description\",\"rank\":2,\"data\":[{\"id\":5,\"title\":\"DATA5\",\"description\":\"A breif video showing what the MDI radiology machines function. Blah blah.\",\"url\":\"https://s3-us-west-2.amazonaws.com/hitourbucket/ExampleData/IVU/MDI+Radiology+CT+IVP+3D.mp4\",\"created_at\":\"2016-03-15T16:06:34.656Z\",\"updated_at\":\"2016-03-15T16:06:34.656Z\",\"rank\":1,\"audiences\":[{\"id\":1},{\"id\":2}]},{\"id\":6,\"title\":\"DATA6\",\"description\":\"An X-Ray scan of an a persons spine, something to do with IVU.\",\"url\":\"https://s3-us-west-2.amazonaws.com/hitourbucket/ExampleData/IVU/61b13ed65cd0b6785a701239b805fd.PNG\",\"created_at\":\"2016-03-15T16:06:34.683Z\",\"updated_at\":\"2016-03-15T16:06:34.683Z\",\"rank\":2,\"audiences\":[{\"id\":1},{\"id\":2}]}]},{\"id\":5,\"name\":\"POINT5\",\"created_at\":\"2016-03-15T16:06:34.886Z\",\"updated_at\":\"2016-03-15T16:06:34.886Z\",\"url\":\"https://s3-us-west-2.amazonaws.com/hitourbucket/ExampleData/PointPhoto/NuclearMed.jpg\",\"description\":\"This is a test description\",\"rank\":4,\"data\":[{\"id\":9,\"title\":\"DATA9\",\"description\":\"An X-Ray scan of a persons head.\",\"url\":\"https://s3-us-west-2.amazonaws.com/hitourbucket/ExampleData/NuclearMedicine/57339506.jpg\",\"created_at\":\"2016-03-15T16:06:34.765Z\",\"updated_at\":\"2016-03-15T16:06:34.765Z\",\"rank\":1,\"audiences\":[{\"id\":1},{\"id\":2}]},{\"id\":10,\"title\":\"DATA10\",\"description\":\"A brief essay, explaining the importance of nuclear medicine.\",\"url\":\"https://s3-us-west-2.amazonaws.com/hitourbucket/ExampleData/NuclearMedicine/nuclear.txt\",\"created_at\":\"2016-03-15T16:06:34.793Z\",\"updated_at\":\"2016-03-15T16:06:34.793Z\",\"rank\":2,\"audiences\":[{\"id\":1},{\"id\":2}]}]}]}}"
+                } else {
+                    returnData = "Invalid session key"
+                }
             
             default:
-                completionHandler(NSData(), nil, nil)
+                let time = dispatch_time(dispatch_time_t(DISPATCH_TIME_NOW), 4 * Int64(NSEC_PER_SEC))
+                dispatch_after(time, dispatch_get_main_queue()) {
+                    completionHandler(NSData(), nil, nil)
+
+                }
                 return MOCKDataTask()
+
             
         }
         
-        completionHandler(returnData.dataUsingEncoding(NSUTF8StringEncoding) ,nil ,nil)
+        completionHandler(returnData.dataUsingEncoding(NSUTF8StringEncoding), nil, nil)
         return MOCKDataTask()
     }
     
     func finishTasksAndInvalidate() -> Void {
         
+    }
+    
+    func expireAll() -> Void {
+        sessionValid = false
     }
     
 }
@@ -73,13 +69,15 @@ class APITests: XCTestCase {
     
     var connector: ApiConnector?
     var httpClient: HTTPClient?
+    var mockSession:MOCKSession?
     var coreDataStack: CoreDataStack?
     
     override func setUp() {
         super.setUp()
         coreDataStack = CoreDataStack()
         coreDataStack?.deleteAll()
-        httpClient = HTTPClient(session: MOCKSession(), baseUrl: "")
+        mockSession = MOCKSession()
+        httpClient = HTTPClient(session: mockSession!, baseUrl: "")
         connector = ApiConnector(HTTPClient: httpClient!, stack: coreDataStack!)
         
     }
@@ -90,203 +88,71 @@ class APITests: XCTestCase {
         httpClient?.tearDown()
     }
     
-    ///
-    /// Tests getting of the points via the api
-    ///
-    func testGettingPoints() {
-        let expectation = expectationWithDescription("Expects to retrieve points 2 points")
-        connector?.fetchPoints({ (points) -> Void in
-            if points.count != 2 {
-                XCTFail("Expected to retrieve 2 points, got: \(points.count)")
-            } else{
-                expectation.fulfill()
-            }
-        })
-        waitForExpectationsWithTimeout(5, handler: nil)
-    }
     
     ///
-    /// Tests getting of the data via the api
+    /// Checks whether the tours are fetched properly when supplied with correct session
     ///
-    func testGettingData() {
-        let expectation = expectationWithDescription("Expects to retrieve points 2 data")
-        connector?.fetchData({ (data) -> Void in
-            if data.count != 2 {
-                XCTFail("Expected to retrieve 2 data, got: \(data.count)")
-            } else{
-                expectation.fulfill()
-            }
-        })
-        waitForExpectationsWithTimeout(5, handler: nil)
-    }
-    
     ///
-    /// Tests getting of the audience via the api
-    ///
-    func testGettingAudience() {
-        let expectation = expectationWithDescription("Expects to retrieve points 2 audiences")
-        connector?.fetchAudience({ (audiences) -> Void in
-            if audiences.count != 2 {
-                XCTFail("Expected to retrieve 2 audience, got: \(audiences.count)")
-            } else{
-                expectation.fulfill()
-            }
-        })
-        waitForExpectationsWithTimeout(5, handler: nil)
-    }
-    
-    ///
-    /// Tests getting of the tours via the api
-    ///
-    func testGettingTours() {
-        let audience = coreDataStack?.insert(Audience.entityName, callback: { (entity, context) -> Audience in
-            let aud = Audience(entity: entity, insertIntoManagedObjectContext: context)
-            aud.audienceId = 1
-            aud.name = "TA1"
-            return aud
-        })
+    func testGetTour() {
+        let expectation = expectationWithDescription("Expects to get full tour as per the request")
+        let session = coreDataStack?.insert(Session.entityName){(a, b) in
+            let ses = Session(entity: a,insertIntoManagedObjectContext: b)
+            ses.sessionCode = "session1"
+            return ses
+        } as! Session
         
-        let expectation = expectationWithDescription("Expects to retrieve points 1 tour")
-        connector?.fetchTours([audience!], chain: { (tours) -> Void in
-            if tours.count != 1 {
-                XCTFail("Expected to retrieve 1 tour, got: \(tours.count)")
-            } else if tours.last?.audience?.name != "TA1" {
-                XCTFail("Expected to have an audience with name TA1, got: \(tours.last?.audience?.name)")
-            } else{
+        connector?.fetchTour(session){
+            $0.forEach{tour in
+                
+                guard let points = tour.pointTours?.array as? [PointTour] else {
+                    return
+                }
+                
+                let pointCheck = points.reduce(false){(acc, point) in
+                    let wrongName = point.point?.name != "POINT1" && point.point?.name != "POINT2" && point.point?.name != "POINT3" && point.point?.name != "POINT5"
+                    return acc || (wrongName && point.point?.pointData?.count != 2)
+                }
+                
+                if (tour.audience?.audienceId != 1 ||
+                    tour.pointTours?.count != 4 ||
+                    tour.name != "TOUR1" ||
+                    pointCheck
+                ) {
+                    return
+                }
                 
                 expectation.fulfill()
             }
-        })
+        }
         waitForExpectationsWithTimeout(5, handler: nil)
     }
     
     ///
-    /// Tests getting of tour-point relation via the api
+    /// Tests removing the tour once the session key is expired
     ///
-    func testGettingPointTour() {
-        let expectation = expectationWithDescription("Expects to retrieve the relation of point-tour")
-        connector?.fetchPoints({ (points) -> Void in
-            self.connector?.fetchAudience({ (audiences) -> Void in
-                self.connector?.fetchTours(audiences, chain: { (tours) -> Void in
-                    self.connector?.fetchPointTour(tours, points: points, chain: { (pointTours) -> Void in
-                        guard pointTours.count == 2 else {
-                            XCTFail("Expected to retrieve 2 tourPoints, got: \(pointTours.count)")
-                            return
-                        }
-                        
-                        guard let tourIdx = tours.indexOf({$0.tourId == 1}) else {
-                            XCTFail("Could not find the tour that should have the tourPoints assigned")
-                            return
-                        }
-                        
-                        let tour  = tours[tourIdx]
-                        
-                        guard tour.pointTours?.count == 2 else {
-                            XCTFail("Expected tour to have 2 point tours")
-                            return
-                        }
-                        
-                        tour.pointTours?.forEach({ (element) -> () in
-                            guard let pt = element as? PointTour else {
-                                XCTFail("In the set of point tours, there is something else than pointTour")
-                                return
-                            }
-                            guard pt.point?.pointId == 1 || pt.point?.pointId == 2 else {
-                                XCTFail("TourPoint points to a point that should not be pressent")
-                                return
-                            }
-                        })
-                        
-                        expectation.fulfill()
-  
-                    })
-                })
-            })
-        })
-        waitForExpectationsWithTimeout(5, handler: nil)
-    }
-    
-    ///
-    /// Tests getting of point-data relation via the api
-    ///
-    func testGettingPointData() {
-        let expectation = expectationWithDescription("Expects to retrieve the relation of point-data")
-        connector?.fetchPoints({ (points) -> Void in
-            self.connector?.fetchData({ (data) -> Void in
-                self.connector?.fetchPointData(data, points: points, chain: { (pointData) -> Void in
-                    guard pointData.count == 2 else {
-                        XCTFail("Expected to retrieve 2 pointData, got: \(pointData.count)")
-                        return
-                    }
-                    
-                    guard let pointIdx = points.indexOf({$0.pointId == 1}) else {
-                        XCTFail("Could not find the tour that should have the tourPoints assigned")
-                        return
-                    }
-                    
-                    let point = points[pointIdx]
-                    
-                    guard point.pointData?.count == 2 else {
-                        XCTFail("Expected point to have 2 pointData")
-                        return
-                    }
-                    
-                    point.pointData?.forEach({ (element) -> () in
-                        guard let pd = element as? PointData else {
-                            XCTFail("In the set of point data, there is something else than PointData")
-                            return
-                        }
-                        guard pd.data?.dataId == 1 || pd.data?.dataId == 2 else {
-                            XCTFail("DataPoint points to a data that should not be pressent, id: \(pd.data?.dataId)")
-                            return
-                        }
-                    })
-                    
-                    expectation.fulfill()
-                })
-            })
-        })
-        waitForExpectationsWithTimeout(5, handler: nil)
-    }
-    
-    ///
-    /// Tests getting of data-audience relation via the api
-    ///
-    func testGettingDataAudience() {
-        let expectation = expectationWithDescription("Expects to retrieve the relation of data-audience")
-        self.connector?.fetchData({ (data) -> Void in
-            self.connector?.fetchAudience({ (audiences) -> Void in
-                self.connector?.fetchDataAudiences(data, audiences: audiences, chain: { () -> Void in
-                    
-                    guard let audienceIdx = audiences.indexOf({$0.audienceId == 1}) else {
-                        XCTFail("Could not find the tour that should have the tourPoints assigned")
-                        return
-                    }
-                    
-                    let audience = audiences[audienceIdx]
-                    
-                    guard audience.data?.count == 2 else {
-                        XCTFail("Expected point to have 2 pointData got: \(audience.data?.count)")
-                        return
-                    }
-                    
-                    audience.data?.forEach({ (element) -> () in
-                        guard let d = element as? Data else {
-                            XCTFail("In the set of data, there is something else than Data")
-                            return
-                        }
-                        guard d.dataId == 1 || d.dataId == 2 else {
-                            XCTFail("DataPoint points to a data that should not be pressent")
-                            return
-                        }
-                    })
-                    
-                    expectation.fulfill()
-                })
-            })
-        })
-        waitForExpectationsWithTimeout(5, handler: nil)
-    }
+    func testRemoveTour() {
+        let expectation = expectationWithDescription("Expects the tour to be removed")
 
+        let session = coreDataStack?.insert(Session.entityName){(a, b) in
+            let ses = Session(entity: a,insertIntoManagedObjectContext: b)
+            ses.sessionCode = "session1"
+            return ses
+            } as! Session
+        
+        connector?.fetchTour(session){
+            $0.forEach{tour in
+                self.mockSession?.expireAll()
+                self.connector?.fetchTour(tour.sessions?.allObjects.first as! Session){ tour in
+                    if(tour == nil && self.coreDataStack?.fetch(name: Tour.entityName)?.count == 0){
+                        expectation.fulfill()
+                    }
+                    
+                }
+            }
+        }
+        waitForExpectationsWithTimeout(5, handler: nil)
+    }
+    
+    
 }
 

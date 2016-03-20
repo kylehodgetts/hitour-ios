@@ -16,6 +16,7 @@
 		6D2B15791C87798800BC5179 /* FeedControllerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D2B15781C87798800BC5179 /* FeedControllerCell.xib */; };
 		6D2B157C1C87815F00BC5179 /* ToursControllerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D2B157B1C87815F00BC5179 /* ToursControllerCell.xib */; };
 		6D4C9F291C98D99200C8F869 /* CollectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4C9F281C98D99200C8F869 /* CollectionHeader.swift */; };
+		6D89C6AF1C9F37B000A2B260 /* TabletSpecificTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D89C6AE1C9F37B000A2B260 /* TabletSpecificTest.swift */; };
 		6D8CFD8D1C8662A000F8E8B9 /* Tablet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D8CFD8C1C8662A000F8E8B9 /* Tablet.storyboard */; };
 		6D90EE561C7E00B500433E1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D90EE481C7E00B500433E1F /* AppDelegate.swift */; };
 		6D90EE581C7E00B500433E1F /* BarcodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D90EE4A1C7E00B500433E1F /* BarcodeScannerViewController.swift */; };
@@ -98,6 +99,7 @@
 		6D2B15781C87798800BC5179 /* FeedControllerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedControllerCell.xib; sourceTree = "<group>"; };
 		6D2B157B1C87815F00BC5179 /* ToursControllerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToursControllerCell.xib; sourceTree = "<group>"; };
 		6D4C9F281C98D99200C8F869 /* CollectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionHeader.swift; sourceTree = "<group>"; };
+		6D89C6AE1C9F37B000A2B260 /* TabletSpecificTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabletSpecificTest.swift; sourceTree = "<group>"; };
 		6D8CFD8C1C8662A000F8E8B9 /* Tablet.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tablet.storyboard; sourceTree = "<group>"; };
 		6D90EE481C7E00B500433E1F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6D90EE4A1C7E00B500433E1F /* BarcodeScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeScannerViewController.swift; sourceTree = "<group>"; };
@@ -346,6 +348,7 @@
 				4506105F1C98C5A800D05EBB /* QuizTests.swift */,
 				6D92E5E61C9F2EF500A208B1 /* FeedControllerTest.swift */,
 				6DAC5E121C9F34090006E210 /* ToursControllerTest.swift */,
+				6D89C6AE1C9F37B000A2B260 /* TabletSpecificTest.swift */,
 			);
 			path = hiTourUITests;
 			sourceTree = "<group>";
@@ -546,6 +549,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D92E5E71C9F2EF500A208B1 /* FeedControllerTest.swift in Sources */,
+				6D89C6AF1C9F37B000A2B260 /* TabletSpecificTest.swift in Sources */,
 				6DAC5E131C9F34090006E210 /* ToursControllerTest.swift in Sources */,
 				984EC7CF1C7209C200A12379 /* hiTourUITests.swift in Sources */,
 				45D87F181C90F7F600962CCF /* PointDiscoveryTest.swift in Sources */,

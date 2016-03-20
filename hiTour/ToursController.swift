@@ -109,4 +109,8 @@ class ToursController : UICollectionViewController {
         }
     }
     
+    override func viewDidAppear(animated: Bool) {
+        self.collectionView?.reloadData()
+    }
+    
 }

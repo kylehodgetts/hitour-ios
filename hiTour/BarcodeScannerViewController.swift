@@ -13,7 +13,7 @@ import UIKit
 protocol BarcodeScannerDelegate: class {
     func didModalDismiss(sender: BarcodeScannerViewController)
     func didItemScan(tour: Tour, sender: BarcodeScannerViewController)
-    func didPointScan(currentTour: Tour, startIndex: Int, sender: BarcodeScannerViewController)
+    func didPointScan(currentTour: Tour, point: Point, sender: BarcodeScannerViewController)
 }
 
 /// Class that implements a QR Barcode Scanner within a UIView by using the device main camera.
@@ -362,7 +362,7 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
             } else {
                 
                 self.dismissViewControllerAnimated(true, completion: nil)
-                delegate?.didPointScan(currentTour!, startIndex: startIndex!, sender: self)
+                delegate?.didPointScan(currentTour!, point: pointFound.point!, sender: self)
                 appDelegate?.feedController?.viewDidAppear(true)
             }
         }

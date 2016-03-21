@@ -88,7 +88,8 @@ class FeedController: UICollectionViewController {
             cell.lockView.hidden = allDiscovered
         }
         else {
-            let pt = t.pointTours![indexPath.row] as! PointTour
+            let orderedPoints = (t.pointTours?.array as! [PointTour]).sort{(a:PointTour, b:PointTour) in a.rank!.integerValue <= b.rank!.integerValue}
+            let pt = orderedPoints[indexPath.row]
             
             cell.labelTitle.text = pt.point?.name
             

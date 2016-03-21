@@ -230,6 +230,8 @@ class ApiConnector{
                             tourPoint.point = nsPoint
                         }
                     } else {
+                        let point = pts[idx!]
+                        point.rank = (pDict["rank"] as? Int).getOrElse(point.rank!.integerValue)
                         oldPoints.remove(pts[idx!]) //Remove the point since its still a valid point in the tour
                     }
                 }
@@ -268,11 +270,14 @@ class ApiConnector{
                     
                     // Creates connection between point and data
                     if let pds = nsData.pointData?.allObjects as? [PointData] {
-                        if(!pds.contains({$0.point == nsPoint})){
+                        let idx = pds.indexOf{$0.point == nsPoint}
+                        if(idx == nil){
                             if let dataPoint = PointData.jsonReader.read(dDict, stack: self.coreDataStack).map({self.coreDataStack.insert(PointData.entityName, callback: $0)}) {
                                 dataPoint.point = nsPoint
                                 dataPoint.data = nsData
                             }
+                        } else {
+                            pds[idx!].rank = (dDict["rank"] as? Int).getOrElse(pds[idx!].rank!.integerValue)
                         }
                     }
                     

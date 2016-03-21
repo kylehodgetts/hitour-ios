@@ -47,10 +47,9 @@ extension TabBarController: BarcodeScannerDelegate {
     }
     
     /// Display the point after scanning a valid point passphrase.
-    func didPointScan(currentTour: Tour, startIndex: Int, sender: BarcodeScannerViewController) {
+    func didPointScan(currentTour: Tour, point: Point, sender: BarcodeScannerViewController) {
         let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("DetailViewControllerTablet") as!DetailViewController
-        let pt = currentTour.pointTours![startIndex] as! PointTour
-        detailController.point = pt.point!
+        detailController.point = point
         detailController.audience = currentTour.audience
         self.showDetailViewController(detailController, sender: self)
     }

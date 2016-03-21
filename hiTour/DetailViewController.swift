@@ -114,7 +114,8 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
     
     /// Return the number of cells i.e. points for a given tour plus a tour description at the beginning.
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return pointData.count + 1
+        if pointData.count > 0 { return pointData.count + 1 }
+        return 0
     }
     
     /// Calculate dynamic height for each cell.
@@ -146,7 +147,7 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
     /// Initialize the header with an image.
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "CollectionHeader", forIndexPath: indexPath) as! CollectionHeader
-        if let imageData = point!.data {
+        if let imageData = point?.data {
             headerView.headerImage.image = UIImage(data: imageData)
         }
         return headerView

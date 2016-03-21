@@ -19,6 +19,9 @@ class FeedController: UICollectionViewController {
     var selectedItem = 0
     var tour: Tour? = nil
     
+    /// The view that is displayed if the FeedController is empty.
+    @IBOutlet weak var emptyLayout: UIView!
+    
     /// Registers UINib for the cell layout and the size of each cell wrt the screen size.
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,15 +62,15 @@ class FeedController: UICollectionViewController {
             }
             overlay.removeFromSuperview()
         }
-        
-        
     }
 
     /// Specifies an image and a title for each cell.
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("FeedControllerCellId", forIndexPath: indexPath) as! FeedControllerCell
-
+        
+        emptyLayout.hidden = true
+        
         guard let t = tour else {
             return cell
         }
@@ -163,7 +166,6 @@ class FeedController: UICollectionViewController {
     /// Reloads all the cells with their updated states
     override func viewDidAppear(animated: Bool) {
         self.collectionView?.reloadData()
-        
     }
     
     /// Assigns the currently selected tour

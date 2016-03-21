@@ -141,6 +141,10 @@
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emptyLayoutImage" translatesAutoresizingMaskIntoConstraints="NO" id="6aU-En-I1x">
                                             <rect key="frame" x="88" y="0.0" width="120" height="120"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="120" id="JkB-3a-clg"/>
+                                                <constraint firstAttribute="height" constant="120" id="eLr-Io-sri"/>
+                                            </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p2E-7z-kxh">
                                             <rect key="frame" x="58" y="143" width="180" height="21"/>
@@ -170,7 +174,6 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="252" id="0Oq-E2-CjH"/>
                                         <constraint firstItem="p2E-7z-kxh" firstAttribute="centerX" secondItem="6aU-En-I1x" secondAttribute="centerX" id="0wh-t0-i19"/>
@@ -193,6 +196,7 @@
                     </collectionView>
                     <navigationItem key="navigationItem" title="hiTour" id="Lp9-3L-PuK"/>
                     <connections>
+                        <outlet property="emptyLayout" destination="vzJ-oZ-rME" id="yCn-H6-tZ1"/>
                         <outlet property="flowLayout" destination="4KB-bT-Q6H" id="VuG-pr-9u1"/>
                         <segue destination="e5H-su-sJU" kind="show" identifier="FeedPageViewSegue" id="LQg-Ti-aCB"/>
                         <segue destination="KW1-di-CeR" kind="show" identifier="quizViewControllerSegue" id="5Go-8K-yL7"/>
@@ -559,7 +563,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="emptyLayoutImage" width="120" height="120"/>
+        <image name="emptyLayoutImage" width="512" height="512"/>
         <image name="feed" width="30" height="30"/>
         <image name="qrcode" width="30" height="30"/>
         <image name="refresh" width="256" height="256"/>

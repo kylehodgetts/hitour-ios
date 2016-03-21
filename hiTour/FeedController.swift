@@ -44,12 +44,16 @@ class FeedController: UICollectionViewController {
         overlay.addSubview(label)
         overlay.backgroundColor = UIColor.grayColor()
         overlay.alpha = 0.5
-        tabBarController?.view.addSubview(overlay)
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+            tabBarController?.parentViewController?.parentViewController?.view.addSubview(overlay)
+        } else {
+            tabBarController?.view.addSubview(overlay)
+        }
+        
         
         /// Update all, remove overlay once update is done
         let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
         delegate?.getApi()?.updateAll{_ in
-            print("yellow")
             let tourId = NSUserDefaults.standardUserDefaults().integerForKey("Tour")
             if (tourId > 0) {
                 if let tour = delegate?.getCoreData().fetch(name: Tour.entityName, predicate: NSPredicate(format: "tourId = %D", tourId))?.last as? Tour {

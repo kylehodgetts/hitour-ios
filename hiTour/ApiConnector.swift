@@ -152,11 +152,6 @@ class ApiConnector{
         
     }
     
-    
-    ///
-    /// !!! ATTENTIONE !!!
-    /// DO NOT TOUCH THIS UNLESS YOU ARE REALLY SURE WHAT YOU ARE DOING
-    /// HAS WEIRD ASS DEPENDEDNCIES ALL OVER THE FUNCTION...
     ///
     /// Fetches a tour from the server, deals with all of the parsing for all points and data in a tour
     /// Downloads the binary data for the Data in the tour, downloads them only in case that the data has been updated

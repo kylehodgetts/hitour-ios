@@ -47,12 +47,16 @@ class FeedController: UICollectionViewController {
         overlay.addSubview(label)
         overlay.backgroundColor = UIColor.grayColor()
         overlay.alpha = 0.5
-        tabBarController?.view.addSubview(overlay)
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+            tabBarController?.parentViewController?.parentViewController?.view.addSubview(overlay)
+        } else {
+            tabBarController?.view.addSubview(overlay)
+        }
+        
         
         /// Update all, remove overlay once update is done
         let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
         delegate?.getApi()?.updateAll{_ in
-            print("yellow")
             let tourId = NSUserDefaults.standardUserDefaults().integerForKey("Tour")
             if (tourId > 0) {
                 if let tour = delegate?.getCoreData().fetch(name: Tour.entityName, predicate: NSPredicate(format: "tourId = %D", tourId))?.last as? Tour {
@@ -87,7 +91,8 @@ class FeedController: UICollectionViewController {
             cell.lockView.hidden = allDiscovered
         }
         else {
-            let pt = t.pointTours![indexPath.row] as! PointTour
+            let orderedPoints = (t.pointTours?.array as! [PointTour]).sort{(a:PointTour, b:PointTour) in a.rank!.integerValue <= b.rank!.integerValue}
+            let pt = orderedPoints[indexPath.row]
             
             cell.labelTitle.text = pt.point?.name
             

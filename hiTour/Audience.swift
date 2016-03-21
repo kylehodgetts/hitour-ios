@@ -21,6 +21,9 @@ class Audience: NSManagedObject {
 class AudienceReader: JsonReader{
     typealias T = Audience
     
+    ///
+    /// Parses the object and stores it in the core data
+    ///
     func read(dict: [String: AnyObject], stack: CoreDataStack) -> ((NSEntityDescription, NSManagedObjectContext) -> Audience)? {
         guard let id = dict["id"] as? Int else {
             return nil

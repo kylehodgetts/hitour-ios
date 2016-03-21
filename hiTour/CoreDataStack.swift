@@ -11,6 +11,7 @@ import CoreData
 
 class CoreDataStack{
     
+    /// The name of the module
     static let moduleName = "hiTour"
     
     private lazy var applicationDocumentsDirectory: NSURL = {
@@ -45,14 +46,14 @@ class CoreDataStack{
     }()
     
     
-    /**
-     * Method name: insert
-     * Description: Inserts a given entity into coreData, THE ENTITY IS NOT PERSISTENTLY SAVED!
-     * Parameters: 
-     *  - entityName:   The name of the entity to be inserted
-     *  - callback:     The callback on created entityDescription, passes ManagedObjectContext as well
-     *                  this is unsave as such should be treated carefully
-     */
+    ///
+    /// Method name: insert
+    /// Description: Inserts a given entity into coreData, THE ENTITY IS NOT PERSISTENTLY SAVED!
+    /// Parameters:
+    ///  - entityName:   The name of the entity to be inserted
+    ///  - callback:     The callback on created entityDescription, passes ManagedObjectContext as well
+    ///                 this is unsave as such should be treated carefully
+    ///
     func insert<T: NSManagedObject>(entityName: String, callback: (NSEntityDescription, NSManagedObjectContext) -> T ) -> T {
         guard let description = NSEntityDescription.entityForName(entityName, inManagedObjectContext: managedObjectContext) else {
             fatalError("Creating an entity that does not exist")
@@ -60,15 +61,15 @@ class CoreDataStack{
         return callback(description, managedObjectContext)
     }
     
-    /**
-     * Method name: fetch
-     * Description: Fetches resources from the core data
-     * Parameters: 
-     *  - entityName:       The name of the entity to be fetched
-     *  - predicate:        The predicate to be used with this query
-     *  - sortDescriptors:  The sort of the fetch query
-     *  - errorHandler:     Handles a possible error thhat was emited while fetching the objects
-     */
+    ///
+    /// Method name: fetch
+    /// Description: Fetches resources from the core data
+    /// Parameters:
+    ///  - entityName:       The name of the entity to be fetched
+    ///  - predicate:        The predicate to be used with this query
+    ///  - sortDescriptors:  The sort of the fetch query
+    ///  - errorHandler:     Handles a possible error thhat was emited while fetching the objects
+    ///
     func fetch<T: NSManagedObject>(
         name entityName: String
         , predicate: NSPredicate? = nil
@@ -87,12 +88,12 @@ class CoreDataStack{
 
     }
     
-    /**
-     * Method name: saveMainContext
-     * Description: Saves the changes to the context to make them persistent
-     * Parameters: 
-     *  - errorHandler: Handles a possible error that was emited while saving the context
-     */
+    ///
+    /// Method name: saveMainContext
+    /// Description: Saves the changes to the context to make them persistent
+    /// Parameters:
+    ///  - errorHandler: Handles a possible error that was emited while saving the context
+    ///
     func saveMainContext(errorHandler: (ErrorType) -> Void = {fatalError("Error occured while saving\($0)")}) -> Void {
         do {
             try managedObjectContext.save()
@@ -101,14 +102,31 @@ class CoreDataStack{
         }
     }
     
+    ///
+    /// Deletes a given object from the managed context
+    ///
     func delete(object: NSManagedObject) -> Void {
         managedObjectContext.deleteObject(object);
     }
     
+    ///
+    /// Deletes all data from the managed context
+    ///
     func deleteAll() -> Void {
-        managedObjectContext.reset()
+        deleteEntity(Tour.entityName)
+        deleteEntity(Session.entityName)
+        deleteEntity(Data.entityName)
+        deleteEntity(Point.entityName)
+        deleteEntity(PointData.entityName)
+        deleteEntity(PointTour.entityName)
+        deleteEntity(Audience.entityName)
     }
     
-    
+    ///
+    /// Deletes given entity(table) from the managed context
+    ///
+    func deleteEntity(entity: String){
+        fetch(name: entity)?.forEach(self.delete)
+    }
     
 }

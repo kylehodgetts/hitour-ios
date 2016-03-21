@@ -66,7 +66,7 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
             return
         }
         
-        pointData = point!.getPointDataFor(audience)
+        pointData = point!.getPointDataFor(audience).sort({(a, b) in a.rank?.integerValue <= b.rank?.integerValue})
     }
     
     /// Initialize cells with appropriate data for each data view.

@@ -20,16 +20,23 @@ class Data: NSManagedObject {
 class DataReader: JsonReader{
     typealias T = Data
     
+    ///
+    /// Parses the object and stores it in the core data
+    ///
     func read(dict: [String: AnyObject], stack: CoreDataStack) -> ((NSEntityDescription, NSManagedObjectContext) -> Data)? {
         guard let id = dict["id"] as? Int, title = dict["title"] as? String, description = dict["description"] as? String, url = dict["url"] as? String else {
             return nil
         }
         
-        
         let fetch = stack.fetch(name: entityName(), predicate: NSPredicate(format: "dataId = %D", id))
         
         if let actual = fetch?.last as? Data {
-            return {_, _ in actual}
+            return {_, _ in
+                actual.title = title
+                actual.descriptionD = description
+                actual.url = url
+                return actual
+            }
             
         } else {
             return

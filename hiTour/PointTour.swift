@@ -20,6 +20,9 @@ class PointTour: NSManagedObject {
 class PointTourReader: JsonReader{
     typealias T = PointTour
     
+    ///
+    /// Parses the object and stores it in the core data
+    ///
     func read(dict: [String: AnyObject], stack: CoreDataStack) -> ((NSEntityDescription, NSManagedObjectContext) -> PointTour)? {
         guard let rank = dict["rank"] as? Int else {
             return nil

@@ -267,7 +267,11 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
         overlay.addSubview(label)
         overlay.backgroundColor = UIColor.grayColor()
         overlay.alpha = 0.5
-        tabBarController?.view.addSubview(overlay)
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+            self.view.addSubview(overlay)
+        } else {
+            tabBarController?.view.addSubview(overlay)
+        }
         
         appDelegate?.getApi()?.fetchTour(ses!, chain: {t in
             dispatch_async(dispatch_get_main_queue(), {
@@ -275,7 +279,7 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
                     coreData?.saveMainContext();
                     appDelegate?.setTour(tour)
                     if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
-                        (self.tabBarController?.childViewControllers[1] as! ToursController).updateTours()
+                        //(self.tabBarController?.childViewControllers[1] as! ToursController).updateTours()
                         self.delegate!.didItemScan(tour, sender: self)
                         overlay.removeFromSuperview()
                         self.dismissViewControllerAnimated(true, completion: nil)

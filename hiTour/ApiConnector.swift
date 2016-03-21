@@ -215,10 +215,11 @@ class ApiConnector{
                 }
                 
                 // Checks whether the point data has to be updated
-                nsPoint.dateUpdated.fold(dowloadPointData())({(date: String) in
-                    if(pointUpdated != date) {return dowloadPointData()}
-                    else { return {}() }
-                })
+                nsPoint.dateUpdated.fold(dowloadPointData)({(date: String) -> (() -> Void) in
+                    if(pointUpdated != date) {
+                        return dowloadPointData
+                    }else { return {} }
+                })()
 
                 // Creates a connection between point and tour if it doesnt already exist
                 (nsPoint.pointTours?.array as? [PointTour]).forEach{pts in
@@ -284,10 +285,11 @@ class ApiConnector{
                     }
                     
                     // Checks whether the binary data has to be updated
-                    nsData.dataUpdated.fold(downloadDataData())({ (date: String) in
-                        if(dataUpdated != date){ downloadDataData()}
-                        else { return {}() }
-                    })
+                    nsData.dataUpdated.fold(downloadDataData)({ (date: String) -> (() -> Void) in
+                        if(dataUpdated != date){
+                            return downloadDataData
+                        } else { return {} }
+                    })()
                     
                     return [nsData]
                 }

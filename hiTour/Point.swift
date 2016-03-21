@@ -41,7 +41,11 @@ class PointReader: JsonReader{
         let fetch = stack.fetch(name: entityName(), predicate: NSPredicate(format: "pointId = %D", id))
         
         if let actual = fetch?.last as? Point {
-            return {_, _ in actual}
+            return {_, _ in
+                actual.name = name
+                actual.descriptionP = description
+                return actual
+            }
             
         } else {
             return

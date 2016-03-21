@@ -16,7 +16,18 @@ class ApiConnector{
     
     let client: HTTPClient
     let coreDataStack: CoreDataStack
-    
+
+    /// The original data that are being used..
+    /// This is to be able to detect data that are not valid anymore, we fill this with the data that are in
+    /// core data at the beginig of fetching, the for every data we use we will delete it from this set. 
+    /// At the end of all fetching we will delete all of the outstanding data in this set, this way we can ensure
+    /// that each point still has only valid data
+    ///
+    var originalData = Set<Data>()
+
+    ///
+    /// Constructor for the api connector
+    ///
     init(HTTPClient client: HTTPClient, stack coreDataStack: CoreDataStack){
         self.client = client
         self.coreDataStack = coreDataStack
@@ -30,11 +41,13 @@ class ApiConnector{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             if let sessions = self.coreDataStack.fetch(name: Session.entityName).flatMap({$0 as? [Session]}){
                 var finished = 0;
+                self.originalData = Set<Data>(self.coreDataStack.fetch(name: Data.entityName)! as [Data])
                 func tryUpdate() -> Void {
                     if(finished >= sessions.count) {
+                        self.originalData.flatMap{$0.pointData?.allObjects as! [PointData]}.forEach(self.checkAndDeletePointData)
                         dispatch_async(dispatch_get_main_queue(), {
-                            // update some UI
-                            _ = chain.map({$0()});
+                            _ = chain.map({$0()}) // update some UI
+
                         });
                     } else {
                         fetchBySession(sessions[finished])
@@ -66,21 +79,27 @@ class ApiConnector{
             return
         }
         
-        for pd in pointData {
-            let data = pd.data!
-            if (data.pointData?.count == 1){
-                coreDataStack.delete(data);
-            }
-            
-            coreDataStack.delete(pd);
-        }
+        pointData.forEach(checkAndDeletePointData)
         
         coreDataStack.delete(point);
     }
     
     ///
-    /// Deletes a tour from the core data
+    /// Deletes a point data connection, in case its nessesary it deletes the data as well
     ///
+    private func checkAndDeletePointData(pd: PointData) -> Void {
+        let data = pd.data!
+        let point = pd.point!
+        if (data.pointData?.count == 1){
+            coreDataStack.delete(data);
+        }
+        coreDataStack.delete(pd);
+        let originalTourPoints = point.pointData!.array as! [PointData]
+        point.pointData = NSOrderedSet(array: originalTourPoints.filter{$0.data != data})
+    }
+    
+    ///
+    /// Deletes a tour from the core data
     ///
     func deleteTour(tour: Tour) -> Void {
         guard let tourPoints = tour.pointTours?.array as? [PointTour] else {
@@ -88,17 +107,23 @@ class ApiConnector{
             return
         }
         
-        for tourPoint in tourPoints {
-            let point = tourPoint.point!
-            if (point.pointTours?.count == 1){
-                deletePoint(point);
-            }
-            
-            coreDataStack.delete(tourPoint);
-        }
-        
+        tourPoints.forEach(checkAndDeletePointTour)
+
         coreDataStack.delete(tour);
+    }
     
+    ///
+    /// Deletes a point tour connection, in case its nessesary it deletes the point as well
+    ///
+    private func checkAndDeletePointTour(pt: PointTour) -> Void {
+        let point = pt.point!
+        let tour = pt.tour!
+        if (point.pointTours?.count == 1){
+            deletePoint(point);
+        }
+        coreDataStack.delete(pt);
+        let originalTourPoints = tour.pointTours!.array as! [PointTour]
+        tour.pointTours = NSOrderedSet(array: originalTourPoints.filter{$0.point != point})
     }
     
     ///
@@ -106,8 +131,6 @@ class ApiConnector{
     ///
     ///
     func deleteSession(session: Session) -> Void{
-        print("DELETING SES")
-        //TODO: Delete all data that has smthing to do with this session
         guard let tour = session.tour else {
             coreDataStack.delete(session);
             return;
@@ -130,6 +153,7 @@ class ApiConnector{
         
     }
     
+    
     ///
     /// !!! ATTENTIONE !!!
     /// DO NOT TOUCH THIS UNLESS YOU ARE REALLY SURE WHAT YOU ARE DOING
@@ -140,13 +164,22 @@ class ApiConnector{
     func fetchTour(session: Session, chain: ((Tour?) -> Void)? = nil) -> Void {
         var outStandingRequests = 0;
         var audiencesS = Set<Audience>()
+        var oldPoints = Set<PointTour>()
         
+        ///
+        /// A try to call to a finish of the tour fetch, this does nothing if all of the data fetches are not finished yet
+        /// Otherwise it deletes old unsued points and then calls the chaining callback
+        ///
         func tryCallBack(tour: Tour){
             if(outStandingRequests <= 0) {
-                _ = chain.map({$0(tour)})
+                oldPoints.forEach(checkAndDeletePointTour) //Deletes the outstanding point tours
+                chain.forEach({$0(tour)})
             }
         }
         
+        ///
+        /// A convenience function to download binary data from a given url, once finished it tries to callback
+        ///
         func downloadBinary(url: String?, nsTour: Tour, after: (NSData?) -> Void) {
             outStandingRequests++
             url.forEach({
@@ -159,6 +192,9 @@ class ApiConnector{
             })
         }
         
+        ///
+        /// Parses point and all of the data required to parse and conenct point in the core data
+        ///
         func parsePoints(nsTour: Tour) -> ([String: AnyObject]) -> [Point] {
             func parse(pDict: [String: AnyObject]) -> [Point] {
                 guard let
@@ -169,6 +205,7 @@ class ApiConnector{
                     return []
                 }
                 
+                /// Downloads overlay data for the point
                 func dowloadPointData(){
                     downloadBinary(pDict["url"] as? String, nsTour: nsTour){ data in
                         nsPoint.data = data
@@ -176,17 +213,22 @@ class ApiConnector{
                     }
                 }
                 
+                // Checks whether the point data has to be updated
                 nsPoint.dateUpdated.fold(dowloadPointData())({(date: String) in
                     if(pointUpdated != date) {return dowloadPointData()}
                     else { return {}() }
                 })
 
+                // Creates a connection between point and tour if it doesnt already exist
                 (nsPoint.pointTours?.array as? [PointTour]).forEach{pts in
-                    if(!pts.contains({$0.tour == nsTour})){
+                    let idx = pts.indexOf{$0.tour == nsTour}
+                    if(idx == nil){
                         PointTour.jsonReader.read(pDict, stack: self.coreDataStack).map({self.coreDataStack.insert(PointTour.entityName, callback: $0)}).forEach{tourPoint in
                             tourPoint.tour = nsTour
                             tourPoint.point = nsPoint
                         }
+                    } else {
+                        oldPoints.remove(pts[idx!]) //Remove the point since its still a valid point in the tour
                     }
                 }
                 
@@ -198,12 +240,16 @@ class ApiConnector{
             return parse
         }
         
+        ///
+        /// Parses the data from the data json, also parses audience ids that are conencted to this data
+        ///
         func parseData(nsPoint: Point, nsTour: Tour) -> ([String: AnyObject]) -> [Data] {
             func parse(dDict: [String: AnyObject]) -> [Data] {
                 guard let audiences = dDict["audiences"] as? [[String: AnyObject]], dataUpdated = dDict["updated_at"] as? String else {
                     return []
                 }
                 
+                // Parses audiences
                 let dataAudience = audiences.flatMap({aDict -> [Audience] in
                     if let audience = Audience.jsonReader.read(aDict, stack: self.coreDataStack).map({self.coreDataStack.insert(Audience.entityName, callback: $0)}) {
                         audiencesS.insert(audience)
@@ -212,10 +258,13 @@ class ApiConnector{
                     return []
                 })
                 
+                // Parses the actual data
                 if let nsData = Data.jsonReader.read(dDict, stack: self.coreDataStack).map({self.coreDataStack.insert(Data.entityName, callback: $0)}) {
                     let nAudience = (dataAudience as [AnyObject]) + nsData.audience!.allObjects
                     nsData.audience = NSSet(array: nAudience)
+                    originalData.remove(nsData)
                     
+                    // Creates connection between point and data
                     if let pds = nsData.pointData?.allObjects as? [PointData] {
                         if(!pds.contains({$0.point == nsPoint})){
                             if let dataPoint = PointData.jsonReader.read(dDict, stack: self.coreDataStack).map({self.coreDataStack.insert(PointData.entityName, callback: $0)}) {
@@ -225,6 +274,7 @@ class ApiConnector{
                         }
                     }
                     
+                    /// Downloads the binary data for the data
                     func downloadDataData() {
                         downloadBinary(dDict["url"] as? String, nsTour: nsTour){data in
                             nsData.data = data
@@ -232,6 +282,7 @@ class ApiConnector{
                         }
                     }
                     
+                    // Checks whether the binary data has to be updated
                     nsData.dataUpdated.fold(downloadDataData())({ (date: String) in
                         if(dataUpdated != date){ downloadDataData()}
                         else { return {}() }
@@ -244,7 +295,10 @@ class ApiConnector{
             return parse
         }
 
-        
+        ///
+        /// Filters the action on the request to the server, decides whether it should continue parsing the received data
+        /// or where we can already decide from the status code what we should do with the incoming data
+        ///
         func tourOnResponse(response: NSURLResponse?) -> Bool{
             guard let resp = response as? NSHTTPURLResponse else {
                 return true; //NO RESPONSE.. most likely an error, should return true as default
@@ -254,7 +308,7 @@ class ApiConnector{
                 //SHOULD BE OK
                 return true;
             } else if (resp.statusCode == 401) {
-                //WRONG SESSION KEY, procede to delete all to do with seš
+                //WRONG SESSION KEY, procede to delete all to do with session
                 deleteSession(session);
                 _ = chain.map({$0(nil)})
                 return false;
@@ -263,9 +317,9 @@ class ApiConnector{
             
         }
         
-
+        //Stars up the show
         client.requestObject(
-            session.sessionCode!
+            session.sessionCode.getOrElse("THIS/IS/NOT/A/VALID/SESSION")
             , onResponse: tourOnResponse
             , onError: {_ in _ = chain.map({$0(nil)})}
             , onParseFail: {_ in
@@ -273,7 +327,6 @@ class ApiConnector{
                 _ = chain.map({$0(nil)})
             }
         ) { (dict:[String: AnyObject] ) -> Void in
-            print("Shoul happen only once...")
             guard let
                 tour = dict["tours"] as? [String: AnyObject]
                 , points = tour["points"] as? [[String: AnyObject]]
@@ -281,12 +334,14 @@ class ApiConnector{
                 , start = tourSession["start_date"] as? String
                 , duration = tourSession["duration"] as? Int
             else {
-                //TODO allert in case something wrong...
+                _ = chain.map({$0(nil)}) //Chaining so that other calls can be made afterwars
                 return
             }
             
+            ///Parses the tour
             Tour.jsonReader.read(tour, stack: self.coreDataStack).map({self.coreDataStack.insert(Tour.entityName, callback: $0)}).forEach{ nsTour in
                 session.tour = nsTour;
+                oldPoints = Set<PointTour>(nsTour.pointTours?.array as! [PointTour])
                 let dateFormater = NSDateFormatter()
                 dateFormater.dateFormat =  "yyyy-MM-dd"
                 session.endData = dateFormater.dateFromString(start)?.dateByAddingTimeInterval(NSTimeInterval(60*60*24*duration))

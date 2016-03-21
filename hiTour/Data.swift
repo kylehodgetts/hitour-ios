@@ -29,7 +29,12 @@ class DataReader: JsonReader{
         let fetch = stack.fetch(name: entityName(), predicate: NSPredicate(format: "dataId = %D", id))
         
         if let actual = fetch?.last as? Data {
-            return {_, _ in actual}
+            return {_, _ in
+                actual.title = title
+                actual.descriptionD = description
+                actual.url = url
+                return actual
+            }
             
         } else {
             return

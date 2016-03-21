@@ -28,7 +28,11 @@ class TourReader: JsonReader{
         let fetch = stack.fetch(name: entityName(), predicate: NSPredicate(format: "tourId = %D", id))
         
         if let actual = fetch?.last as? Tour {
-            return {_, _ in actual}
+            return {_, _ in
+                actual.name = name
+                actual.quizUrl = quizUrl
+                return actual
+            }
             
         } else {
             return

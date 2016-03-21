@@ -13,7 +13,7 @@ import UIKit
 protocol BarcodeScannerDelegate: class {
     func didModalDismiss(sender: BarcodeScannerViewController)
     func didItemScan(tour: Tour, sender: BarcodeScannerViewController)
-    func didPointScan(currentTour: Tour, startIndex: Int, sender: BarcodeScannerViewController)
+    func didPointScan(currentTour: Tour, point: Point, sender: BarcodeScannerViewController)
 }
 
 /// Class that implements a QR Barcode Scanner within a UIView by using the device main camera.
@@ -267,7 +267,11 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
         overlay.addSubview(label)
         overlay.backgroundColor = UIColor.grayColor()
         overlay.alpha = 0.5
-        tabBarController?.view.addSubview(overlay)
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+            self.view.addSubview(overlay)
+        } else {
+            tabBarController?.view.addSubview(overlay)
+        }
         
         appDelegate?.getApi()?.fetchTour(ses!, chain: {t in
             dispatch_async(dispatch_get_main_queue(), {
@@ -275,6 +279,7 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
                     coreData?.saveMainContext();
                     appDelegate?.setTour(tour)
                     if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+                        //(self.tabBarController?.childViewControllers[1] as! ToursController).updateTours()
                         self.delegate!.didItemScan(tour, sender: self)
                         overlay.removeFromSuperview()
                         appDelegate?.feedController?.assignTour(tour)
@@ -284,8 +289,12 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
                         self.tabBarController?.selectedIndex = 0
                         let feedController = self.tabBarController?.selectedViewController?.childViewControllers.first! as! FeedController
                         feedController.assignTour(tour)
+
                         let tourController = (self.tabBarController?.viewControllers?.last as! UINavigationController).childViewControllers.first as! ToursController
                         tourController.updateTours()
+
+                        (UIApplication.sharedApplication().delegate as! AppDelegate).tourController?.collectionView?.reloadData()
+                        
                         overlay.removeFromSuperview()
                     }
                 } else {
@@ -365,7 +374,7 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
             } else {
                 
                 self.dismissViewControllerAnimated(true, completion: nil)
-                delegate?.didPointScan(currentTour!, startIndex: startIndex!, sender: self)
+                delegate?.didPointScan(currentTour!, point: pointFound.point!, sender: self)
                 appDelegate?.feedController?.viewDidAppear(true)
             }
         }

@@ -34,7 +34,7 @@ class QuizTests: XCTestCase {
         
         let app = XCUIApplication()
         
-        NSThread.sleepForTimeInterval(2)
+        NSThread.sleepForTimeInterval(15)
         
         let tabBarsQuery = app.tabBars
         let scannerButton = tabBarsQuery.buttons["Scanner"]
@@ -51,7 +51,7 @@ class QuizTests: XCTestCase {
         let doneButton = app.buttons["Done"]
         doneButton.tap()
         
-        NSThread.sleepForTimeInterval(2)
+        NSThread.sleepForTimeInterval(15)
         
         scannerButton.tap()
         okButton.tap()
@@ -74,7 +74,7 @@ class QuizTests: XCTestCase {
         enterAPassphraseTextField.typeText("POINT-2")
         app.typeText("\r")
         
-        NSThread.sleepForTimeInterval(2)
+        NSThread.sleepForTimeInterval(15)
         
         scannerButton.tap()
         okButton.tap()
@@ -83,7 +83,7 @@ class QuizTests: XCTestCase {
         enterAPassphraseTextField.typeText("POINT-4")
         app.typeText("\r")
         
-        NSThread.sleepForTimeInterval(2)
+        NSThread.sleepForTimeInterval(15)
         
         scannerButton.tap()
         okButton.tap()
@@ -93,19 +93,25 @@ class QuizTests: XCTestCase {
         doneButton.tap()
         tabBarsQuery.buttons["Feed"].tap()
         XCUIApplication().collectionViews.staticTexts["Feedback Quiz"].tap()
+        
+        XCTAssertNotNil(app.staticTexts["The Best Quiz"])
     }
     
     // Tests the quiz loads when network connection
     func testQuizFunctionalityWhenNetworkConnection() {
-        NSThread.sleepForTimeInterval(5)
+        NSThread.sleepForTimeInterval(15)
+        XCTAssertNotNil(XCUIApplication().collectionViews.staticTexts["Feedback Quiz"])
         XCUIApplication().collectionViews.staticTexts["Feedback Quiz"].tap()
-        
-        NSThread.sleepForTimeInterval(5)
+        NSThread.sleepForTimeInterval(25)
         
         
         XCUIApplication().childrenMatchingType(.Window).elementBoundByIndex(0).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).elementBoundByIndex(1).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.tap()
         XCUIApplication().childrenMatchingType(.Window).elementBoundByIndex(0).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).elementBoundByIndex(1).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.tap()
         XCUIApplication().childrenMatchingType(.Window).elementBoundByIndex(0).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).elementBoundByIndex(1).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.tap()
+        
+        XCTAssertNotNil(XCUIApplication().childrenMatchingType(.Window).elementBoundByIndex(0).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).elementBoundByIndex(1).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element)
+        XCTAssertNotNil(XCUIApplication().childrenMatchingType(.Window).elementBoundByIndex(0).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).elementBoundByIndex(1).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element)
+        XCTAssertNotNil(XCUIApplication().childrenMatchingType(.Window).elementBoundByIndex(0).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).elementBoundByIndex(1).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element)
     }
     
     ///  Tests a quiz can be done and answers submitted
@@ -113,9 +119,11 @@ class QuizTests: XCTestCase {
         
         let app = XCUIApplication()
         
+        NSThread.sleepForTimeInterval(15)
+        
         app.collectionViews.staticTexts["Feedback Quiz"].tap()
         
-        NSThread.sleepForTimeInterval(5)
+        NSThread.sleepForTimeInterval(25)
         
         let element = app.childrenMatchingType(.Window).elementBoundByIndex(0).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).elementBoundByIndex(1).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element
         element.tap()
@@ -127,6 +135,10 @@ class QuizTests: XCTestCase {
         element.tap()
         app.buttons["cloud SUBMIT ANSWERS"].tap()
         
+        NSThread.sleepForTimeInterval(15)
+        
+        XCTAssertNotNil(app.staticTexts["Thank You!"])
+        XCTAssertNotNil(app.staticTexts["You Scored"])
     }
 
     

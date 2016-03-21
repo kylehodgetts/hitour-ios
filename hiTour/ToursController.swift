@@ -39,11 +39,11 @@ class ToursController : UICollectionViewController {
         let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
         let coredata = delegate?.getCoreData()
         
-        guard let nTours = coredata?.fetch(name: Tour.entityName).flatMap({$0 as? [Tour]}) else {
+        guard let nSessions = coredata?.fetch(name: Session.entityName).flatMap({$0 as? [Session]}) else {
             return
         }
         
-        tours = nTours
+        tours = nSessions.flatMap{$0.tour}
         collectionView?.reloadData()
         
     }

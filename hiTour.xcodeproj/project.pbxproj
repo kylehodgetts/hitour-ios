@@ -10,13 +10,13 @@
 		450610551C987DB800D05EBB /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450610541C987DB800D05EBB /* QuizViewController.swift */; };
 		4506105A1C98AC0400D05EBB /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450610591C98AC0400D05EBB /* Reachability.swift */; };
 		450610601C98C5A800D05EBB /* QuizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506105F1C98C5A800D05EBB /* QuizTests.swift */; };
-		451342221C8366040089F2DC /* prototype.txt in Resources */ = {isa = PBXBuildFile; fileRef = 451342211C8366040089F2DC /* prototype.txt */; };
 		459A8B471C8662BE009B79F0 /* FullScreenImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459A8B461C8662BE009B79F0 /* FullScreenImageViewController.swift */; };
 		45C734391C87950B0069AF2F /* DynamicContentTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C734381C87950B0069AF2F /* DynamicContentTest.swift */; };
 		45D87F181C90F7F600962CCF /* PointDiscoveryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D87F171C90F7F600962CCF /* PointDiscoveryTest.swift */; };
 		6D2B15791C87798800BC5179 /* FeedControllerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D2B15781C87798800BC5179 /* FeedControllerCell.xib */; };
 		6D2B157C1C87815F00BC5179 /* ToursControllerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D2B157B1C87815F00BC5179 /* ToursControllerCell.xib */; };
 		6D4C9F291C98D99200C8F869 /* CollectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4C9F281C98D99200C8F869 /* CollectionHeader.swift */; };
+		6D89C6AF1C9F37B000A2B260 /* TabletSpecificTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D89C6AE1C9F37B000A2B260 /* TabletSpecificTest.swift */; };
 		6D8CFD8D1C8662A000F8E8B9 /* Tablet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D8CFD8C1C8662A000F8E8B9 /* Tablet.storyboard */; };
 		6D90EE561C7E00B500433E1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D90EE481C7E00B500433E1F /* AppDelegate.swift */; };
 		6D90EE581C7E00B500433E1F /* BarcodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D90EE4A1C7E00B500433E1F /* BarcodeScannerViewController.swift */; };
@@ -27,6 +27,8 @@
 		6D90EE5F1C7E00B500433E1F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D90EE521C7E00B500433E1F /* Info.plist */; };
 		6D90EE611C7E00B500433E1F /* ToursController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D90EE541C7E00B500433E1F /* ToursController.swift */; };
 		6D90EE621C7E00B500433E1F /* ToursControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D90EE551C7E00B500433E1F /* ToursControllerCell.swift */; };
+		6D92E5E71C9F2EF500A208B1 /* FeedControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D92E5E61C9F2EF500A208B1 /* FeedControllerTest.swift */; };
+		6DAC5E131C9F34090006E210 /* ToursControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DAC5E121C9F34090006E210 /* ToursControllerTest.swift */; };
 		6DBAC94D1C95CBEE0092CAB8 /* ImageDataViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DBAC94C1C95CBEE0092CAB8 /* ImageDataViewCell.xib */; };
 		6DBAC94F1C95D1210092CAB8 /* TextDataViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DBAC94E1C95D1210092CAB8 /* TextDataViewCell.xib */; };
 		6DBAC9511C95D2640092CAB8 /* VideoDataViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DBAC9501C95D2640092CAB8 /* VideoDataViewCell.xib */; };
@@ -42,6 +44,8 @@
 		6DF7DC4E1C7E72CD00C88B48 /* FeedPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF7DC4D1C7E72CD00C88B48 /* FeedPageViewController.swift */; };
 		8F1C8FAB1C776E33009C95F4 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1C8FAA1C776E33009C95F4 /* HTTPClient.swift */; };
 		8F1C8FAD1C7770BD009C95F4 /* APITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1C8FAC1C7770BD009C95F4 /* APITests.swift */; };
+		8FC00D521C9B144D007D2DB9 /* Optional_Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC00D511C9B144D007D2DB9 /* Optional_Ext.swift */; };
+		8FC00D551C9DD2D3007D2DB9 /* CoredataTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC00D531C9DD24C007D2DB9 /* CoredataTest.swift */; };
 		8FF1C6D11C75F73A00F16473 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF1C6D01C75F73A00F16473 /* CoreDataStack.swift */; };
 		8FF1C6E11C7603A800F16473 /* PointData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF1C6D31C7603A800F16473 /* PointData+CoreDataProperties.swift */; };
 		8FF1C6E21C7603A800F16473 /* PointData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF1C6D41C7603A800F16473 /* PointData.swift */; };
@@ -97,6 +101,7 @@
 		6D2B15781C87798800BC5179 /* FeedControllerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedControllerCell.xib; sourceTree = "<group>"; };
 		6D2B157B1C87815F00BC5179 /* ToursControllerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToursControllerCell.xib; sourceTree = "<group>"; };
 		6D4C9F281C98D99200C8F869 /* CollectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionHeader.swift; sourceTree = "<group>"; };
+		6D89C6AE1C9F37B000A2B260 /* TabletSpecificTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabletSpecificTest.swift; sourceTree = "<group>"; };
 		6D8CFD8C1C8662A000F8E8B9 /* Tablet.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tablet.storyboard; sourceTree = "<group>"; };
 		6D90EE481C7E00B500433E1F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6D90EE4A1C7E00B500433E1F /* BarcodeScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeScannerViewController.swift; sourceTree = "<group>"; };
@@ -107,6 +112,8 @@
 		6D90EE521C7E00B500433E1F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6D90EE541C7E00B500433E1F /* ToursController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToursController.swift; sourceTree = "<group>"; };
 		6D90EE551C7E00B500433E1F /* ToursControllerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToursControllerCell.swift; sourceTree = "<group>"; };
+		6D92E5E61C9F2EF500A208B1 /* FeedControllerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedControllerTest.swift; sourceTree = "<group>"; };
+		6DAC5E121C9F34090006E210 /* ToursControllerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToursControllerTest.swift; sourceTree = "<group>"; };
 		6DBAC94C1C95CBEE0092CAB8 /* ImageDataViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageDataViewCell.xib; sourceTree = "<group>"; };
 		6DBAC94E1C95D1210092CAB8 /* TextDataViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextDataViewCell.xib; sourceTree = "<group>"; };
 		6DBAC9501C95D2640092CAB8 /* VideoDataViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoDataViewCell.xib; sourceTree = "<group>"; };
@@ -122,6 +129,8 @@
 		6DF7DC4D1C7E72CD00C88B48 /* FeedPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedPageViewController.swift; sourceTree = "<group>"; };
 		8F1C8FAA1C776E33009C95F4 /* HTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		8F1C8FAC1C7770BD009C95F4 /* APITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APITests.swift; sourceTree = "<group>"; };
+		8FC00D511C9B144D007D2DB9 /* Optional_Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Optional_Ext.swift; sourceTree = "<group>"; };
+		8FC00D531C9DD24C007D2DB9 /* CoredataTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoredataTest.swift; sourceTree = "<group>"; };
 		8FF1C6D01C75F73A00F16473 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		8FF1C6D31C7603A800F16473 /* PointData+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PointData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8FF1C6D41C7603A800F16473 /* PointData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointData.swift; sourceTree = "<group>"; };
@@ -200,7 +209,6 @@
 			name = PrototypeFiles;
 			sourceTree = "<group>";
 		};
-
 		6D90EE631C7E00D300433E1F /* BarcodeScanner */ = {
 			isa = PBXGroup;
 			children = (
@@ -317,10 +325,10 @@
 				6D90EE521C7E00B500433E1F /* Info.plist */,
 				450610581C98ABE500D05EBB /* Network */,
 				4513421E1C8342B90089F2DC /* PrototypeFiles */,
-
 				984EC7C21C7209C200A12379 /* hiTourTests */,
 				8FF1C6D21C75FF9E00F16473 /* models */,
 				8FF1C6CF1C75F71A00F16473 /* coreData */,
+				8FC00D511C9B144D007D2DB9 /* Optional_Ext.swift */,
 			);
 			path = hiTour;
 			sourceTree = "<group>";
@@ -331,6 +339,7 @@
 				984EC7C31C7209C200A12379 /* hiTourTests.swift */,
 				984EC7C51C7209C200A12379 /* Info.plist */,
 				8F1C8FAC1C7770BD009C95F4 /* APITests.swift */,
+				8FC00D531C9DD24C007D2DB9 /* CoredataTest.swift */,
 			);
 			path = hiTourTests;
 			sourceTree = SOURCE_ROOT;
@@ -343,6 +352,9 @@
 				45C734381C87950B0069AF2F /* DynamicContentTest.swift */,
 				45D87F171C90F7F600962CCF /* PointDiscoveryTest.swift */,
 				4506105F1C98C5A800D05EBB /* QuizTests.swift */,
+				6D92E5E61C9F2EF500A208B1 /* FeedControllerTest.swift */,
+				6DAC5E121C9F34090006E210 /* ToursControllerTest.swift */,
+				6D89C6AE1C9F37B000A2B260 /* TabletSpecificTest.swift */,
 			);
 			path = hiTourUITests;
 			sourceTree = "<group>";
@@ -415,7 +427,7 @@
 				TargetAttributes = {
 					984EC7A71C7209C200A12379 = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = R6PXL3EZJD;
+						DevelopmentTeam = UXP88FR3YR;
 					};
 					984EC7BE1C7209C200A12379 = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -515,6 +527,8 @@
 				984EC7B41C7209C200A12379 /* (null) in Sources */,
 				6DBAC9531C95E8710092CAB8 /* ImageDataViewCell.swift in Sources */,
 				450610551C987DB800D05EBB /* QuizViewController.swift in Sources */,
+				45583DB31C82671E0087AB18 /* ContentView.swift in Sources */,
+				8FC00D521C9B144D007D2DB9 /* Optional_Ext.swift in Sources */,
 				8FF1C6E91C7603A800F16473 /* PointTour+CoreDataProperties.swift in Sources */,
 				6DBAC9571C9612B90092CAB8 /* VideoDataViewCell.swift in Sources */,
 				8FF1C6E21C7603A800F16473 /* PointData.swift in Sources */,
@@ -535,6 +549,7 @@
 			files = (
 				8F1C8FAD1C7770BD009C95F4 /* APITests.swift in Sources */,
 				984EC7C41C7209C200A12379 /* hiTourTests.swift in Sources */,
+				8FC00D551C9DD2D3007D2DB9 /* CoredataTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -542,6 +557,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D92E5E71C9F2EF500A208B1 /* FeedControllerTest.swift in Sources */,
+				6D89C6AF1C9F37B000A2B260 /* TabletSpecificTest.swift in Sources */,
+				6DAC5E131C9F34090006E210 /* ToursControllerTest.swift in Sources */,
 				984EC7CF1C7209C200A12379 /* hiTourUITests.swift in Sources */,
 				45D87F181C90F7F600962CCF /* PointDiscoveryTest.swift in Sources */,
 				450610601C98C5A800D05EBB /* QuizTests.swift in Sources */,
@@ -657,7 +675,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = hiTour/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = hiTour.;
+				PRODUCT_BUNDLE_IDENTIFIER = hiTour.dom;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -673,7 +691,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = hiTour/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = hiTour.;
+				PRODUCT_BUNDLE_IDENTIFIER = hiTour.dom;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "refresh.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "round-corners-hiTourArtwork@2x.png",
       "scale" : "2x"
     },
     {

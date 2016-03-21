@@ -122,12 +122,72 @@
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="stx-5H-ziW">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <constraints>
+                            <constraint firstItem="LHi-A3-Otk" firstAttribute="centerY" secondItem="stx-5H-ziW" secondAttribute="centerY" id="SBx-Ig-gLC"/>
+                            <constraint firstItem="LHi-A3-Otk" firstAttribute="centerX" secondItem="stx-5H-ziW" secondAttribute="centerX" id="nBB-y0-U0k"/>
+                        </constraints>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4KB-bT-Q6H">
                             <size key="itemSize" width="378.5" height="185"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
+                        <view key="backgroundView" contentMode="scaleToFill" id="vzJ-oZ-rME">
+                            <rect key="frame" x="0.0" y="-64" width="600" height="600"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LHi-A3-Otk">
+                                    <rect key="frame" x="152" y="237" width="297" height="252"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emptyLayoutImage" translatesAutoresizingMaskIntoConstraints="NO" id="6aU-En-I1x">
+                                            <rect key="frame" x="88" y="0.0" width="120" height="120"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="120" id="JkB-3a-clg"/>
+                                                <constraint firstAttribute="height" constant="120" id="eLr-Io-sri"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p2E-7z-kxh">
+                                            <rect key="frame" x="58" y="143" width="180" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="PAH-Kz-5s2"/>
+                                                <constraint firstAttribute="width" constant="180" id="UNR-dg-LzD"/>
+                                            </constraints>
+                                            <attributedString key="attributedText">
+                                                <fragment content="Your feed is empty.">
+                                                    <attributes>
+                                                        <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <font key="NSFont" size="20" name="HelveticaNeue-Medium"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can start a Tour by pressing the scanner button bellow." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="INY-lk-vea">
+                                            <rect key="frame" x="0.0" y="172" width="297" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="Duc-wA-nfY"/>
+                                                <constraint firstAttribute="width" constant="297" id="mxM-8a-4W2"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="252" id="0Oq-E2-CjH"/>
+                                        <constraint firstItem="p2E-7z-kxh" firstAttribute="centerX" secondItem="6aU-En-I1x" secondAttribute="centerX" id="0wh-t0-i19"/>
+                                        <constraint firstItem="6aU-En-I1x" firstAttribute="centerX" secondItem="LHi-A3-Otk" secondAttribute="centerX" id="D7S-8k-2aZ"/>
+                                        <constraint firstItem="6aU-En-I1x" firstAttribute="top" secondItem="LHi-A3-Otk" secondAttribute="top" id="JEn-gt-TuN"/>
+                                        <constraint firstItem="INY-lk-vea" firstAttribute="centerX" secondItem="p2E-7z-kxh" secondAttribute="centerX" id="Qz4-Ho-6fq"/>
+                                        <constraint firstItem="INY-lk-vea" firstAttribute="top" secondItem="p2E-7z-kxh" secondAttribute="bottom" constant="8" id="a3n-XF-VLX"/>
+                                        <constraint firstAttribute="width" constant="297" id="aA7-vk-WsP"/>
+                                        <constraint firstItem="p2E-7z-kxh" firstAttribute="top" secondItem="6aU-En-I1x" secondAttribute="bottom" constant="23" id="qL5-aL-7Gf"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
                         <cells/>
                         <connections>
                             <outlet property="dataSource" destination="ANH-Qu-MBs" id="zXf-cM-bXq"/>
@@ -136,6 +196,7 @@
                     </collectionView>
                     <navigationItem key="navigationItem" title="hiTour" id="Lp9-3L-PuK"/>
                     <connections>
+                        <outlet property="emptyLayout" destination="vzJ-oZ-rME" id="yCn-H6-tZ1"/>
                         <outlet property="flowLayout" destination="4KB-bT-Q6H" id="VuG-pr-9u1"/>
                         <segue destination="e5H-su-sJU" kind="show" identifier="FeedPageViewSegue" id="LQg-Ti-aCB"/>
                         <segue destination="KW1-di-CeR" kind="show" identifier="quizViewControllerSegue" id="5Go-8K-yL7"/>
@@ -143,7 +204,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="48o-fl-WiL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="43.5" y="-317"/>
+            <point key="canvasLocation" x="43" y="-317"/>
         </scene>
         <!--Quiz View Controller-->
         <scene sceneID="c5M-Mk-fen">
@@ -502,6 +563,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="emptyLayoutImage" width="512" height="512"/>
         <image name="feed" width="30" height="30"/>
         <image name="qrcode" width="30" height="30"/>
         <image name="refresh" width="256" height="256"/>

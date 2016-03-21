@@ -101,12 +101,15 @@ class ToursController : UICollectionViewController {
             self.tabBarController?.selectedIndex = 0
             let feedControlelr = self.tabBarController?.selectedViewController as! FeedController
             feedControlelr.assignTour(tours[indexPath.row])
-            
         } else {
             self.tabBarController?.selectedIndex = 0
             let feedControlelr = self.tabBarController?.selectedViewController?.childViewControllers.first! as! FeedController
             feedControlelr.assignTour(tours[indexPath.row])
         }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        self.collectionView?.reloadData()
     }
     
 }

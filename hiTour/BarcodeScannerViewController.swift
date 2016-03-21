@@ -282,13 +282,19 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
                         //(self.tabBarController?.childViewControllers[1] as! ToursController).updateTours()
                         self.delegate!.didItemScan(tour, sender: self)
                         overlay.removeFromSuperview()
+                        appDelegate?.feedController?.assignTour(tour)
+                        appDelegate?.tourController?.updateTours()
                         self.dismissViewControllerAnimated(true, completion: nil)
                     } else {
                         self.tabBarController?.selectedIndex = 0
-                        let feedControlelr = self.tabBarController?.selectedViewController?.childViewControllers.first! as! FeedController
-                        feedControlelr.assignTour(tour)
+                        let feedController = self.tabBarController?.selectedViewController?.childViewControllers.first! as! FeedController
+                        feedController.assignTour(tour)
+
+                        let tourController = (self.tabBarController?.viewControllers?.last as! UINavigationController).childViewControllers.first as! ToursController
+                        tourController.updateTours()
+
                         (UIApplication.sharedApplication().delegate as! AppDelegate).tourController?.collectionView?.reloadData()
-                        (self.tabBarController?.childViewControllers[2].childViewControllers.first as! ToursController).updateTours()
+                        
                         overlay.removeFromSuperview()
                     }
                 } else {

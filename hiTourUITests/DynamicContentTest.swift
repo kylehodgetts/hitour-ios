@@ -35,7 +35,7 @@ class DynamicContentTest: XCTestCase {
         
         let app = XCUIApplication()
         
-        NSThread.sleepForTimeInterval(5)
+        NSThread.sleepForTimeInterval(15)
         
         let tabBarsQuery = app.tabBars
         let scannerButton = tabBarsQuery.buttons["Scanner"]
@@ -74,7 +74,7 @@ class DynamicContentTest: XCTestCase {
         enterAPassphraseTextField.typeText("POINT-1")
         app.typeText("\r")
         
-        NSThread.sleepForTimeInterval(5)
+        NSThread.sleepForTimeInterval(15)
         
         let collectionViewsQuery2 = app.collectionViews
         collectionViewsQuery2.cells.otherElements.containingType(.StaticText, identifier:"Fluroscopy System Video - Modified").childrenMatchingType(.TextView).element.swipeUp()
@@ -85,6 +85,11 @@ class DynamicContentTest: XCTestCase {
         collectionViewsQuery.buttons["EnterFullScreenButton"].tap()
         app.buttons["Done"].tap()
         
+        XCTAssertNotNil(collectionViewsQuery.buttons["PlayButton"])
+        XCTAssertNotNil(collectionViewsQuery.otherElements["Video"])
+        XCTAssertNotNil(collectionViewsQuery.buttons["EnterFullScreenButton"])
+
+        
     }
     
     //  Test that checks image content is dynamically populated correctly and also tests the functionality of the images
@@ -94,7 +99,7 @@ class DynamicContentTest: XCTestCase {
         
         let app = XCUIApplication()
         
-        NSThread.sleepForTimeInterval(5)
+        NSThread.sleepForTimeInterval(15)
         
         let scannerButton = app.tabBars.buttons["Scanner"]
         scannerButton.tap()
@@ -131,13 +136,15 @@ class DynamicContentTest: XCTestCase {
         enterAPassphraseTextField.typeText("POINT-5")
         app.typeText("\r")
         
-        NSThread.sleepForTimeInterval(5)
+        NSThread.sleepForTimeInterval(15)
         app.collectionViews.staticTexts["Nuclear Scan"].tap()
         
         let element = app.childrenMatchingType(.Window).elementBoundByIndex(0).childrenMatchingType(.Other).element.childrenMatchingType(.Other).element
         element.tap()
         element.tap()
+        XCTAssertNotNil(element)
         app.buttons["X"].tap()
+        XCTAssertNotNil(app.collectionViews.staticTexts["Nuclear Scan"])
         
     }
     
@@ -145,7 +152,7 @@ class DynamicContentTest: XCTestCase {
     func testTextContent() {
         let app = XCUIApplication()
         
-        NSThread.sleepForTimeInterval(5)
+        NSThread.sleepForTimeInterval(15)
         
         let scannerButton = app.tabBars.buttons["Scanner"]
         scannerButton.tap()
@@ -182,12 +189,15 @@ class DynamicContentTest: XCTestCase {
         enterAPassphraseTextField.typeText("POINT-5")
         app.typeText("\r")
         
-        NSThread.sleepForTimeInterval(5)
+        NSThread.sleepForTimeInterval(15)
         
         
         let cellsQuery = XCUIApplication().collectionViews.cells
         cellsQuery.otherElements.containingType(.StaticText, identifier:"Nuclear Medicine").childrenMatchingType(.TextView).elementBoundByIndex(0).swipeUp()
         cellsQuery.otherElements.containingType(.StaticText, identifier:"What is nuclear medicine?").childrenMatchingType(.TextView).elementBoundByIndex(1).tap()
+        
+        XCTAssertNotNil(cellsQuery.otherElements.containingType(.StaticText, identifier:"Nuclear Medicine").childrenMatchingType(.TextView).elementBoundByIndex(0))
+        XCTAssertNotNil(cellsQuery.otherElements.containingType(.StaticText, identifier:"Nuclear Medicine").childrenMatchingType(.TextView).elementBoundByIndex(1))
     }
 
 }

@@ -33,7 +33,7 @@ class PointDiscoveryTest: XCTestCase {
         
         let app = XCUIApplication()
         
-        NSThread.sleepForTimeInterval(4)
+        NSThread.sleepForTimeInterval(15)
         
         app.tabBars.buttons["Scanner"].tap()
         app.sheets["Input Device Error"].collectionViews.buttons["Ok"].tap()
@@ -56,7 +56,7 @@ class PointDiscoveryTest: XCTestCase {
         enterAPassphraseTextField.typeText("123")
         app.buttons["Done"].tap()
         
-        NSThread.sleepForTimeInterval(4)
+        NSThread.sleepForTimeInterval(15)
         
         
         app.tabBars.buttons["Scanner"].tap()
@@ -74,7 +74,7 @@ class PointDiscoveryTest: XCTestCase {
         moreNumbersKey.tap()
         enterAPassphraseTextField.typeText("-2")
         app.buttons["Done"].tap()
-        
+        XCTAssertNotNil(XCUIApplication().collectionViews.staticTexts["Angiography"])
     }
     
     
@@ -82,7 +82,7 @@ class PointDiscoveryTest: XCTestCase {
         
         let app = XCUIApplication()
         
-        NSThread.sleepForTimeInterval(4)
+        NSThread.sleepForTimeInterval(15)
         
         app.tabBars.buttons["Scanner"].tap()
         app.sheets["Input Device Error"].collectionViews.buttons["Ok"].tap()
@@ -90,6 +90,21 @@ class PointDiscoveryTest: XCTestCase {
         let enterAPassphraseTextField = app.textFields["Enter a passphrase"]
         enterAPassphraseTextField.tap()
         enterAPassphraseTextField.tap()
+        let deleteKey = app.keys["delete"]
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+        deleteKey.tap()
+
         
         let shiftButton = app.buttons["shift"]
         shiftButton.tap()
@@ -105,13 +120,13 @@ class PointDiscoveryTest: XCTestCase {
         enterAPassphraseTextField.typeText("123")
         app.buttons["Done"].tap()
         
-        NSThread.sleepForTimeInterval(4)
+        NSThread.sleepForTimeInterval(15)
 
         let collectionViewsQuery = app.collectionViews
-        collectionViewsQuery.staticTexts["Angiography"].tap()
-        app.navigationBars["hiTour.FeedPageView"].buttons["hiTour"].tap()
-        collectionViewsQuery.staticTexts["Nuclear Medicine"].tap()
-        collectionViewsQuery.staticTexts["Magnetic Resonance Imaging (MRI)"].tap()
+        XCTAssertNotNil(collectionViewsQuery.staticTexts["Angiography"])
+        XCTAssertNotNil(app.navigationBars["hiTour.FeedPageView"].buttons["hiTour"])
+        XCTAssertNotNil(collectionViewsQuery.staticTexts["Nuclear Medicine"])
+        XCTAssertNotNil(collectionViewsQuery.staticTexts["Magnetic Resonance Imaging (MRI)"])
         
     }
     
@@ -120,7 +135,7 @@ class PointDiscoveryTest: XCTestCase {
         
         let app = XCUIApplication()
         
-        NSThread.sleepForTimeInterval(4)
+        NSThread.sleepForTimeInterval(15)
         
         app.tabBars.buttons["Scanner"].tap()
         app.sheets["Input Device Error"].collectionViews.buttons["Ok"].tap()
@@ -143,7 +158,7 @@ class PointDiscoveryTest: XCTestCase {
         enterAPassphraseTextField.typeText("123")
         app.buttons["Done"].tap()
         
-        NSThread.sleepForTimeInterval(4)
+        NSThread.sleepForTimeInterval(15)
 
         
         app.tabBars.buttons["Scanner"].tap()
@@ -175,7 +190,7 @@ class PointDiscoveryTest: XCTestCase {
         
         let app2 = app
         app2.buttons["Done"].tap()
-        app2.collectionViews.staticTexts["Nuclear Medicine"].tap()
+        XCTAssertNotNil(app2.collectionViews.staticTexts["Nuclear Medicine"])
     }
     
     /// Test that checks points scanned not on the tour are correctly handled by showing the user
@@ -183,7 +198,7 @@ class PointDiscoveryTest: XCTestCase {
     func testIncorrectPointScannedIsHandled() {
         let app = XCUIApplication()
         
-        NSThread.sleepForTimeInterval(4)
+        NSThread.sleepForTimeInterval(15)
         
         app.tabBars.buttons["Scanner"].tap()
         app.sheets["Input Device Error"].collectionViews.buttons["Ok"].tap()
@@ -206,7 +221,7 @@ class PointDiscoveryTest: XCTestCase {
         enterAPassphraseTextField.typeText("123")
         app.buttons["Done"].tap()
         
-        NSThread.sleepForTimeInterval(4)
+        NSThread.sleepForTimeInterval(15)
 
         
         app.tabBars.buttons["Scanner"].tap()
@@ -238,8 +253,7 @@ class PointDiscoveryTest: XCTestCase {
         moreNumbersKey.tap()
         enterAPassphraseTextField.typeText("-1")
         app.buttons["Done"].tap()
-        app.sheets["Point Not Found"].collectionViews.buttons["OK"].tap()
-        
+        XCTAssertNotNil(app.sheets["Point Not Found"].collectionViews.buttons["OK"])
     }
     
 }

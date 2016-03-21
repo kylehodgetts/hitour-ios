@@ -20,6 +20,9 @@ class Tour: NSManagedObject {
 class TourReader: JsonReader{
     typealias T = Tour
     
+    ///
+    /// Parses the object and stores it in the core data
+    ///
     func read(dict: [String: AnyObject], stack: CoreDataStack) -> ((NSEntityDescription, NSManagedObjectContext) -> Tour)? {
         guard let id = dict["id"] as? Int, name = dict["name"] as? String, quizUrl = dict["quiz_url"] as? String else {
             return nil

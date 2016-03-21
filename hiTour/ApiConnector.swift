@@ -129,7 +129,6 @@ class ApiConnector{
     ///
     /// Deletes a session from core data
     ///
-    ///
     func deleteSession(session: Session) -> Void{
         guard let tour = session.tour else {
             coreDataStack.delete(session);
@@ -159,7 +158,9 @@ class ApiConnector{
     /// DO NOT TOUCH THIS UNLESS YOU ARE REALLY SURE WHAT YOU ARE DOING
     /// HAS WEIRD ASS DEPENDEDNCIES ALL OVER THE FUNCTION...
     ///
-    /// It is a function with many sub functions, that are being called
+    /// Fetches a tour from the server, deals with all of the parsing for all points and data in a tour
+    /// Downloads the binary data for the Data in the tour, downloads them only in case that the data has been updated
+    /// Also deletes a tour in case the session is not valid anymore, in case we have multiple sessions, it only deletes the session
     ///
     func fetchTour(session: Session, chain: ((Tour?) -> Void)? = nil) -> Void {
         var outStandingRequests = 0;

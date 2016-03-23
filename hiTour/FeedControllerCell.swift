@@ -10,7 +10,7 @@ import Foundation
 
 import UIKit
 
-/// Holds outlets for the feed cell.
+/// Hold outlets for the feed cell.
 class FeedControllerCell: UICollectionViewCell {
     
     /// Image showing a specific point.

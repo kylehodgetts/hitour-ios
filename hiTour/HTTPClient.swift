@@ -62,7 +62,6 @@ class HTTPClient {
                     cb([])
                     return
                 }
-                //TODO: error handling and such
                 do {
                     let json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as? [[String: AnyObject]]
                     guard let ret = json else {
@@ -80,7 +79,7 @@ class HTTPClient {
         url: String
         , onResponse: (NSURLResponse? -> Bool) = {(a:NSURLResponse?) -> Bool in return true}
         , onError: (() -> Void)? = nil
-        , onParseFail: (() -> Void)? = nil //HERE just because of how we are returning the data now..., the onResponse should work properly once we fix the statusCOdes of our reply messages, ie getting 401 for wrong SessionKey
+        , onParseFail: (() -> Void)? = nil
         ,cb: ([String: AnyObject]
         ) -> Void) -> Void {
         let nsURL = NSURL(string: baseUrl + "/\(url)")!

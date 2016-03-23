@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class CoreDataStack{
+class CoreDataStack {
     
     /// The name of the module
     static let moduleName = "hiTour"

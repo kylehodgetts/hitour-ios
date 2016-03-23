@@ -22,7 +22,7 @@ class FeedPageViewController : UIPageViewController {
     /// The index of a selected item when the Page View Controller is instantiated.
     var startIndex : Int!
     
-    /// Initializes the first view controller and a data source.
+    /// Initialize the first view controller and a data source.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,13 +49,13 @@ class FeedPageViewController : UIPageViewController {
         return controllers
     }()
     
-    /// Instantiants a new DetailViewController.
+    /// Instantiante a new DetailViewController.
     private func newDetailsController() -> DetailViewController {
         return self.storyboard!.instantiateViewControllerWithIdentifier("DetailViewController") as!DetailViewController
     }
 }
 
-/// Implements the Data Source protocol.
+/// Implement the Data Source protocol.
 extension FeedPageViewController: UIPageViewControllerDataSource {
     
     /// - Returns: An appropriate controller when a users tries to access a previous page.

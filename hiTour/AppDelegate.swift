@@ -54,20 +54,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.coreDataStack.saveMainContext()
     }
     
-    ///
-    /// Getter for coredata
-    ///
+    /// Getter for coredata.
     func getCoreData() -> CoreDataStack {
         return coreDataStack
     }
     
+    /// Getter for the ApiConnector.
     func getApi() -> ApiConnector? {
         return apiConnector
     }
     
-    //
-    //  Function that allows landscape rotation when an image or video is viewed full screen
-    //  
+    /// Function that allows landscape rotation when an image or video is viewed full screen.
     func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask {
         if self.window?.rootViewController?.presentedViewController is FullScreenImageViewController {
             return UIInterfaceOrientationMask.All
@@ -77,25 +74,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return UIInterfaceOrientationMask.All
         }
         
-        // Restrict orientation to landscape mode for tablets
+        // Restrict orientation to landscape mode for tablets.
         if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
             return UIInterfaceOrientationMask.Landscape
         }
         
-        // Set portrait mode for phones
+        // Set portrait mode for phones.
         return UIInterfaceOrientationMask.Portrait
     }
     
-    ///
-    /// A setter for current tour
-    ///
+    /// A setter for current tour.
     func setTour(tour: Tour) -> Void {
         self.currentTour = tour
     }
     
-    ///
-    /// A getter for current tour
-    ///
+    /// A getter for current tour.
     func getTour() -> Tour? {
         return currentTour
     }

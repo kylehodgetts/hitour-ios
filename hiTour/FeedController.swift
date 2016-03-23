@@ -16,13 +16,13 @@ class FeedController: UICollectionViewController {
     /// Flow layout specifies position of each item in the collection.
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
-    var selectedItem = 0
+    /// Reference to the current tour.
     var tour: Tour? = nil
     
     /// The view that is displayed if the FeedController is empty.
     @IBOutlet weak var emptyLayout: UIView!
     
-    /// Registers UINib for the cell layout and the size of each cell wrt the screen size.
+    /// Register UINib for the cell layout and the size of each cell wrt the screen size.
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView!.registerNib(UINib(nibName: "FeedControllerCell", bundle: nil), forCellWithReuseIdentifier: "FeedControllerCellId")
@@ -38,7 +38,7 @@ class FeedController: UICollectionViewController {
             flowLayout.itemSize = CGSize(width: screenSize.width, height: 185)
         }
         
-        /// Add overlay that says updating....
+        /// Add overlay that says "Updating, please wait...".
         let overlay = UIView(frame: self.view.frame)
         let label = UILabel(frame: overlay.frame)
         label.text = "Updating, please wait..."
@@ -54,7 +54,7 @@ class FeedController: UICollectionViewController {
         }
         
         
-        /// Update all, remove overlay once update is done
+        /// Update all, remove overlay once update is done.
         let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
         delegate?.getApi()?.updateAll{_ in
             let tourId = NSUserDefaults.standardUserDefaults().integerForKey("Tour")
@@ -68,7 +68,7 @@ class FeedController: UICollectionViewController {
         }
     }
 
-    /// Specifies an image and a title for each cell.
+    /// Specify an image and a title for each cell.
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("FeedControllerCellId", forIndexPath: indexPath) as! FeedControllerCell
@@ -118,7 +118,7 @@ class FeedController: UICollectionViewController {
         }
     }
     
-    /// Launches the detail view in a master-detail layout for a tablet and in a new View Controller on a phone.
+    /// Launch the detail view in a master-detail layout for a tablet and in a new View Controller on a phone.
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         guard let t = tour else {
             return
@@ -156,7 +156,7 @@ class FeedController: UICollectionViewController {
         }
     }
     
-    /// Loads all currently discovered points and returns a PointTour array
+    /// Load all currently discovered points and returns a PointTour array
     func foundPoints() -> [PointTour] {
         let allPoints = tour?.pointTours?.array as! [PointTour]
         var discoveredPoints : [PointTour] = []
@@ -168,18 +168,19 @@ class FeedController: UICollectionViewController {
         return discoveredPoints
     }
     
-    /// Reloads all the cells with their updated states
+    /// Reload all the cells with their updated states
     override func viewDidAppear(animated: Bool) {
         self.collectionView?.reloadData()
     }
     
-    /// Assigns the currently selected tour
+    /// Assign the currently selected tour
     func assignTour(tour: Tour) -> Void {
         self.tour = tour
         NSUserDefaults.standardUserDefaults().setInteger(tour.tourId!.integerValue, forKey: "Tour")
         collectionView?.reloadData()
     }
     
+    /// Check whether all points are unlocked.
     func areAllPointsDiscovered() -> Bool {
         let points = tour?.pointTours?.array as! [PointTour]
         for point in points {

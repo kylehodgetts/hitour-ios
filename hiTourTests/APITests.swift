@@ -101,7 +101,6 @@ class APITests: XCTestCase {
     ///
     /// Checks whether the tours are fetched properly when supplied with correct session
     ///
-    ///
     func testGetTour() {
         let expectation = expectationWithDescription("Expects to get full tour as per the request")
         let session = coreDataStack?.insert(Session.entityName){(a, b) in
@@ -195,7 +194,6 @@ class APITests: XCTestCase {
         }
         waitForExpectationsWithTimeout(10, handler: nil)
     }
-    
     
 }
 

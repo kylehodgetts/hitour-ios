@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-/// Holds outlets for the point header.
+/// Hold an outlet for the point header.
 class CollectionHeader: UICollectionReusableView {
     
     /// Image displayed in the header.

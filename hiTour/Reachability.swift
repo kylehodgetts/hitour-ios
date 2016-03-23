@@ -9,7 +9,7 @@
 import Foundation
 import SystemConfiguration
 
-///  Class created to hold a helper method to check for network connectivity
+///  Class created to hold a helper method to check for network connectivity.
 class Reachability {
     
     ///  Function that trys to access the internet and returns a boolean if it has connectivity

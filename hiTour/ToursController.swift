@@ -7,7 +7,6 @@
 //
 
 import Foundation
-
 import UIKit
 
 /// The collection view that allows switching between tours.
@@ -17,7 +16,7 @@ class ToursController : UICollectionViewController {
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     var tours: [Tour] = []
     
-    /// Sets up the size of a collection cell wrt the screen size.
+    /// Set up the size of a collection cell wrt the screen size.
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView!.registerNib(UINib(nibName: "ToursControllerCell", bundle: nil), forCellWithReuseIdentifier: "ToursControllerCellId")
@@ -31,10 +30,15 @@ class ToursController : UICollectionViewController {
             flowLayout.itemSize = CGSize(width: (screenSize.width - 22) / 2, height: screenSize.height / 3)
         }
         updateTours()
-        
-        
     }
     
+    /// Reload the data when the view appears.
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.collectionView?.reloadData()
+    }
+    
+    /// Update tours in a collection view.
     func updateTours() {
         let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
         let coredata = delegate?.getCoreData()
@@ -45,10 +49,9 @@ class ToursController : UICollectionViewController {
         
         tours = nSessions.flatMap{$0.tour}
         collectionView?.reloadData()
-        
     }
     
-    /// Defines layout details for each cell.
+    /// Define layout details for each cell.
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ToursControllerCellId", forIndexPath: indexPath) as! ToursControllerCell
@@ -58,6 +61,9 @@ class ToursController : UICollectionViewController {
         cell.labelTitle.text = institution
         cell.labelDate.text = "N/A"
         
+        // Get the tour expiration date.
+        // There might be multiple sessions for the same tour 
+        // so the code below is respondsible for finding the latest date.
         let tour = tours[indexPath.row]
         if let sessions = tour.sessions {
             let latestSession =
@@ -74,6 +80,7 @@ class ToursController : UICollectionViewController {
                     }
                 })
             })
+            // Update the cell's date label with the latest date.
             if let session = latestSession {
                 if let date = session.endData {
                     let dateFormatter = NSDateFormatter()
@@ -93,7 +100,7 @@ class ToursController : UICollectionViewController {
         return tours.count
     }
     
-    /// Switches the tour when the cell has been selected.
+    /// Switch the tour when the cell has been selected.
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
         delegate?.setTour(tours[indexPath.row])
@@ -106,10 +113,6 @@ class ToursController : UICollectionViewController {
             let feedControlelr = self.tabBarController?.selectedViewController?.childViewControllers.first! as! FeedController
             feedControlelr.assignTour(tours[indexPath.row])
         }
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        self.collectionView?.reloadData()
     }
     
 }

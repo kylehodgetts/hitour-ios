@@ -17,16 +17,16 @@ import MediaPlayer
 ///  for that particular point.
 class DetailViewController : UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate, UICollectionViewDelegateFlowLayout {
         
-    ///  Reference variable to a point
+    ///  Reference variable to a point.
     var point : Point?
     
-    /// Reference to audience that this point if for
+    /// Reference to audience that this point if for.
     var audience: Audience!
     
-    ///  Reference variable to populate the point description text
+    ///  Reference variable to populate the point description text.
     var textDetail: UITextView!
     
-    ///  AVPlayer in order to play the data item's video
+    ///  AVPlayer in order to play the data item's video.
     var videoPlayers : [AVPlayer!] = []
     
     /// Array storing data for the current point.
@@ -45,9 +45,9 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
     var imageDetail: UIImage!
     
     
-    ///  Set's up and instantiates all of the views including setting the values for the point's
-    ///  title, description and image
-    ///  Calls the function to populate the view controller with its content data into the stackview
+    ///  Set up and instantiate all of the views including setting the values for the point's
+    ///  title, description and image.
+    ///  Call the function to populate the view controller with its content data into the stackview.
     override func viewDidLoad() {
         collectionView!.delegate = self
         collectionView!.dataSource = self
@@ -178,7 +178,7 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
         }
     }
     
-    ///  Function that adds to the stack view a video and sets up its constraints and tap gesture to display its controls.
+    /// Add a video to the stack view and set up its constraints and tap gesture to display its controls.
     func addVideoContent(cell: VideoDataViewCell, dataId: String, data: NSData) {
 
         let tmpDirURL = NSURL.fileURLWithPath(NSTemporaryDirectory(), isDirectory: true)
@@ -199,7 +199,7 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
         }
     }
     
-    ///  Prepares the view controller segue for when an image is tapped, the image displays full screen for the user to
+    ///  Prepare the view controller segue for when an image is tapped, the image displays full screen for the user to
     ///  zoom and pan the image. This function prepares the FullScreenImageViewController with the image that the user has tapped on.
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "imageFullScreenSegue" {
@@ -209,7 +209,7 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
         }
     }
     
-    /// Closes down the view by ensuring any videos that are playing are stopped when the view is dismissed
+    /// Close down the view by ensuring any videos that are playing are stopped when the view is dismissed.
     override func viewDidDisappear(animated: Bool) {
         for video in videoPlayers {
             if video != nil && video.rate != 0 && video.error == nil {

@@ -31,7 +31,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YI5-w3-yfc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1690.5" y="603"/>
+            <point key="canvasLocation" x="-1681" y="497"/>
         </scene>
         <!--Scanner-->
         <scene sceneID="577-QZ-Eby">
@@ -95,7 +95,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tyc-cq-9Lw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="66" y="1060"/>
+            <point key="canvasLocation" x="43" y="1060"/>
         </scene>
         <!--Feed-->
         <scene sceneID="FsQ-4o-GcT">
@@ -113,14 +113,14 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4bp-B7-XDq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-712.5" y="-314"/>
+            <point key="canvasLocation" x="-725" y="-272"/>
         </scene>
         <!--hiTour-->
         <scene sceneID="dzb-tC-LIE">
             <objects>
                 <collectionViewController storyboardIdentifier="FeedController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ANH-Qu-MBs" customClass="FeedController" customModule="hiTour" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="stx-5H-ziW">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <constraints>
                             <constraint firstItem="LHi-A3-Otk" firstAttribute="centerY" secondItem="stx-5H-ziW" secondAttribute="centerY" id="SBx-Ig-gLC"/>
@@ -133,11 +133,11 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <view key="backgroundView" contentMode="scaleToFill" id="vzJ-oZ-rME">
-                            <rect key="frame" x="0.0" y="-64" width="600" height="600"/>
+                            <rect key="frame" x="0.0" y="-64" width="600" height="551"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LHi-A3-Otk">
-                                    <rect key="frame" x="152" y="237" width="297" height="252"/>
+                                    <rect key="frame" x="152" y="239" width="297" height="252"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emptyLayoutImage" translatesAutoresizingMaskIntoConstraints="NO" id="6aU-En-I1x">
                                             <rect key="frame" x="88" y="0.0" width="120" height="120"/>
@@ -194,6 +194,7 @@
                             <outlet property="delegate" destination="ANH-Qu-MBs" id="9Du-Le-AVr"/>
                         </connections>
                     </collectionView>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <navigationItem key="navigationItem" title="hiTour" id="Lp9-3L-PuK"/>
                     <connections>
                         <outlet property="emptyLayout" destination="vzJ-oZ-rME" id="yCn-H6-tZ1"/>
@@ -204,7 +205,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="48o-fl-WiL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="43" y="-317"/>
+            <point key="canvasLocation" x="43" y="-272"/>
         </scene>
         <!--Quiz View Controller-->
         <scene sceneID="c5M-Mk-fen">
@@ -218,28 +219,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ro2-SR-um2">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ro2-SR-um2">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
                             </webView>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b27-L3-MYQ">
-                                <rect key="frame" x="158" y="209" width="284" height="181"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b27-L3-MYQ">
+                                <rect key="frame" x="150" y="146" width="300" height="307.5"/>
                                 <subviews>
-                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="refresh" translatesAutoresizingMaskIntoConstraints="NO" id="i3B-gZ-9An">
-                                        <rect key="frame" x="22" y="8" width="240" height="128"/>
+                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="refresh" translatesAutoresizingMaskIntoConstraints="NO" id="i3B-gZ-9An">
+                                        <rect key="frame" x="22" y="8" width="256" height="256"/>
                                         <gestureRecognizers/>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="Tef-G7-A3V" appends="YES" id="YbY-yi-lDa"/>
                                         </connections>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="No Internet Connection Detected" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YDT-kb-EOC">
-                                        <rect key="frame" x="11" y="138" width="265" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Internet Connection Detected" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YDT-kb-EOC">
+                                        <rect key="frame" x="11" y="266" width="281" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Tap Icon To Retry" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Grp-a7-0Qt">
-                                        <rect key="frame" x="68" y="160" width="150" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap Icon To Retry" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Grp-a7-0Qt">
+                                        <rect key="frame" x="68" y="287" width="166" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -266,8 +267,8 @@
                             <constraint firstItem="b27-L3-MYQ" firstAttribute="centerX" secondItem="zhG-Tk-rpM" secondAttribute="centerX" id="Pp1-0H-tim"/>
                             <constraint firstItem="ro2-SR-um2" firstAttribute="width" secondItem="zhG-Tk-rpM" secondAttribute="width" id="hPX-7h-oan"/>
                             <constraint firstItem="b27-L3-MYQ" firstAttribute="centerY" secondItem="zhG-Tk-rpM" secondAttribute="centerY" id="r7Y-s6-HFX"/>
-                            <constraint firstItem="1in-Ng-q8o" firstAttribute="top" secondItem="ro2-SR-um2" secondAttribute="bottom" id="s8j-WE-VDL"/>
-                            <constraint firstItem="ro2-SR-um2" firstAttribute="top" secondItem="CeK-ey-XT5" secondAttribute="bottom" constant="-64" id="zc2-wp-Ybf"/>
+                            <constraint firstItem="ro2-SR-um2" firstAttribute="centerX" secondItem="zhG-Tk-rpM" secondAttribute="centerX" id="tW1-OX-fPu"/>
+                            <constraint firstItem="ro2-SR-um2" firstAttribute="centerY" secondItem="zhG-Tk-rpM" secondAttribute="centerY" id="uaf-OH-ZG0"/>
                         </constraints>
                     </view>
                     <connections>
@@ -282,7 +283,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="838" y="104"/>
+            <point key="canvasLocation" x="768" y="-272"/>
         </scene>
         <!--hiTour-->
         <scene sceneID="EiM-DD-fot">
@@ -416,7 +417,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eUI-5f-z3k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="66" y="404"/>
+            <point key="canvasLocation" x="43" y="398"/>
         </scene>
         <!--Feed Page View Controller-->
         <scene sceneID="3RJ-XI-u6X">
@@ -429,7 +430,7 @@
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ft9-Jg-epm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="838.5" y="-1035"/>
+            <point key="canvasLocation" x="768" y="-1040"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="vg4-wr-7OI">
@@ -494,7 +495,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qpe-aJ-SkQ" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="838" y="-317"/>
+            <point key="canvasLocation" x="1472" y="-1040"/>
         </scene>
         <!--Full Screen Image View Controller-->
         <scene sceneID="ujM-9t-V0I">
@@ -508,18 +509,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" maximumZoomScale="15" translatesAutoresizingMaskIntoConstraints="NO" id="VBk-qy-6B0">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="15" translatesAutoresizingMaskIntoConstraints="NO" id="VBk-qy-6B0">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
-                                    <imageView multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uEQ-ht-dWO">
-                                        <rect key="frame" x="16" y="-6" width="584" height="584"/>
+                                    <imageView multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uEQ-ht-dWO">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                         <gestureRecognizers/>
                                     </imageView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="uEQ-ht-dWO" firstAttribute="centerY" secondItem="VBk-qy-6B0" secondAttribute="centerY" id="JZI-yI-sov"/>
+                                    <constraint firstItem="uEQ-ht-dWO" firstAttribute="leading" secondItem="VBk-qy-6B0" secondAttribute="leading" id="VdZ-8c-1sG"/>
                                     <constraint firstItem="uEQ-ht-dWO" firstAttribute="width" secondItem="VBk-qy-6B0" secondAttribute="width" id="YRG-RA-xyt"/>
-                                    <constraint firstItem="uEQ-ht-dWO" firstAttribute="centerX" secondItem="VBk-qy-6B0" secondAttribute="centerX" id="oDT-RR-xVR"/>
+                                    <constraint firstAttribute="bottom" secondItem="uEQ-ht-dWO" secondAttribute="bottom" id="YkP-8p-gzy"/>
+                                    <constraint firstAttribute="trailing" secondItem="uEQ-ht-dWO" secondAttribute="trailing" id="c3D-ea-se0"/>
+                                    <constraint firstItem="uEQ-ht-dWO" firstAttribute="top" secondItem="VBk-qy-6B0" secondAttribute="top" id="uyM-KH-tqq"/>
                                     <constraint firstItem="uEQ-ht-dWO" firstAttribute="height" secondItem="VBk-qy-6B0" secondAttribute="height" id="wwr-6p-f7y"/>
                                 </constraints>
                                 <variation key="widthClass=compact" ambiguous="YES">
@@ -529,8 +532,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="400" height="800"/>
                                 </variation>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XNR-Bs-J2Q">
-                                <rect key="frame" x="534" y="28" width="46" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XNR-Bs-J2Q">
+                                <rect key="frame" x="534" y="28" width="46" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="X">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -559,7 +562,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GYQ-k6-mtD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2381" y="-1035"/>
+            <point key="canvasLocation" x="1472" y="-272"/>
         </scene>
     </scenes>
     <resources>

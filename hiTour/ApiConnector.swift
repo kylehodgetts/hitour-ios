@@ -17,7 +17,7 @@ class ApiConnector{
     let client: HTTPClient
     let coreDataStack: CoreDataStack
 
-    /// The original data that are being used..
+    /// The original data that are being used.
     /// This is to be able to detect data that are not valid anymore, we fill this with the data that are in
     /// core data at the beginig of fetching, the for every data we use we will delete it from this set. 
     /// At the end of all fetching we will delete all of the outstanding data in this set, this way we can ensure
@@ -141,7 +141,7 @@ class ApiConnector{
             return;
         }
         
-        //Multiple session keys loaded, no need to delete tour
+        // Multiple session keys loaded, no need to delete tour
         if(sessions.count > 1){
             coreDataStack.delete(session);
             return;
@@ -227,7 +227,7 @@ class ApiConnector{
                     } else {
                         let point = pts[idx!]
                         point.rank = (pDict["rank"] as? Int).getOrElse(point.rank!.integerValue)
-                        oldPoints.remove(pts[idx!]) //Remove the point since its still a valid point in the tour
+                        oldPoints.remove(pts[idx!]) // Remove the point since its still a valid point in the tour
                     }
                 }
                 
@@ -304,23 +304,23 @@ class ApiConnector{
         ///
         func tourOnResponse(response: NSURLResponse?) -> Bool{
             guard let resp = response as? NSHTTPURLResponse else {
-                return true; //NO RESPONSE.. most likely an error, should return true as default
+                return true; // NO RESPONSE.. most likely an error, should return true as default
             }
                         
             if (resp.statusCode == 200) {
-                //SHOULD BE OK
+                // SHOULD BE OK
                 return true;
             } else if (resp.statusCode == 401) {
-                //WRONG SESSION KEY, procede to delete all to do with session
+                // WRONG SESSION KEY, procede to delete all to do with session
                 deleteSession(session);
                 _ = chain.map({$0(nil)})
                 return false;
             }
-            return true // return true as default... mostlikely will result into an error anyway...
+            return true // return true as default
             
         }
         
-        //Stars up the show
+        // Stars up the show
         client.requestObject(
             session.sessionCode.getOrElse("THIS/IS/NOT/A/VALID/SESSION")
             , onResponse: tourOnResponse
@@ -337,11 +337,11 @@ class ApiConnector{
                 , start = tourSession["start_date"] as? String
                 , duration = tourSession["duration"] as? Int
             else {
-                _ = chain.map({$0(nil)}) //Chaining so that other calls can be made afterwars
+                _ = chain.map({$0(nil)}) // Chaining so that other calls can be made afterwars
                 return
             }
             
-            ///Parses the tour
+            /// Parses the tour
             Tour.jsonReader.read(tour, stack: self.coreDataStack).map({self.coreDataStack.insert(Tour.entityName, callback: $0)}).forEach{ nsTour in
                 session.tour = nsTour;
                 oldPoints = Set<PointTour>(nsTour.pointTours?.array as! [PointTour])

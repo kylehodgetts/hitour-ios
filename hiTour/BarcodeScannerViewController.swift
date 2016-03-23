@@ -20,39 +20,39 @@ protocol BarcodeScannerDelegate: class {
 /// Then inputs the results into the text field on the view.
 class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputObjectsDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate {
     
-    /// Capture session for receiving input from the camera */
+    /// Capture session for receiving input from the camera.
     let session = AVCaptureSession()
     
-    /// Video Preview layer to provide a live video camera feevaro the view */
+    /// Video Preview layer to provide a live video camera feevaro the view.
     var previewLayer : AVCaptureVideoPreviewLayer?
     
-    /// View that provides a red rectangle when a QR code has been discovered */
+    /// View that provides a red rectangle when a QR code has been discovered.
     var identifiedBorder : DiscoveredBardCodeView?
     
-    /// Timer to remove the red rectangle after a small moment */
+    /// Timer to remove the red rectangle after a small moment.
     var timer : NSTimer!
     
-    /// Error Alert to be displayed */
+    /// Error Alert to be displayed.
     var errorAlert : UIAlertController!
     
-    /// Reference to the Storyboards camera view */
+    /// Reference to the Storyboards camera view.
     @IBOutlet weak var cameraView: UIView!
     
-    /// Reference to the View containing the text field and button */
+    /// Reference to the View containing the text field and button.
     @IBOutlet weak var codeInputView: UIView!
     
-    /// Reference to the input text field */
+    /// Reference to the input text field.
     @IBOutlet weak var txtInput: UITextField!
     
-    /// Reference to the delegate
+    /// Reference to the delegate.
     weak var delegate: BarcodeScannerDelegate?
     
     
     // MARK: Initialiser
     
     
-    ///  Starts a new capture device session which only accepts QR codes as the output produced by the session
-    ///  Handles error if the camera can't be accessed.
+    ///  Start a new capture device session which only accepts QR codes as the output produced by the session
+    ///  Handle error if the camera can't be accessed.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -109,7 +109,7 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
     }
     
     
-    ///  Stops the capture session when the view is no longer visible
+    ///  Stop the capture session when the view is no longer visible.
     override func viewWillDisappear(animated: Bool) {
         session.stopRunning()
     }
@@ -118,8 +118,8 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
     // MARK: Actions
     
     
-    /// Sets up the video preview layer to handle the live camera feed and prepares the view to be displayed when a
-    /// QR code has been discovered.
+    /// Set up the video preview layer to handle the live camera feed and prepares the view to be displayed when 
+    /// a QR code has been discovered.
     func addPreviewLayer() {
         previewLayer = AVCaptureVideoPreviewLayer(session: session)
         previewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
@@ -139,7 +139,7 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
     }
     
     
-    ///  Translates the points for each received from the capture session by the camera.
+    ///  Translate the points for each received from the capture session by the camera.
     ///  - Returns: Array of CGPoint's
     func translatePoints(points: [AnyObject], fromView: UIView, toView: UIView) -> [CGPoint] {
         var translatedPoints : [CGPoint] = []
@@ -155,7 +155,7 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
     }
     
     
-    ///  Starts the timer to remove the discovered red rectangle view around a found QR code when the session is to be started again.
+    ///  Start the timer to remove the discovered red rectangle view around a found QR code when the session is to be started again.
     func startTimer() {
         if timer?.valid != true {
             timer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: "removeBorder", userInfo: nil, repeats: false)
@@ -166,7 +166,7 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
     }
     
     
-    /// Hides the discovered red rectangle from the view.
+    /// Hide the discovered red rectangle from the view.
     func removeBorder() {
         self.identifiedBorder?.hidden = true
     }
@@ -193,7 +193,7 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
     }
 
     
-    ///  Closes the keyboard view when the user presses the done button on the keyboard
+    ///  Close the keyboard view when the user presses the done button on the keyboard.
     @IBAction func textInputDone(sender: UITextField) {
         sender.resignFirstResponder()
         submit()
@@ -227,6 +227,7 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
+    /// Submit the passphrase.
     func submit() {
         if txtInput.text?.characters.count > 0 {
             processInput(txtInput.text!)
@@ -234,6 +235,7 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
         }
     }
     
+    /// Check whether the provided passhprase is for a tour or a point.
     func processInput(text: String){
         if(text.hasPrefix("SN")) {
             handleSessionScan(text.substringFromIndex(text.startIndex.advancedBy(2)))
@@ -243,6 +245,7 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
     
     }
     
+    /// Handle the process of retrieving data after submitting a passphrase.
     func handleSessionScan(session: String){
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate?
         let coreData = appDelegate?.getCoreData();
@@ -279,7 +282,6 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
                     coreData?.saveMainContext();
                     appDelegate?.setTour(tour)
                     if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
-                        //(self.tabBarController?.childViewControllers[1] as! ToursController).updateTours()
                         self.delegate!.didItemScan(tour, sender: self)
                         overlay.removeFromSuperview()
                         appDelegate?.feedController?.assignTour(tour)
@@ -318,11 +320,10 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
         
     }
     
-    /// Checks if the point id received as input has already been discovered returning a boolean
+    /// Check if the point id received as input has already been discovered returning a boolean.
     func isPointFound(pointId : String) -> PointTour! {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate?
         let currentTour = appDelegate?.getTour()
-        // TODO: The app crashes if the tour was not explicitly selected from the collection view
         let currentTourPoints = currentTour?.pointTours?.array as! [PointTour]
         for tourPoint in currentTourPoints {
             if tourPoint.point?.valueForKey("pointId") as? Int == Int(pointId) {
@@ -332,7 +333,7 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
         return nil
     }
     
-    /// Finds an array of all the currently discovered points on the tour and returns a PointTour array
+    /// Find an array of all the currently discovered points on the tour and returns a PointTour array.
     func findDiscoveredPointIndex() -> [PointTour] {
         let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let tour = delegate.getTour()
@@ -346,8 +347,8 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
         return discoveredPoints
     }
     
-    /// Navigates to the detail view if the point id received as input is a valid point in the currently selected tour.
-    /// Otherwise a Point Not Found dialog is displayed to the user
+    /// Navigate to the detail view if the point id received as input is a valid point in the currently selected tour.
+    /// Otherwise a Point Not Found dialog is displayed to the user.
     func navigateToPoint(pointId : String) {
 
         if let pointFound = isPointFound(pointId) {

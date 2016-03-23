@@ -9,10 +9,10 @@
 import Foundation
 import UIKit
 
-/// View Controller that manages the master-detail layout used on tablets
+/// View Controller that manages the master-detail layout used on tablets.
 class SplitViewController: UISplitViewController {
     
-    /// Set column width of the master layout
+    /// Set column width of the master layout.
     override func viewDidLoad() {
         self.maximumPrimaryColumnWidth = 400
         self.preferredPrimaryColumnWidthFraction = 0.33

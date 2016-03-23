@@ -205,13 +205,10 @@
 		6D90EE641C7E00E500433E1F /* feedView */ = {
 			isa = PBXGroup;
 			children = (
-				6D90EE4C1C7E00B500433E1F /* DetailViewController.swift */,
 				6D90EE4E1C7E00B500433E1F /* FeedController.swift */,
 				6D2B15781C87798800BC5179 /* FeedControllerCell.xib */,
 				6D90EE4F1C7E00B500433E1F /* FeedControllerCell.swift */,
 				6DF7DC4D1C7E72CD00C88B48 /* FeedPageViewController.swift */,
-				459A8B461C8662BE009B79F0 /* FullScreenImageViewController.swift */,
-				6D4C9F281C98D99200C8F869 /* CollectionHeader.swift */,
 			);
 			name = feedView;
 			sourceTree = "<group>";
@@ -231,12 +228,31 @@
 			children = (
 				6DBAC94C1C95CBEE0092CAB8 /* ImageDataViewCell.xib */,
 				6DBAC94E1C95D1210092CAB8 /* TextDataViewCell.xib */,
-				6DBAC9541C96123B0092CAB8 /* TextDataViewCell.swift */,
 				6DBAC9501C95D2640092CAB8 /* VideoDataViewCell.xib */,
 				6DBAC9521C95E8710092CAB8 /* ImageDataViewCell.swift */,
+				6DBAC9541C96123B0092CAB8 /* TextDataViewCell.swift */,
 				6DBAC9561C9612B90092CAB8 /* VideoDataViewCell.swift */,
 			);
 			name = dataView;
+			sourceTree = "<group>";
+		};
+		6DD987AF1CA2EEE700B23EB8 /* detailsView */ = {
+			isa = PBXGroup;
+			children = (
+				6D90EE4C1C7E00B500433E1F /* DetailViewController.swift */,
+				6D4C9F281C98D99200C8F869 /* CollectionHeader.swift */,
+				459A8B461C8662BE009B79F0 /* FullScreenImageViewController.swift */,
+			);
+			name = detailsView;
+			sourceTree = "<group>";
+		};
+		6DD987B01CA2EF7E00B23EB8 /* tablet */ = {
+			isa = PBXGroup;
+			children = (
+				6DBD48FA1C8DCAA700CB6158 /* SplitViewController.swift */,
+				6DBD48FE1C8E219B00CB6158 /* TabBarController.swift */,
+			);
+			name = tablet;
 			sourceTree = "<group>";
 		};
 		8FF1C6CF1C75F71A00F16473 /* coreData */ = {
@@ -274,13 +290,14 @@
 		984EC79F1C7209C200A12379 = {
 			isa = PBXGroup;
 			children = (
-				6DBED3CC1C7E021E008BFA30 /* hiTour.xcdatamodeld */,
 				6D90EE521C7E00B500433E1F /* Info.plist */,
+				6DBED3CC1C7E021E008BFA30 /* hiTour.xcdatamodeld */,
 				6DBED3CE1C7E021E008BFA30 /* LaunchScreen.storyboard */,
 				6DBED3CF1C7E021E008BFA30 /* Main.storyboard */,
 				6D8CFD8C1C8662A000F8E8B9 /* Tablet.storyboard */,
 				6DBED3CB1C7E021E008BFA30 /* Assets.xcassets */,
 				984EC7AA1C7209C200A12379 /* hiTour */,
+				984EC7C21C7209C200A12379 /* hiTourTests */,
 				984EC7CD1C7209C200A12379 /* hiTourUITests */,
 				984EC7A91C7209C200A12379 /* Products */,
 			);
@@ -299,18 +316,17 @@
 		984EC7AA1C7209C200A12379 /* hiTour */ = {
 			isa = PBXGroup;
 			children = (
-				984EC7C21C7209C200A12379 /* hiTourTests */,
 				6D90EE481C7E00B500433E1F /* AppDelegate.swift */,
-				6DBD48FA1C8DCAA700CB6158 /* SplitViewController.swift */,
-				6DBD48FE1C8E219B00CB6158 /* TabBarController.swift */,
+				6DD987B01CA2EF7E00B23EB8 /* tablet */,
 				6DBAC94B1C95CB7F0092CAB8 /* dataView */,
-				6D90EE651C7E010E00433E1F /* toursView */,
 				6D90EE641C7E00E500433E1F /* feedView */,
+				6DD987AF1CA2EEE700B23EB8 /* detailsView */,
+				6D90EE651C7E010E00433E1F /* toursView */,
 				6D90EE631C7E00D300433E1F /* barcodeScanner */,
 				450610531C987D5100D05EBB /* quizView */,
-				450610581C98ABE500D05EBB /* utilities */,
 				8FF1C6D21C75FF9E00F16473 /* models */,
 				8FF1C6CF1C75F71A00F16473 /* coreData */,
+				450610581C98ABE500D05EBB /* utilities */,
 			);
 			path = hiTour;
 			sourceTree = "<group>";
@@ -328,8 +344,8 @@
 		984EC7CD1C7209C200A12379 /* hiTourUITests */ = {
 			isa = PBXGroup;
 			children = (
-				984EC7CE1C7209C200A12379 /* hiTourUITests.swift */,
 				984EC7D01C7209C200A12379 /* Info.plist */,
+				984EC7CE1C7209C200A12379 /* hiTourUITests.swift */,
 				45C734381C87950B0069AF2F /* DynamicContentTest.swift */,
 				45D87F171C90F7F600962CCF /* PointDiscoveryTest.swift */,
 				4506105F1C98C5A800D05EBB /* QuizTests.swift */,

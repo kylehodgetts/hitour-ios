@@ -150,7 +150,7 @@ class FeedController: UICollectionViewController {
         else {
             let pageView = self.storyboard!.instantiateViewControllerWithIdentifier("FeedPageViewController") as! FeedPageViewController
             pageView.audience = t.audience!
-            pageView.points = t.pointTours!.array.map({$0 as! PointTour})
+            pageView.points = self.sortedPoints
             let pt = self.sortedPoints[indexPath.row]
             pageView.startIndex = foundPoints().indexOf(pt)
             self.navigationController!.pushViewController(pageView, animated: true)
@@ -159,7 +159,7 @@ class FeedController: UICollectionViewController {
     
     /// Load all currently discovered points and returns a PointTour array
     func foundPoints() -> [PointTour] {
-        let allPoints = tour?.pointTours?.array as! [PointTour]
+        let allPoints = self.sortedPoints
         var discoveredPoints : [PointTour] = []
         for point in allPoints {
             if point.scanned == true {

@@ -19,6 +19,8 @@ class FeedController: UICollectionViewController {
     /// Reference to the current tour.
     var tour: Tour? = nil
     
+    var sortedPoints: [PointTour] = []
+    
     /// The view that is displayed if the FeedController is empty.
     @IBOutlet weak var emptyLayout: UIView!
     
@@ -91,8 +93,7 @@ class FeedController: UICollectionViewController {
             cell.lockView.hidden = allDiscovered
         }
         else {
-            let orderedPoints = (t.pointTours?.array as! [PointTour]).sort{(a:PointTour, b:PointTour) in a.rank!.integerValue <= b.rank!.integerValue}
-            let pt = orderedPoints[indexPath.row]
+            let pt = self.sortedPoints[indexPath.row]
             
             cell.labelTitle.text = pt.point?.name
             
@@ -134,7 +135,7 @@ class FeedController: UICollectionViewController {
             else {
                 let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("DetailViewControllerTablet") as!DetailViewController
                 
-                let pt = t.pointTours![indexPath.row] as! PointTour
+                let pt = self.sortedPoints[indexPath.row]
                 detailController.point = pt.point!
                 detailController.audience = t.audience!
                 
@@ -176,6 +177,8 @@ class FeedController: UICollectionViewController {
     /// Assign the currently selected tour
     func assignTour(tour: Tour) -> Void {
         self.tour = tour
+        self.sortedPoints = (tour.pointTours?.array as! [PointTour]).sort{(a:PointTour, b:PointTour) in a.rank!.integerValue <= b.rank!.integerValue}
+
         NSUserDefaults.standardUserDefaults().setInteger(tour.tourId!.integerValue, forKey: "Tour")
         collectionView?.reloadData()
     }

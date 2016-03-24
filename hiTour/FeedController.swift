@@ -151,7 +151,7 @@ class FeedController: UICollectionViewController {
             let pageView = self.storyboard!.instantiateViewControllerWithIdentifier("FeedPageViewController") as! FeedPageViewController
             pageView.audience = t.audience!
             pageView.points = t.pointTours!.array.map({$0 as! PointTour})
-            let pt = t.pointTours![indexPath.row] as! PointTour
+            let pt = self.sortedPoints[indexPath.row]
             pageView.startIndex = foundPoints().indexOf(pt)
             self.navigationController!.pushViewController(pageView, animated: true)
         }

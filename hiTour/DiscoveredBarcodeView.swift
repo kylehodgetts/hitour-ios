@@ -35,7 +35,7 @@ class DiscoveredBardCodeView : UIView {
         let path = UIBezierPath()
         
         path.moveToPoint(points.first!)
-        for(var i = 1; i < points.count; i++) {
+        for i in 1 ..< points.count {
             path.addLineToPoint(points[i])
         }
         path.addLineToPoint(points.first!)

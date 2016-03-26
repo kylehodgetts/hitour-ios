@@ -13,10 +13,10 @@ import CoreData
 /// A generic reader of json objects, is meant to be used together with coredata as it expects 
 /// to be returning a function that will have an entity for the object as well as context
 ///
-protocol JsonReader{
+protocol JsonReader {
     
     /// The type of the returned object
-    typealias T: NSManagedObject
+    associatedtype T: NSManagedObject
    
     ///
     /// Reads a json object and returns a function that stores the object into core data

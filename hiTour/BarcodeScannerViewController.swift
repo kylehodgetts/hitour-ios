@@ -77,8 +77,8 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
         }
         
         // Notify when a keyboard appears/disappears from the screen.
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BarcodeScannerViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BarcodeScannerViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
     }
     
     // MARK: Overrides
@@ -158,7 +158,7 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
     ///  Start the timer to remove the discovered red rectangle view around a found QR code when the session is to be started again.
     func startTimer() {
         if timer?.valid != true {
-            timer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: "removeBorder", userInfo: nil, repeats: false)
+            timer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: #selector(BarcodeScannerViewController.removeBorder), userInfo: nil, repeats: false)
         }
         else {
             timer?.invalidate()

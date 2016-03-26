@@ -57,7 +57,7 @@ class ApiConnector{
                 func fetchBySession(session: Session){
                     print("Fetching", session.sessionCode)
                     self.fetchTour(session, chain: {_ in
-                        finished++
+                        finished += 1
                         self.coreDataStack.saveMainContext()
                         tryUpdate()
                     })
@@ -177,11 +177,11 @@ class ApiConnector{
         /// A convenience function to download binary data from a given url, once finished it tries to callback
         ///
         func downloadBinary(url: String?, nsTour: Tour, after: (NSData?) -> Void) {
-            outStandingRequests++
+            outStandingRequests += 1
             url.forEach({
                 self.client.binaryReques($0, cb: { (data) -> Void in
                     after(data)
-                    outStandingRequests--
+                    outStandingRequests -= 1
                     tryCallBack(nsTour)
                 })
  

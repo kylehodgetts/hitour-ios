@@ -58,7 +58,7 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
         flowLayout.minimumLineSpacing = 0.0
         flowLayout.headerReferenceSize.height = 200
         
-        tapFullScreenGesture = UITapGestureRecognizer(target: self, action: Selector("recognizeTapOnCell:"))
+        tapFullScreenGesture = UITapGestureRecognizer(target: self, action: #selector(DetailViewController.recognizeTapOnCell(_:)))
         tapFullScreenGesture.delegate = self
         collectionView?.addGestureRecognizer(tapFullScreenGesture)
 

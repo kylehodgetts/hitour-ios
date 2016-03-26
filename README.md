@@ -39,7 +39,7 @@ The project does not require any additional configuration.
 ## License
 
 ```
-Copyright 2016 hiTour
+Copyright 2016 Stranders
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

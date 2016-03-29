@@ -70,7 +70,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
             return UIInterfaceOrientationMask.Landscape
         }
-
         if self.window?.rootViewController?.presentedViewController is FullScreenImageViewController {
             return UIInterfaceOrientationMask.All
         }
@@ -78,6 +77,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if ((self.window?.rootViewController?.presentedViewController?.isKindOfClass(NSClassFromString("AVFullScreenViewController").self!)) != nil) {
             return UIInterfaceOrientationMask.All
         }
+        
+        
         
         // Set portrait mode for phones.
         return UIInterfaceOrientationMask.Portrait

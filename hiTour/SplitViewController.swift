@@ -17,5 +17,9 @@ class SplitViewController: UISplitViewController {
         self.maximumPrimaryColumnWidth = 400
         self.preferredPrimaryColumnWidthFraction = 0.33
     }
+        
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return [UIInterfaceOrientationMask.LandscapeLeft, UIInterfaceOrientationMask.LandscapeRight]
+    }
 
 }

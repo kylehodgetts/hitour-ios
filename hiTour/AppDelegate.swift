@@ -66,17 +66,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     /// Function that allows landscape rotation when an image or video is viewed full screen.
     func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask {
+        // Restrict orientation to landscape mode for tablets.
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+            return UIInterfaceOrientationMask.Landscape
+        }
+
         if self.window?.rootViewController?.presentedViewController is FullScreenImageViewController {
             return UIInterfaceOrientationMask.All
         }
 
         if ((self.window?.rootViewController?.presentedViewController?.isKindOfClass(NSClassFromString("AVFullScreenViewController").self!)) != nil) {
             return UIInterfaceOrientationMask.All
-        }
-        
-        // Restrict orientation to landscape mode for tablets.
-        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
-            return UIInterfaceOrientationMask.Landscape
         }
         
         // Set portrait mode for phones.

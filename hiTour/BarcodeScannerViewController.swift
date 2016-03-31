@@ -103,7 +103,7 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
         }
         else {
             if UIDevice.currentDevice().orientation == .LandscapeLeft {
-                avConnection?.videoOrientation = .Portrait
+                avConnection?.videoOrientation = .PortraitUpsideDown
             }
             else if UIDevice.currentDevice().orientation == .LandscapeRight {
                 avConnection?.videoOrientation = .LandscapeRight

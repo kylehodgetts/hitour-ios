@@ -98,13 +98,16 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
         }
         
         let avConnection = self.previewLayer?.connection
-        let statusBarOrientation = UIApplication.sharedApplication().statusBarOrientation
-        
-        if statusBarOrientation.isPortrait {
+        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
             avConnection?.videoOrientation = .Portrait
         }
-        else if statusBarOrientation.isLandscape {
-            avConnection?.videoOrientation = .LandscapeLeft
+        else {
+            if UIDevice.currentDevice().orientation == .LandscapeLeft {
+                avConnection?.videoOrientation = .LandscapeLeft
+            }
+            else if UIDevice.currentDevice().orientation == .LandscapeRight {
+                avConnection?.videoOrientation = .LandscapeRight
+            }
         }
     }
     

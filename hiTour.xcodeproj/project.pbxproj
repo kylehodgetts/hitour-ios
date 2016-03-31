@@ -424,6 +424,7 @@
 				TargetAttributes = {
 					984EC7A71C7209C200A12379 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = R6PXL3EZJD;
 					};
 					984EC7BE1C7209C200A12379 = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -670,7 +671,7 @@
 				INFOPLIST_FILE = hiTour/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.stranders.hiTour;
+				PRODUCT_BUNDLE_IDENTIFIER = hiTour.;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -687,7 +688,7 @@
 				INFOPLIST_FILE = hiTour/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.stranders.hiTour;
+				PRODUCT_BUNDLE_IDENTIFIER = hiTour.;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

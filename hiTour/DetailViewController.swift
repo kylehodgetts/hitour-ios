@@ -180,7 +180,9 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
     
     /// Add a video to the stack view and set up its constraints and tap gesture to display its controls.
     func addVideoContent(cell: VideoDataViewCell, dataId: String, data: NSData) {
-
+       
+        if cell.videStackView.subviews.count > 0 { return }
+        
         let tmpDirURL = NSURL.fileURLWithPath(NSTemporaryDirectory(), isDirectory: true)
         let fileURL = tmpDirURL.URLByAppendingPathComponent(dataId).URLByAppendingPathExtension("mp4")
         let checkValidation = NSFileManager.defaultManager()
@@ -194,7 +196,7 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
             playerController.player = videoPlayer
             cell.playerController = playerController
             cell.videStackView.addArrangedSubview(playerController.view)
-        
+            
             videoPlayers.append(videoPlayer)
         }
     }

@@ -314,6 +314,8 @@ class BarcodeScannerViewController : UIViewController, AVCaptureMetadataOutputOb
 
                     overlay.removeFromSuperview()
                 }
+                self.txtInput.text = ""
+                self.identifiedBorder?.hidden = true
             });
         });
         

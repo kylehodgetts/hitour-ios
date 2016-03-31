@@ -193,6 +193,9 @@ class DetailViewController : UIViewController, UICollectionViewDelegate, UIColle
             playerController.videoGravity = AVLayerVideoGravityResizeAspect
             playerController.player = videoPlayer
             cell.playerController = playerController
+            if cell.videStackView.subviews.count > 0 {
+                cell.videStackView.subviews[0].removeFromSuperview()
+            }
             cell.videStackView.addArrangedSubview(playerController.view)
         
             videoPlayers.append(videoPlayer)

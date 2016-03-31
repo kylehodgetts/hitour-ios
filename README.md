@@ -2,6 +2,8 @@
 
 The app has been designed and developed as a second year project at King's College London for Royal Brompton Hospital in London to allow doctors deliver high quality tours around the hospital for their medical students. However, the project requirement was to build a modular and extensible system that could work with any organisation. We successfully achieved that and our product can be used by museums, art galleries, and other instutitions that organise tours or exhibitions.
 
+<a href="https://geo.itunes.apple.com/us/app/hitour/id1097234551?mt=8"><img alt="Download on the AppStore" src="http://linkmaker.itunes.apple.com/images/badges/en-us/badge_appstore-lrg.svg" width="165" height="40" /></a>
+
 - [Content Management System](https://github.com/KyleHodgetts/project-run-cms)
 - [Android application](https://github.com/KyleHodgetts/project-run-android)
 - [iOS application](https://github.com/KyleHodgetts/project-run-ios)
